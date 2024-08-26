@@ -1,0 +1,105 @@
+---
+title: Learning objectives
+---
+
+This page lists the chapter-specific and overall learning objectives for the course
+
+
+## Introduction
+
+At the end of this chapter, students should be able to
+
+- formulate the null and alternative hypotheses attached to a problem statement;
+- undertake hypothesis tests;
+- understand and correctly interpret p-values and confidence intervals;
+- perform an exploratory data analysis and list the most important features of a dataset.
+
+
+## Linear regression
+
+At the end of the chapter, students should be able to
+
+- interpret the coefficients of a linear model (binary, continuous and categorical variables);
+- fit the model by least squares (using dedicated software), correctly accounting for categorical variables;
+- test for statistical significance of model parameters as well as global significance;
+- obtain predictions from a linear model using software; understand the distinction between estimated mean and predicted values;
+- interpret the coefficients of the log-linear model on a meaningful scale;
+- interpret and test the significance of interaction terms between continuous and categorical variables, as well as between two categorical variables;
+- conceptualize the notion of collinearity and understand its impacts on statistical inference.
+- test for equality of means in multiple (sub-groups) and also mean differences between groups with one or two
+factors;
+- list the assumptions of the linear model and understand their meaning;
+- use graphical diagnostic tools to validate the model assumptions.
+
+
+## Likelihood-based modelling
+
+At the end of the chapter, students should be able to:
+
+- understand what the likelihood represents;
+- derive the maximum likelihood estimator of a simple model;
+- understand the maximum likelihood principle;
+- perform likelihood ratio tests for two nested models using software output;
+- use information criteria to compare two non-nested models.
+Generalized linear models
+At the end of the chapter, students should be able to
+- write the equation linking predictors and parameters for Poisson, binomial and normal generalized linear models
+with canonical link function;
+- understand the relationship between mean and variance in generalized linear models;
+- interpret parameters of the Poisson and negative binomial models;
+- test for overdispersion in Poisson models using likelihood ratio tests;
+- assess the quality of the fit of a Poisson model using the deviance statistic;
+- test independence in contingency tables using a saturated Poisson model.
+- interpret software output for generalized linear models and the respective merits of different functions;
+- interpret parameters of logistic regression models in terms of log-odds.
+- model success rate for aggregated data using a Poisson regression with an offset or a binomial generalized linear
+regression and correctly interpret the rates.
+
+## Correlated and longitudinal data
+
+At the end of the chapter, students should be able to
+
+- understand how correlation appears in grouped or longitudinal data;
+- correctly calculate summary statistics for repeated data;
+- adjust models with compound symmetry, first-order autoregressive or unstructured correlation structures;
+- write correlation and covariance models for main models and understand their parametrization;
+- perform tests to compare covariance structures (for nested models) or using information criteria;
+- understand group heteroscedasticity and how to account for it.
+
+## Linear mixed models
+
+At the end of the chapter, students should be able to
+
+- understand the concept of group-effect;
+- know in which context to use random group-effects as opposed to fixed group-effects (covariates constant within
+group, large number of groups with few observations in each);
+- write down the equation of the mixed model with random-intercept(s) and random-slope(s);
+- write down the model assumptions (linearity, covariance within-group and between-group, etc.);
+- write the covariance matrix of observations given parameter estimates (sum of covariance matrices of random
+effects and errors);
+- distinguish between the adequate structures for correlated and longitudinal data;
+- distinguish predicted (marginal) mean and individual predictions with random effects (conditional);
+- obtain predictions for new observations from mixed models using dedicated software.
+
+## Introduction to survival analysis
+
+At the end of the chapter, students should be able to
+
+- explain key concepts (truncation, censoring) arising in survival analysis in your own word and provide examples of
+the latter;
+- recognize scenarios with random right censoring;
+- interpret a Kaplan–Meier nonparametric estimate of the survival function;
+- compare and test for equality of survival curves using a score test;
+- interpret the coefficients of the Cox proportional hazard model and check for their significance.
+
+
+## Global objectives
+
+At the end of the course, students should be able to de
+
+- set up a database in a format suitable for a regression analysis (e.g., in long format).
+- choose an adequate regression model for data.
+- criticise the quality of model fit.
+- synthetise the conclusions of a regression model.
+- compare different regression models based on their respective benefits.
+- formulate practical recommandations based on a regression model.

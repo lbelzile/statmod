@@ -61,5 +61,14 @@
   },
   "content/sas.qmd": {
     "sas.html": "43117ade"
+  },
+  "syllabus.qmd": {
+    "syllabus.html": "9efa6b0a"
+  },
+  "example/installation.qmd": {
+    "installation.html": "c48c4b6d"
+  },
+  "learningobjectives.qmd": {
+    "learningobjectives.html": "80389bce"
   }
 }

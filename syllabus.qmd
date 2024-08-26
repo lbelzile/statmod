@@ -1,0 +1,190 @@
+---
+title: Syllabus
+---
+
+```{r setup, message=FALSE, warning=FALSE, include=FALSE}
+library(dplyr)
+library(tibble)
+library(pander)
+```
+
+::: {.grid .course-details .course-details-smaller}
+
+::: {.g-col-4}
+### Instructor 1
+
+- {{< fa user >}} &nbsp; [{{< var instructor1.name >}}]({{< var instructor1.url >}})
+- {{< fa university >}} &nbsp; {{< var instructor1.office >}}
+- {{< fa envelope >}} &nbsp; <a href='mailto:{{< var instructor1.email >}}'>{{< var instructor1.email >}}</a>
+:::
+
+
+::: {.g-col-4}
+### Instructor 2
+
+- {{< fa user >}} &nbsp; [{{< var instructor2.name >}}]({{< var instructor2.url >}})
+- {{< fa university >}} &nbsp; {{< var instructor2.office >}}
+- {{< fa envelope >}} &nbsp; <a href='mailto:{{< var instructor2.email >}}'>{{< var instructor2.email >}}</a>
+:::
+
+::: {.g-col-4}
+### Course details
+- {{< fa calendar-alt >}} &nbsp; {{< var course.semester >}}
+- {{< fa calendar >}} &nbsp; {{< var course.days >}}
+- {{< fa clock >}} &nbsp; {{< var course.time >}}
+- {{< fa location-dot >}} &nbsp; {{< var course.location >}}
+:::
+
+
+:::
+
+## Course description
+
+The objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.
+
+The course will focus on regression models, including linear models, generalized linear models and models for longitudinal data with random effects and correlation structures. For each of these models, basic inference principles will be covered, notably hypothesis testing and estimation procedures.
+
+
+- Basic principles in inference and statistical modeling
+- Linear models
+- Generalized linear models
+- Models for longitudinal data and correlated data
+- Introduction to survival analysis
+
+## Prerequisites
+
+
+The course is of an overview course. Students should have basic training in statistics at the level of [_Introductory Statistics with Randomization and Simulation_](https://www.openintro.org/book/isrs/) (Chapters 1--4, excluding special topics).
+
+## Learning objectives
+
+The course learning objectives are listed [here](learningobjectives.qmd).
+
+## Target audience
+
+Statistical modelling is a compulsory course of the M.Sc. in Data Science and Business Analytics (Supervised Project stream) and an optional course for the Thesis stream. Please note this course is not credited in the "Intelligence d'affaires" specialization: the course is incompatible with MATH606019(A).
+
+<!--
+
+
+## License
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+## Contributors
+
+- [Léo Belzile](https://www.hec.ca/en/profs/leo.belzile.html)
+  wrote the new version of the course notes and created most of the exercise sheets and the accompanying solutions.
+- [Denis Larocque](https://www.hec.ca/en/profs/denis.larocque.html)
+  wrote the initial course notes for _Analyse et inférence statistique_, a precursor to this course.
+- [Aurélie Labbe](https://www.hec.ca/en/profs/aurelie.labbe.html)
+  transformed these notes into slides and taught multiple iterations of the course, writing **R** scripts and some exercises.
+- [Kevin McGregor](https://kevmcgregor.com/) translated the slides from French to English.
+- [Juliana Schulz](https://www.hec.ca/en/profs/juliana.schulz.html) taught the first iteration of MATH60604A in the Fall 2019 and created the material for survival analysis.
+
+-->
+
+# Programming
+
+The course uses the  [**R**](https://cran.r-project.org/) programming language. If you have never programmed before, you may find there is a steep learning curve. **R** has a vibrant user community, so most routines of interest have been contributed by other users and you can get support through help forums. You can [find instructions for installing R, RStudio, and all the tidyverse packages here.](/example/installation/). You may want to look at [Douglas et al. (2024) *An introduction to R*](https://alexd106.github.io/intro2R/index.html), [Julia Palms' *Introduction to R*](https://bookdown.org/palmjulia/r_intro_script/), the  free [CRAN manuals](https://cran.r-project.org/manuals.html) or similar introductions, or online courses, to brush up the basics of the programming language.
+
+Follow the [instructions](content/installation.qmd) to install **R**.
+
+# Evaluations and grades
+
+
+Your final grade will be based on 
+
+- a three part group project, 
+- a midterm evaluation taking place on Tuesday, October 29th, from 12:00-15:00, and 
+- a final examination which will take place on Thursday, December 12th, from 13:30-16:30.
+
+
+```{r assignments-grades, include=FALSE}
+assignments <- tibble::tribble(
+  ~Points,  ~Assignment,
+  10 * 3 ,   "Course project (3 x 10 pt)",
+  30      ,  "Midterm (30 pt)",
+  40      ,  "Final examination (40 pt)",
+)
+```
+
+Team work counts towards your final grade only if you score more than 50% on individual evaluations.
+
+<div class="centered-table">
+
+```{r show-assignments-table, echo=FALSE, results="asis"}
+assignments_total <- tibble(Assignment = "Total",
+                            Points = sum(assignments$Points))
+
+bind_rows(assignments, assignments_total) %>%
+  select(Assignment, Points) %>%
+  pandoc.table(justify = "lc", missing = "—")
+```
+</div>
+
+# Course content
+
+Below is a tentative schedule for the semester. 
+
+1. **Introduction**
+    - Syllabus
+    - Motivating examples
+    - Review of probability
+    - Random variables: discrete and continuous distributions, moments
+    - Statistical inference (basic notions, sampling and estimation, hypothesis tests, confidence intervals)
+2. **Linear models**
+    - Parametrizations
+    - Parameter interpretation
+    - Coefficient of determination
+3.  **Likelihood based inference**
+    - Likelihood
+    - Maximum likelihood estimation
+    - Hypothesis tests
+4. **Linear models**
+    - Predictions
+    - Interactions
+    - Collinearity
+5. **Diagnostics for linear model hypotheses**
+    - Linear model hypotheses
+    - Graphical diagnostics
+    - Extensions and remedies
+6. **Generalized linear models**
+    - Structure of GLMs
+    - Poisson regression
+    - Contingency tables
+    - Overdispersion
+
+
+## Intellectual integrity and generative artificial intelligence
+
+Please don't cheat! The [official policy](https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/REG_intellectual-integrity-students-v2.pdf) lists the school rules regarding plagiarism and academic integrity.
+
+The midterm and final are closed book exams. Students can use generative artificial intelligence (AI) tools for the project to improve and edit the deliverables (either code or text), but only as a proof-reading tool. That is, the first draft of the text must be student's original work. Any use of generative AI must be cited adequately and students should provide their work with
+
+a. details about the tool used (name and version),
+b. the list of prompts,
+c. a copy of the original draft or code,
+d. a description of any modification to the proposed output,
+e. a short reflection on the usage of generative AI.
+
+## Student services
+
+Students with special needs should feel free to approach me so we can best discuss accommodations. Do check out [HEC Montréal's disabled students](https://www.hec.ca/en/students/support-resources/support-disabled-students/index.html) and [psychological](https://www.hec.ca/en/students/support-resources/psychological-support/index.html) support services.
+
+## Harassment and sexual violence
+
+The Center for Harassment Intervention (BIMH) is the unique access point for all members of the community subject to harassment or sexual violence. You can reach them at 514 343-7020 or by email at [`harcelement@hec.ca`](mailto:harcelement@hec.ca) from Monday until Friday, from 8:30 until 4:30pm.
+
+If you are in an emergency situation or fear for your safety, call emergency services at 911, followed by HEC Montréal security services at 514 340-6611.
+
+[Check the school official policy on these matters](https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/policy-to-prevent-and-fight-sexual-violence.pdf) for more details.
+
+## Family policy
+
+HEC now has an [official family policy](https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/DIR_parents-etudes.pdf), but the following guidelines reflect my own beliefs and commitments towards parent students^[Shamelessly stolen/adapted from similar policy by Drs. Melissa Cheney, Guy Grossman and Rohan Alexander]
+
+1. Babies are welcome in class as often as necessary for support feeding relationship.
+2. You are welcome to bring your child to class in order to cover unforeseeable gaps in childcare. 
+3. If you come with babies or toddler, I ask that you sit close to the door so that, in case your little one needs special attention and is disrupting the learning of other students, you may step outside of class until their needs are met. Seats close to the door are reserved for parents attending class with their child.

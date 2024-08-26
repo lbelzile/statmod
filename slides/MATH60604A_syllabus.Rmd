@@ -1,0 +1,324 @@
+---
+title: "Statistical modelling"
+subtitle: "Syllabus"
+author: "<br> <br> Dr. Léo Belzile <br> HEC Montréal"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css", "slides-style.css"]
+    nature:
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+        
+---
+
+```{r child = "setup.Rmd"}
+```
+
+```{r set-theme, include=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color      = "#003C71", # pantone classic blue
+  secondary_color    = "#009FDF", # pantone baby blue
+  header_font_google = google_font("Raleway"),
+  text_font_google   = google_font("Raleway", "300", "300i"),
+  code_font_google   = google_font("Source Code Pro"),
+  text_font_size     = "30px"
+)
+```
+
+
+```{r load-packages, message=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      message = FALSE, 
+                      warning = FALSE, 
+                      out.width = '70%', 
+                      fig.align = 'center', 
+                      tidy = FALSE)
+options(scipen = 1, digits = 3)
+library(ggplot2, warn.conflicts = FALSE, quietly = TRUE)
+theme_set(theme_minimal())
+```
+
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view", "editable","panelset", "tachyons","webcam"))
+
+```
+
+
+# Organization
+
+- Weekly meetings in [room Hélène-Desmarais](https://www.hec.ca/campus/cote_sainte_catherine/1er_etage/salles_cours/hdesmarais.html) (Wednesday, 15:30-18:30).
+- Two instructors! Each teaching one half of the course
+  - [Léo Belzile](https://www.hec.ca/en/profs/leo.belzile.html) (CSC 4.850, `leo.belzile@hec.ca`)
+  - [Juliana Schulz](https://www.hec.ca/en/profs/juliana.schulz.html) (CSC 4.809, `juliana.schulz`)
+
+---
+
+# Course content
+
+- All of the course material can be downloaded from the course website: [`https://lbelzile.github.io/statmod/`](https://lbelzile.github.io/statmod/) and from ZoneCours
+.midi[
+- course notes
+- video recording
+- **R** package with datasets and quizzes
+- exercises and solutions
+- **R** demos
+    ]
+- Submit your assignments/projects via *ZoneCours*
+- Ask course-related questions on **Piazza**: [`piazza.com/hec.ca/fall2024/math60604a`](piazza.com/hec.ca/fall2024/math60604a)
+- For other matters, we are best reached by *email*: [`leo.belzile@hec.ca`](mailto:leo.belzile@hec.ca) and [`juliana.schulz@hec.ca`](mailto:juliana.schulz@hec.ca)
+
+---
+
+# Course content
+
+
+> *All models are wrong, but some are useful.* 
+.right[— Georges Box]
+
+
+1. Basic principles in inference and statistical modelling
+2. Linear models
+3. Generalized linear models
+4. Models for longitudinal data and correlated data
+5. Linear mixed models
+6. Introduction to survival analysis
+
+---
+
+
+
+# Evaluations
+
+- Three part-project worth 30% (teamwork).
+- Midterm exam (30%) on Tuesday, October 29th 2024, 12:00-15:00.
+- Final exam (40%) on Thursday, December 12th, from 13:30-16:30.
+ 
+
+---
+
+
+.question[
+What is the format of the course?
+]
+
+--
+.pull-left[
+At home:
+- reading course notes
+- quiz
+- exercises (with solutions)
+]
+
+--
+
+.pull-right[
+In class:
+- weekly summary
+- **R** demonstrations
+- question period
+]
+
+---
+
+.question[
+What is the workload for this course?
+]
+
+--
+
+- 3 credits = 135 hours of work
+- an average of 9 hours per week
+- do not underestimate the initial time investment:
+    - installing required software
+    - learning programming basics
+    - getting up to speed with prerequisites 
+
+---
+
+.question[
+What is the target audience?
+]
+
+--
+
+Students enrolled in the Data Science and Business Analytics M.Sc program. 
+
+Students admitted normally have a bachelor in
+ - engineering
+ - physics or 
+ - mathematics.
+
+Basic knowledge of calculus and linear algebra is assumed.
+
+---
+
+.question[
+What are the prerequisites?
+]
+
+--
+
+A first course in probability/statistic covering the following notions:
+
+.pull-left[
++ probability axioms and combinatorics
++ random variables
+    + moments (expectation, variance, correlation)
+    + discrete distributions: Bernoulli, binomial, Poisson
+    + continuous distributions: uniform, exponential, normal
+]
+
+.pull-right[
++ descriptive statistics
++ hypothesis tests
++ comparison of means and proportions (one and two samples)
++ simple linear regression
+]
+
+---
+
+.question[
+What software will we use in class?
+]
+
+.pull-left[
+```{r fig.align="center", echo=FALSE, alt = "R", out.width="80%"}
+knitr::include_graphics("https://www.r-project.org/logo/Rlogo.png")
+```
+]
+
+.pull-right[
+I am avid support of open-access software and of **R**, a programming language written by the community
+
+ - its free!
+ - multi-platform support
+ - download from [cran.r-project.org](https://cran.r-project.org/)
+  - I recommand the free [RStudio Desktop](https://posit.co/download/rstudio-desktop/) IDE by Posit.
+ 
+]
+
+---
+
+.question[
+Will there be programming?
+]
+
+--
+.sample-answer[
+*Yes*. We will cover the basics of **R** to fit models and visualized data.
+]
+
+- I will provide code only for exercises and slides.
+
+You must provide your code for the group project
+
+- I should be able to reproduce *exactly* your analyses.
+- submit as a `.txt` file (otherwise, you won't be able to submit your work on *Zonecours*) 
+- use UTF8 encoding 
+- follow the instructions for naming scripts/files
+($\neq$ `mycode.txt`)
+
+---
+
+
+# Learning **R**
+
+The [CAMS offers free tutorials](https://hec-ca.libcal.com/calendar/cams) (mandatory registration, limited space).
+
+- [An introduction to R: Part 1](https://hec-ca.libcal.com/event/3823302) on Thursday, August 29th 2024, from 15:30-17:30
+- [An introduction to R: Part 2](https://hec-ca.libcal.com/event/3823606) on Thursday, September 5th 2024, from 15:30-17:30
+
+The objective of this course is not to become expert **R** programmers,
+rather to use R to carry out data analyses.
+
+- Additional resources are listed on the course website
+---
+
+.question[
+What are the professors expectating of you?
+]
+
+--
+
+- Active participation in class: students are expected to be in class
+.midi[
+- ask questions! there is no silly question
+]
+--
+
+- Autonomy: you are sole responsible for your learning.
+.midi[
+- stay up to date and do your readings
+- don't stay in the dark: ask questions (to instructors or your peers)!
+]
+--
+
+- Feedback: problems or unclear explanations? let us know asap
+
+---
+
+# Inclusive and respectful environment
+ Harassment, discriminatory views, etc. are not tolerated.
+
+--
+
+Let us know if
+
+- We can do something to improve the course experience for you or other students
+- a statement or attitude makes you uncomfortable
+- your name/prefered pronoun/gender differs from the information provided on *HEC en ligne*
+- your performance is affected by external factors: we will do our best to help you or direct you to external resources.
+
+---
+
+# Plagiarism
+
+Please don't. There are consequences and its an insult to your intelligence. Ask for help if necessary!
+
+.midi[
+- if you take and adapt code from elsewhere (e.g., `StackOverflow`), cite your sources!
+- you must program yourself your code for individual assignments (discussion with peers is okay, but code sharing, copy paste or similar wording is punishable)
+
+]
+
+---
+ 
+## Generative AI
+
+Midterm and final are closed-book exam (no computer).
+
+Projects: students can use generative artificial intelligence (AI) or large language models (LLM) to improve and edit the deliverable (either code or text), but only as a proof-reading tool. That is, the first draft of the text must be student's original work. 
+
+---
+.question[
+So, can I use ChatGPT?
+]
+
+Wise words stolen from [Andrew Heiss](https://datavizs24.classes.andrewheiss.com/news/2024-06-11_faqs_session-01.html#can-we-use-chatgpt-can-you-even-tell-if-we-do)
+
+.small[
+
+> using ChatGPT and other LLMs when learning R is actually really detrimental to learning, especially if you just copy/paste directly from what it spits out. It will give you code that is wrong or that contains extra stuff you don't need, and if you don't know enough of the language you're working with, you won't understand why or what's going on.
+
+> Using ChatGPT with R requires a good baseline knowledge of R to actually be useful. A good analogy for this is with recipes. ChatGPT is really confident at spitting out plausible-looking recipes. A few months ago, for fun, I asked it to give me a cookie recipe. I got back something with flour, eggs, sugar, and all other standard-looking ingredients, but it also said to include 3/4 cup of baking powder. That's wild and obviously wrong, but I only knew that because I've made cookies before. I've seen other AI-generated recipes that call for a cup of horseradish in brownies or 21 pounds of cabbage for a pork dish. A few weeks ago Google's AI recommended adding glue to pizza sauce to stop the cheese from sliding off. Again, to people who have cooked before, these are all obviously wrong (and dangerous in the case of the glue!), but to a complete beginner, these look like plausible instructions.
+
+]
+---
+
+## Using genAI and large language models (LLM)
+
+Any use of generative AI or LLM must be cited adequately and students should provide their work with
+
+1. details about the tool used (name and version),
+2. the list of prompts,
+3. a copy of the original draft or code,
+4. a description of any modification to the proposed output,
+5. a short reflection on the usage of generative AI or LLM.

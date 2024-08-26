@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: docs
   render:
     - "*.qmd"
     - "!slides/"
@@ -12,8 +13,6 @@ project:
     - "slides/libs/"
     - "slides/css/"
     - "slides/*_files/"
-    - "evaluations/*.pdf"
-
 
 # See https://quarto.org/docs/projects/code-execution.html#freeze
 execute:
@@ -32,11 +31,9 @@ website:
     foreground: "#ffffff"
     right:
       - text: "Syllabus"
-        file: "/files/syllabus/MATH60604A-F20-Syllabus.pdf"
+        file: "syllabus.qmd"
       - text: "Content"
         file: content/index.qmd
-      - text: "Evaluations"
-        file: evaluations/index.qmd
       - text: "Exercises"
         file: exercises/index.qmd
       - text: "Notes"
@@ -53,10 +50,10 @@ website:
           file: content/index.qmd
         - section: "Programming"
           contents:
-            - text: "Introduction to **SAS**"
-              file: content/sas.qmd
+            - text: "Installing **R**"
+              file: content/installation.qmd
         - text: "Learning objectives"
-          file:  "/files/syllabus/MATH60604A_courseobjectives.pdf"
+          file:  syllabus.qmd
         - section: "Pedagogical content"
           contents:
             - text: "Week 1"
@@ -71,30 +68,14 @@ website:
               file: content/05-content.qmd
             - text: "Week 6"
               file: content/06-content.qmd
-            - text: "Week 7"
-              file: content/07-content.qmd
-            - text: "Week 8"
-              file: content/08-content.qmd
-            - text: "Week 9"
-              file: content/09-content.qmd
-            - text: "Week 10"
-              file: content/10-content.qmd
-            - text: "Week 11"
-              file: content/11-content.qmd
-            - text: "Week 12"
-              file: content/12-content.qmd
-            - text: "Week 13"
-              file: content/13-content.qmd
-    - title: "Evaluations"
-      file: evaluations/index.qmd
     - title: "Exercises"
       file: exercises/index.qmd
 
   page-footer:
     left: |
-      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}})<br>
+      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor1.name_no_title >}}]({{< var instructor1.url >}}), [{{< var instructor2.name_no_title >}}]({{< var instructor2.url >}})<br>
       Website template by [Dr. Andrew Heiss](https://www.andrewheiss.com/) under [MIT License](https://mit-license.org/)<br>
-      All content licensed under a {{< fa brands creative-commons >}}
+      Content licensed under a {{< fa brands creative-commons >}}
       {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
       [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/)
     right: |

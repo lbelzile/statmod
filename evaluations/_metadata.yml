@@ -1,9 +1,0 @@
-date-heading:
-  content: "Submit by 23:55 at the latest"
-  class: "bg-assignment"
-date-format: "full"
-
-format:
-  html:
-    template-partials:
-      - ../html/title-block.html
