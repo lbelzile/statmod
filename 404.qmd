@@ -1,5 +1,0 @@
----
-title: Page Not Found
----
-
-The page you requested cannot be found. Perhaps try using the search bar or navigating the menu?

@@ -113,7 +113,7 @@ What is the format of the course?
 .pull-left[
 At home:
 - reading course notes
-- quiz
+- watch videos (when applicable)
 - exercises (with solutions)
 ]
 
@@ -121,7 +121,7 @@ At home:
 
 .pull-right[
 In class:
-- weekly summary
+- lectures with weekly summary
 - **R** demonstrations
 - question period
 ]

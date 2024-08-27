@@ -6,7 +6,7 @@ body, h1, h2, h3 {
 }
 
 h1, h2, h3 {
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .remark-code, .remark-inline-code {
@@ -15,7 +15,7 @@ h1, h2, h3 {
 
 $presentation-title-slide-text-align: center;
 
-$presentation-h1-font-size: 1.4em;
+$presentation-h1-font-size: 1.8em;
 $presentation-h2-font-size: 1.2em;
 
 
@@ -57,6 +57,14 @@ $font-weight: bold;
 
 .middle h2 {
   text-align: center !important;
+}
+
+.reveal pre {
+  font-size: 1.8rem !important;
+}
+
+.reveal code {
+  font-size: 0.85em !important;
 }
 
 
