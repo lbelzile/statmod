@@ -8,7 +8,7 @@
 <link href="MATH60604A-slides1_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="MATH60604A-slides1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="MATH60604A-slides1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.1">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Léo Belzile, HEC Montréal">
   <meta name="dcterms.date" content="2024-01-01">
@@ -425,6 +425,35 @@ Léo Belzile, HEC Montréal
 
   <p class="date">2024</p>
 </section>
+<section>
+<section id="statistical-inference" class="title-slide slide level1 center" data-background-color="#002855">
+<h1>Statistical inference</h1>
+
+</section>
+<section id="studying-a-population" class="slide level2">
+<h2>Studying a population</h2>
+<p>The population distribution (describing possible outcomes and their frequencies) encodes everything we could be interested in.</p>
+
+<img data-src="MATH60604A-slides1_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:70.0%" class="r-stretch"></section>
+<section id="sampling-variability" class="slide level2">
+<h2>Sampling variability</h2>
+
+<img data-src="MATH60604A-slides1_files/figure-revealjs/unifsamp1-1.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Histograms for 10 random samples of size 20 from a discrete uniform distribution.</p></section>
+<section id="decision-making-under-uncertainty" class="slide level2">
+<h2>Decision making under uncertainty</h2>
+<p><strong>Statistics</strong> is concerned with decision making under uncertainty.</p>
+<ul>
+<li>Data collection is costly.
+<ul>
+<li>we only have limited information about the population.</li>
+<li>focus on moments (mean <span class="math inline">\(\mu\)</span>, standard deviation <span class="math inline">\(\sigma\)</span>, etc.)</li>
+</ul></li>
+<li>Samples are typically too small to reliably estimate the whole distribution.
+<ul>
+<li>we rely instead on a statistical model to gain insights about the data.</li>
+</ul></li>
+</ul>
+</section>
 <section id="why-use-models" class="slide level2">
 <h2>Why use models?</h2>
 <p>A famous quote attributed to George Box claims that</p>
@@ -443,6 +472,62 @@ Léo Belzile, HEC Montréal
 <p>…it does not seem helpful just to say that all models are wrong. The very word model implies simplification and idealization. The idea that complex physical, biological or sociological systems can be exactly described by a few formulae is patently absurd. The construction of idealized representations that <strong>capture important stable aspects of such systems</strong> is, however, a vital part of general scientific analysis and statistical models, especially substantive ones, do not seem essentially different from other kinds of model.</p>
 </blockquote>
 </section>
+<section id="what-is-in-a-model" class="slide level2">
+<h2>What is in a model?</h2>
+<p>A stochastic model typically combines</p>
+<ul>
+<li>a distribution for the data</li>
+<li>a formula linking the parameters or the mean of a response variable <span class="math inline">\(Y\)</span> conditional on explanatory variables <span class="math inline">\(\mathbf{X}\)</span></li>
+</ul>
+<p>Models are “golem” for obtaining answers to our questions.</p>
+</section>
+<section id="how-to-model" class="slide level2">
+<h2>How to model</h2>
+<ol start="0" type="1">
+<li>Determine a research question and collect some data/harvest data.</li>
+<li>Conduct an <strong>exploratory data analysis</strong>.
+<ul>
+<li>what are the salient features of the data?</li>
+</ul></li>
+<li>Build a preliminary model.</li>
+<li>Check the goodness-of-fit or adjustment.</li>
+<li>Rinse and repeat if necessary.</li>
+</ol>
+</section>
+<section id="how-do-we-determine-the-model" class="slide level2">
+<h2>How do we determine the model?</h2>
+<p>We need to know</p>
+<ol type="1">
+<li>how were the data collected
+<ul>
+<li>what is the sampling mechanism?</li>
+<li>are variables observed or experimentally manipulated?</li>
+</ul></li>
+<li>what is the nature of the response?
+<ul>
+<li>count data, proportions, etc.</li>
+</ul></li>
+</ol>
+</section>
+<section id="nature-of-data" class="slide level2">
+<h2>Nature of data</h2>
+<ul>
+<li>Are data from a <strong>random sample of the population</strong> or not?
+<ul>
+<li>if so, can generalize conclusions.</li>
+</ul></li>
+<li>Is there a “treatment” randomly allocated?
+<ul>
+<li>if so, data are experimental (as opposed to observational).</li>
+</ul></li>
+</ul>
+
+<img data-src="fig/01/random_sample_assignment.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="observational-vs-experimental" class="slide level2">
+<h2>Observational vs experimental</h2>
+<p>Without further adjustment, we cannot draw <strong>causal</strong> statements from observational data.</p>
+
+<img data-src="fig/01/nyt-wellness-program.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section></section>
 <section>
 <section id="motivating-examples" class="title-slide slide level1 center" data-background-color="#002855">
 <h1>Motivating examples</h1>
@@ -616,7 +701,7 @@ Eye tracking gaze distribution results show that participants were more distract
 </div></div>
 <p>Model: logistic regression, dataset <code>DA23_E1</code>.</p>
 </section>
-<section id="price-of-oil-in-the-gaspe-peninsula" class="slide level2">
+<section id="price-of-oil-in-the-gaspe-peninsula" class="slide level2 smaller">
 <h2>8. Price of oil in the Gaspe Peninsula</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -640,14 +725,25 @@ Eye tracking gaze distribution results show that participants were more distract
 <h1>Hypothesis testing</h1>
 
 </section>
-<section id="hypothesis-testing-as-a-trial-analogy" class="slide level2">
-<h2>Hypothesis testing as a trial analogy</h2>
+<section id="sampling-variability-1" class="slide level2">
+<h2>Sampling variability</h2>
+<p>We cannot compare summaries without accounting for their uncertainty inherent to our estimation which is due to random sample.</p>
 
-<img data-src="fig/01/12_Angry_Men_scene.jpg" style="width:65.0%" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;1: Screenshot of the courtoom drama <em>Twelve Angry Men</em> (1957)
+<img data-src="MATH60604A-slides1_files/figure-revealjs/fig-samplevar-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;1: Five samples of size <span class="math inline">\(n=10\)</span> drawn from a common population with mean <span class="math inline">\(\mu\)</span> (horizontal line). The colored segments show the sample means of each sample.
 </p></section>
-<section id="hypothesis-test-recipe" class="slide level2">
-<h2>Hypothesis test recipe</h2>
+<section id="the-signal-and-the-noise" class="slide level2">
+<h2>The signal and the noise</h2>
+<p>The stronger the signal-to-noise ratio, the larger our ability to detect differences when they truly exist.</p>
+
+<img data-src="MATH60604A-slides1_files/figure-revealjs/plots-1.png" style="width:80.0%" class="r-stretch"></section>
+<section id="accumulation-of-information" class="slide level2">
+<h2>Accumulation of information</h2>
+<p>As we gather more observations (sample size increases), we can better discriminate between scenarios.</p>
+
+<img data-src="MATH60604A-slides1_files/figure-revealjs/uniformsamp2-1.png" width="768" class="r-stretch quarto-figure-center"><p class="caption">Histograms of data from uniform (top) and non-uniform (bottom) distributions with increasing sample sizes.</p></section>
+<section id="recipe-for-hypothesis-test" class="slide level2">
+<h2>Recipe for hypothesis test</h2>
 <p>An hypothesis test is a binary decision rule (reject/fail to reject)</p>
 <p>Below are the different steps to undertake:</p>
 <ol type="1">
@@ -659,11 +755,11 @@ Figure&nbsp;1: Screenshot of the courtoom drama <em>Twelve Angry Men</em> (1957)
 <li>Conclude in the setting of the problem.</li>
 </ol>
 </section>
-<section id="texting-while-walking-a-dangerous-habit" class="slide level2">
-<h2>Texting while walking: a dangerous habit?</h2>
+<section id="running-example-texting-while-walking" class="slide level2">
+<h2>Running example: texting while walking</h2>
 <p>Tech3Lab, HEC Montreal’s User Experience (UX) lab, studied the impact of texting on distraction.</p>
 
-<img data-src="fig/01/Tech3Lab-texter.jpg" style="width:85.0%" class="r-stretch"></section>
+<img data-src="fig/01/Tech3Lab-texter.jpg" style="width:65.0%" class="r-stretch"></section>
 <section id="study-details" class="slide level2">
 <h2>Study details</h2>
 <ul>
@@ -710,10 +806,28 @@ Figure&nbsp;1: Screenshot of the courtoom drama <em>Twelve Angry Men</em> (1957)
 <p>Express the hypothesis in terms of the difference of means <span class="math display">\[\begin{align*}
 \mathscr{H}_a: \mu_{\texttt{t}} - \mu_{\texttt{c}}&gt;0.
 \end{align*}\]</span></p>
+<p>We only ever assess the null hypothesis at a single value.</p>
 </section>
+<section id="how-to-assess-evidence" class="slide level2">
+<h2>How to assess evidence?</h2>
+<ul>
+<li>A <strong>statistic</strong> is a function of the data that returns a numerical summary.</li>
+<li>There are general principles for constructing statistics: for example, <strong>Wald statistics</strong> are of the form <span class="math display">\[\begin{align*}
+W = \frac{\text{estimated qty} - \text{postulated qty}}{\text{std. error (estimated qty)}} = \frac{T - T_0}{\mathsf{se}(T)}
+\end{align*}\]</span>
+<ul>
+<li>Statistic are typically unitless quantities.</li>
+<li>This standardization is useful for benchmarking purposes.</li>
+<li>The <strong>standard error</strong> measures the uncertainty of the statistic.</li>
+</ul></li>
+</ul>
+
+<aside><div>
+<p>Do not confuse standard error (variability of statistic) and standard deviation (variability of observation from the population).</p>
+</div></aside></section>
 <section id="choose-the-test-statistic" class="slide level2">
 <h2>3.Choose the test statistic</h2>
-<p>We compare the difference of the mean reaction time</p>
+<p>We compare the difference of the mean reaction time.</p>
 <ul>
 <li>one-sample <em>t</em>-test for <span class="math inline">\(\texttt{t}-\texttt{c}\)</span> (paired <em>t</em>-test) <span class="math display">\[\begin{align*}
 T_D=\frac{\overline{D}-\mu_0}{\mathsf{se}(\overline{D})}
@@ -747,6 +861,21 @@ T_D=\frac{\overline{D}-\mu_0}{\mathsf{se}(\overline{D})}
 ##           0.313</code></pre>
 </div>
 </section>
+<section id="null-distribution" class="slide level2">
+<h2>Null distribution</h2>
+<p>The null distribution tells us what values we would obtain under a null, and their relative frequency.</p>
+<ul>
+<li>We typically rely on <strong>large sample approximations</strong>, that are justified by the central limit theorem.</li>
+<li>Alternative, use simulation-based inference (check <a href="https://www.jwilber.me/permutationtest/">permutation tests</a>).</li>
+<li>The null distribution is a benchmark to establish whether our outcome is extreme.</li>
+</ul>
+</section>
+<section id="null-distributions" class="slide level2">
+<h2>Null distributions</h2>
+
+<img data-src="MATH60604A-slides1_files/figure-revealjs/fig-renfepermut-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"><p class="caption">
+Figure&nbsp;2: Permutation-based approximation to the null distribution (full) and standard normal approximation (dashed curve). The value of the test statistic calculated using the original sample is represented by a vertical line.
+</p></section>
 <section id="compare-the-statistic-with-the-null-distribution" class="slide level2">
 <h2>4. Compare the statistic with the null distribution</h2>
 <ul>
@@ -756,30 +885,273 @@ T_D=\frac{\overline{D}-\mu_0}{\mathsf{se}(\overline{D})}
 <li>The <span class="math inline">\(0.05\)</span> quantile of <span class="math inline">\(T\)</span> is <span class="math inline">\(\mathfrak{t}_{0.05} = -1.691\)</span>.</li>
 </ul>
 </section>
+<section id="p-values" class="slide level2">
+<h2><span class="math inline">\(P\)</span>-values</h2>
+<p>Apply distribution function of the null distribution to map the test statistic to the <span class="math inline">\([0,1]\)</span> interval.</p>
+<p>The <em>p</em>-value is the probability that the test statistic is equal or more extreme to the estimate computed from the data, assuming <span class="math inline">\(\mathscr{H}_0\)</span> is true.</p>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Caution</strong></p>
+</div>
+<div class="callout-content">
+<p>The <a href="https://doi.org/10.1080/00031305.2016.1154108">American Statistical Association (ASA) published a list of principles</a> guiding (mis)interpretation of <em>p</em>-values, including:</p>
+<ul>
+<li><ol start="2" type="1">
+<li><em>P</em>-values do not measure the probability that the studied hypothesis is true.</li>
+</ol></li>
+<li><ol start="5" type="1">
+<li><em>p</em>-value, or statistical significance, does not measure the size of an effect or the importance of a result.</li>
+</ol></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="hypothesis-testing-as-a-trial-analogy" class="slide level2">
+<h2>Hypothesis testing as a trial analogy</h2>
+
+<img data-src="fig/01/12_Angry_Men_scene.jpg" style="width:55.0%" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;3: Screenshot of the courtoom drama <em>Twelve Angry Men</em> (1957)
+</p></section>
+<section id="trial-analogy" class="slide level2">
+<h2>Trial analogy</h2>
+<p>The presumption of innocence applies (look at everything as if the null hypothesis is true)</p>
+<ul>
+<li>Evidences are judged under this optic: are they remotely plausible if the person was innocent?<br>
+</li>
+<li>The burden of the proof lies with the prosecution to avoid as much as possible judicial errors.</li>
+<li>The null hypothesis <span class="math inline">\(\mathscr{H}_0\)</span> is <em>not guilty</em>, whereas the alternative <span class="math inline">\(\mathscr{H}_a\)</span> is <em>guilty</em>.</li>
+<li>If there is a reasonable doubt, the verdict of the trial will be not guilty.</li>
+</ul>
+</section>
+<section id="what-can-we-expect-of-p-values" class="slide level2">
+<h2>What can we expect of <span class="math inline">\(p\)</span>-values?</h2>
+<p>If we repeat the experiment with random samples, we expect <span class="math inline">\(p\)</span>-values to be uniform if <span class="math inline">\(\mathscr{H}_0\)</span> is true <strong>and</strong> the null hypothesis benchmark is properly calibrated.</p>
+<p>Under the alternative, smaller <span class="math inline">\(p\)</span>-values occur more often than <span class="math inline">\(\alpha\)</span>.</p>
+
+<img data-src="MATH60604A-slides1_files/figure-revealjs/fig-power-plots-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;4: Density of <em>p</em>-values under the null hypothesis (left) and under an alternative with a signal-to-noise ratio of 0.5 (right).
+</p></section>
+<section id="level-of-a-test" class="slide level2">
+<h2>Level of a test</h2>
+<p>If the null hypothesis <span class="math inline">\(\mathscr{H}_0\)</span> is true, the <em>p</em>-value follows a uniform distribution if our benchmark is properly calibrated.</p>
+<ul>
+<li>There are always small <span class="math inline">\(p\)</span>-values, even if they are less likely.</li>
+<li>Since we want to rule out <strong>against</strong> the null hypothesis, we need to pre-determine a <strong>level</strong> <span class="math inline">\(\alpha\)</span> to decide when to reject <span class="math inline">\(\mathscr{H}_0\)</span>.</li>
+</ul>
+<p>To make a decision, we compare our <em>p</em>-value <span class="math inline">\(P\)</span> with the level of the test <span class="math inline">\(\alpha\)</span>:</p>
+<ul>
+<li>if <span class="math inline">\(P &lt; \alpha,\)</span> we reject <span class="math inline">\(\mathscr{H}_0\)</span>;</li>
+<li>if <span class="math inline">\(P \geq \alpha,\)</span> we fail to reject <span class="math inline">\(\mathscr{H}_0.\)</span></li>
+</ul>
+<p>The value of <span class="math inline">\(\alpha \in (0, 1)\)</span> is the probability of rejecting <span class="math inline">\(\mathscr{H}_0\)</span> when <span class="math inline">\(\mathscr{H}_0\)</span> is in fact true.</p>
+</section>
+<section id="statistical-errors" class="slide level2">
+<h2>Statistical errors</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Decision</strong> \ <strong>true model</strong></th>
+<th style="text-align: center;"><span class="math inline">\(\mathscr{H}_0\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\mathscr{H}_a\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fail to reject <span class="math inline">\(\mathscr{H}_0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\checkmark\)</span></td>
+<td style="text-align: center;">type II error</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reject <span class="math inline">\(\mathscr{H}_0\)</span></td>
+<td style="text-align: center;">type I error</td>
+<td style="text-align: center;"><span class="math inline">\(\checkmark\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We seek to avoid error of type I: we reject <span class="math inline">\(\mathscr{H}_0\)</span> when <span class="math inline">\(\mathscr{H}_0\)</span> is true.</p>
+<ul>
+<li>trial analogy: avoid condemning an innocent.</li>
+</ul>
+<p>Since we fix the level <span class="math inline">\(\alpha\)</span>, we have no control over the type II error.</p>
+</section>
+<section id="power" class="slide level2">
+<h2>Power</h2>
+<p>We want to be able to detect and reject <span class="math inline">\(\mathscr{H}_0\)</span> when it is false.</p>
+<p>The <strong>power of a test</strong> is the probability of rejecting <span class="math inline">\(\mathscr{H}_0\)</span> when it is false, i.e., <span class="math display">\[\begin{align*}
+\Pr{\!}_a(\text{reject } \mathscr{H}_0),
+\end{align*}\]</span> where <span class="math inline">\(\Pr_a\)</span> is the probability under a <strong>given</strong> alternative of falling in the rejection region .</p>
+</section>
+<section id="illustration-of-power" class="slide level2">
+<h2>Illustration of power</h2>
+
+<img data-src="MATH60604A-slides1_files/figure-revealjs/fig-power-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;5: Comparison between null distribution (full curve) and a specific alternative for a <em>t</em>-test (dashed line). The power corresponds to the area under the curve of the density of the alternative distribution which is in the rejection area (in white). The middle panel shows an increase in power due to an increase in the mean difference, whereas the right panel shows the change due to a decrease in variability of increase in the sample size.
+</p></section>
+<section id="criteria-determining-power" class="slide level2">
+<h2>Criteria determining power</h2>
+<ul>
+<li>the effect size: the bigger the difference between the postulated value for <span class="math inline">\(\theta_0\)</span> under <span class="math inline">\(\mathscr{H}_0\)</span> and the observed behavior, the easier it is to detect it, as in the middle panel of <a href="#/fig-power" class="quarto-xref">Figure&nbsp;5</a>;</li>
+<li>variability: the less noisy your data, the easier it is to detect differences between the curves</li>
+<li>the sample size: the more observation, the smaller the standard error</li>
+<li>the choice of test statistic</li>
+</ul>
+<p>Minimally, the power of the test should be <span class="math inline">\(\alpha\)</span> because we reject the null hypothesis <span class="math inline">\(\alpha\)</span> fraction of the time even when <span class="math inline">\(\mathscr{H}_0\)</span> is true.</p>
+</section>
+<section id="confidence-interval" class="slide level2">
+<h2>Confidence interval</h2>
+<p>A <strong>confidence interval</strong> is an alternative way to present the conclusions of an hypothesis test performed at significance level <span class="math inline">\(\alpha\)</span> with the <strong>same data units</strong>.</p>
+<p>Wald-based <span class="math inline">\((1-\alpha)\)</span> confidence intervals for a scalar parameter <span class="math inline">\(\theta\)</span> are of the form <span class="math display">\[\begin{align*}
+[\widehat{\theta} + \mathfrak{q}_{\alpha/2}\mathrm{se}(\widehat{\theta}, \widehat{\theta} +\mathfrak{q}_{1-\alpha/2}\times \mathrm{se}(\widehat{\theta})]
+\end{align*}\]</span> corresponding to a point estimate plus or minus the margin of error.</p>
+</section>
+<section id="estimation-a-piece-of-cake" class="slide level2">
+<h2>Estimation: a piece of cake</h2>
+<p>We distinguish between our target (estimand, e.g., population mean), the recipe or formula (estimator) and the output (estimate).</p>
+<div id="fig-cake" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-cake-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cake" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-cake-1" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-cake-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="fig/01/estimand.jpg" style="width:100.0%" data-ref-parent="fig-cake">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cake-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Estimand
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cake" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-cake-2" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-cake-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="fig/01/estimator.jpg" style="width:100.0%" data-ref-parent="fig-cake">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cake-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Estimator
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-cake" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-cake-3" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-cake-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="fig/01/estimate.jpg" style="width:100.0%" data-ref-parent="fig-cake">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-cake-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Estimate
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cake-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: <a href="https://www.flickr.com/photos/darkdwarf/16563489881">Estimand</a> (left), estimator (middle) and <a href="https://www.flickr.com/photos/bensutherland/14685548773">estimate</a> (right) illustrated with cakes and based on an original idea of Simon Grund. Cake photos shared under <a href="https://creativecommons.org/licenses/by-nc/2.0/">CC BY-NC 2.0 license</a>.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="interpretation-of-confidence-interval" class="slide level2">
+<h2>Interpretation of confidence interval</h2>
+<p>Since the inputs of the confidence interval (estimator) are random, the output is also random and change from one sample to the next: even if you repeat a recipe, you won’t always get the exact same result.</p>
+<ul>
+<li>If we calculate the confidence interval for a sample, the true unknown value of the parameter <span class="math inline">\(\theta\)</span> is either in the confidence interval or not: there is no notion of probability!</li>
+<li>Our confidence is in the <em>procedure</em> we use to calculate confidence intervals and not in the actual values we obtain from a sample.</li>
+<li>If we were to repeat the experiment multiple times, and calculate a <span class="math inline">\(1-\alpha\)</span> confidence interval each time, then roughly <span class="math inline">\(1-\alpha\)</span> of the calculated confidence intervals would contain the true value of <span class="math inline">\(\theta\)</span> in repeated samples.</li>
+</ul>
+</section>
+<section id="frequentist-properties-of-confidence-intervals" class="slide level2">
+<h2>Frequentist properties of confidence intervals</h2>
+
+<img data-src="MATH60604A-slides1_files/figure-revealjs/intconf-1.png" width="768" class="r-stretch quarto-figure-center"><p class="caption">95% confidence intervals for the mean of a standard normal population for 100 random samples. On average, 5% of these intervals fail to include the true mean value of zero (in red).</p></section>
+<section id="equivalence-of-confidence-intervals-and-p-values" class="slide level2">
+<h2>Equivalence of confidence intervals and <span class="math inline">\(p\)</span>-values</h2>
+<p>The <span class="math inline">\(1-\alpha\)</span> confidence interval gives us all values for which we fail to reject <span class="math inline">\(\mathscr{H}_0\)</span> at level <span class="math inline">\(\alpha\)</span></p>
+<ul>
+<li>Binary decision rule with confidence interval: if the postulated value lies inside the interval, we fail to reject the null hypothesis.</li>
+<li>The <span class="math inline">\(p\)</span>-value based on the same procedure would be <span class="math inline">\(p \ge\alpha\)</span> if you fail to reject (and vice-versa <span class="math inline">\(p &lt;\alpha\)</span> if the value is outside the interval).</li>
+</ul>
+<p>But confidence intervals are in terms of the data units, so easier to interpret.</p>
+</section>
 <section id="obtain-a-p-value-or-a-confidence-interval" class="slide level2">
 <h2>5. Obtain a <em>p</em>-value or a confidence interval</h2>
-<p>The <em>p</em>-value is <span class="math inline">\(p = \Pr_0(T &gt; t_D)\)</span>. Using <strong>R</strong>, we find <span class="math inline">\(p=0.0032\)</span>, which is smaller than <span class="math inline">\(\alpha=5\%\)</span>.</p>
+<p>The <em>p</em>-value is <span class="math inline">\(p = \Pr_0(T &gt; t_D)\)</span>, where <span class="math inline">\(T \sim \mathsf{Student}(34)\)</span>. Using <strong>R</strong>, we find <span class="math inline">\(p=0.0032\)</span>, which is smaller than <span class="math inline">\(\alpha=5\%\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">pt</span>(<span class="at">q =</span> ttest<span class="sc">$</span>statistic, <span class="co"># value of T (2.91)</span></span>
-<span id="cb3-2"><a href=""></a>   <span class="at">df =</span> ttest<span class="sc">$</span>parameter, <span class="co"># degrees of freedom (sample size minus 1)</span></span>
-<span id="cb3-3"><a href=""></a>   <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="co"># Probability of being above (not below)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<pre><code>## [1] 0.00319</code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>ttest<span class="sc">$</span>p.value</span>
+<span id="cb3-2"><a href=""></a><span class="do">## [1] 0.249</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The lower bound of the confidence interval is <span class="math inline">\(\overline{D} + \mathsf{se}(\overline{D}) \times \mathfrak{t}_{0.05}\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>ttest<span class="sc">$</span>estimate <span class="sc">+</span> ttest<span class="sc">$</span>stderr <span class="sc">*</span> <span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="at">df =</span> <span class="dv">34</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>ttest<span class="sc">$</span>conf.int</span>
+<span id="cb4-2"><a href=""></a><span class="do">## [1] -1.067  0.277</span></span>
+<span id="cb4-3"><a href=""></a><span class="do">## attr(,"conf.level")</span></span>
+<span id="cb4-4"><a href=""></a><span class="do">## [1] 0.95</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<pre><code>## [1] 0.131</code></pre>
-</div>
-<p>The one-sided confidence interval is <span class="math inline">\([0.131, \infty]\)</span>. The postulated null value, <span class="math inline">\(0\)</span>, is outside the interval.</p>
+<p>The one-sided confidence interval is <span class="math inline">\([-1.067, \infty]\)</span>. The postulated null value, <span class="math inline">\(0\)</span>, is outside the interval.</p>
 </section>
+<section id="r-calculations-by-hand" class="slide level2">
+<h2><strong>R</strong> — calculations by hand</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>d <span class="ot">&lt;-</span> <span class="fu">with</span>(distraction, t <span class="sc">-</span> c) <span class="co"># time difference text vs conversation</span></span>
+<span id="cb5-2"><a href=""></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(d) <span class="co"># sample size</span></span>
+<span id="cb5-3"><a href=""></a>(mean_d <span class="ot">&lt;-</span> <span class="fu">mean</span>(d)) <span class="co"># mean difference</span></span>
+<span id="cb5-4"><a href=""></a><span class="do">## [1] 0.313</span></span>
+<span id="cb5-5"><a href=""></a>(se_d <span class="ot">&lt;-</span> <span class="fu">sd</span>(d)<span class="sc">/</span><span class="fu">sqrt</span>(n)) <span class="co"># standard error of sample mean</span></span>
+<span id="cb5-6"><a href=""></a><span class="do">## [1] 0.108</span></span>
+<span id="cb5-7"><a href=""></a>(stat <span class="ot">&lt;-</span> mean_d<span class="sc">/</span>se_d) <span class="co"># t-test statistic</span></span>
+<span id="cb5-8"><a href=""></a><span class="do">## [1] 2.91</span></span>
+<span id="cb5-9"><a href=""></a>dof <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span>L <span class="co"># degrees of freedom</span></span>
+<span id="cb5-10"><a href=""></a>crit <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="at">p =</span> <span class="fl">0.05</span>, <span class="at">df =</span> dof) <span class="co"># critical value, "q" for quantile</span></span>
+<span id="cb5-11"><a href=""></a>(pval <span class="ot">&lt;-</span> <span class="fu">pt</span>(<span class="at">q =</span> stat, <span class="at">df =</span> dof, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)) <span class="co"># Pr(T &gt; stat)</span></span>
+<span id="cb5-12"><a href=""></a><span class="do">## [1] 0.00319</span></span>
+<span id="cb5-13"><a href=""></a>(conf_low <span class="ot">&lt;-</span> mean_d <span class="sc">+</span> se_d<span class="sc">*</span>crit) <span class="co"># lower bound of Wald confidence interval</span></span>
+<span id="cb5-14"><a href=""></a><span class="do">## [1] 0.131</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p><strong>R</strong> uses the convention <code>d/p/q/r</code> for density/distribution function/quantile function/random number generation. The name of the distribution (e.g., <code>norm</code>, <code>t</code>, <code>chisq</code>, <code>f</code>, <code>unif</code>) is appended to that letter, e.g.,</p>
+<ul>
+<li><code>pnorm</code> is the distribution function of a normal variable,</li>
+<li><code>qt</code> is the quantile function of a Student-<span class="math inline">\(t\)</span> variable,</li>
+<li><code>runif</code> generates uniform variables.</li>
+</ul>
+</div></aside></section>
 <section id="conclude-in-the-setting-of-the-problem" class="slide level2">
 <h2>6. Conclude in the setting of the problem</h2>
-<p>We reject <span class="math inline">\(\mathscr{H}_0\)</span>, meaning that the reaction time is significantly higher (at level <span class="math inline">\(5\)</span>%) when texting than talking on the cellphone while walking.</p>
-<p>The estimated mean difference is <span class="math inline">\(0.313\)</span> seconds (std. error of 0.108).</p>
+<p>The estimated mean difference is <span class="math inline">\(82.146, 82.541\)</span> seconds (std. error of <span class="math inline">\(0.343\)</span> seconds).</p>
+<p>We reject <span class="math inline">\(\mathscr{H}_0\)</span>, meaning that the reaction time is significantly higher (at level <span class="math inline">\(5\)</span>%) when texting than talking on the cellphone while walking (p-value of <span class="math inline">\(0.003\)</span>).</p>
+</section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning objectives</h2>
+<div title="Learning objectives">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Learning objectives</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Understanding the role of uncertainty in decision making.</li>
+<li>Understanding the importance of signal-to-noise ratio as a measure of evidence.</li>
+<li>Knowing the basic ingredients of hypothesis testing and being capable of correctly formulating and identifying these components in a paper.</li>
+<li>Correctly interpreting <span class="math inline">\(p\)</span>-values and confidence intervals for a parameter.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
