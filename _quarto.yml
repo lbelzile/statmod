@@ -9,9 +9,9 @@ project:
     - "slides/*.html"
     - "slides/*.pdf"
     - "slides/img/"
-    - "slides/figures/"
+    - "slides/fig/"
     - "slides/libs/"
-    - "slides/css/"
+    - "slides/partials/"
     - "slides/*_files/"
 
 # See https://quarto.org/docs/projects/code-execution.html#freeze
