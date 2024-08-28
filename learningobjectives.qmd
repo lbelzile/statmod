@@ -9,10 +9,10 @@ This page lists the chapter-specific and overall learning objectives for the cou
 
 At the end of this chapter, students should be able to
 
-- formulate the null and alternative hypotheses attached to a problem statement;
-- undertake hypothesis tests;
-- understand and correctly interpret p-values and confidence intervals;
-- perform an exploratory data analysis and list the most important features of a dataset.
+- Understanding the role of uncertainty in decision making.
+- Understanding the importance of signal-to-noise ratio as a measure of evidence.
+- Formulating the null and alternative hypotheses attached to a problem statement.
+- Understanding and correctly interpreting $p$-values and confidence intervals;
 
 
 ## Linear regression

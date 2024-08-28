@@ -68,6 +68,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -209,10 +238,10 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>At the end of this chapter, students should be able to</p>
 <ul>
-<li>formulate the null and alternative hypotheses attached to a problem statement;</li>
-<li>undertake hypothesis tests;</li>
-<li>understand and correctly interpret p-values and confidence intervals;</li>
-<li>perform an exploratory data analysis and list the most important features of a dataset.</li>
+<li>Understanding the role of uncertainty in decision making.</li>
+<li>Understanding the importance of signal-to-noise ratio as a measure of evidence.</li>
+<li>Formulating the null and alternative hypotheses attached to a problem statement.</li>
+<li>Understanding and correctly interpreting <span class="math inline">\(p\)</span>-values and confidence intervals;</li>
 </ul>
 </section>
 <section id="linear-regression" class="level2">

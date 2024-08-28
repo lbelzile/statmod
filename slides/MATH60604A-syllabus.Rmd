@@ -59,6 +59,8 @@ xaringanExtra::use_xaringan_extra(c("tile_view", "editable","panelset", "tachyon
   - [Léo Belzile](https://www.hec.ca/en/profs/leo.belzile.html) (CSC 4.850, `leo.belzile@hec.ca`)
   - [Juliana Schulz](https://www.hec.ca/en/profs/juliana.schulz.html) (CSC 4.809, `juliana.schulz`)
 
+
+
 ---
 
 # Course content
@@ -66,14 +68,21 @@ xaringanExtra::use_xaringan_extra(c("tile_view", "editable","panelset", "tachyon
 - All of the course material can be downloaded from the course website: [`https://lbelzile.github.io/statmod/`](https://lbelzile.github.io/statmod/) and from ZoneCours
 .midi[
 - course notes
-- video recording
-- **R** package with datasets and quizzes
+- video recordings
+- **R** package with datasets
 - exercises and solutions
 - **R** demos
     ]
+    
+---
+
+# Communication policies
+
 - Submit your assignments/projects via *ZoneCours*
-- Ask course-related questions on **Piazza**: [`piazza.com/hec.ca/fall2024/math60604a`](piazza.com/hec.ca/fall2024/math60604a)
-- For other matters, we are best reached by *email*: [`leo.belzile@hec.ca`](mailto:leo.belzile@hec.ca) and [`juliana.schulz@hec.ca`](mailto:juliana.schulz@hec.ca)
+- Ask course-related questions on **Teams** Class Channel: [`
+O365-MATH 60604A - A2024`](https://teams.microsoft.com/l/team/19%3AP5_SoY0JjmvoYXDUY7JIujD3VOpn1E1gQ66RFRnu-MM1%40thread.tacv2/conversations?groupId=f740d7d7-f3fc-47f7-b3f2-cb20ed2a73c2&tenantId=19df09a9-d1f0-4cff-90c4-01385cc40b57) 
+    - enter the code `r2e6mjw` to join.
+- For other matters, *email* both of us: [`leo.belzile@hec.ca`](mailto:leo.belzile@hec.ca) and [`juliana.schulz@hec.ca`](mailto:juliana.schulz@hec.ca)
 
 ---
 
@@ -97,10 +106,14 @@ xaringanExtra::use_xaringan_extra(c("tile_view", "editable","panelset", "tachyon
 
 # Evaluations
 
-- Three part-project worth 30% (teamwork).
+- Three part-project worth 30% (teamwork) using Montreal Bixi data with due dates
+   - October 11th,
+   - November 8th, 
+   - December 6th.
 - Midterm exam (30%) on Tuesday, October 29th 2024, 12:00-15:00.
 - Final exam (40%) on Thursday, December 12th, from 13:30-16:30.
  
+One sided letter paper for crib-sheet is allowed for midterm, two-sided for the final.
 
 ---
 
@@ -295,22 +308,11 @@ Please don't. There are consequences and its an insult to your intelligence. Ask
 
 Midterm and final are closed-book exam (no computer).
 
-Projects: students can use generative artificial intelligence (AI) or large language models (LLM) to improve and edit the deliverable (either code or text), but only as a proof-reading tool. That is, the first draft of the text must be student's original work. 
+Projects: students can use generative artificial intelligence (AI) or large language models (LLM) to improve and edit the deliverable (either code or text), but only as a proof-reading tool. That is, sudents must create the original draft of all components of the assignment (including all statistical analyses, code, and accompanying text).
 
----
-.question[
-So, can I use ChatGPT?
-]
+My policy reflects that of [Andrew Heiss](https://datavizf24.classes.andrewheiss.com/resource/ai-bs.html)
 
-Wise words stolen from [Andrew Heiss](https://datavizs24.classes.andrewheiss.com/news/2024-06-11_faqs_session-01.html#can-we-use-chatgpt-can-you-even-tell-if-we-do)
 
-.small[
-
-> using ChatGPT and other LLMs when learning R is actually really detrimental to learning, especially if you just copy/paste directly from what it spits out. It will give you code that is wrong or that contains extra stuff you don't need, and if you don't know enough of the language you're working with, you won't understand why or what's going on.
-
-> Using ChatGPT with R requires a good baseline knowledge of R to actually be useful. A good analogy for this is with recipes. ChatGPT is really confident at spitting out plausible-looking recipes. A few months ago, for fun, I asked it to give me a cookie recipe. I got back something with flour, eggs, sugar, and all other standard-looking ingredients, but it also said to include 3/4 cup of baking powder. That's wild and obviously wrong, but I only knew that because I've made cookies before. I've seen other AI-generated recipes that call for a cup of horseradish in brownies or 21 pounds of cabbage for a pork dish. A few weeks ago Google's AI recommended adding glue to pizza sauce to stop the cheese from sliding off. Again, to people who have cooked before, these are all obviously wrong (and dangerous in the case of the glue!), but to a complete beginner, these look like plausible instructions.
-
-]
 ---
 
 ## Using genAI and large language models (LLM)

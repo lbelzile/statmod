@@ -18,7 +18,7 @@ format:
     title-slide-attributes:
       data-background-color: "#002855"
     logo: "fig/logo_hec_montreal_bleu_web.png"
-    width: 1200
+    width: 1600
     height: 900
 ---
 
@@ -1006,7 +1006,7 @@ Wald-based  $(1-\alpha)$ confidence intervals for a scalar parameter $\theta$ ar
 \end{align*}
 corresponding to a point estimate plus or minus the margin of error.
 
-## Estimation: a piece of cake
+## Estimation: a piece of cake {.smaller}
 
 We distinguish between our target (estimand, e.g., population mean), the recipe or formula (estimator) and the output (estimate). 
 
@@ -1021,7 +1021,7 @@ We distinguish between our target (estimand, e.g., population mean), the recipe 
 #|  - "Estimator"
 #|  - "Estimate"
 #| layout-ncol: 3
-#| out-width: '100%'
+#| out-width: '90%'
 knitr::include_graphics("fig/01/estimand.jpg")
 knitr::include_graphics("fig/01/estimator.jpg")
 knitr::include_graphics("fig/01/estimate.jpg")

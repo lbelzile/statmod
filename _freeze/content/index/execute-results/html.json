@@ -1,0 +1,15 @@
+{
+  "hash": "c8b31137920b9f84aa570241b6e05822",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Content\"\n---\n\n\n\n\nThe course content is divided in chapters: for each topic,\nreaders have access to course notes, sample code and exercises sheets.\n\n\n## R packages and data\n\nYou can access the data sets in **R** by installing the `hecstatmod` package from Github using the following commands (uncomment the first line to install the  `remotes` and `learnr` libraries --- do only once):\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlib <- c(\"remotes\", \"dplyr\", \"MASS\", \"broom\", \n         \"car\", \"nlme\", \"lme4\",\n         \"survival\", \"ggplot2\", \"tidyr\")\nfor(pack in lib){\n  if(!require(pack, quietly = TRUE)){\n    install.packages(pack)\n  }\n}\nremotes::install_github(\"lbelzile/hecstatmod\")\nremotes::install_github(\"lbelzile/hecedsm\")\n```\n:::\n\n\n\n\n*Note*: not all data sets are currently documented in `hecstatmod`. Please re-install the package periodically to benefit from the latest features.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

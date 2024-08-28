@@ -38,8 +38,6 @@ website:
         file: exercises/index.qmd
       - text: "Notes"
         href: "https://lbelzile.github.io/math60604a"
-
-
   sidebar:
     - title: "Content"
       style: "docked"
@@ -57,12 +55,18 @@ website:
             - text: "Week 1"
               file: content/01-content.qmd
     - title: "Exercises"
-      file: exercises/index.qmd
+      style: "docked"
+      search: false
+      foreground: "#002855"
       contents:
-        - text: "Exercise 1"
-          file: exercises/01-exercise.qmd
-        - text: "Solution 1"
-          file: exercises/01-solution.qmd
+        - text: "Exercises"
+          file: exercises/index.qmd 
+        - section: "Hypothesis testing"
+          contents:
+            - text: "Exercise 1"
+              file: exercises/01-exercise.qmd
+            - text: "Solution 1"
+              file: exercises/01-solution.qmd
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor1.name_no_title >}}]({{< var instructor1.url >}}), [{{< var instructor2.name_no_title >}}]({{< var instructor2.url >}})<br>

@@ -4,18 +4,28 @@ title: "Content"
 
 
 The course content is divided in chapters: for each topic,
-readers have access to course notes, sample code, online quizzes and exercises.
+readers have access to course notes, sample code and exercises sheets.
 
-## Course notes
 
-## Data
+## R packages and data
 
 You can access the data sets in **R** by installing the `hecstatmod` package from Github using the following commands (uncomment the first line to install the  `remotes` and `learnr` libraries --- do only once):
 
-```{r, eval = FALSE}
-# install.packages("remotes")
+
+```{r}
+#| echo: true
+#| eval: false
+lib <- c("remotes", "dplyr", "MASS", "broom", 
+         "car", "nlme", "lme4",
+         "survival", "ggplot2", "tidyr")
+for(pack in lib){
+  if(!require(pack, quietly = TRUE)){
+    install.packages(pack)
+  }
+}
 remotes::install_github("lbelzile/hecstatmod")
 remotes::install_github("lbelzile/hecedsm")
 ```
+
 
 *Note*: not all data sets are currently documented in `hecstatmod`. Please re-install the package periodically to benefit from the latest features.

@@ -96,10 +96,11 @@ Follow the [instructions](content/installation.qmd) to install **R**.
 
 Your final grade will be based on 
 
-- a three part group project, 
+- a three part group project, with due dates on Friday October 11th, November 8th and December 6th.
 - a midterm evaluation taking place on Tuesday, October 29th, from 12:00-15:00, and 
 - a final examination which will take place on Thursday, December 12th, from 13:30-16:30.
 
+Students can bring in one-sided crib-sheet (letter paper) for the midterm, and a two-sided one for the final.
 
 ```{r assignments-grades, include=FALSE}
 assignments <- tibble::tribble(
