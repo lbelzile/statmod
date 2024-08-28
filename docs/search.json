@@ -133,7 +133,7 @@
     "href": "content/index.html#r-packages-and-data",
     "title": "Content",
     "section": "R packages and data",
-    "text": "R packages and data\nYou can access the data sets in R by installing the hecstatmod package from Github using the following commands (uncomment the first line to install the remotes and learnr libraries — do only once):\n\nlib &lt;- c(\"remotes\", \"dplyr\", \"MASS\", \"broom\", \n         \"car\", \"nlme\", \"lme4\",\n         \"survival\", \"ggplot2\", \"tidyr\")\nfor(pack in lib){\n  if(!require(pack, quietly = TRUE)){\n    install.packages(pack)\n  }\n}\nremotes::install_github(\"lbelzile/hecstatmod\")\nremotes::install_github(\"lbelzile/hecedsm\")\n\nNote: not all data sets are currently documented in hecstatmod. Please re-install the package periodically to benefit from the latest features.",
+    "text": "R packages and data\nYou can access the data sets in R by installing the hecstatmod package from Github using the following commands (uncomment the first line to install the remotes and learnr libraries — do only once):\n\nlib &lt;- c(\"afex\", \"broom\", \"car\", \"dplyr\", \"emmeans\",\n         \"ggplot2\", \"lme4\", \"lmerTest\", \"marginaleffects\", \"MASS\",\n         \"multcomp\", \"nlme\", \"patchwork\", \"poorman\", \"remotes\",\n         \"survival\", \"tidyr\", \"tinytable\")\nfor(pack in lib){\n  if(!require(pack, quietly = TRUE)){\n    install.packages(pack)\n  }\n}\nremotes::install_github(\"lbelzile/hecstatmod\")\nremotes::install_github(\"lbelzile/hecedsm\")\n\nNote: not all data sets are currently documented in hecstatmod. Please re-install the package periodically to benefit from the latest features.",
     "crumbs": [
       "Content",
       "Ressources"

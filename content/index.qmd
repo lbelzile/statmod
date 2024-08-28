@@ -15,9 +15,10 @@ You can access the data sets in **R** by installing the `hecstatmod` package fro
 ```{r}
 #| echo: true
 #| eval: false
-lib <- c("remotes", "dplyr", "MASS", "broom", 
-         "car", "nlme", "lme4",
-         "survival", "ggplot2", "tidyr")
+lib <- c("afex", "broom", "car", "dplyr", "emmeans",
+         "ggplot2", "lme4", "lmerTest", "marginaleffects", "MASS",
+         "multcomp", "nlme", "patchwork", "poorman", "remotes",
+         "survival", "tidyr", "tinytable")
 for(pack in lib){
   if(!require(pack, quietly = TRUE)){
     install.packages(pack)
