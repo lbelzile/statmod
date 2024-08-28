@@ -1,0 +1,100 @@
+---
+title: "Statistical inference"
+execute:
+  echo: true
+  eval: true
+  message: false
+  warning: false
+  error: false
+---
+
+## Solution to Exercise 1.1
+
+
+1. The level of the test is 5%, so we should reject 5% of the time under the null.
+2. The curve is the power curve, i.e., the percentage of rejection of the null hypothesis for one-sample $t$-test. The further away from the true value $\mu$, the higher the ability to detect departures from $\mathscr{H}_0$. Because we set $\alpha=0.05$, the curve should be around 0.05 near $\mu$ and increase towards 1 as we move away from the true population mean.
+3. Power increases if the sample size $n$ increases, so we expect to see the curve be higher everywhere, but at $\mu$ where it should be close to $0.05$ if the test is calibrated.
+4. The data are clearly not symmetric and heavily discretized, yet the power curve of the one-sample $t$-test is steadily increasing and the nominal level matches the type I error. This illustrates the robustness of the test to departures from normality.
+
+```{r}
+#| eval: true
+#| echo: true
+data(renfe, package = "hecstatmod")
+library(ggplot2)
+renfe_sub <- renfe |> 
+         dplyr::filter(type == "AVE")
+params <- as.list(MASS::fitdistr(renfe_sub$duration, "normal")$estimate)
+ggplot(data = renfe_sub,
+       mapping = aes(sample = duration)) +
+  geom_qq(dparams = list(mean = params$mean, 
+                         sd = params$sd)) +
+  geom_abline(intercept = 0, slope = 1) + 
+  theme_classic()
+```
+
+
+## Solution to Exercise 1.2
+
+
+1. The empirical coverage is 0.947. The coverage is not far from nominal coverage of 0.95, indicating the test is well calibrated.
+
+```{r}
+#| eval: true
+#| echo: true
+data(renfe_simu, package = "hecstatmod")
+true_diff <- -0.28
+coverage <- mean(with(renfe_simu, cilb < true_diff & ciub > true_diff))
+coverage
+```
+
+2. The histogram for the mean difference in @fig-renfe-hist looks symmetric and light-tailed, and centered around 0.28, whereas the $p$-values are scattered in the unit interval, with some values closer to zero.
+
+```{r}
+#| label: fig-renfe-hist
+#| fig-cap: "Left: density plot of the mean difference price for high-speed train tickets from Madrid to Barcelona versus Barcelona to Madrid, along with average (gray vertical line). Right: histogram of p-values."
+#| eval: true
+#| echo: true
+library(patchwork) 
+theme_set(theme_classic())
+g1 <- ggplot(data = renfe_simu, 
+             mapping = aes(x = meandif)) +
+  geom_density() +
+  geom_vline(xintercept = true_diff, 
+             color = "gray",
+             linetype = "dashed") +
+  labs(x = "mean difference")
+g2 <- ggplot(data = renfe_simu,
+             mapping = aes(x = pval)) +
+  geom_histogram(bins = 11)
+g1 + g2
+```
+
+3. The power is $0.105$. Under the alternative regime (since $\Delta=0.28$€), we only reject 10.5\% of the time. While this number is low, it is due to the small size of the true mean difference, which is hard to detect unless the sample size is enormous. The estimated mean difference for the sample is $0.274$€.
+
+```{r}
+t.test(price ~ dest, data = renfe_sub)
+mean(renfe_simu$pval < 0.05)
+```
+
+
+## Solution to Exercise 1.3
+
+Careful here, as the price of the `REXPRESS` tickets is fixed at 43.25€. The only random sample is for the other class of train!
+ 
+```{r}
+#| eval: true
+#| echo: true
+with(renfe,
+     t.test(x = price,
+            mu = 43.25,
+            conf.level = 0.9,
+            subset = type == "AVE-TGV"))
+
+```
+ 
+- The null hypothesis is $\mathscr{H}_0: \mu_{\text{AVE-TGV}}=43.25$€ against the alternative $\mathscr{H}_1: \mu_{\text{AVE-TGV}}\neq 43.25$€, where $\mu_{\text{AVE-TGV}}$ is the average `AVE-TGV` ticket price.
+- Since this is a one-sample location problem, we use a one-sample $t$-test.
+- The estimated mean difference is $45.63$€$= 88.88$€$-43.25$€, with 90\% confidence interval for the mean difference of $[44.14, 47.12]$.
+- The $t$-statistic is 50.519 with 428 degrees of freedom, and the $p$-value is negligible.
+- We strongly reject the null hypothesis that high-speed trains are the same price as RegioExpress ones.
+

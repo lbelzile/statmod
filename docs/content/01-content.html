@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.53">
+<meta name="generator" content="quarto-1.6.1">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction – Statistical modelling</title>
+<title>Statistical inference – Statistical modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -133,10 +133,22 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Ressources</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/installation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installing <strong>R</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../learningobjectives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Learning objectives</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Programming</span></a>
+ <span class="menu-text">Pedagogical content</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -144,61 +156,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/installation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installing <strong>R</strong></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../files/syllabus/MATH60604A_courseobjectives.pdf" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Learning objectives</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Pedagogical content</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../content/01-content.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Week 1</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/02-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 2</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 3</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 4</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 5</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/06-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 6</span></a>
   </div>
 </li>
       </ul>
@@ -214,117 +173,83 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a></li>
-  <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In class:</a></li>
-  <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After class:</a></li>
-  <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings">Additional readings:</a></li>
-  <li><a href="#other-references" id="toc-other-references" class="nav-link" data-scroll-target="#other-references">Other references:</a></li>
+  <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In class</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After class</a></li>
+  <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings">Additional readings</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header">
-<h2 class="title anchored display-7">Introduction</h2>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Pedagogical content</a></li><li class="breadcrumb-item"><a href="../content/01-content.html">Week 1</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Statistical inference</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
 
 </header>
 
 
 <section id="content" class="level3">
 <h3 class="anchored" data-anchor-id="content">Content</h3>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">S</th>
-<th style="text-align: left;">Content</th>
-<th style="text-align: center;">Slides</th>
-<th style="text-align: center;">PDF</th>
-<th style="text-align: center;">Videos</th>
-<th style="text-align: center;">SAS</th>
-<th style="text-align: center;">R</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">Course Outline</td>
-<td style="text-align: center;"><a href="https://lbelzile.github.io/MATH60604A-slides/MATH60604A_w0_syllabus.html"><span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://lbelzile.github.io/MATH60604A-slides/MATH60604A_w0_syllabus.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://youtu.be/luOkCcpDSjs"><span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span></a></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">1a</td>
-<td style="text-align: left;">Hypothesis Tests</td>
-<td style="text-align: center;"><a href="https://lbelzile.github.io/MATH60604A-slides/MATH60604A_w1a_tests.html"><span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://lbelzile.github.io/MATH60604A-slides/MATH60604A_w1a_tests.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://youtu.be/TSMuEX8FqYo"><span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/code/MATH60604A_1a_test.sas"><span style="color: #4b5357;"><i class="fas fa-file-code fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/code/MATH60604A_1a_test.R"><span style="color: #276dc2;"><i class="fab fa-r-project fa-lg"></i></span></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">1b</td>
-<td style="text-align: left;">Central Limit Theorem</td>
-<td style="text-align: center;"><a href="https://lbelzile.github.io/MATH60604A-slides/MATH60604A_w1b_clt.html"><span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://lbelzile.github.io/MATH60604A-slides/MATH60604A_w1b_clt.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://youtu.be/nCUT05szKwQ"><span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span></a></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">1c</td>
-<td style="text-align: left;">Exploratory Data Analysis</td>
-<td style="text-align: center;"><a href="https://lbelzile.github.io/MATH60604A-slides/MATH60604A_w1c_eda.html"><span style="color: #4b5357;"><i class="fas fa-desktop fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://lbelzile.github.io/MATH60604A-slides/MATH60604A_w1c_eda.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://youtu.be/5Yc46pAQpFk"><span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/code/MATH60604A_1c_eda.sas"><span style="color: #4b5357;"><i class="fas fa-file-code fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/code/MATH60604A_1c_eda.R"><span style="color: #276dc2;"><i class="fab fa-r-project fa-lg"></i></span></a></td>
-</tr>
-</tbody>
-</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These readings should normally be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes.</p>
 </div>
 </div>
 <ul>
-<li>Course notes: chapter 1 and Appendix A</li>
-<li>Create an account on <strong>SAS</strong> onDemand</li>
-<li>Complete the <a href="sas.html">Introduction to <strong>SAS</strong></a></li>
+<li>Course notes: chapter <a href="https://lbelzile.github.io/math60604a/introduction.html">1 (Introduction)</a> and <a href="https://lbelzile.github.io/math60604a/inference.html">2 (Statistical Inference)</a></li>
+<li><a href="../content/installation.html">Install <strong>R</strong> and RStudio</a></li>
 </ul>
 </section>
 <section id="in-class" class="level3">
-<h3 class="anchored" data-anchor-id="in-class">In class:</h3>
+<h3 class="anchored" data-anchor-id="in-class">In class</h3>
 <ul>
-<li>Presentation and practice of pedagogical tools (Zoom / Wooclap / SAS onDemand)</li>
-<li><a href="https://github.com/lbelzile/statmod/raw/main/files/workshop/graphics.zip">Graphics workshop (group)</a></li>
+<li><a href="../slides/MATH60604A_syllabus.html">Syllabus</a></li>
+<li><a href="../slides/MATH60604A-slides1.html">Examples of hypothesis tests</a> <a href="../slides/MATH60604A-slides1.pdf">pdf</a></li>
+<li>Activity: reporting conclusion of tests</li>
 </ul>
 </section>
+<section id="slides" class="level3">
+<h3 class="anchored" data-anchor-id="slides">Slides</h3>
+<p class="text-center">
+<a class="btn btn-success btn-lg" target="_blank" href="../MATH60604A-slides1.html"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>  View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides1.pdf" role="button"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i>  Download PDF of slides</a>
+</p>
+<div class="ratio ratio-16x9">
+<iframe class="slide-deck" src="../slides/MATH60604A-slides1.html">
+</iframe>
+</div>
+</section>
 <section id="after-class" class="level3">
-<h3 class="anchored" data-anchor-id="after-class">After class:</h3>
+<h3 class="anchored" data-anchor-id="after-class">After class</h3>
 <ul>
-<li><code>intro</code> quiz (self-assessment)</li>
-<li>Exercise 1.4 (a-b) with <strong>SAS</strong>. The whole exercise sheet may be somewhat difficult at this stage, but you should (be able to) complete it in the upcoming weeks.</li>
+<li><a href="../exercises/01-exercise.html">Exercise sheet 1</a></li>
 </ul>
 </section>
 <section id="additional-readings" class="level3">
-<h3 class="anchored" data-anchor-id="additional-readings">Additional readings:</h3>
+<h3 class="anchored" data-anchor-id="additional-readings">Additional readings</h3>
 <ul>
-<li><a href="https://socviz.co/lookatdata.html#lookatdata">Chapter 1 of <em>Data Visualization: A practical introduction</em> by Kieran Healy</a></li>
 <li><a href="https://www.jwilber.me/permutationtest/">Permutation tests</a></li>
-<li><a href="https://policyviz.com/2018/08/07/dataviz-cheatsheet/">DataViz Cheatsheet</a></li>
-<li><a href="https://r4ds.had.co.nz/">Chapter 7 of <em><strong>R</strong> for Data Science</em> by Garrett Grolemund and Hadley Wickham</a></li>
-</ul>
-</section>
-<section id="other-references" class="level3">
-<h3 class="anchored" data-anchor-id="other-references">Other references:</h3>
-<ul>
-<li><a href="https://r4ds.had.co.nz/">Chapter 3 of <em><strong>R</strong> for Data Science</em> by Garrett Grolemund and Hadley Wickham</a></li>
-<li><a href="https://clauswilke.com/dataviz/"><em>Fundamentals of Data Visualization</em> by Claus O. Wilke</a></li>
-<li><a href="https://stat545.com/effective-graphs.html">Do’s and don’ts of making effective graphics</a></li>
-<li><a href="https://github.com/ft-interactive/chart-doctor/tree/master/visual-vocabulary">Financial Times Visual Vocabulary</a></li>
-<li><a href="https://bbc.github.io/rcookbook/">BBC R Cookbook (optional)</a></li>
-<li><a href="https://www.nytimes.com/2020/06/10/learning/over-60-new-york-times-graphs-for-students-to-analyze.html">What’s going on in this graph?</a></li>
 </ul>
 
 

@@ -8,30 +8,9 @@ readers have access to course notes, sample code, online quizzes and exercises.
 
 ## Course notes
 
-- [Basics of statistical inference](https://lbelzile.github.io/math60604a/intro.html)
-- [Linear regression](https://lbelzile.github.io/math60604a/linear-regression.html)
-- [Generalized linear models](https://lbelzile.github.io/math60604a/generalized-linear-models.html)
-- [Correlated and longitudinal data](https://lbelzile.github.io/math60604a/correlated-longitudinal-data.html)
-- [Linear mixed models](https://lbelzile.github.io/math60604a/linear-mixed-models.html)
-- [Survival analysis](https://lbelzile.github.io/math60604a/survival.html)
-- [Likelihood](https://lbelzile.github.io/math60604a/likelihood.html)
-
-
-
-## Videos and Slides
-
-In this section you can find the links to all videos individually as well as the slides and accompanying code used in the videos.
-
-```{r, echo=FALSE, eval=TRUE, message=FALSE}
-source("../files/get_slide_data.R")
-knitr::kable(sldat, align = "llccccc")
-```
-
----
-
 ## Data
 
-You can access the data sets in **R** by installing the `hecstatmod` package from Github using the following commands (uncomment the first line to install the  `remotes` and `learnr` libraries - do only once):
+You can access the data sets in **R** by installing the `hecstatmod` package from Github using the following commands (uncomment the first line to install the  `remotes` and `learnr` libraries --- do only once):
 
 ```{r, eval = FALSE}
 # install.packages("remotes")
@@ -40,14 +19,3 @@ remotes::install_github("lbelzile/hecedsm")
 ```
 
 *Note*: not all data sets are currently documented in `hecstatmod`. Please re-install the package periodically to benefit from the latest features.
-
-## Quiz
-
-The **R** package also contain quizzes: to run the later and launch a new browser window, use the following commands (each line represents a different quiz).
-
-```{r eval = FALSE}
-# install.packages("learnr")
-learnr::run_tutorial("intro", package = "hecstatmod")
-learnr::run_tutorial("likelihood", package = "hecstatmod")
-```
-

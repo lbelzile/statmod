@@ -48,29 +48,21 @@ website:
       contents:
         - text: "Ressources"
           file: content/index.qmd
-        - section: "Programming"
-          contents:
-            - text: "Installing **R**"
-              file: content/installation.qmd
+        - text: "Installing **R**"
+          file: content/installation.qmd
         - text: "Learning objectives"
-          file:  syllabus.qmd
+          file: learningobjectives.qmd
         - section: "Pedagogical content"
           contents:
             - text: "Week 1"
               file: content/01-content.qmd
-            - text: "Week 2"
-              file: content/02-content.qmd
-            - text: "Week 3"
-              file: content/03-content.qmd
-            - text: "Week 4"
-              file: content/04-content.qmd
-            - text: "Week 5"
-              file: content/05-content.qmd
-            - text: "Week 6"
-              file: content/06-content.qmd
     - title: "Exercises"
       file: exercises/index.qmd
-
+      contents:
+        - text: "Exercise 1"
+          file: exercises/01-exercise.qmd
+        - text: "Solution 1"
+          file: exercises/01-solution.qmd
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor1.name_no_title >}}]({{< var instructor1.url >}}), [{{< var instructor2.name_no_title >}}]({{< var instructor2.url >}})<br>

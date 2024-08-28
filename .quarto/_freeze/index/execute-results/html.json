@@ -3,9 +3,7 @@
   "result": {
     "engine": "knitr",
     "markdown": "---\ntitle: \"Statistical modelling\"\nsubtitle: |\n  The objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.\ndetails: |\n  MATH 60604A, Fall 2024<br>HEC Montréal\nsidebar: false\ntoc: false\npage-layout: full\nformat:\n  html:\n    template-partials:\n      - html/home/title-block.html\n---\n\n\n\n\n\n::: {.home}\n\n::: {.grid .course-details}\n\n::: {.g-col-4}\n### Instructor\n\n- {{< fa user >}} &nbsp; [{{< var instructor1.name >}}]({{< var instructor1.url >}})\n- {{< fa university >}} &nbsp; {{< var instructor1.office >}}\n- {{< fa envelope >}} &nbsp; <a href='mailto:{{< var instructor1.email >}}'>{{< var instructor1.email >}}</a>\n:::\n\n\n::: {.g-col-4}\n### Instructor\n\n- {{< fa user >}} &nbsp; [{{< var instructor2.name >}}]({{< var instructor2.url >}})\n- {{< fa university >}} &nbsp; {{< var instructor2.office >}}\n- {{< fa envelope >}} &nbsp; <a href='mailto:{{< var instructor2.email >}}'>{{< var instructor2.email >}}</a>\n:::\n\n::: {.g-col-4}\n### Course details\n- {{< fa calendar-alt >}} &nbsp; {{< var course.semester >}}\n- {{< fa calendar >}} &nbsp; {{< var course.days >}}\n- {{< fa clock >}} &nbsp; {{< var course.time >}}\n- {{< fa location-dot >}} &nbsp; {{< var course.location >}}\n:::\n\n\n:::\n\n:::\n",
-    "supporting": [
-      "index_files"
-    ],
+    "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

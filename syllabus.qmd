@@ -87,7 +87,7 @@ Statistical modelling is a compulsory course of the M.Sc. in Data Science and Bu
 
 # Programming
 
-The course uses the  [**R**](https://cran.r-project.org/) programming language. If you have never programmed before, you may find there is a steep learning curve. **R** has a vibrant user community, so most routines of interest have been contributed by other users and you can get support through help forums. You can [find instructions for installing R, RStudio, and all the tidyverse packages here.](/example/installation/). You may want to look at [Douglas et al. (2024) *An introduction to R*](https://alexd106.github.io/intro2R/index.html), [Julia Palms' *Introduction to R*](https://bookdown.org/palmjulia/r_intro_script/), the  free [CRAN manuals](https://cran.r-project.org/manuals.html) or similar introductions, or online courses, to brush up the basics of the programming language.
+The course uses the  [**R**](https://cran.r-project.org/) programming language. If you have never programmed before, you may find there is a steep learning curve. **R** has a vibrant user community, so most routines of interest have been contributed by other users and you can get support through help forums. You may want to look at [Douglas et al. (2024) *An introduction to R*](https://alexd106.github.io/intro2R/index.html), [Julia Palms' *Introduction to R*](https://bookdown.org/palmjulia/r_intro_script/), the  free [CRAN manuals](https://cran.r-project.org/manuals.html) or similar introductions, or online courses, to brush up the basics of the programming language.
 
 Follow the [instructions](content/installation.qmd) to install **R**.
 

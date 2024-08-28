@@ -1,79 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lbelzile.github.io/statmod/content/installation.html</loc>
-    <lastmod>2024-07-12T16:18:27.811Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/index.html</loc>
-    <lastmod>2023-10-28T17:46:44.400Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/exercises/index.html</loc>
-    <lastmod>2023-10-28T20:21:14.216Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/12-content.html</loc>
-    <lastmod>2023-10-28T17:33:32.990Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/10-content.html</loc>
-    <lastmod>2023-10-28T18:02:57.474Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/08-content.html</loc>
-    <lastmod>2023-10-28T17:33:32.990Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/06-content.html</loc>
-    <lastmod>2023-10-28T17:33:32.990Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/04-content.html</loc>
-    <lastmod>2023-10-28T17:33:32.990Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/02-content.html</loc>
-    <lastmod>2023-10-28T17:33:32.990Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/01-content.html</loc>
-    <lastmod>2023-10-28T19:49:18.828Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/03-content.html</loc>
-    <lastmod>2023-10-28T17:33:32.990Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/05-content.html</loc>
-    <lastmod>2023-10-28T18:32:04.221Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/07-content.html</loc>
-    <lastmod>2023-10-28T17:33:32.990Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/09-content.html</loc>
-    <lastmod>2023-10-28T18:18:37.632Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/11-content.html</loc>
-    <lastmod>2023-10-28T17:45:19.195Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/content/13-content.html</loc>
-    <lastmod>2023-10-28T17:33:32.990Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lbelzile.github.io/statmod/index.html</loc>
-    <lastmod>2024-07-12T15:28:41.334Z</lastmod>
+    <loc>https://lbelzile.github.io/statmod/exercises/01-solution.html</loc>
+    <lastmod>2024-08-28T04:29:19.663Z</lastmod>
   </url>
   <url>
     <loc>https://lbelzile.github.io/statmod/syllabus.html</loc>
-    <lastmod>2024-08-20T14:00:53.412Z</lastmod>
+    <lastmod>2024-08-26T23:56:16.242Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lbelzile.github.io/statmod/index.html</loc>
+    <lastmod>2024-08-26T23:56:16.203Z</lastmod>
   </url>
   <url>
     <loc>https://lbelzile.github.io/statmod/learningobjectives.html</loc>
-    <lastmod>2024-08-20T15:04:40.745Z</lastmod>
+    <lastmod>2024-08-26T23:56:16.203Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lbelzile.github.io/statmod/content/01-content.html</loc>
+    <lastmod>2024-08-28T04:03:32.666Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lbelzile.github.io/statmod/exercises/index.html</loc>
+    <lastmod>2024-08-28T01:01:14.992Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lbelzile.github.io/statmod/content/index.html</loc>
+    <lastmod>2024-08-28T04:17:05.608Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lbelzile.github.io/statmod/exercises/01-exercise.html</loc>
+    <lastmod>2024-08-28T04:28:25.365Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lbelzile.github.io/statmod/content/installation.html</loc>
+    <lastmod>2024-08-26T23:56:16.117Z</lastmod>
   </url>
 </urlset>

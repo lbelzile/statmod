@@ -1,0 +1,5 @@
+---
+title: "Exercises"
+---
+
+This webpage section contains exercises along with solutions sets and code.

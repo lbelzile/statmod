@@ -1,0 +1,110 @@
+---
+title: "Hypothesis testing"
+---
+
+
+The `renfe` data contains information about 10 000 train ticket sales from [Renfe](https://www.renfe.com/es/en), the Spanish national train company. The data include:
+
+
+- `price`: price of the ticket (in euros);
+- `dest`: binary variable indicating the journey, either Barcelona to Madrid (`0`) or Madrid to Barcelona (`1`);
+- `fare`: categorical variable indicating the ticket fare, one of `AdultoIda`, `Promo` or `Flexible`;
+- `class`: ticket class, either `Preferente`, `Turista`, `TuristaPlus` or `TuristaSolo`;
+- `type`: categorical variable indicating the type of train, either Alta Velocidad Española (`AVE`), Alta Velocidad Española jointly with TGV (parternship between SNCF and Renfe for trains to/from Toulouse and beyond) `AVE-TGV` or regional train `REXPRESS`; only trains labelled `AVE` or `AVE-TGV` are high-speed trains.
+- `duration`: length of train journey (in minutes);
+- `wday` integer denoting the week day, ranging from Sunday (`1`) to Saturday (`7`).
+
+We consider travel time for high-speed (`AVE` and `AVE-TGV`) trains. The true "population" mean travel time between cities is known to be $\mu=2.845$ hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).
+
+## Exercise 1.1
+
+A simulation study is performed to assess the behaviour of univariate tests under repeated sampling. The following algorithm was repeated 10K times for different values of $\mu_0$:
+
+1. Select a random subsample of size $n=100$.
+2. Compute the one-sample $t$-test statistic for $\mathscr{H}_0: \mu=\mu_0$ (versus $\mathscr{H}_0: \mu \neq \mu_0$) .
+3. Return the $p$-value
+ 
+ 
+@fig-powercurve shows the percentage of the 10K $p$-values that are less than 0.05, i.e. the percentage of rejection (at the $5$% level) of $\mathscr{H}_0:\mu=\mu_0$ against the two-sided alternative at $\mu_0 \in \{2.83, \nu, 2.835, 2.84, \ldots, 2.995, 3\`$. Use the resulting curve to answer the following questions:
+
+```{r}
+#| eval: true
+#| echo: false
+#| cache: true
+#| message: false
+#| warning: false
+#| label: fig-powercurve
+#| fig-cap: "Power curve for the one-sample $t$-test based on subsamples of size $n=100$, as a function of travel time. The grey horizontal line is at 0.05, the vertical dashed line indicates the population mean $\\mu$."
+library(hecstatmod)
+library(ggplot2, warn.conflicts = FALSE) # grammar of graphics
+data(renfe, package = "hecstatmod")
+# Select subsample with only high-speed trains
+data <- renfe |> dplyr::filter(type %in% c("AVE","AVE-TGV"))
+# Transform duration in hours
+duration <- data$duration / 60
+# Compute summary statistics of the duration
+mean_d <- mean(duration);
+# Power simulation
+B <- 1e4L # number of simulations
+n <- nrow(data)
+m <- 100L # subsample size
+alpha <- 0.05 # level of test
+# Create a grid of duration times for the alternative hypothesis
+time <- seq(from = mean_d, to = 3, by = 0.005)
+power <- matrix(nrow = B, ncol = length(time)) # container to store results
+# fix random number generation seed for reproducibility
+set.seed(2020)
+for(i in seq_len(B)){ # for each replication
+  for(j in seq_along(time)){ # for each alternative mean duration
+    # Compute the p-value of the one-sample t-test
+     power[i,j] <-  t.test(x = duration[sample.int(n = n, size = m)],
+                           mu = time[j])$p.value
+     # Store p-values
+  }
+}
+# Plot the power curve as a function of time
+ggplot(data = data.frame(time = time,
+                         # Proportion of rejection of H0 at level alpha
+                         power = colMeans(power < alpha)),
+       mapping = aes(x = time, y = power)) +
+  geom_point() +
+  geom_vline(xintercept = 2.845, linetype = "dashed") +
+  geom_hline(yintercept = alpha) +
+  labs(x = "average duration time (in hours)",
+       y = "",
+       subtitle = "Power as a function of the mean alternative time") +
+  scale_y_continuous(limits = c(0,1),
+                     expand = expansion(add = 0.01)) +
+  theme_classic()
+```
+
+
+1. Explain why the value for the one-sample $t$-test around $\mu=2.845$ should be approximately 0.05.
+2. Explain why the values on the curve increase towards the right of the plot.
+3. Suppose we repeated the simulation study, but this time with subsamples of size $n=1000$. How would the points compare for the one-sample $t$-test: should they be higher, equal, or lower than their current values?
+4. Is the assumption of the one-sample $t$-test valid in this example? Produce a quantile-quantile plot using the code below and hence comment on the robustness of the $t$-test to departures from the normality assumption.
+
+ 
+
+
+
+## Exercise 1.2
+
+
+Suppose we now want to compare the mean fare for high-speed train tickets for the two destinations, i.e., Madrid to Barcelona versus Barcelona to Madrid. We run a simulation study where we perform a two-sided Welch test for this hypothesis repeatedly with random subsamples of size $n=1000$. The data `renfe_simu` contains the mean difference (`meandif`), the test statistic (`Wstat`), the $p$-value (`pval`) and the  confidence interval (`cilb` and `ciub`) for these 1000 repetitions. Based on the entire database, the true mean difference is known to be $-0.28$€. Use the simulated data to answer the following questions and *briefly comment* on each item
+ 
+1. What is the empirical coverage of the 95% confidence intervals (i.e., the percentage of intervals covering the true mean difference value)? 
+2. Plot an histogram of the mean differences and superimpose the true  mean difference in the population.
+3. Compute the power of the test (percentage of rejection of the null hypothesis).
+
+
+## Exercise 1.3
+
+Using the `renfe` data, test whether the average ticket price of `AVE-TGV` trains is different from that of Regio Express trains (`REXPRESS`). Make sure to 
+
+- State your null and alternative hypothesis.
+- Carefully justify your choice of test statistic.
+- Report the estimated mean difference and a 90\% confidence interval for that difference.
+- Conclude within the setting of the problem.
+
+

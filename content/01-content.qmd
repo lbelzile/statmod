@@ -1,33 +1,40 @@
 ---
-title: "Introduction"
+title: "Statistical inference"
 ---
 
 
 ### Content
 
  
-```{r, echo=FALSE, eval=TRUE, message=FALSE}
-source("../files/get_slide_data.R")
-knitr::kable(sldat[which(sldat$S %in% c("0","1a","1b","1c")),], align = "llccccc", row.names = FALSE)
-```
+:::{.callout-warning}
+These readings should normally be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies --- the strict minimum being the course notes.
+:::
 
-- Course notes: chapter 1 and 2
-- [Install **R** and RStudio](content/installation.R)
-
-
-### In class:
-
-- [Syllabus](slides/MATH60604A_syllabus.html)
-- [Examples of hypothesis tests](slides/MATH606064A_01_statisticalinference.html)
-- Workshop: reporting conclusion of tests
+- Course notes: chapter [1 (Introduction)](https://lbelzile.github.io/math60604a/introduction.html) and [2 (Statistical Inference)](https://lbelzile.github.io/math60604a/inference.html)
+- [Install **R** and RStudio](installation.qmd)
 
 
-### After class:
+### In class
 
-### Additional readings:
+- [Syllabus](../slides/MATH60604A_syllabus.html)
+- [Examples of hypothesis tests](../slides/MATH60604A-slides1.html) [pdf](../slides/MATH60604A-slides1.pdf)
+- Activity: reporting conclusion of tests
+
+### Slides
+
+
+<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../MATH60604A-slides1.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides1.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
+
+<div class="ratio ratio-16x9">
+<iframe class="slide-deck" src="../slides/MATH60604A-slides1.html"></iframe>
+</div>
+
+
+### After class
+
+- [Exercise sheet 1](../exercises/01-exercise.qmd)
+
+### Additional readings
 
 - [Permutation tests](https://www.jwilber.me/permutationtest/)
-
-
-### Other references:
 

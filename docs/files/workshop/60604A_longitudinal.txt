@@ -11,9 +11,9 @@ Pick one of the following datasets, depending on your team number
 Answer the following question
 
 1) is the database in long format?
-2) identify the time variable
-3) are the number of time period the same for each individual
-4) are there missing values
-5) which variables are fixed in time? which vary
+2) identify the time variable.
+3) are the number of time period the same for each individual?
+4) are there missing values?
+5) which variables are fixed in time and which vary?
 6) create a spaghetti plot!
 

@@ -1,32 +1,232 @@
 [
   {
-    "objectID": "content/installation.html",
-    "href": "content/installation.html",
-    "title": "Statistical modelling",
+    "objectID": "exercises/01-solution.html",
+    "href": "exercises/01-solution.html",
+    "title": "Statistical inference",
     "section": "",
-    "text": "You will do all of your work in this class with the open source (and free!) R programming language. You will use RStudio as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.",
+    "text": "The level of the test is 5%, so we should reject 5% of the time under the null.\nThe curve is the power curve, i.e., the percentage of rejection of the null hypothesis for one-sample \\(t\\)-test. The further away from the true value \\(\\mu\\), the higher the ability to detect departures from \\(\\mathscr{H}_0\\). Because we set \\(\\alpha=0.05\\), the curve should be around 0.05 near \\(\\mu\\) and increase towards 1 as we move away from the true population mean.\nPower increases if the sample size \\(n\\) increases, so we expect to see the curve be higher everywhere, but at \\(\\mu\\) where it should be close to \\(0.05\\) if the test is calibrated.\nThe data are clearly not symmetric and heavily discretized, yet the power curve of the one-sample \\(t\\)-test is steadily increasing and the nominal level matches the type I error. This illustrates the robustness of the test to departures from normality.\n\n\n\nCode\ndata(renfe, package = \"hecstatmod\")\nlibrary(ggplot2)\nrenfe_sub &lt;- renfe |&gt; \n         dplyr::filter(type == \"AVE\")\nparams &lt;- as.list(MASS::fitdistr(renfe_sub$duration, \"normal\")$estimate)\nggplot(data = renfe_sub,\n       mapping = aes(sample = duration)) +\n  geom_qq(dparams = list(mean = params$mean, \n                         sd = params$sd)) +\n  geom_abline(intercept = 0, slope = 1) + \n  theme_classic()",
     "crumbs": [
-      "Content",
-      "Programming",
-      "Installing **R**"
+      "Solution 1"
     ]
   },
   {
-    "objectID": "content/installation.html#learning-r",
-    "href": "content/installation.html#learning-r",
+    "objectID": "exercises/01-solution.html#solution-to-exercise-1.1",
+    "href": "exercises/01-solution.html#solution-to-exercise-1.1",
+    "title": "Statistical inference",
+    "section": "",
+    "text": "The level of the test is 5%, so we should reject 5% of the time under the null.\nThe curve is the power curve, i.e., the percentage of rejection of the null hypothesis for one-sample \\(t\\)-test. The further away from the true value \\(\\mu\\), the higher the ability to detect departures from \\(\\mathscr{H}_0\\). Because we set \\(\\alpha=0.05\\), the curve should be around 0.05 near \\(\\mu\\) and increase towards 1 as we move away from the true population mean.\nPower increases if the sample size \\(n\\) increases, so we expect to see the curve be higher everywhere, but at \\(\\mu\\) where it should be close to \\(0.05\\) if the test is calibrated.\nThe data are clearly not symmetric and heavily discretized, yet the power curve of the one-sample \\(t\\)-test is steadily increasing and the nominal level matches the type I error. This illustrates the robustness of the test to departures from normality.\n\n\n\nCode\ndata(renfe, package = \"hecstatmod\")\nlibrary(ggplot2)\nrenfe_sub &lt;- renfe |&gt; \n         dplyr::filter(type == \"AVE\")\nparams &lt;- as.list(MASS::fitdistr(renfe_sub$duration, \"normal\")$estimate)\nggplot(data = renfe_sub,\n       mapping = aes(sample = duration)) +\n  geom_qq(dparams = list(mean = params$mean, \n                         sd = params$sd)) +\n  geom_abline(intercept = 0, slope = 1) + \n  theme_classic()",
+    "crumbs": [
+      "Solution 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-solution.html#solution-to-exercise-1.2",
+    "href": "exercises/01-solution.html#solution-to-exercise-1.2",
+    "title": "Statistical inference",
+    "section": "Solution to Exercise 1.2",
+    "text": "Solution to Exercise 1.2\n\nThe empirical coverage is 0.947. The coverage is not far from nominal coverage of 0.95, indicating the test is well calibrated.\n\n\n\nCode\ndata(renfe_simu, package = \"hecstatmod\")\ntrue_diff &lt;- -0.28\ncoverage &lt;- mean(with(renfe_simu, cilb &lt; true_diff & ciub &gt; true_diff))\ncoverage\n\n\n[1] 0.947\n\n\n\nThe histogram for the mean difference in Figure 1 looks symmetric and light-tailed, and centered around 0.28, whereas the \\(p\\)-values are scattered in the unit interval, with some values closer to zero.\n\n\n\nCode\nlibrary(patchwork) \ntheme_set(theme_classic())\ng1 &lt;- ggplot(data = renfe_simu, \n             mapping = aes(x = meandif)) +\n  geom_density() +\n  geom_vline(xintercept = true_diff, \n             color = \"gray\",\n             linetype = \"dashed\") +\n  labs(x = \"mean difference\")\ng2 &lt;- ggplot(data = renfe_simu,\n             mapping = aes(x = pval)) +\n  geom_histogram(bins = 11)\ng1 + g2\n\n\n\n\n\n\n\n\nFigure 1: Left: density plot of the mean difference price for high-speed train tickets from Madrid to Barcelona versus Barcelona to Madrid, along with average (gray vertical line). Right: histogram of p-values.\n\n\n\n\n\n\nThe power is \\(0.105\\). Under the alternative regime (since \\(\\Delta=0.28\\)€), we only reject 10.5% of the time. While this number is low, it is due to the small size of the true mean difference, which is hard to detect unless the sample size is enormous. The estimated mean difference for the sample is \\(0.274\\)€.\n\n\n\nCode\nt.test(price ~ dest, data = renfe_sub)\n\n\n\n    Welch Two Sample t-test\n\ndata:  price by dest\nt = -1.9433, df = 9170.2, p-value = 0.05201\nalternative hypothesis: true difference in means between group Barcelona-Madrid and group Madrid-Barcelona is not equal to 0\n95 percent confidence interval:\n -1.652691253  0.007157275\nsample estimates:\nmean in group Barcelona-Madrid mean in group Madrid-Barcelona \n                      87.40053                       88.22329 \n\n\nCode\nmean(renfe_simu$pval &lt; 0.05)\n\n\n[1] 0.105",
+    "crumbs": [
+      "Solution 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-solution.html#solution-to-exercise-1.3",
+    "href": "exercises/01-solution.html#solution-to-exercise-1.3",
+    "title": "Statistical inference",
+    "section": "Solution to Exercise 1.3",
+    "text": "Solution to Exercise 1.3\nCareful here, as the price of the REXPRESS tickets is fixed at 43.25€. The only random sample is for the other class of train!\n\n\nCode\nwith(renfe,\n     t.test(x = price,\n            mu = 43.25,\n            conf.level = 0.9,\n            subset = type == \"AVE-TGV\"))\n\n\n\n    One Sample t-test\n\ndata:  price\nt = 197.9, df = 9999, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 43.25\n90 percent confidence interval:\n 85.73892 86.45119\nsample estimates:\nmean of x \n 86.09505 \n\n\n\nThe null hypothesis is \\(\\mathscr{H}_0: \\mu_{\\text{AVE-TGV}}=43.25\\)€ against the alternative \\(\\mathscr{H}_1: \\mu_{\\text{AVE-TGV}}\\neq 43.25\\)€, where \\(\\mu_{\\text{AVE-TGV}}\\) is the average AVE-TGV ticket price.\nSince this is a one-sample location problem, we use a one-sample \\(t\\)-test.\nThe estimated mean difference is \\(45.63\\)€\\(= 88.88\\)€\\(-43.25\\)€, with 90% confidence interval for the mean difference of \\([44.14, 47.12]\\).\nThe \\(t\\)-statistic is 50.519 with 428 degrees of freedom, and the \\(p\\)-value is negligible.\nWe strongly reject the null hypothesis that high-speed trains are the same price as RegioExpress ones.",
+    "crumbs": [
+      "Solution 1"
+    ]
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Dr. Léo Belzile\n   CSC 4.850\n   leo.belzile@hec.ca\n\n\n\n\n\n   Dr. Juliana Schulz\n   CSC 4.809\n   juliana.schulz@hec.ca\n\n\n\n\n\n   Fall 2024\n   Thursday\n   12:00–15:00\n   Côte-Ste-Catherine, salle Hélène-Desmarais"
+  },
+  {
+    "objectID": "syllabus.html#course-description",
+    "href": "syllabus.html#course-description",
+    "title": "Syllabus",
+    "section": "Course description",
+    "text": "Course description\nThe objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.\nThe course will focus on regression models, including linear models, generalized linear models and models for longitudinal data with random effects and correlation structures. For each of these models, basic inference principles will be covered, notably hypothesis testing and estimation procedures.\n\nBasic principles in inference and statistical modeling\nLinear models\nGeneralized linear models\nModels for longitudinal data and correlated data\nIntroduction to survival analysis"
+  },
+  {
+    "objectID": "syllabus.html#prerequisites",
+    "href": "syllabus.html#prerequisites",
+    "title": "Syllabus",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nThe course is of an overview course. Students should have basic training in statistics at the level of Introductory Statistics with Randomization and Simulation (Chapters 1–4, excluding special topics)."
+  },
+  {
+    "objectID": "syllabus.html#learning-objectives",
+    "href": "syllabus.html#learning-objectives",
+    "title": "Syllabus",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nThe course learning objectives are listed here."
+  },
+  {
+    "objectID": "syllabus.html#target-audience",
+    "href": "syllabus.html#target-audience",
+    "title": "Syllabus",
+    "section": "Target audience",
+    "text": "Target audience\nStatistical modelling is a compulsory course of the M.Sc. in Data Science and Business Analytics (Supervised Project stream) and an optional course for the Thesis stream. Please note this course is not credited in the “Intelligence d’affaires” specialization: the course is incompatible with MATH606019(A)."
+  },
+  {
+    "objectID": "syllabus.html#intellectual-integrity-and-generative-artificial-intelligence",
+    "href": "syllabus.html#intellectual-integrity-and-generative-artificial-intelligence",
+    "title": "Syllabus",
+    "section": "Intellectual integrity and generative artificial intelligence",
+    "text": "Intellectual integrity and generative artificial intelligence\nPlease don’t cheat! The official policy lists the school rules regarding plagiarism and academic integrity.\nThe midterm and final are closed book exams. Students can use generative artificial intelligence (AI) tools for the project to improve and edit the deliverables (either code or text), but only as a proof-reading tool. That is, the first draft of the text must be student’s original work. Any use of generative AI must be cited adequately and students should provide their work with\n\ndetails about the tool used (name and version),\nthe list of prompts,\na copy of the original draft or code,\na description of any modification to the proposed output,\na short reflection on the usage of generative AI."
+  },
+  {
+    "objectID": "syllabus.html#student-services",
+    "href": "syllabus.html#student-services",
+    "title": "Syllabus",
+    "section": "Student services",
+    "text": "Student services\nStudents with special needs should feel free to approach me so we can best discuss accommodations. Do check out HEC Montréal’s disabled students and psychological support services."
+  },
+  {
+    "objectID": "syllabus.html#harassment-and-sexual-violence",
+    "href": "syllabus.html#harassment-and-sexual-violence",
+    "title": "Syllabus",
+    "section": "Harassment and sexual violence",
+    "text": "Harassment and sexual violence\nThe Center for Harassment Intervention (BIMH) is the unique access point for all members of the community subject to harassment or sexual violence. You can reach them at 514 343-7020 or by email at harcelement@hec.ca from Monday until Friday, from 8:30 until 4:30pm.\nIf you are in an emergency situation or fear for your safety, call emergency services at 911, followed by HEC Montréal security services at 514 340-6611.\nCheck the school official policy on these matters for more details."
+  },
+  {
+    "objectID": "syllabus.html#family-policy",
+    "href": "syllabus.html#family-policy",
+    "title": "Syllabus",
+    "section": "Family policy",
+    "text": "Family policy\nHEC now has an official family policy, but the following guidelines reflect my own beliefs and commitments towards parent students1\n\nBabies are welcome in class as often as necessary for support feeding relationship.\nYou are welcome to bring your child to class in order to cover unforeseeable gaps in childcare.\nIf you come with babies or toddler, I ask that you sit close to the door so that, in case your little one needs special attention and is disrupting the learning of other students, you may step outside of class until their needs are met. Seats close to the door are reserved for parents attending class with their child."
+  },
+  {
+    "objectID": "syllabus.html#footnotes",
+    "href": "syllabus.html#footnotes",
+    "title": "Syllabus",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nShamelessly stolen/adapted from similar policy by Drs. Melissa Cheney, Guy Grossman and Rohan Alexander↩︎"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
     "title": "Statistical modelling",
-    "section": "Learning R",
-    "text": "Learning R\nSearching for help with R on Google can sometimes be tricky because the program name is a single letter. Google is generally smart enough to figure out what you mean when you search for “r scatterplot”, but if it does struggle, try searching for “rstats” instead (e.g., “rstats scatterplot”).\nCheck out StackOverflow (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and RStudio Community (a forum specifically designed for people using RStudio and the tidyverse).",
+    "section": "",
+    "text": "Statistical modelling\n        \n        \n            The objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.\n        \n        \n            MATH 60604A, Fall 2024HEC Montréal\n        \n    \n\n\n\n\n\n\nInstructor\n\n   Dr. Léo Belzile\n   CSC 4.850\n   leo.belzile@hec.ca\n\n\n\nInstructor\n\n   Dr. Juliana Schulz\n   CSC 4.809\n   juliana.schulz@hec.ca\n\n\n\nCourse details\n\n   Fall 2024\n   Thursday\n   12:00–15:00\n   Côte-Ste-Catherine, salle Hélène-Desmarais"
+  },
+  {
+    "objectID": "learningobjectives.html",
+    "href": "learningobjectives.html",
+    "title": "Learning objectives",
+    "section": "",
+    "text": "This page lists the chapter-specific and overall learning objectives for the course",
     "crumbs": [
       "Content",
-      "Programming",
-      "Installing **R**"
+      "Learning objectives"
     ]
+  },
+  {
+    "objectID": "learningobjectives.html#introduction",
+    "href": "learningobjectives.html#introduction",
+    "title": "Learning objectives",
+    "section": "Introduction",
+    "text": "Introduction\nAt the end of this chapter, students should be able to\n\nformulate the null and alternative hypotheses attached to a problem statement;\nundertake hypothesis tests;\nunderstand and correctly interpret p-values and confidence intervals;\nperform an exploratory data analysis and list the most important features of a dataset.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "learningobjectives.html#linear-regression",
+    "href": "learningobjectives.html#linear-regression",
+    "title": "Learning objectives",
+    "section": "Linear regression",
+    "text": "Linear regression\nAt the end of the chapter, students should be able to\n\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;\ntest for statistical significance of model parameters as well as global significance;\nobtain predictions from a linear model using software; understand the distinction between estimated mean and predicted values;\ninterpret the coefficients of the log-linear model on a meaningful scale;\ninterpret and test the significance of interaction terms between continuous and categorical variables, as well as between two categorical variables;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors;\nlist the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "learningobjectives.html#likelihood-based-modelling",
+    "href": "learningobjectives.html#likelihood-based-modelling",
+    "title": "Learning objectives",
+    "section": "Likelihood-based modelling",
+    "text": "Likelihood-based modelling\nAt the end of the chapter, students should be able to:\n\nunderstand what the likelihood represents;\nderive the maximum likelihood estimator of a simple model;\nunderstand the maximum likelihood principle;\nperform likelihood ratio tests for two nested models using software output;\nuse information criteria to compare two non-nested models. Generalized linear models At the end of the chapter, students should be able to\nwrite the equation linking predictors and parameters for Poisson, binomial and normal generalized linear models with canonical link function;\nunderstand the relationship between mean and variance in generalized linear models;\ninterpret parameters of the Poisson and negative binomial models;\ntest for overdispersion in Poisson models using likelihood ratio tests;\nassess the quality of the fit of a Poisson model using the deviance statistic;\ntest independence in contingency tables using a saturated Poisson model.\ninterpret software output for generalized linear models and the respective merits of different functions;\ninterpret parameters of logistic regression models in terms of log-odds.\nmodel success rate for aggregated data using a Poisson regression with an offset or a binomial generalized linear regression and correctly interpret the rates.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "learningobjectives.html#correlated-and-longitudinal-data",
+    "href": "learningobjectives.html#correlated-and-longitudinal-data",
+    "title": "Learning objectives",
+    "section": "Correlated and longitudinal data",
+    "text": "Correlated and longitudinal data\nAt the end of the chapter, students should be able to\n\nunderstand how correlation appears in grouped or longitudinal data;\ncorrectly calculate summary statistics for repeated data;\nadjust models with compound symmetry, first-order autoregressive or unstructured correlation structures;\nwrite correlation and covariance models for main models and understand their parametrization;\nperform tests to compare covariance structures (for nested models) or using information criteria;\nunderstand group heteroscedasticity and how to account for it.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "learningobjectives.html#linear-mixed-models",
+    "href": "learningobjectives.html#linear-mixed-models",
+    "title": "Learning objectives",
+    "section": "Linear mixed models",
+    "text": "Linear mixed models\nAt the end of the chapter, students should be able to\n\nunderstand the concept of group-effect;\nknow in which context to use random group-effects as opposed to fixed group-effects (covariates constant within group, large number of groups with few observations in each);\nwrite down the equation of the mixed model with random-intercept(s) and random-slope(s);\nwrite down the model assumptions (linearity, covariance within-group and between-group, etc.);\nwrite the covariance matrix of observations given parameter estimates (sum of covariance matrices of random effects and errors);\ndistinguish between the adequate structures for correlated and longitudinal data;\ndistinguish predicted (marginal) mean and individual predictions with random effects (conditional);\nobtain predictions for new observations from mixed models using dedicated software.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "learningobjectives.html#introduction-to-survival-analysis",
+    "href": "learningobjectives.html#introduction-to-survival-analysis",
+    "title": "Learning objectives",
+    "section": "Introduction to survival analysis",
+    "text": "Introduction to survival analysis\nAt the end of the chapter, students should be able to\n\nexplain key concepts (truncation, censoring) arising in survival analysis in your own word and provide examples of the latter;\nrecognize scenarios with random right censoring;\ninterpret a Kaplan–Meier nonparametric estimate of the survival function;\ncompare and test for equality of survival curves using a score test;\ninterpret the coefficients of the Cox proportional hazard model and check for their significance.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "learningobjectives.html#global-objectives",
+    "href": "learningobjectives.html#global-objectives",
+    "title": "Learning objectives",
+    "section": "Global objectives",
+    "text": "Global objectives\nAt the end of the course, students should be able to de\n\nset up a database in a format suitable for a regression analysis (e.g., in long format).\nchoose an adequate regression model for data.\ncriticise the quality of model fit.\nsynthetise the conclusions of a regression model.\ncompare different regression models based on their respective benefits.\nformulate practical recommandations based on a regression model.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html",
+    "href": "content/01-content.html",
+    "title": "Statistical inference",
+    "section": "",
+    "text": "Content\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should normally be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes.\n\n\n\nCourse notes: chapter 1 (Introduction) and 2 (Statistical Inference)\nInstall R and RStudio\n\n\n\nIn class\n\nSyllabus\nExamples of hypothesis tests pdf\nActivity: reporting conclusion of tests\n\n\n\nSlides\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n\nAfter class\n\nExercise sheet 1\n\n\n\nAdditional readings\n\nPermutation tests",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "exercises/index.html",
+    "href": "exercises/index.html",
+    "title": "Exercises",
+    "section": "",
+    "text": "This webpage section contains exercises along with solutions sets and code."
   },
   {
     "objectID": "content/index.html",
     "href": "content/index.html",
-    "title": "Statistical modelling",
+    "title": "Content",
     "section": "",
     "text": "The course content is divided in chapters: for each topic, readers have access to course notes, sample code, online quizzes and exercises.",
     "crumbs": [
@@ -37,20 +237,9 @@
   {
     "objectID": "content/index.html#course-notes",
     "href": "content/index.html#course-notes",
-    "title": "Statistical modelling",
+    "title": "Content",
     "section": "Course notes",
-    "text": "Course notes\n\nBasics of statistical inference\nLinear regression\nGeneralized linear models\nCorrelated and longitudinal data\nLinear mixed models\nSurvival analysis\nLikelihood",
-    "crumbs": [
-      "Content",
-      "Ressources"
-    ]
-  },
-  {
-    "objectID": "content/index.html#videos-and-slides",
-    "href": "content/index.html#videos-and-slides",
-    "title": "Statistical modelling",
-    "section": "Videos and Slides",
-    "text": "Videos and Slides\nIn this section you can find the links to all videos individually as well as the slides and accompanying code used in the videos.\n\n\n\n\n\nS\nContent\nSlides\nPDF\nVideos\nSAS\nR\n\n\n\n\n0\nCourse Outline\n\n\n\n\n\n\n\n1a\nHypothesis Tests\n\n\n\n\n\n\n\n1b\nCentral Limit Theorem\n\n\n\n\n\n\n\n1c\nExploratory Data Analysis\n\n\n\n\n\n\n\n2a\nParameter interpretation\n\n\n\n\n\n\n\n2b\nLinear transformations\n\n\n\n\n\n\n\n2c\nGeometry of least squares\n\n\n\n\n\n\n\n2d\nHypothesis tests\n\n\n\n\n\n\n\n2e\nCoefficient of determination\n\n\n\n\n\n\n\n2f\nPredictions\n\n\n\n\n\n\n\n2g\nInteractions\n\n\n\n\n\n\n\n2h\nCollinearity\n\n\n\n\n\n\n\n2i\nDiagnostic plots\n\n\n\n\n\n\n\n3\nLikelihood-based inference\n\n\n\n\n\n\n\n4a\nGeneralized linear models\n\n\n\n\n\n\n\n4b\nLogistic regression\n\n\n\n\n\n\n\n4c\nExample of logistic regression\n\n\n\n\n\n\n\n4d\nPoisson regression\n\n\n\n\n\n\n\n4e\nContingency tables\n\n\n\n\n\n\n\n4f\nOverdispersion\n\n\n\n\n\n\n\n4g\nRates and offsets\n\n\n\n\n\n\n\n4h\nLogistic model for proportions\n\n\n\n\n\n\n\n5a\nIntroduction to correlated data\n\n\n\n\n\n\n\n5b\nExample of longitudinal data\n\n\n\n\n\n\n\n5c\nModel formulation\n\n\n\n\n\n\n\n5d\nCompound symmetry covariance\n\n\n\n\n\n\n\n5e\nAutoregressive covariance\n\n\n\n\n\n\n\n5f\nOther covariance models\n\n\n\n\n\n\n\n5g\nSelection of covariance structures\n\n\n\n\n\n\n\n5h\nGroup heteroscedasticity\n\n\n\n\n\n\n\n6a\nGroup effects\n\n\n\n\n\n\n\n6b\nClustered data example\n\n\n\n\n\n\n\n6c\nRandom effects\n\n\n\n\n\n\n\n6d\nRandom intercept\n\n\n\n\n\n\n\n6e\nRandom slope\n\n\n\n\n\n\n\n6f\nPrediction for mixed models\n\n\n\n\n\n\n\n7a\nSurvival analysis and censoring\n\n\n\n\n\n\n\n7b\nLikelihood for survival data\n\n\n\n\n\n\n\n7c\nKaplan-Meier estimator\n\n\n\n\n\n\n\n7d\nCox proportional hazard model\n\n\n\n\n\n\n\n7e\nLog rank test",
+    "text": "Course notes",
     "crumbs": [
       "Content",
       "Ressources"
@@ -59,351 +248,84 @@
   {
     "objectID": "content/index.html#data",
     "href": "content/index.html#data",
-    "title": "Statistical modelling",
+    "title": "Content",
     "section": "Data",
-    "text": "Data\nThe SAS databases (.sas7bdat) can be downloaded by clicking on this link. Create a repository on SAS onDemand, add these files and create a library as shown in the Introduction to SAS.\nTo access the course database, you can also add the following code snippet in your SAS autoload:\nLIBNAME statmod \"~/my_shared_file_links/u41148888/statmod\" access=readonly;\nYou must create a local copy to modify these data.\nYou can also access the data sets in R by installing the hecstatmod package from Github using the following commands (uncomment the first line to install the remotes and learnr libraries - do only once):\n\n#install.packages(c(\"learnr\",\"remotes\"))\nremotes::install_github(\"lbelzile/hecstatmod\")\n\nNote: not all data sets are currently documented and (most) tutorials are still missing. Please re-install the package periodically to benefit from the latest features.",
+    "text": "Data\nYou can access the data sets in R by installing the hecstatmod package from Github using the following commands (uncomment the first line to install the remotes and learnr libraries — do only once):\n\n# install.packages(\"remotes\")\nremotes::install_github(\"lbelzile/hecstatmod\")\nremotes::install_github(\"lbelzile/hecedsm\")\n\nNote: not all data sets are currently documented in hecstatmod. Please re-install the package periodically to benefit from the latest features.",
     "crumbs": [
       "Content",
       "Ressources"
     ]
   },
   {
-    "objectID": "content/index.html#quiz",
-    "href": "content/index.html#quiz",
-    "title": "Statistical modelling",
-    "section": "Quiz",
-    "text": "Quiz\nThe R package also contain quizzes: to run the later and launch a new browser window, use the following commands (each line represents a different quiz).\n\nlearnr::run_tutorial(\"intro\", package = \"hecstatmod\")\nlearnr::run_tutorial(\"likelihood\", package = \"hecstatmod\")",
+    "objectID": "exercises/01-exercise.html",
+    "href": "exercises/01-exercise.html",
+    "title": "Hypothesis testing",
+    "section": "",
+    "text": "The renfe data contains information about 10 000 train ticket sales from Renfe, the Spanish national train company. The data include:\nWe consider travel time for high-speed (AVE and AVE-TGV) trains. The true “population” mean travel time between cities is known to be \\(\\mu=2.845\\) hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).",
+    "crumbs": [
+      "Exercise 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-exercise.html#exercise-1.1-spanish-high-speed-trains",
+    "href": "exercises/01-exercise.html#exercise-1.1-spanish-high-speed-trains",
+    "title": "Hypothesis testing",
+    "section": "",
+    "text": "The renfe data contains information about 10 000 train ticket sales from Renfe, the Spanish national train company. The data include:\n\nprice: price of the ticket (in euros);\ndest: binary variable indicating the journey, either Barcelona to Madrid (0) or Madrid to Barcelona (1);\nfare: categorical variable indicating the ticket fare, one of AdultoIda, Promo or Flexible;\nclass: ticket class, either Preferente, Turista, TuristaPlus or TuristaSolo;\ntype: categorical variable indicating the type of train, either Alta Velocidad Española (AVE), Alta Velocidad Española jointly with TGV (parternship between SNCF and Renfe for trains to/from Toulouse and beyond) AVE-TGV or regional train REXPRESS; only trains labelled AVE or AVE-TGV are high-speed trains. % - hour: hour of departure of the train;\nduration: length of train journey (in minutes);\nwday integer denoting the week day, ranging from Sunday (1) to Saturday (7).\n\nWe consider travel time for high-speed (AVE and AVE-TGV) trains. The true “population” mean travel time between cities is known to be \\(\\mu=2.845\\) hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).\nA simulation study is performed to assess the behaviour of univariate tests under repeated sampling. The following algorithm was repeated 10K times for different values of \\(\\mu_0\\):\n\nSelect a random subsample of size \\(n=100\\).\nCompute the one-sample \\(t\\)-test statistic for \\(\\mathscr{H}_0: \\mu=\\mu_0\\) (versus \\(\\mathscr{H}_0: \\mu \\neq \\mu_0\\)) .\nReturn the \\(p\\)-value\n\nFigure 1 shows the percentage of the 10K \\(p\\)-values that are less than 0.05, i.e. the percentage of rejection (at the \\(5\\)% level) of \\(\\mathscr{H}_0:\\mu=\\mu_0\\) against the two-sided alternative at \\(\\mu_0 \\in \\{2.83, \\nu, 2.835, 2.84, \\ldots, 2.995, 3\\`\\). Use the resulting curve to answer the following questions:\n\n\n\n\n\n\n\n\nFigure 1: Power curve for the one-sample \\(t\\)-test based on subsamples of size \\(n=100\\), as a function of travel time. The grey horizontal line is at 0.05, the vertical dashed line indicates the population mean \\(\\mu\\).\n\n\n\n\n\n\nExplain why the value for the one-sample \\(t\\)-test around \\(\\mu=2.845\\) should be approximately 0.05.\nExplain why the values on the curve increase towards the right of the plot.\nSuppose we repeated the simulation study, but this time with subsamples of size \\(n=1000\\). How would the points compare for the one-sample \\(t\\)-test: should they be higher, equal, or lower than their current values?\nIs the assumption of the one-sample \\(t\\)-test valid in this example? Produce a quantile-quantile plot using the code below and hence comment on the robustness of the \\(t\\)-test to departures from the normality assumption.",
+    "crumbs": [
+      "Exercise 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-exercise.html#exercise-1.2",
+    "href": "exercises/01-exercise.html#exercise-1.2",
+    "title": "Hypothesis testing",
+    "section": "Exercise 1.2",
+    "text": "Exercise 1.2\nSuppose we now want to compare the mean fare for high-speed train tickets for the two destinations, i.e., Madrid to Barcelona versus Barcelona to Madrid. We run a simulation study where we perform a two-sided Welch test for this hypothesis repeatedly with random subsamples of size \\(n=1000\\). The data renfe_simu contains the mean difference (meandif), the test statistic (Wstat), the \\(p\\)-value (pval) and the confidence interval (cilb and ciub) for these 1000 repetitions. Based on the entire database, the true mean difference is known to be \\(-0.28\\)€. Use the simulated data to answer the following questions and briefly comment on each item\n\nWhat is the empirical coverage of the 95% confidence intervals (i.e., the percentage of intervals covering the true mean difference value)?\nPlot an histogram of the mean differences and superimpose the true mean difference in the population.\nCompute the power of the test (percentage of rejection of the null hypothesis).",
+    "crumbs": [
+      "Exercise 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-exercise.html#exercise-1.3",
+    "href": "exercises/01-exercise.html#exercise-1.3",
+    "title": "Hypothesis testing",
+    "section": "Exercise 1.3",
+    "text": "Exercise 1.3\nUsing the renfe data, test whether the average ticket price of AVE-TGV trains is different from that of Regio Express trains (REXPRESS). Make sure to\n\nState your null and alternative hypothesis.\nCarefully justify your choice of test statistic.\nReport the estimated mean difference and a 90% confidence interval for that difference.\nConclude within the setting of the problem.",
+    "crumbs": [
+      "Exercise 1"
+    ]
+  },
+  {
+    "objectID": "content/installation.html",
+    "href": "content/installation.html",
+    "title": "Installing R and RStudio",
+    "section": "",
+    "text": "You will do all of your work in this class with the open source (and free!) R programming language. You will use RStudio as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.",
     "crumbs": [
       "Content",
-      "Ressources"
+      "Installing **R**"
     ]
   },
   {
-    "objectID": "exercises/index.html",
-    "href": "exercises/index.html",
-    "title": "Exercises",
-    "section": "",
-    "text": "Chapter\nExercise\nSolution\nR\n\n\n\n\n1\nBasics of statistical inference\n\n\n\n\n\n2\nLinear regression\n\n\n\n\n\n3\nLikelihood methods\n\n\n\n\n\n4\nGeneralized linear models\n\n\n\n\n\n5\nCorrelated and longitudinal data\n\n\n\n\n\n6\nLinear mixed models\n\n\n\n\n\n7\nSurvival analysis"
-  },
-  {
-    "objectID": "content/12-content.html",
-    "href": "content/12-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Content\n\n\n\n\n\nS\nContent\nPDF\nVideos\nSAS\nR\n\n\n\n\n6b\nClustered data example\n\n\n\n\n\n\n6c\nRandom effects\n\n\n\n\n\n\n6d\nRandom intercept\n\n\n\n\n\n\n\n\n\n\n\nIn class:\n\nTheoretical review of mixed models\n\nmarginal versus conditional mean\nmodel equation\nREML versus ML (model comparison)\n\nWorkshop: models for CD4 counts"
-  },
-  {
-    "objectID": "content/10-content.html",
-    "href": "content/10-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Content\n\n\n\n\n\nS\nContent\nPDF\nVideos\nSAS\nR\n\n\n\n\n5g\nSelection of covariance structures\n\n\n\n\n\n\n5h\nGroup heteroscedasticity\n\n\n\n\n\n\n6a\nGroup effects\n\n\n\n\n\n\n\n\n\n\nRestricted estimation maximum likelihood\nDependence graph of different covariance models\nAR(1) model with irregular time steps\nWorkshop: testing restrictions\nANOVA with unequal variance"
-  },
-  {
-    "objectID": "content/08-content.html",
-    "href": "content/08-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Content\n\n\n\n\n\nS\nContent\nPDF\nVideos\nSAS\nR\n\n\n\n\n4g\nRates and offsets\n\n\n\n\n\n\n4h\nLogistic model for proportions\n\n\n\n\n\n\n5a\nIntroduction to correlated data\n\n\n\n\n\n\n\n\n\n\n\nIn class:\n\nPoisson/binomial analysis for sweden.\nModels for contingency tables (not covered)\nRates - Exercise 4.3 (children ever born)\nOverdispersion - slides (see Exercise 4.4 for an example)"
-  },
-  {
-    "objectID": "content/06-content.html",
-    "href": "content/06-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Content\n\n\n\n\n\nS\nContent\nPDF\nVideos\nSAS\nR\n\n\n\n\n4a\nGeneralized linear models\n\n\n\n\n\n\n4b\nLogistic regression\n\n\n\n\n\n\n4c\nExample of logistic regression\n\n\n\n\n\n\n\n\n\n\nCourse notes: Sections 2.10, 4.1-4.2\n\n\n\nIn class:\n\nOverview of the theory of generalized linear models.\nExample of Box-Cox regression\nMidterm survey.",
+    "objectID": "content/installation.html#learning-r",
+    "href": "content/installation.html#learning-r",
+    "title": "Installing R and RStudio",
+    "section": "Learning R",
+    "text": "Learning R\nSearching for help with R on Google can sometimes be tricky because the program name is a single letter. Google is generally smart enough to figure out what you mean when you search for “r scatterplot”, but if it does struggle, try searching for “rstats” instead (e.g., “rstats scatterplot”).\nCheck out StackOverflow (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and RStudio Community (a forum specifically designed for people using RStudio and the tidyverse).",
     "crumbs": [
       "Content",
-      "Pedagogical content",
-      "Week 6"
+      "Installing **R**"
     ]
   },
   {
-    "objectID": "content/04-content.html",
-    "href": "content/04-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "S\nContent\nPDF\nVideos\nSAS\nR\n\n\n\n\n2e\nCoefficient of determination\n\n\n\n\n\n\n2f\nPredictions\n\n\n\n\n\n\n2g\nInteractions\n\n\n\n\n\n\n\n\n\n\nCourse notes: chapter 2 (section 5-7)",
+    "objectID": "exercises/01-exercise.html#exercise-1.1",
+    "href": "exercises/01-exercise.html#exercise-1.1",
+    "title": "Hypothesis testing",
+    "section": "Exercise 1.1",
+    "text": "Exercise 1.1\nA simulation study is performed to assess the behaviour of univariate tests under repeated sampling. The following algorithm was repeated 10K times for different values of \\(\\mu_0\\):\n\nSelect a random subsample of size \\(n=100\\).\nCompute the one-sample \\(t\\)-test statistic for \\(\\mathscr{H}_0: \\mu=\\mu_0\\) (versus \\(\\mathscr{H}_0: \\mu \\neq \\mu_0\\)) .\nReturn the \\(p\\)-value\n\nFigure 1 shows the percentage of the 10K \\(p\\)-values that are less than 0.05, i.e. the percentage of rejection (at the \\(5\\)% level) of \\(\\mathscr{H}_0:\\mu=\\mu_0\\) against the two-sided alternative at \\(\\mu_0 \\in \\{2.83, \\nu, 2.835, 2.84, \\ldots, 2.995, 3\\`\\). Use the resulting curve to answer the following questions:\n\n\n\n\n\n\n\n\nFigure 1: Power curve for the one-sample \\(t\\)-test based on subsamples of size \\(n=100\\), as a function of travel time. The grey horizontal line is at 0.05, the vertical dashed line indicates the population mean \\(\\mu\\).\n\n\n\n\n\n\nExplain why the value for the one-sample \\(t\\)-test around \\(\\mu=2.845\\) should be approximately 0.05.\nExplain why the values on the curve increase towards the right of the plot.\nSuppose we repeated the simulation study, but this time with subsamples of size \\(n=1000\\). How would the points compare for the one-sample \\(t\\)-test: should they be higher, equal, or lower than their current values?\nIs the assumption of the one-sample \\(t\\)-test valid in this example? Produce a quantile-quantile plot using the code below and hence comment on the robustness of the \\(t\\)-test to departures from the normality assumption.",
     "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 4"
+      "Exercise 1"
     ]
-  },
-  {
-    "objectID": "content/04-content.html#after-class",
-    "href": "content/04-content.html#after-class",
-    "title": "Statistical modelling",
-    "section": "After class:",
-    "text": "After class:\n\nTests of linear hypothesis in SAS: theory, R code, SAS code\nExercises 2.5-2.7",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "content/02-content.html",
-    "href": "content/02-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Content\nRecording 2c is optional.\n\n\n\n\n\nS\nContent\nSlides\nPDF\nVideos\nSAS\nR\n\n\n\n\n2a\nParameter interpretation\n\n\n\n\n\n\n\n2b\nLinear transformations\n\n\n\n\n\n\n\n2c\nGeometry of least squares\n\n\n\n\n\n\n\n\n\n\n\nCourse notes: chapter 2 (sections 1-3)\n\n\n\nIn class\n\nParameter interpretation (intention data, full model)\nExploratory data analysis of the insurance data and construction of a linear model\nCode to create added-variable plots\nxkcd comic strip: Curve-fitting",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html",
-    "href": "content/01-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Content\n\n\n\n\n\nS\nContent\nSlides\nPDF\nVideos\nSAS\nR\n\n\n\n\n0\nCourse Outline\n\n\n\n\n\n\n\n1a\nHypothesis Tests\n\n\n\n\n\n\n\n1b\nCentral Limit Theorem\n\n\n\n\n\n\n\n1c\nExploratory Data Analysis\n\n\n\n\n\n\n\n\n\n\n\nCourse notes: chapter 1 and Appendix A\nCreate an account on SAS onDemand\nComplete the Introduction to SAS\n\n\n\nIn class:\n\nPresentation and practice of pedagogical tools (Zoom / Wooclap / SAS onDemand)\nGraphics workshop (group)\n\n\n\nAfter class:\n\nintro quiz (self-assessment)\nExercise 1.4 (a-b) with SAS. The whole exercise sheet may be somewhat difficult at this stage, but you should (be able to) complete it in the upcoming weeks.\n\n\n\nAdditional readings:\n\nChapter 1 of Data Visualization: A practical introduction by Kieran Healy\nPermutation tests\nDataViz Cheatsheet\nChapter 7 of R for Data Science by Garrett Grolemund and Hadley Wickham\n\n\n\nOther references:\n\nChapter 3 of R for Data Science by Garrett Grolemund and Hadley Wickham\nFundamentals of Data Visualization by Claus O. Wilke\nDo’s and don’ts of making effective graphics\nFinancial Times Visual Vocabulary\nBBC R Cookbook (optional)\nWhat’s going on in this graph?",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html",
-    "href": "content/03-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "S\nContent\nPDF\nVideos\nSAS\nR\n\n\n\n\n2d\nHypothesis tests\n\n\n\n\n\n\n3\nLikelihood-based inference\n\n\n\n\n\n\n\n\n\n\nCourse notes: chapter 3, chapter 2 (section 4)",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#after-class",
-    "href": "content/03-content.html#after-class",
-    "title": "Statistical modelling",
-    "section": "After class",
-    "text": "After class\n\nExercise sheet 2\nTests as linear models",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "content/05-content.html",
-    "href": "content/05-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Content\n\n\n\n\n\nS\nContent\nSlides\nPDF\nVideos\nSAS\nR\n\n\n\n\n2h\nCollinearity\n\n\n\n\n\n\n\n2i\nDiagnostic plots\n\n\n\n\n\n\n\n\n\n\n\nCourse notes: chapter 2 (sections 8 and 9)\n\n\n\nIn class:\n\nCollinearity illustration with wages85 data\nGraphical analysis of residuals for college data\nWorkshop on diagnostic plots",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 5"
-    ]
-  },
-  {
-    "objectID": "content/07-content.html",
-    "href": "content/07-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Content\n\n\n\n\n\nS\nContent\nPDF\nVideos\nSAS\nR\n\n\n\n\n4d\nPoisson regression\n\n\n\n\n\n\n4e\nContingency tables\n\n\n\n\n\n\n4f\nOverdispersion\n\n\n\n\n\n\n\n\n\n\nCourse notes: Section 4.3 (excluding 4.3.3)\n\n\n\nIn class:\n\nReview of Assignment 1\nLogistic regression with SAS"
-  },
-  {
-    "objectID": "content/09-content.html",
-    "href": "content/09-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Content\n\n\n\n\n\nS\nContent\nPDF\nVideos\nSAS\nR\n\n\n\n\n5b\nExample of longitudinal data\n\n\n\n\n\n\n5c\nModel formulation\n\n\n\n\n\n\n5d\nCompound symmetry covariance\n\n\n\n\n\n\n5e\nAutoregressive covariance\n\n\n\n\n\n\n5f\nOther covariance models\n\n\n\n\n\n\n\n\n\n\n\nIn class:\n\nDiscussion of features of longitudinal data: example code from Rick Wicklin\nWorkshop: examples of longitudinal data and a description of datasets\nTransforming data from wide to long format"
-  },
-  {
-    "objectID": "content/11-content.html",
-    "href": "content/11-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Content\n\n\n\n\n\nS\nContent\nPDF\nVideos\nSAS\nR\n\n\n\n\n6e\nRandom slope\n\n\n\n\n\n\n6f\nPrediction for mixed models\n\n\n\n\n\n\n\n\n\n\n\nIn class:\n\nTheoretical review\n\nconditional and marginal predictions\nnested random effects\npartial pooling (blog post)\n\nAnalysis of chick growth curves: SAS and R code\n\n\n\nAfter class:\n\nNested versus crossed effects (optional reading)"
-  },
-  {
-    "objectID": "content/13-content.html",
-    "href": "content/13-content.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "S\nContent\nPDF\nVideos\nSAS\nR\n\n\n\n\n7a\nSurvival analysis and censoring\n\n\n\n\n\n\n7b\nLikelihood for survival data\n\n\n\n\n\n\n7c\nKaplan-Meier estimator\n\n\n\n\n\n\n7d\nCox proportional hazard model\n\n\n\n\n\n\n7e\nLog rank test"
-  },
-  {
-    "objectID": "content/13-content.html#in-class",
-    "href": "content/13-content.html#in-class",
-    "title": "Statistical modelling",
-    "section": "In class:",
-    "text": "In class:\n\nExercise 7.1"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Statistical modelling\n        \n        \n            The objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.\n        \n        \n            MATH 60604A, Fall 2024HEC Montréal\n        \n    \n\n\n\n\n\n\nInstructor\n\n   Dr. Léo Belzile\n   4.850\n   leo.belzile@hec.ca\n\n\n\nInstructor\n\n   Dr. Juliana Schulz\n   4.809\n   juliana.schulz@hec.ca\n\n\n\nCourse details\n\n   Fall 2024\n   Thursday\n   12:00–15:00\n   Côte-Ste-Catherine, Louis-Laberge"
-  },
-  {
-    "objectID": "syllabus.html",
-    "href": "syllabus.html",
-    "title": "Syllabus",
-    "section": "",
-    "text": "Dr. Léo Belzile\n   CSC 4.850\n   leo.belzile@hec.ca\n\n\n\n\n\n   Dr. Juliana Schulz\n   CSC 4.809\n   juliana.schulz@hec.ca\n\n\n\n\n\n   Fall 2024\n   Thursday\n   12:00–15:00\n   Côte-Ste-Catherine, salle Hélène-Desmarais",
-    "crumbs": [
-      "Syllabus",
-      "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "syllabus.html#course-description",
-    "href": "syllabus.html#course-description",
-    "title": "Syllabus",
-    "section": "Course description",
-    "text": "Course description\nThe objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.\nThe course will focus on regression models, including linear models, generalized linear models and models for longitudinal data with random effects and correlation structures. For each of these models, basic inference principles will be covered, notably hypothesis testing and estimation procedures.\n\nBasic principles in inference and statistical modeling\nLinear models\nGeneralized linear models\nModels for longitudinal data and correlated data\nIntroduction to survival analysis",
-    "crumbs": [
-      "Syllabus",
-      "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "syllabus.html#prerequisites",
-    "href": "syllabus.html#prerequisites",
-    "title": "Syllabus",
-    "section": "Prerequisites",
-    "text": "Prerequisites\nThe course is of an overview course. Students should have basic training in statistics at the level of Introductory Statistics with Randomization and Simulation (Chapters 1–4, excluding special topics).",
-    "crumbs": [
-      "Syllabus",
-      "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "syllabus.html#target-audience",
-    "href": "syllabus.html#target-audience",
-    "title": "Syllabus",
-    "section": "Target audience",
-    "text": "Target audience\nStatistical modelling is a compulsory course of the M.Sc. in Data Science and Business Analytics (Supervised Project stream) and an optional course for the Thesis stream. Please note this course is not credited in the “Intelligence d’affaires” specialization: the course is incompatible with MATH606019(A).",
-    "crumbs": [
-      "Syllabus",
-      "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "syllabus.html#intellectual-integrity",
-    "href": "syllabus.html#intellectual-integrity",
-    "title": "Syllabus",
-    "section": "Intellectual integrity",
-    "text": "Intellectual integrity\nPlease don’t cheat! The official policy lists the school rules regarding plagiarism and academic integrity."
-  },
-  {
-    "objectID": "syllabus.html#student-services",
-    "href": "syllabus.html#student-services",
-    "title": "Syllabus",
-    "section": "Student services",
-    "text": "Student services\nStudents with special needs should feel free to approach me so we can best discuss accommodations. Do check out HEC Montréal’s disabled students and psychological support services.",
-    "crumbs": [
-      "Syllabus",
-      "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "syllabus.html#harassment-and-sexual-violence",
-    "href": "syllabus.html#harassment-and-sexual-violence",
-    "title": "Syllabus",
-    "section": "Harassment and sexual violence",
-    "text": "Harassment and sexual violence\nThe Center for Harassment Intervention (BIMH) is the unique access point for all members of the community subject to harassment or sexual violence. You can reach them at 514 343-7020 or by email at harcelement@hec.ca from Monday until Friday, from 8:30 until 4:30pm.\nIf you are in an emergency situation or fear for your safety, call emergency services at 911, followed by HEC Montréal security services at 514 340-6611.\nCheck the school official policy on these matters for more details.",
-    "crumbs": [
-      "Syllabus",
-      "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "syllabus.html#family-policy",
-    "href": "syllabus.html#family-policy",
-    "title": "Syllabus",
-    "section": "Family policy",
-    "text": "Family policy\nHEC now has an official family policy, but the following guidelines reflect my own beliefs and commitments towards parent students1\n\nBabies are welcome in class as often as necessary for support feeding relationship.\nYou are welcome to bring your child to class in order to cover unforeseeable gaps in childcare.\nIf you come with babies or toddler, I ask that you sit close to the door so that, in case your little one needs special attention and is disrupting the learning of other students, you may step outside of class until their needs are met. Seats close to the door are reserved for parents attending class with their child.",
-    "crumbs": [
-      "Syllabus",
-      "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "syllabus.html#footnotes",
-    "href": "syllabus.html#footnotes",
-    "title": "Syllabus",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nShamelessly stolen/adapted from similar policy by Drs. Melissa Cheney, Guy Grossman and Rohan Alexander↩︎",
-    "crumbs": [
-      "Syllabus",
-      "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "syllabus.html#intellectual-integrity-and-generative-artificial-intelligence",
-    "href": "syllabus.html#intellectual-integrity-and-generative-artificial-intelligence",
-    "title": "Syllabus",
-    "section": "Intellectual integrity and generative artificial intelligence",
-    "text": "Intellectual integrity and generative artificial intelligence\nPlease don’t cheat! The official policy lists the school rules regarding plagiarism and academic integrity.\nThe midterm and final are closed book exams. Students can use generative artificial intelligence (AI) tools for the project to improve and edit the deliverables (either code or text), but only as a proof-reading tool. That is, the first draft of the text must be student’s original work. Any use of generative AI must be cited adequately and students should provide their work with\n\ndetails about the tool used (name and version),\nthe list of prompts,\na copy of the original draft or code,\na description of any modification to the proposed output,\na short reflection on the usage of generative AI.",
-    "crumbs": [
-      "Syllabus",
-      "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "learningobjectives.html",
-    "href": "learningobjectives.html",
-    "title": "Learning objectives",
-    "section": "",
-    "text": "This page lists the chapter-specific and overall learning objectives for the course"
-  },
-  {
-    "objectID": "learningobjectives.html#introduction",
-    "href": "learningobjectives.html#introduction",
-    "title": "Learning objectives",
-    "section": "Introduction",
-    "text": "Introduction\nAt the end of this chapter, students should be able to\n\nformulate the null and alternative hypotheses attached to a problem statement;\nundertake hypothesis tests;\nunderstand and correctly interpret p-values and confidence intervals;\nperform an exploratory data analysis and list the most important features of a dataset."
-  },
-  {
-    "objectID": "learningobjectives.html#linear-regression",
-    "href": "learningobjectives.html#linear-regression",
-    "title": "Learning objectives",
-    "section": "Linear regression",
-    "text": "Linear regression\nAt the end of the chapter, students should be able to\n\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;\ntest for statistical significance of model parameters as well as global significance;\nobtain predictions from a linear model using software; understand the distinction between estimated mean and predicted values;\ninterpret the coefficients of the log-linear model on a meaningful scale;\ninterpret and test the significance of interaction terms between continuous and categorical variables, as well as between two categorical variables;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors;\nlist the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions."
-  },
-  {
-    "objectID": "learningobjectives.html#likelihood-based-modelling",
-    "href": "learningobjectives.html#likelihood-based-modelling",
-    "title": "Learning objectives",
-    "section": "Likelihood-based modelling",
-    "text": "Likelihood-based modelling\nAt the end of the chapter, students should be able to:\n\nunderstand what the likelihood represents;\nderive the maximum likelihood estimator of a simple model;\nunderstand the maximum likelihood principle;\nperform likelihood ratio tests for two nested models using software output;\nuse information criteria to compare two non-nested models. Generalized linear models At the end of the chapter, students should be able to\nwrite the equation linking predictors and parameters for Poisson, binomial and normal generalized linear models with canonical link function;\nunderstand the relationship between mean and variance in generalized linear models;\ninterpret parameters of the Poisson and negative binomial models;\ntest for overdispersion in Poisson models using likelihood ratio tests;\nassess the quality of the fit of a Poisson model using the deviance statistic;\ntest independence in contingency tables using a saturated Poisson model.\ninterpret software output for generalized linear models and the respective merits of different functions;\ninterpret parameters of logistic regression models in terms of log-odds.\nmodel success rate for aggregated data using a Poisson regression with an offset or a binomial generalized linear regression and correctly interpret the rates."
-  },
-  {
-    "objectID": "learningobjectives.html#correlated-and-longitudinal-data",
-    "href": "learningobjectives.html#correlated-and-longitudinal-data",
-    "title": "Learning objectives",
-    "section": "Correlated and longitudinal data",
-    "text": "Correlated and longitudinal data\nAt the end of the chapter, students should be able to\n\nunderstand how correlation appears in grouped or longitudinal data;\ncorrectly calculate summary statistics for repeated data;\nadjust models with compound symmetry, first-order autoregressive or unstructured correlation structures;\nwrite correlation and covariance models for main models and understand their parametrization;\nperform tests to compare covariance structures (for nested models) or using information criteria;\nunderstand group heteroscedasticity and how to account for it."
-  },
-  {
-    "objectID": "learningobjectives.html#linear-mixed-models",
-    "href": "learningobjectives.html#linear-mixed-models",
-    "title": "Learning objectives",
-    "section": "Linear mixed models",
-    "text": "Linear mixed models\nAt the end of the chapter, students should be able to\n\nunderstand the concept of group-effect;\nknow in which context to use random group-effects as opposed to fixed group-effects (covariates constant within group, large number of groups with few observations in each);\nwrite down the equation of the mixed model with random-intercept(s) and random-slope(s);\nwrite down the model assumptions (linearity, covariance within-group and between-group, etc.);\nwrite the covariance matrix of observations given parameter estimates (sum of covariance matrices of random effects and errors);\ndistinguish between the adequate structures for correlated and longitudinal data;\ndistinguish predicted (marginal) mean and individual predictions with random effects (conditional);\nobtain predictions for new observations from mixed models using dedicated software."
-  },
-  {
-    "objectID": "learningobjectives.html#introduction-to-survival-analysis",
-    "href": "learningobjectives.html#introduction-to-survival-analysis",
-    "title": "Learning objectives",
-    "section": "Introduction to survival analysis",
-    "text": "Introduction to survival analysis\nAt the end of the chapter, students should be able to\n\nexplain key concepts (truncation, censoring) arising in survival analysis in your own word and provide examples of the latter;\nrecognize scenarios with random right censoring;\ninterpret a Kaplan–Meier nonparametric estimate of the survival function;\ncompare and test for equality of survival curves using a score test;\ninterpret the coefficients of the Cox proportional hazard model and check for their significance."
-  },
-  {
-    "objectID": "learningobjectives.html#global-objectives",
-    "href": "learningobjectives.html#global-objectives",
-    "title": "Learning objectives",
-    "section": "Global objectives",
-    "text": "Global objectives\nAt the end of the course, students should be able to de\n\nset up a database in a format suitable for a regression analysis (e.g., in long format).\nchoose an adequate regression model for data.\ncriticise the quality of model fit.\nsynthetise the conclusions of a regression model.\ncompare different regression models based on their respective benefits.\nformulate practical recommandations based on a regression model."
   }
 ]

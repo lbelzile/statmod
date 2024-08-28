@@ -70,5 +70,11 @@
   },
   "learningobjectives.qmd": {
     "learningobjectives.html": "80389bce"
+  },
+  "exercises/01-exercise.qmd": {
+    "01-exercise.html": "f8b065cd"
+  },
+  "exercises/01-solution.qmd": {
+    "01-solution.html": "b06870f0"
   }
 }
