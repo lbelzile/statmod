@@ -1,5 +1,5 @@
 ---
-title: "Hypothesis testing"
+title: "Statistical inference"
 ---
 
 
@@ -14,9 +14,10 @@ The `renfe` data contains information about 10 000 train ticket sales from [Renf
 - `duration`: length of train journey (in minutes);
 - `wday` integer denoting the week day, ranging from Sunday (`1`) to Saturday (`7`).
 
-We consider travel time for high-speed (`AVE` and `AVE-TGV`) trains. The true "population" mean travel time between cities is known to be $\mu=2.845$ hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).
 
 ## Exercise 1.1
+
+We consider travel time for high-speed (`AVE` and `AVE-TGV`) trains. The true "population" mean travel time between cities is known to be $\mu=2.845$ hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).
 
 A simulation study is performed to assess the behaviour of univariate tests under repeated sampling. The following algorithm was repeated 10K times for different values of $\mu_0$:
 
@@ -91,7 +92,7 @@ ggplot(data = data.frame(time = time,
 ## Exercise 1.2
 
 
-Suppose we now want to compare the mean fare for high-speed train tickets for the two destinations, i.e., Madrid to Barcelona versus Barcelona to Madrid. We run a simulation study where we perform a two-sided Welch test for this hypothesis repeatedly with random subsamples of size $n=1000$. The data `renfe_simu` contains the mean difference (`meandif`), the test statistic (`Wstat`), the $p$-value (`pval`) and the  confidence interval (`cilb` and `ciub`) for these 1000 repetitions. Based on the entire database, the true mean difference is known to be $-0.28$€. Use the simulated data to answer the following questions and *briefly comment* on each item
+Suppose we now want to compare the mean fare for high-speed train tickets for the two destinations, i.e., Madrid to Barcelona versus Barcelona to Madrid. We run a simulation study where we perform a two-sided Welch test for this hypothesis repeatedly with random subsamples of size $n=1000$. The data `renfe_simu` contains the mean difference (`meandif`), the test statistic (`Wstat`), the $p$-value (`pval`) and the  confidence interval (`cilb` and `ciub`) for these 1000 repetitions. Based on the entire database, the true mean difference is known to be $-0.28$€. Use the simulated data to answer the following questions and briefly comment on each item
  
 1. What is the empirical coverage of the 95% confidence intervals (i.e., the percentage of intervals covering the true mean difference value)? 
 2. Plot an histogram of the mean differences and superimpose the true  mean difference in the population.

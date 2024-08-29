@@ -132,9 +132,8 @@ Below is a tentative schedule for the semester.
 1. **Introduction**
     - Syllabus
     - Motivating examples
-    - Review of probability
-    - Random variables: discrete and continuous distributions, moments
-    - Statistical inference (basic notions, sampling and estimation, hypothesis tests, confidence intervals)
+    - Review
+    - Statistical inference (bhypothesis testing)
 2. **Linear models**
     - Parametrizations
     - Parameter interpretation

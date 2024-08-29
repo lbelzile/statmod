@@ -23,7 +23,7 @@ These readings should normally be completed before class, to ensure timely under
 ### In class
 
 - [Syllabus](../slides/MATH60604A-syllabus.pdf)
-- Slides: [Examples of hypothesis tests](../slides/MATH60604A-slides1.html) ([pdf](../slides/MATH60604A-slides1.pdf) and [code](MATH60604A-slides1.R))
+- [Slides](../slides/MATH60604A-slides1.html) ([pdf](../slides/MATH60604A-slides1.pdf) and [code](MATH60604A-slides1.R))
 - Activity: [reporting conclusion of tests](MATH60604A-week1-workshop.R)
 
 ### Slides

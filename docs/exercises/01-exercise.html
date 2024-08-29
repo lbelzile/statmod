@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.1">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Hypothesis testing – Statistical modelling</title>
+<title>Statistical inference – Statistical modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -206,7 +206,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/01-exercise.html">Hypothesis testing</a></li><li class="breadcrumb-item"><a href="../exercises/01-exercise.html">Exercise 1</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Hypothesis testing</h1>
+<h1 class="title">Statistical inference</h1>
 </div>
 
 
@@ -233,9 +233,9 @@ window.Quarto = {
 <li><code>duration</code>: length of train journey (in minutes);</li>
 <li><code>wday</code> integer denoting the week day, ranging from Sunday (<code>1</code>) to Saturday (<code>7</code>).</li>
 </ul>
-<p>We consider travel time for high-speed (<code>AVE</code> and <code>AVE-TGV</code>) trains. The true “population” mean travel time between cities is known to be <span class="math inline">\(\mu=2.845\)</span> hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).</p>
 <section id="exercise-1.1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1.1">Exercise 1.1</h2>
+<p>We consider travel time for high-speed (<code>AVE</code> and <code>AVE-TGV</code>) trains. The true “population” mean travel time between cities is known to be <span class="math inline">\(\mu=2.845\)</span> hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).</p>
 <p>A simulation study is performed to assess the behaviour of univariate tests under repeated sampling. The following algorithm was repeated 10K times for different values of <span class="math inline">\(\mu_0\)</span>:</p>
 <ol type="1">
 <li>Select a random subsample of size <span class="math inline">\(n=100\)</span>.</li>
@@ -266,7 +266,7 @@ Figure&nbsp;1: Power curve for the one-sample <span class="math inline">\(t\)</s
 </section>
 <section id="exercise-1.2" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1.2">Exercise 1.2</h2>
-<p>Suppose we now want to compare the mean fare for high-speed train tickets for the two destinations, i.e., Madrid to Barcelona versus Barcelona to Madrid. We run a simulation study where we perform a two-sided Welch test for this hypothesis repeatedly with random subsamples of size <span class="math inline">\(n=1000\)</span>. The data <code>renfe_simu</code> contains the mean difference (<code>meandif</code>), the test statistic (<code>Wstat</code>), the <span class="math inline">\(p\)</span>-value (<code>pval</code>) and the confidence interval (<code>cilb</code> and <code>ciub</code>) for these 1000 repetitions. Based on the entire database, the true mean difference is known to be <span class="math inline">\(-0.28\)</span>€. Use the simulated data to answer the following questions and <em>briefly comment</em> on each item</p>
+<p>Suppose we now want to compare the mean fare for high-speed train tickets for the two destinations, i.e., Madrid to Barcelona versus Barcelona to Madrid. We run a simulation study where we perform a two-sided Welch test for this hypothesis repeatedly with random subsamples of size <span class="math inline">\(n=1000\)</span>. The data <code>renfe_simu</code> contains the mean difference (<code>meandif</code>), the test statistic (<code>Wstat</code>), the <span class="math inline">\(p\)</span>-value (<code>pval</code>) and the confidence interval (<code>cilb</code> and <code>ciub</code>) for these 1000 repetitions. Based on the entire database, the true mean difference is known to be <span class="math inline">\(-0.28\)</span>€. Use the simulated data to answer the following questions and briefly comment on each item</p>
 <ol type="1">
 <li>What is the empirical coverage of the 95% confidence intervals (i.e., the percentage of intervals covering the true mean difference value)?</li>
 <li>Plot an histogram of the mean differences and superimpose the true mean difference in the population.</li>

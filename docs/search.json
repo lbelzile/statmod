@@ -232,7 +232,7 @@
     "href": "content/01-content.html",
     "title": "Statistical inference",
     "section": "",
-    "text": "Learning objectives\n\nUnderstanding the role of uncertainty in decision making.\nUnderstanding the importance of signal-to-noise ratio as a measure of evidence.\nFormulating the null and alternative hypotheses attached to a problem statement.\nUnderstanding and correctly interpreting \\(p\\)-values and confidence intervals;\n\n\n\nContent\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should normally be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes.\n\n\n\nCourse notes: chapter 1 (Introduction) and 2 (Statistical Inference)\nInstall R and RStudio\n\n\n\nIn class\n\nSyllabus\nSlides: Examples of hypothesis tests (pdf and code)\nActivity: reporting conclusion of tests\n\n\n\nSlides\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n\nAfter class\n\nExercise sheet 1\n\n\n\nAdditional readings\n\nPermutation tests",
+    "text": "Learning objectives\n\nUnderstanding the role of uncertainty in decision making.\nUnderstanding the importance of signal-to-noise ratio as a measure of evidence.\nFormulating the null and alternative hypotheses attached to a problem statement.\nUnderstanding and correctly interpreting \\(p\\)-values and confidence intervals;\n\n\n\nContent\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should normally be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes.\n\n\n\nCourse notes: chapter 1 (Introduction) and 2 (Statistical Inference)\nInstall R and RStudio\n\n\n\nIn class\n\nSyllabus\nSlides (pdf and code)\nActivity: reporting conclusion of tests\n\n\n\nSlides\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n\nAfter class\n\nExercise sheet 1\n\n\n\nAdditional readings\n\nPermutation tests",
     "crumbs": [
       "Content",
       "Pedagogical content",
@@ -259,9 +259,9 @@
   {
     "objectID": "exercises/01-exercise.html",
     "href": "exercises/01-exercise.html",
-    "title": "Hypothesis testing",
+    "title": "Statistical inference",
     "section": "",
-    "text": "The renfe data contains information about 10 000 train ticket sales from Renfe, the Spanish national train company. The data include:\nWe consider travel time for high-speed (AVE and AVE-TGV) trains. The true “population” mean travel time between cities is known to be \\(\\mu=2.845\\) hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).",
+    "text": "The renfe data contains information about 10 000 train ticket sales from Renfe, the Spanish national train company. The data include:",
     "crumbs": [
       "Exercises",
       "Hypothesis testing",
@@ -271,9 +271,9 @@
   {
     "objectID": "exercises/01-exercise.html#exercise-1.1",
     "href": "exercises/01-exercise.html#exercise-1.1",
-    "title": "Hypothesis testing",
+    "title": "Statistical inference",
     "section": "Exercise 1.1",
-    "text": "Exercise 1.1\nA simulation study is performed to assess the behaviour of univariate tests under repeated sampling. The following algorithm was repeated 10K times for different values of \\(\\mu_0\\):\n\nSelect a random subsample of size \\(n=100\\).\nCompute the one-sample \\(t\\)-test statistic for \\(\\mathscr{H}_0: \\mu=\\mu_0\\) (versus \\(\\mathscr{H}_0: \\mu \\neq \\mu_0\\)) .\nReturn the \\(p\\)-value\n\nFigure 1 shows the percentage of the 10K \\(p\\)-values that are less than 0.05, i.e. the percentage of rejection (at the \\(5\\)% level) of \\(\\mathscr{H}_0:\\mu=\\mu_0\\) against the two-sided alternative at \\(\\mu_0 \\in \\{2.83, \\nu, 2.835, 2.84, \\ldots, 2.995, 3\\`\\). Use the resulting curve to answer the following questions:\n\n\n\n\n\n\n\n\nFigure 1: Power curve for the one-sample \\(t\\)-test based on subsamples of size \\(n=100\\), as a function of travel time. The grey horizontal line is at 0.05, the vertical dashed line indicates the population mean \\(\\mu\\).\n\n\n\n\n\n\nExplain why the value for the one-sample \\(t\\)-test around \\(\\mu=2.845\\) should be approximately 0.05.\nExplain why the values on the curve increase towards the right of the plot.\nSuppose we repeated the simulation study, but this time with subsamples of size \\(n=1000\\). How would the points compare for the one-sample \\(t\\)-test: should they be higher, equal, or lower than their current values?\nIs the assumption of the one-sample \\(t\\)-test valid in this example? Produce a quantile-quantile plot using the code below and hence comment on the robustness of the \\(t\\)-test to departures from the normality assumption.",
+    "text": "Exercise 1.1\nWe consider travel time for high-speed (AVE and AVE-TGV) trains. The true “population” mean travel time between cities is known to be \\(\\mu=2.845\\) hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).\nA simulation study is performed to assess the behaviour of univariate tests under repeated sampling. The following algorithm was repeated 10K times for different values of \\(\\mu_0\\):\n\nSelect a random subsample of size \\(n=100\\).\nCompute the one-sample \\(t\\)-test statistic for \\(\\mathscr{H}_0: \\mu=\\mu_0\\) (versus \\(\\mathscr{H}_0: \\mu \\neq \\mu_0\\)) .\nReturn the \\(p\\)-value\n\nFigure 1 shows the percentage of the 10K \\(p\\)-values that are less than 0.05, i.e. the percentage of rejection (at the \\(5\\)% level) of \\(\\mathscr{H}_0:\\mu=\\mu_0\\) against the two-sided alternative at \\(\\mu_0 \\in \\{2.83, \\nu, 2.835, 2.84, \\ldots, 2.995, 3\\`\\). Use the resulting curve to answer the following questions:\n\n\n\n\n\n\n\n\nFigure 1: Power curve for the one-sample \\(t\\)-test based on subsamples of size \\(n=100\\), as a function of travel time. The grey horizontal line is at 0.05, the vertical dashed line indicates the population mean \\(\\mu\\).\n\n\n\n\n\n\nExplain why the value for the one-sample \\(t\\)-test around \\(\\mu=2.845\\) should be approximately 0.05.\nExplain why the values on the curve increase towards the right of the plot.\nSuppose we repeated the simulation study, but this time with subsamples of size \\(n=1000\\). How would the points compare for the one-sample \\(t\\)-test: should they be higher, equal, or lower than their current values?\nIs the assumption of the one-sample \\(t\\)-test valid in this example? Produce a quantile-quantile plot using the code below and hence comment on the robustness of the \\(t\\)-test to departures from the normality assumption.",
     "crumbs": [
       "Exercises",
       "Hypothesis testing",
@@ -283,7 +283,7 @@
   {
     "objectID": "exercises/01-exercise.html#exercise-1.2",
     "href": "exercises/01-exercise.html#exercise-1.2",
-    "title": "Hypothesis testing",
+    "title": "Statistical inference",
     "section": "Exercise 1.2",
     "text": "Exercise 1.2\nSuppose we now want to compare the mean fare for high-speed train tickets for the two destinations, i.e., Madrid to Barcelona versus Barcelona to Madrid. We run a simulation study where we perform a two-sided Welch test for this hypothesis repeatedly with random subsamples of size \\(n=1000\\). The data renfe_simu contains the mean difference (meandif), the test statistic (Wstat), the \\(p\\)-value (pval) and the confidence interval (cilb and ciub) for these 1000 repetitions. Based on the entire database, the true mean difference is known to be \\(-0.28\\)€. Use the simulated data to answer the following questions and briefly comment on each item\n\nWhat is the empirical coverage of the 95% confidence intervals (i.e., the percentage of intervals covering the true mean difference value)?\nPlot an histogram of the mean differences and superimpose the true mean difference in the population.\nCompute the power of the test (percentage of rejection of the null hypothesis).",
     "crumbs": [
@@ -295,7 +295,7 @@
   {
     "objectID": "exercises/01-exercise.html#exercise-1.3",
     "href": "exercises/01-exercise.html#exercise-1.3",
-    "title": "Hypothesis testing",
+    "title": "Statistical inference",
     "section": "Exercise 1.3",
     "text": "Exercise 1.3\nUsing the renfe data, test whether the average ticket price of AVE-TGV trains is different from that of Regio Express trains (REXPRESS). Make sure to\n\nState your null and alternative hypothesis.\nCarefully justify your choice of test statistic.\nReport the estimated mean difference and a 90% confidence interval for that difference.\nConclude within the setting of the problem.",
     "crumbs": [

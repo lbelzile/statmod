@@ -19,14 +19,15 @@ $rosep: #eab8e4 !default;
 $jaunef: #f3d03e !default;
 $jaunep: #f2f0a1 !default;
 
-$primary:       $aquap !default;
-$secondary:     $aquaf !default;
-$success:       $rougef !default;
+$primary:       $bleuhec !default;
+$secondary:     $bleuf !default;
+$success:       $bleuhec !default;
 $info:          $aquap !default;
 $warning:       $jaunef !default;
 $danger:        $rougef !default;
 $light:         $grisp !default;
 $dark:          $grisf !default;
+
 
 $font-family-sans-serif:      Fira Sans Condensed, sans-serif !default;
 $font-family-serif:           Barlow, serif !default;  /* Not actually a serif font but whatever */
@@ -46,8 +47,9 @@ $toc-font-size: 0.95rem;
 $sidebar-font-size: 1.1rem;
 $sidebar-font-size-section: 0.95rem;
 $footer-font-size: 0.95rem;
-$link-color: $grisf;
-$link-hover-color: darken($bleuhec, 0.8);
+$link-color: $bleuf;
+$link-hover-color: $bleup;
+$code-color: $bleuhec;
 $monokai-bg: #2e3440;
 $sidebar-fg: $noir;
 
