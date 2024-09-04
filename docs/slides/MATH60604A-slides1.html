@@ -533,7 +533,7 @@ Léo Belzile, HEC Montréal
 <h1>Motivating examples</h1>
 
 </section>
-<section id="driving-exams-in-great-britain" class="slide level2">
+<section id="driving-exams-in-great-britain" class="slide level2 smaller">
 <h2>1. Driving exams in Great Britain</h2>
 <p>Are driving tests easier if you live in a rural area? Source: <a href="https://www.theguardian.com/world/2019/aug/23/an-easy-ride-scottish-village-fuels-debate-driving-test-pass-rates">The Guardian, August 23rd, 2019</a></p>
 <div class="columns">
@@ -547,12 +547,12 @@ Léo Belzile, HEC Montréal
 </div>
 </div>
 </div>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:45%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="fig/01/guardian_driving_infographic.png" style="width:100.0%"></p>
+<p><img data-src="fig/01/guardian_driving_infographic.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -685,6 +685,9 @@ Eye tracking gaze distribution results show that participants were more distract
 <blockquote>
 <p>Customers must often decide on the quantity to purchase in addition to whether to purchase. The current research introduces and compares the quantity-sequential selling format, in which shoppers resolve the purchase and quantity decisions separately, with the quantity-integrated selling format, where shoppers simultaneously consider whether and how many to buy. Although retailers often use the sequential format, we demonstrate that the integrated format can increase purchase rates.</p>
 </blockquote>
+<blockquote>
+<p>A field experiment conducted with a large technology firm found that quantity integration yielded considerably higher sales, amounting to an increase of more than $1 million in annual revenue.</p>
+</blockquote>
 </div><div class="column" style="width:40%;">
 <div class="cell">
 <div class="cell-output-display">
@@ -695,11 +698,8 @@ Eye tracking gaze distribution results show that participants were more distract
 </div>
 </div>
 </div>
-<blockquote>
-<p>A field experiment conducted with a large technology firm found that quantity integration yielded considerably higher sales, amounting to an increase of more than $1 million in annual revenue.</p>
-</blockquote>
-</div></div>
 <p>Model: logistic regression, dataset <code>DA23_E1</code>.</p>
+</div></div>
 </section>
 <section id="price-of-oil-in-the-gaspe-peninsula" class="slide level2 smaller">
 <h2>8. Price of oil in the Gaspe Peninsula</h2>
@@ -707,18 +707,18 @@ Eye tracking gaze distribution results show that participants were more distract
 <div class="column" style="width:50%;">
 <p>Mayors requested an inquiry by the <a href="https://www.regie-energie.qc.ca/fr"><strong>Régie de l’énergie</strong></a>, a regulating agency in charge of energy prices. The report found that prices were indeed more expensive, but pointed out that there were more retailers per capita, and lower volume so their margins were higher.</p>
 <p>Source: Radio-Canada <a href="https://ici.radio-canada.ca/nouvelle/1303956/prix-essence-gaspe-enquete">1</a>, <a href="https://ici.radio-canada.ca/nouvelle/1463520/prix-essence-gaspesie-rapport-regie-energie">2</a></p>
+<p>Model: Linear regression with autoregressive errors, pairwise comparisons. Dataset <code>renergy</code>, package <code>hecstatmod</code>.</p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="fig/01/regieenergie.png" style="width:100.0%"></p>
+<p><img data-src="fig/01/regieenergie.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
-<p>Model: Linear regression with autoregressive errors, pairwise comparisons. Dataset <code>renergy</code>, package <code>hecstatmod</code>.</p>
 </section></section>
 <section>
 <section id="hypothesis-testing" class="title-slide slide level1 center" data-background-color="#002855">
@@ -736,7 +736,7 @@ Figure&nbsp;1: Five samples of size <span class="math inline">\(n=10\)</span> dr
 <h2>The signal and the noise</h2>
 <p>The stronger the signal-to-noise ratio, the larger our ability to detect differences when they truly exist.</p>
 
-<img data-src="MATH60604A-slides1_files/figure-revealjs/plots-1.png" style="width:80.0%" class="r-stretch"></section>
+<img data-src="MATH60604A-slides1_files/figure-revealjs/plots-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%"></section>
 <section id="accumulation-of-information" class="slide level2">
 <h2>Accumulation of information</h2>
 <p>As we gather more observations (sample size increases), we can better discriminate between scenarios.</p>
@@ -759,7 +759,7 @@ Figure&nbsp;1: Five samples of size <span class="math inline">\(n=10\)</span> dr
 <h2>Running example: texting while walking</h2>
 <p>Tech3Lab, HEC Montreal’s User Experience (UX) lab, studied the impact of texting on distraction.</p>
 
-<img data-src="fig/01/Tech3Lab-texter.jpg" style="width:65.0%" class="r-stretch"></section>
+<img data-src="fig/01/Tech3Lab-texter.jpg" class="quarto-figure quarto-figure-center r-stretch" style="width:65.0%"></section>
 <section id="study-details" class="slide level2">
 <h2>Study details</h2>
 <ul>
@@ -782,6 +782,23 @@ Figure&nbsp;1: Five samples of size <span class="math inline">\(n=10\)</span> dr
 <li>Distraction type (cellphone call or texting): nominal variable</li>
 </ul></li>
 <li>Response variable: time (in seconds) that it takes for a person to notice the obstacle when walking while texting or talking on a cell phone (measured through an encephalogram)</li>
+</ul>
+</section>
+<section id="hypothesis-testing-as-a-trial-analogy" class="slide level2">
+<h2>Hypothesis testing as a trial analogy</h2>
+
+<img data-src="fig/01/12_Angry_Men_scene.jpg" style="width:55.0%" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;2: Screenshot of the courtoom drama <em>Twelve Angry Men</em> (1957)
+</p></section>
+<section id="trial-analogy" class="slide level2">
+<h2>Trial analogy</h2>
+<p>The presumption of innocence applies (look at everything as if the null hypothesis is true)</p>
+<ul>
+<li>Evidences are judged under this optic: are they remotely plausible if the person was innocent?<br>
+</li>
+<li>The burden of the proof lies with the prosecution to avoid as much as possible judicial errors.</li>
+<li>The null hypothesis <span class="math inline">\(\mathscr{H}_0\)</span> is <em>not guilty</em>, whereas the alternative <span class="math inline">\(\mathscr{H}_a\)</span> is <em>guilty</em>.</li>
+<li>If there is a reasonable doubt, the verdict of the trial will be not guilty.</li>
 </ul>
 </section>
 <section id="define-the-variables-of-interest" class="slide level2">
@@ -874,7 +891,7 @@ T_D=\frac{\overline{D}-\mu_0}{\mathsf{se}(\overline{D})}
 <h2>Null distributions</h2>
 
 <img data-src="MATH60604A-slides1_files/figure-revealjs/fig-renfepermut-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"><p class="caption">
-Figure&nbsp;2: Permutation-based approximation to the null distribution (full) and standard normal approximation (dashed curve). The value of the test statistic calculated using the original sample is represented by a vertical line.
+Figure&nbsp;3: Sign permutation-based approximation to the null distribution (full) and standard normal approximation (dashed curve). The value of the test statistic calculated using the original sample is represented by a vertical line.
 </p></section>
 <section id="compare-the-statistic-with-the-null-distribution" class="slide level2">
 <h2>4. Compare the statistic with the null distribution</h2>
@@ -886,7 +903,7 @@ Figure&nbsp;2: Permutation-based approximation to the null distribution (full) a
 </ul>
 </section>
 <section id="p-values" class="slide level2">
-<h2><span class="math inline">\(P\)</span>-values</h2>
+<h2><span class="math inline">\(p\)</span>-values</h2>
 <p>Apply distribution function of the null distribution to map the test statistic to the <span class="math inline">\([0,1]\)</span> interval.</p>
 <p>The <em>p</em>-value is the probability that the test statistic is equal or more extreme to the estimate computed from the data, assuming <span class="math inline">\(\mathscr{H}_0\)</span> is true.</p>
 <div class="callout callout-caution callout-titled callout-style-default">
@@ -910,23 +927,6 @@ Figure&nbsp;2: Permutation-based approximation to the null distribution (full) a
 </div>
 </div>
 </div>
-</section>
-<section id="hypothesis-testing-as-a-trial-analogy" class="slide level2">
-<h2>Hypothesis testing as a trial analogy</h2>
-
-<img data-src="fig/01/12_Angry_Men_scene.jpg" style="width:55.0%" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;3: Screenshot of the courtoom drama <em>Twelve Angry Men</em> (1957)
-</p></section>
-<section id="trial-analogy" class="slide level2">
-<h2>Trial analogy</h2>
-<p>The presumption of innocence applies (look at everything as if the null hypothesis is true)</p>
-<ul>
-<li>Evidences are judged under this optic: are they remotely plausible if the person was innocent?<br>
-</li>
-<li>The burden of the proof lies with the prosecution to avoid as much as possible judicial errors.</li>
-<li>The null hypothesis <span class="math inline">\(\mathscr{H}_0\)</span> is <em>not guilty</em>, whereas the alternative <span class="math inline">\(\mathscr{H}_a\)</span> is <em>guilty</em>.</li>
-<li>If there is a reasonable doubt, the verdict of the trial will be not guilty.</li>
-</ul>
 </section>
 <section id="what-can-we-expect-of-p-values" class="slide level2">
 <h2>What can we expect of <span class="math inline">\(p\)</span>-values?</h2>
@@ -952,6 +952,10 @@ Figure&nbsp;4: Density of <em>p</em>-values under the null hypothesis (left) and
 </section>
 <section id="statistical-errors" class="slide level2">
 <h2>Statistical errors</h2>
+<p>We seek to avoid error of type I: we reject <span class="math inline">\(\mathscr{H}_0\)</span> when <span class="math inline">\(\mathscr{H}_0\)</span> is true.</p>
+<ul>
+<li>trial analogy: avoid condemning an innocent.</li>
+</ul>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -973,10 +977,6 @@ Figure&nbsp;4: Density of <em>p</em>-values under the null hypothesis (left) and
 </tr>
 </tbody>
 </table>
-<p>We seek to avoid error of type I: we reject <span class="math inline">\(\mathscr{H}_0\)</span> when <span class="math inline">\(\mathscr{H}_0\)</span> is true.</p>
-<ul>
-<li>trial analogy: avoid condemning an innocent.</li>
-</ul>
 <p>Since we fix the level <span class="math inline">\(\alpha\)</span>, we have no control over the type II error.</p>
 </section>
 <section id="power" class="slide level2">
@@ -1006,7 +1006,7 @@ Figure&nbsp;5: Comparison between null distribution (full curve) and a specific 
 <h2>Confidence interval</h2>
 <p>A <strong>confidence interval</strong> is an alternative way to present the conclusions of an hypothesis test performed at significance level <span class="math inline">\(\alpha\)</span> with the <strong>same data units</strong>.</p>
 <p>Wald-based <span class="math inline">\((1-\alpha)\)</span> confidence intervals for a scalar parameter <span class="math inline">\(\theta\)</span> are of the form <span class="math display">\[\begin{align*}
-[\widehat{\theta} + \mathfrak{q}_{\alpha/2}\mathrm{se}(\widehat{\theta}, \widehat{\theta} +\mathfrak{q}_{1-\alpha/2}\times \mathrm{se}(\widehat{\theta})]
+[\widehat{\theta} + \mathfrak{q}_{\alpha/2}\mathrm{se}(\widehat{\theta}), \widehat{\theta} +\mathfrak{q}_{1-\alpha/2}\times \mathrm{se}(\widehat{\theta})]
 \end{align*}\]</span> corresponding to a point estimate plus or minus the margin of error.</p>
 </section>
 <section id="estimation-a-piece-of-cake" class="slide level2 smaller">
@@ -1087,16 +1087,16 @@ Figure&nbsp;6: <a href="https://www.flickr.com/photos/darkdwarf/16563489881">Est
 <p>The <em>p</em>-value is <span class="math inline">\(p = \Pr_0(T &gt; t_D)\)</span>, where <span class="math inline">\(T \sim \mathsf{Student}(34)\)</span>. Using <strong>R</strong>, we find <span class="math inline">\(p=0.0032\)</span>, which is smaller than <span class="math inline">\(\alpha=5\%\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>ttest<span class="sc">$</span>p.value</span>
-<span id="cb3-2"><a href=""></a><span class="do">## [1] 0.249</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href=""></a><span class="do">## [1] 0.00319</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The lower bound of the confidence interval is <span class="math inline">\(\overline{D} + \mathsf{se}(\overline{D}) \times \mathfrak{t}_{0.05}\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>ttest<span class="sc">$</span>conf.int</span>
-<span id="cb4-2"><a href=""></a><span class="do">## [1] -1.067  0.277</span></span>
+<span id="cb4-2"><a href=""></a><span class="do">## [1] 0.131   Inf</span></span>
 <span id="cb4-3"><a href=""></a><span class="do">## attr(,"conf.level")</span></span>
 <span id="cb4-4"><a href=""></a><span class="do">## [1] 0.95</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The one-sided confidence interval is <span class="math inline">\([-1.067, \infty]\)</span>. The postulated null value, <span class="math inline">\(0\)</span>, is outside the interval.</p>
+<p>The one-sided confidence interval is <span class="math inline">\([0.131, \infty]\)</span>. The postulated null value, <span class="math inline">\(0\)</span>, is outside the interval.</p>
 </section>
 <section id="r-calculations-by-hand" class="slide level2">
 <h2><strong>R</strong> — calculations by hand</h2>
@@ -1127,7 +1127,7 @@ Figure&nbsp;6: <a href="https://www.flickr.com/photos/darkdwarf/16563489881">Est
 </div></aside></section>
 <section id="conclude-in-the-setting-of-the-problem" class="slide level2">
 <h2>6. Conclude in the setting of the problem</h2>
-<p>The estimated mean difference is <span class="math inline">\(82.146, 82.541\)</span> seconds (std. error of <span class="math inline">\(0.343\)</span> seconds).</p>
+<p>The estimated mean difference is <span class="math inline">\(0.313\)</span> seconds (std. error of <span class="math inline">\(0.108\)</span> seconds).</p>
 <p>We reject <span class="math inline">\(\mathscr{H}_0\)</span>, meaning that the reaction time is significantly higher (at level <span class="math inline">\(5\)</span>%) when texting than talking on the cellphone while walking (p-value of <span class="math inline">\(0.003\)</span>).</p>
 </section>
 <section id="learning-objectives" class="slide level2">

@@ -1,9 +1,11 @@
 {
-  "hash": "29a9e695e03131ad68369850f2574fc1",
+  "hash": "07bd0cd0c5865d9434b3c5751334b43a",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Content\"\n---\n\n\n\n\n\nThe course content is divided in chapters: for each topic,\nreaders have access to course notes, sample code and exercises sheets.\n\n\n## R packages and data\n\nYou can access the data sets in **R** by installing the `hecstatmod` package from Github using the following commands (uncomment the first line to install the  `remotes` and `learnr` libraries --- do only once):\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlib <- c(\"afex\", \"broom\", \"car\", \"dplyr\", \"emmeans\",\n         \"ggplot2\", \"lme4\", \"lmerTest\", \"marginaleffects\", \"MASS\",\n         \"multcomp\", \"nlme\", \"patchwork\", \"poorman\", \"remotes\",\n         \"survival\", \"tidyr\", \"tinytable\")\nfor(pack in lib){\n  if(!require(pack, quietly = TRUE)){\n    install.packages(pack)\n  }\n}\nremotes::install_github(\"lbelzile/hecstatmod\")\nremotes::install_github(\"lbelzile/hecedsm\")\n```\n:::\n\n\n\n\n\n*Note*: not all data sets are currently documented in `hecstatmod`. Please re-install the package periodically to benefit from the latest features.\n",
-    "supporting": [],
+    "markdown": "---\ntitle: \"Content\"\n---\n\n\n\n\n\nThe course content is divided in chapters: for each topic,\nreaders have access to course notes, sample code and exercises sheets.\n\n\n## R packages and data\n\nYou can access the data sets in **R** by installing the `hecstatmod` package from Github using the following commands (uncomment the first line to install the  `remotes` and `learnr` libraries --- do only once):\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlib <- c(\"afex\", \"broom\", \"car\", \"dplyr\", \"emmeans\",\n         \"ggplot2\", \"Hmisc\", \"lme4\", \"lmerTest\", \n         \"marginaleffects\", \"MASS\", \"multcomp\", \"nlme\", \n         \"patchwork\", \"poorman\", \"remotes\", \"survminer\",\n         \"survival\", \"tidyr\", \"tinytable\")\nfor(pack in lib){\n  if(!require(pack, quietly = TRUE)){\n    install.packages(pack)\n  }\n}\nremotes::install_github(\"lbelzile/hecstatmod\")\nremotes::install_github(\"lbelzile/hecedsm\")\n```\n:::\n\n\n\n\n\n*Note*: not all data sets are currently documented in `hecstatmod`. Please re-install the package periodically to benefit from the latest features.\n",
+    "supporting": [
+      "index_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

@@ -198,7 +198,7 @@ knitr::include_graphics("fig/01/nyt-wellness-program.png")
 
 # Motivating examples {background-color="#002855"}
 
-## 1. Driving exams in Great Britain
+## 1. Driving exams in Great Britain {.smaller}
 
 Are driving tests easier if you live in a rural area? Source: [The Guardian, August 23rd, 2019](https://www.theguardian.com/world/2019/aug/23/an-easy-ride-scottish-village-fuels-debate-driving-test-pass-rates)
 
@@ -215,11 +215,11 @@ knitr::include_graphics("fig/01/guardian_driving.png")
 :::
 
 
-::: {.column width="50%"}
+::: {.column width="45%"}
 ```{r}
 #| eval: true
 #| echo: false
-#| out-width: '100%'
+#| out-width: '80%'
 knitr::include_graphics("fig/01/guardian_driving_infographic.png")
 ```
 
@@ -395,6 +395,8 @@ Model: Tobit type II regression and Poisson regression (independence test), data
 
 > Customers must often decide on the quantity to purchase in addition to whether to purchase. The current research introduces and compares the quantity-sequential selling format, in which shoppers resolve the purchase and quantity decisions separately, with the quantity-integrated selling format, where shoppers simultaneously consider whether and how many to buy. Although retailers often use the sequential format, we demonstrate that the integrated format can increase purchase rates.
 
+
+> A field experiment conducted with a large technology firm found that quantity integration yielded considerably higher sales, amounting to an increase of more than $1 million in annual revenue. 
 :::
 
 ::: {.column width="40%"}
@@ -406,13 +408,12 @@ Model: Tobit type II regression and Poisson regression (independence test), data
 knitr::include_graphics("fig/01/Duke_Amir.png")
 ```
 
-> A field experiment conducted with a large technology firm found that quantity integration yielded considerably higher sales, amounting to an increase of more than $1 million in annual revenue. 
 
+Model: logistic regression, dataset `DA23_E1`.
 :::
 
 ::::
 
-Model: logistic regression, dataset `DA23_E1`.
 
 ## 8. Price of oil in the Gaspe Peninsula {.smaller}
 
@@ -425,6 +426,9 @@ Model: logistic regression, dataset `DA23_E1`.
 Mayors requested  an inquiry by the [**Régie de l'énergie**](https://www.regie-energie.qc.ca/fr), a regulating agency in charge of energy prices. The report found that prices were indeed more expensive, but pointed out that there were more retailers per capita, and lower volume so their margins were higher.
 
 Source: Radio-Canada [1](https://ici.radio-canada.ca/nouvelle/1303956/prix-essence-gaspe-enquete), [2](https://ici.radio-canada.ca/nouvelle/1463520/prix-essence-gaspesie-rapport-regie-energie)
+
+
+Model: Linear regression with autoregressive errors, pairwise comparisons. Dataset `renergy`, package `hecstatmod`.
 :::
 
 ::: {.column width="50%"}
@@ -432,7 +436,7 @@ Source: Radio-Canada [1](https://ici.radio-canada.ca/nouvelle/1303956/prix-essen
 ```{r}
 #| eval: true
 #| echo: false
-#| out-width: '100%'
+#| out-width: '80%'
 knitr::include_graphics("fig/01/regieenergie.png")
 ```
 
@@ -440,7 +444,6 @@ knitr::include_graphics("fig/01/regieenergie.png")
 
 ::::
 
-Model: Linear regression with autoregressive errors, pairwise comparisons. Dataset `renergy`, package `hecstatmod`.
 
 
 # Hypothesis testing {background-color="#002855"}
@@ -484,6 +487,7 @@ The stronger the signal-to-noise ratio, the larger our ability to detect differe
 #| fig-height: 4
 #| fig-width: 8
 #| out-width: 80%
+#| fig-align: 'center'
 set.seed(12345)
 dat1 <- data.frame(dat = rnorm(100, mean = 10, sd = 3) + rep((1:4)/4, each = 25),
        group = factor(x = rep(1:4, each = 25), 
@@ -592,6 +596,7 @@ Tech3Lab, HEC Montreal's User Experience (UX) lab, studied the impact of texting
 #| label: tech3lab
 #| echo: false
 #| out-width: '65%'
+#| fig-align: 'center'
 knitr::include_graphics('fig/01/Tech3Lab-texter.jpg')
 ```
 
@@ -615,6 +620,25 @@ phone, whereas in another session, they walked while texting.
   - Distraction type (cellphone call or texting): nominal variable
 - Response variable: time (in seconds) that it takes for a person to notice the obstacle when walking while texting or talking on a cell phone (measured through an encephalogram)
 
+
+## Hypothesis testing as a trial analogy
+
+```{r}
+#| label: fig-twelveangrymen
+#| echo: false
+#| out-width: '55%'
+#| fig-cap: "Screenshot of the courtoom drama _Twelve Angry Men_ (1957)"
+knitr::include_graphics('fig/01/12_Angry_Men_scene.jpg')
+```
+
+## Trial analogy 
+
+The presumption of innocence applies (look at everything as if the null hypothesis is true)
+
+- Evidences are judged under this optic: are they remotely plausible if the person was innocent?  
+- The burden of the proof lies with the prosecution to avoid as much as possible judicial errors. 
+- The null hypothesis $\mathscr{H}_0$ is *not guilty*, whereas the alternative $\mathscr{H}_a$ is *guilty*. 
+- If there is a reasonable doubt, the verdict of the trial will be not guilty.
 
 ## 1. Define the variables of interest
 
@@ -648,7 +672,6 @@ W = \frac{\text{estimated qty} - \text{postulated qty}}{\text{std. error (estima
     - This standardization is useful for benchmarking purposes.
     - The **standard error** measures the uncertainty of the statistic.
 
- 
 ::: aside
 Do not confuse standard error (variability of statistic) and standard deviation (variability of observation from the population). 
 :::
@@ -698,35 +721,30 @@ The null distribution tells us what values we would obtain under a null, and the
 ## Null distributions
 
 
-
 ```{r}
 #| label: fig-renfepermut
 #| cache: true
 #| echo: false
 #| fit.height: 5
 #| fig-align: 'center'
-#| fig-cap: Permutation-based approximation to the null distribution (full) and standard normal approximation
+#| fig-cap: Sign permutation-based approximation to the null distribution (full) and standard normal approximation
 #|   (dashed curve). The value of the test statistic calculated using the original sample
 #|   is represented by a vertical line.
 #| fig-width: 6
-# p-value (permutation test)
-data(renfe, package = "hecstatmod")
-# Sub-sample with only Promo tickets
-renfe_promo <- renfe |>
-   dplyr::filter(fare == "Promo",
-                 type == "AVE")
-
-# two-sample t-test and mean difference
-ttest <- t.test(price~dest, data = renfe_promo)
-n <- nrow(renfe_promo)
+# p-value (sign permutation test)
+data(distraction, package = "hecstatmod")
+di <- with(distraction, t-c)
+n <- length(di)
 B <- 1e4
 ttest_stats <- numeric(B)
-ttest_stats[1] <- ttest$statistic
+ttest_stats[1] <- t.test(di, alternative = "greater")$statistic
 set.seed(20200608) # set seed of pseudo-random number generator
 for(i in 2:B){
   # Recalculate the test statistic, permuting the labels
-  ttest_stats[i] <- t.test(price ~ dest[sample.int(n = n)],
-                           data = renfe_promo)$statistic
+  ttest_stats[i] <- t.test(sample(x = c(-1, 1),
+                                  size = n,
+                                  replace = TRUE) * di,
+                           alternative = "greater")$statistic
 }
 # Graphics library
 library(ggplot2)
@@ -749,7 +767,7 @@ ggplot(data = data.frame(statistic = ttest_stats),
 - The $0.05$ quantile of $T$ is $\mathfrak{t}_{0.05} = `r qt(0.05, 34)`$.
 
 
-## $P$-values
+## $p$-values
 
 Apply distribution function of the null distribution to map the test statistic to the $[0,1]$ interval.
 
@@ -766,25 +784,6 @@ list of principles](https://doi.org/10.1080/00031305.2016.1154108) guiding (mis)
 
 :::
 
-
-## Hypothesis testing as a trial analogy
-
-```{r}
-#| label: fig-twelveangrymen
-#| echo: false
-#| out-width: '55%'
-#| fig-cap: "Screenshot of the courtoom drama _Twelve Angry Men_ (1957)"
-knitr::include_graphics('fig/01/12_Angry_Men_scene.jpg')
-```
-
-## Trial analogy 
-
-The presumption of innocence applies (look at everything as if the null hypothesis is true)
-
-- Evidences are judged under this optic: are they remotely plausible if the person was innocent?  
-- The burden of the proof lies with the prosecution to avoid as much as possible judicial errors. 
-- The null hypothesis $\mathscr{H}_0$ is *not guilty*, whereas the alternative $\mathscr{H}_a$ is *guilty*. 
-- If there is a reasonable doubt, the verdict of the trial will be not guilty.
 
 ## What can we expect of $p$-values?
 
@@ -904,15 +903,17 @@ The value of $\alpha \in (0, 1)$ is the probability of rejecting $\mathscr{H}_0$
 ## Statistical errors
 
 
+
+We seek to avoid error of type I: we reject $\mathscr{H}_0$ when $\mathscr{H}_0$ is true.
+
+- trial analogy: avoid condemning an innocent. 
+
+
 | **Decision** \\ **true model** | $\mathscr{H}_0$ | $\mathscr{H}_a$ |
 | :-- | :-: | :-: |
 | fail to reject $\mathscr{H}_0$ | $\checkmark$ | type II error |
 | reject $\mathscr{H}_0$ |type I error | $\checkmark$|
 
-
-We seek to avoid error of type I: we reject $\mathscr{H}_0$ when $\mathscr{H}_0$ is true.
-
-- trial analogy: avoid condemning an innocent. 
 
 Since we fix the level $\alpha$, we have no control over the type II error.
 
@@ -1002,7 +1003,7 @@ A **confidence interval** is an alternative way to present the conclusions of an
 
 Wald-based  $(1-\alpha)$ confidence intervals for a scalar parameter $\theta$ are of the form
 \begin{align*}
-[\widehat{\theta} + \mathfrak{q}_{\alpha/2}\mathrm{se}(\widehat{\theta}, \widehat{\theta} +\mathfrak{q}_{1-\alpha/2}\times \mathrm{se}(\widehat{\theta})]
+[\widehat{\theta} + \mathfrak{q}_{\alpha/2}\mathrm{se}(\widehat{\theta}), \widehat{\theta} +\mathfrak{q}_{1-\alpha/2}\times \mathrm{se}(\widehat{\theta})]
 \end{align*}
 corresponding to a point estimate plus or minus the margin of error.
 

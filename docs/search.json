@@ -133,10 +133,44 @@
     "href": "content/index.html#r-packages-and-data",
     "title": "Content",
     "section": "R packages and data",
-    "text": "R packages and data\nYou can access the data sets in R by installing the hecstatmod package from Github using the following commands (uncomment the first line to install the remotes and learnr libraries — do only once):\n\nlib &lt;- c(\"afex\", \"broom\", \"car\", \"dplyr\", \"emmeans\",\n         \"ggplot2\", \"lme4\", \"lmerTest\", \"marginaleffects\", \"MASS\",\n         \"multcomp\", \"nlme\", \"patchwork\", \"poorman\", \"remotes\",\n         \"survival\", \"tidyr\", \"tinytable\")\nfor(pack in lib){\n  if(!require(pack, quietly = TRUE)){\n    install.packages(pack)\n  }\n}\nremotes::install_github(\"lbelzile/hecstatmod\")\nremotes::install_github(\"lbelzile/hecedsm\")\n\nNote: not all data sets are currently documented in hecstatmod. Please re-install the package periodically to benefit from the latest features.",
+    "text": "R packages and data\nYou can access the data sets in R by installing the hecstatmod package from Github using the following commands (uncomment the first line to install the remotes and learnr libraries — do only once):\n\nlib &lt;- c(\"afex\", \"broom\", \"car\", \"dplyr\", \"emmeans\",\n         \"ggplot2\", \"Hmisc\", \"lme4\", \"lmerTest\", \n         \"marginaleffects\", \"MASS\", \"multcomp\", \"nlme\", \n         \"patchwork\", \"poorman\", \"remotes\", \"survminer\",\n         \"survival\", \"tidyr\", \"tinytable\")\nfor(pack in lib){\n  if(!require(pack, quietly = TRUE)){\n    install.packages(pack)\n  }\n}\nremotes::install_github(\"lbelzile/hecstatmod\")\nremotes::install_github(\"lbelzile/hecedsm\")\n\nNote: not all data sets are currently documented in hecstatmod. Please re-install the package periodically to benefit from the latest features.",
     "crumbs": [
       "Content",
       "Ressources"
+    ]
+  },
+  {
+    "objectID": "exercises/index.html",
+    "href": "exercises/index.html",
+    "title": "Exercises",
+    "section": "",
+    "text": "This webpage section contains exercises along with solutions sets and code.\n\n\n\n\n\n\nChapter\nExercise\nSolution\nR\n\n\n\n\n1\nBasics of statistical inference\n\n\n\n\n\n2\nLinear regression\n\n\n\n\n\n3\nLikelihood methods\n\n\n\n\n\n4\nGeneralized linear models\n\n\n\n\n\n5\nCorrelated and longitudinal data\n\n\n\n\n\n6\nLinear mixed models\n\n\n\n\n\n7\nSurvival analysis",
+    "crumbs": [
+      "Exercises"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html",
+    "href": "content/02-content.html",
+    "title": "Likelihood-based inference",
+    "section": "",
+    "text": "Learning objectives\n\nLearn the terminology associated with likelihood-based inference\nDerive closed-form expressions for the maximum likelihood estimator in simple models\nUsing numerical optimization, obtain parameter estimates and their standards errors using maximum likelihood\nUse large-sample properties of the likelihood to derive confidence intervals and tests\nUse information criteria for model selection\n\n\n\nContent\n\nCourse notes: chapter 3 (Likelihood-based inference)\n\n\n\nIn class\n\nSlides (pdf and code)\n\n\n\nSlides\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n\nAfter class\n\nExercise sheet 3\n\n\n\nAdditional readings\n\n@Davison:2008, Chapter 4",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html",
+    "href": "content/01-content.html",
+    "title": "Statistical inference",
+    "section": "",
+    "text": "Learning objectives\n\nUnderstanding the role of uncertainty in decision making.\nUnderstanding the importance of signal-to-noise ratio as a measure of evidence.\nFormulating the null and alternative hypotheses attached to a problem statement.\nUnderstanding and correctly interpreting \\(p\\)-values and confidence intervals;\n\n\n\nContent\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should normally be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes.\n\n\n\nCourse notes: chapter 1 (Introduction) and 2 (Statistical Inference)\nInstall R and RStudio\n\n\n\nIn class\n\nSyllabus\nSlides (pdf and code)\nActivity: reporting conclusion of tests\n\n\n\nSlides\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n\nAfter class\n\nExercise sheet 1\n\n\n\nAdditional readings\n\nPermutation tests",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 1"
     ]
   },
   {
@@ -225,28 +259,6 @@
     "crumbs": [
       "Content",
       "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html",
-    "href": "content/01-content.html",
-    "title": "Statistical inference",
-    "section": "",
-    "text": "Learning objectives\n\nUnderstanding the role of uncertainty in decision making.\nUnderstanding the importance of signal-to-noise ratio as a measure of evidence.\nFormulating the null and alternative hypotheses attached to a problem statement.\nUnderstanding and correctly interpreting \\(p\\)-values and confidence intervals;\n\n\n\nContent\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should normally be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes.\n\n\n\nCourse notes: chapter 1 (Introduction) and 2 (Statistical Inference)\nInstall R and RStudio\n\n\n\nIn class\n\nSyllabus\nSlides (pdf and code)\nActivity: reporting conclusion of tests\n\n\n\nSlides\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n\nAfter class\n\nExercise sheet 1\n\n\n\nAdditional readings\n\nPermutation tests",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "exercises/index.html",
-    "href": "exercises/index.html",
-    "title": "Exercises",
-    "section": "",
-    "text": "This webpage section contains exercises along with solutions sets and code.",
-    "crumbs": [
-      "Exercises"
     ]
   },
   {

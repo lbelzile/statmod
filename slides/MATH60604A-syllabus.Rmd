@@ -237,7 +237,6 @@ You must provide your code for the group project
 - submit as a `.txt` file (otherwise, you won't be able to submit your work on *Zonecours*) 
 - use UTF8 encoding 
 - follow the instructions for naming scripts/files
-($\neq$ `mycode.txt`)
 
 ---
 
