@@ -8,7 +8,7 @@
 <link href="MATH60604A-slides2_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="MATH60604A-slides2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="MATH60604A-slides2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.1">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Léo Belzile, HEC Montréal">
   <meta name="dcterms.date" content="2024-01-01">
@@ -425,14 +425,9 @@ Léo Belzile, HEC Montréal
 
   <p class="date">2024</p>
 </section>
-<section>
-<section id="likelihood" class="title-slide slide level1 center" data-background-color="#002855">
-<h1>Likelihood</h1>
-
-</section>
 <section id="motivating-example" class="slide level2">
 <h2>Motivating example</h2>
-<p>The data <code>waiting</code> contain the time in minutes from 17:59 until the next metro train departs from station <em>Université de Montréal</em> on the blue line of the Montreal subway, collected over three months (62 week days). The observations are positive and range from <span class="math inline">\(4\)</span> to <span class="math inline">\(57\)</span> seconds.</p>
+<p>The data <code>waiting</code> contain the time in seconds from 17:59 until the next metro train departs from station <em>Université de Montréal</em> on the blue line of the Montreal subway, collected over three months (62 week days). The observations are positive and range from <span class="math inline">\(4\)</span> to <span class="math inline">\(57\)</span> seconds.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">data</span>(waiting, <span class="at">package =</span> <span class="st">"hecstatmod"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -459,7 +454,7 @@ f(\boldsymbol{y}) = \prod_{i=1}^n f(y_i) =\prod_{i=1}^n  \lambda^{-1} \exp(- y_i
 \end{align*}\]</span> The sample space is <span class="math inline">\(\mathbb{R}_{+}^n = [0, \infty)^n,\)</span> while the parameter space is <span class="math inline">\((0, \infty).\)</span></p>
 <p>To estimate the scale parameter <span class="math inline">\(\lambda\)</span> and obtain suitable uncertainty measures, we need a <strong>modelling framework</strong>.</p>
 </section>
-<section id="likelihood-1" class="slide level2">
+<section id="likelihood" class="slide level2">
 <h2>Likelihood</h2>
 <div id="def-lik" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Likelihood)</strong></span> The <strong>likelihood</strong> <span class="math inline">\(L(\boldsymbol{\theta})\)</span> is a function of the parameter vector <span class="math inline">\(\boldsymbol{\theta}\)</span> that gives the probability (or density) of observing a sample under a postulated distribution, treating the observations as fixed, <span class="math display">\[\begin{align*}
@@ -553,7 +548,7 @@ i(\lambda) &amp;= \frac{n}{\lambda^{2}} + \frac{2}{n\lambda^{3}}\sum_{i=1}^n \ma
 </section>
 <section id="gradient-based-optimization-newtonraphson-algorithm" class="slide level2">
 <h2>Gradient-based optimization (Newton–Raphson algorithm)</h2>
-<p>If we consider an initial value <span class="math inline">\(\boldsymbol{\theta}^{\dagger},\)</span> then under suitable <strong>regularity conditions</strong>, a first order Taylor series expansion of the score likelihood in a neighborhood <span class="math inline">\(\boldsymbol{\theta}^{\dagger}\)</span> of the MLE <span class="math inline">\(\widehat{\boldsymbol{\theta}}\)</span> gives <span class="math display">\[\begin{align*}
+<p>If we consider an initial value <span class="math inline">\(\boldsymbol{\theta}^{\dagger},\)</span> then under suitable <strong>regularity conditions</strong>, a first order Taylor series expansion of the score in a neighborhood <span class="math inline">\(\boldsymbol{\theta}^{\dagger}\)</span> of the MLE <span class="math inline">\(\widehat{\boldsymbol{\theta}}\)</span> gives <span class="math display">\[\begin{align*}
 \boldsymbol{0}_p &amp; = U(\widehat{\boldsymbol{\theta}}) \stackrel{\cdot}{\simeq} \left.
 \frac{\partial \ell(\boldsymbol{\theta})}{\partial \boldsymbol{\theta}} \right|_{\boldsymbol{\theta} = \boldsymbol{\theta}^{\dagger}} + \left.
 \frac{\partial^2 \ell(\boldsymbol{\theta})}{\partial \boldsymbol{\theta} \partial \boldsymbol{\theta}^\top}\right|_{\boldsymbol{\theta} = \boldsymbol{\theta}^{\dagger}}(\widehat{\boldsymbol{\theta}} - \boldsymbol{\theta}^{\dagger})\\&amp;=U(\boldsymbol{\theta}^{\dagger}) - j(\boldsymbol{\theta}^{\dagger})(\widehat{\boldsymbol{\theta}} - \boldsymbol{\theta}^{\dagger})
@@ -634,7 +629,7 @@ Figure&nbsp;3: Quantile-quantile plots for exponential (left) and Weibull (right
 <h2>Sampling distribution</h2>
 <p>The <strong>sampling distribution</strong> of an estimator <span class="math inline">\(\widehat{\boldsymbol{\theta}}\)</span> is the probability distribution induced by the underlying data (<em>recall that the data inputs are random, so the output is random too</em>).</p>
 <p>Denote the true value of the parameter vector <span class="math inline">\(\boldsymbol{\theta}_0.\)</span> Under suitable regularity conditions, an application of the central limit gives <span class="math display">\[\begin{align*}
-i(\boldsymbol{\theta}_0)^{-1/2}U(\boldsymbol{\theta}_0) \stackrel{\cdot}{\sim}\mathsf{normal}(0,1).
+i(\boldsymbol{\theta}_0)^{-1/2}U(\boldsymbol{\theta}_0) \stackrel{\cdot}{\sim}\mathsf{normal}_p(\boldsymbol{0}_p, \mathsf{I}_p).
 \end{align*}\]</span></p>
 <p>Similar approximations for the sampling distribution of <span class="math inline">\(\widehat{\boldsymbol{\theta}}\)</span> show that <span class="math display">\[\begin{align*}
 \widehat{\boldsymbol{\theta}} \stackrel{\cdot}{\sim} \mathsf{normal}_p\{\boldsymbol{\theta}_0, i^{-1}(\boldsymbol{\theta})\}
@@ -682,7 +677,7 @@ i(\boldsymbol{\theta}_0)^{-1/2}U(\boldsymbol{\theta}_0) \stackrel{\cdot}{\sim}\m
 <h2>Delta-method and transformations</h2>
 <p>The asymptotic normality result can be used to derive standard errors for other quantities of interest.</p>
 <p>If <span class="math inline">\(\phi = g(\boldsymbol{\theta})\)</span>, where <span class="math inline">\(g: \mathbb{R}^p \to \mathbb{R}^k\)</span> for <span class="math inline">\(k \leq p\)</span> is a differentiable function of <span class="math inline">\(\boldsymbol{\theta}\)</span> non-vanishing at <span class="math inline">\(\boldsymbol{\theta}_0\)</span> then <span class="math display">\[\widehat{\phi} \stackrel{\cdot}{\sim}\mathsf{normal}(\phi_0, \nabla \phi^\top i(\boldsymbol{\theta}_0)^{-1} \nabla \phi),\]</span> where <span class="math display">\[\nabla \phi=[\partial \phi/\partial \theta_1, \ldots, \partial \phi/\partial \theta_p]^\top.\]</span></p>
-<p>The variance matrix and the gradient vector are evaluated at the maximum likelihood estimate <span class="math inline">\(\widehat{\boldsymbol{\theta}}.\)</span></p>
+<p>The variance matrix and the jacobian are evaluated at the maximum likelihood estimate <span class="math inline">\(\widehat{\boldsymbol{\theta}}.\)</span></p>
 </section>
 <section id="probability-of-waiting-for-exponential-model." class="slide level2">
 <h2>Probability of waiting for exponential model.</h2>
@@ -703,18 +698,22 @@ i(\boldsymbol{\theta}_0)^{-1/2}U(\boldsymbol{\theta}_0) \stackrel{\cdot}{\sim}\m
 </section>
 <section id="comparison-of-nested-models" class="slide level2">
 <h2>Comparison of nested models</h2>
-<p>We consider a null hypothesis <span class="math inline">\(\mathscr{H}_0\)</span> that imposes restrictions on the possible values of <span class="math inline">\(\boldsymbol{\theta}\)</span> can take, relative to an unconstrained alternative <span class="math inline">\(\mathscr{H}_1.\)</span></p>
-<p>There are two <strong>nested</strong> models: a <em>full</em> model (alternative), and a <em>reduced</em> or null model that is a subset of the full model where we impose <span class="math inline">\(q\)</span> restrictions on the parameters.</p>
-<p>For example, the exponential distribution is a special case of the Weibull distribution if <span class="math inline">\(\alpha=1\)</span>.</p>
+<ul>
+<li><p>We consider a null hypothesis <span class="math inline">\(\mathscr{H}_0\)</span> that imposes restrictions on the possible values of <span class="math inline">\(\boldsymbol{\theta}\)</span> can take, relative to an unconstrained alternative <span class="math inline">\(\mathscr{H}_a.\)</span></p></li>
+<li><p>There are two <strong>nested</strong> models: a <em>full</em> model (alternative), and a <em>reduced</em> or null model that is a subset of the full model where we impose <span class="math inline">\(q\)</span> restrictions on the parameters.</p></li>
+<li><p>For example, the exponential distribution is a special case of the Weibull distribution if <span class="math inline">\(\alpha=1\)</span>.</p></li>
+</ul>
 </section>
 <section id="likelihood-tests" class="slide level2">
 <h2>Likelihood tests</h2>
-<p>The null hypothesis <span class="math inline">\(\mathscr{H}_0\)</span> tested is: `the reduced model is an <strong>adequate simplification</strong> of the full model’ and the likelihood provides three main classes of statistics for testing this hypothesis: these are</p>
+<p>Recall that the null hypothesis <span class="math inline">\(\mathscr{H}_0\)</span> tested is “the reduced model is an <strong>adequate simplification</strong> of the full model”.</p>
+<p>The likelihood provides three main classes of statistics for testing this hypothesis, namely</p>
 <ul>
 <li>likelihood ratio tests statistics, denoted <span class="math inline">\(R,\)</span> which measure the drop in log likelihood (vertical distance) from <span class="math inline">\(\ell(\widehat{\boldsymbol{\theta}})\)</span> and <span class="math inline">\(\ell(\widehat{\boldsymbol{\theta}}_0).\)</span></li>
 <li>Wald tests statistics, denoted <span class="math inline">\(W,\)</span> which consider the standardized horizontal distance between <span class="math inline">\(\widehat{\boldsymbol{\theta}}\)</span> and <span class="math inline">\(\widehat{\boldsymbol{\theta}}_0.\)</span></li>
 <li>score tests statistics, denoted <span class="math inline">\(S,\)</span> which looks at the scaled slope of <span class="math inline">\(\ell,\)</span> evaluated <em>only</em> at <span class="math inline">\(\widehat{\boldsymbol{\theta}}_0\)</span> (derivative of <span class="math inline">\(\ell\)</span>).</li>
 </ul>
+<p>where <span class="math inline">\(\widehat{\boldsymbol{\theta}}_0\)</span> is the MLE with the constraints under the null, and <span class="math inline">\(\widehat{\boldsymbol{\theta}}\)</span> the MLE of the full model.</p>
 </section>
 <section id="visualizing-likelihood-tests" class="slide level2">
 <h2>Visualizing likelihood tests</h2>
@@ -724,13 +723,12 @@ Figure&nbsp;4: Log-likelihood curve and the three likelihood-based tests, namely
 </p></section>
 <section id="likelihood-based-test-statistics" class="slide level2">
 <h2>Likelihood-based test statistics</h2>
-<p>The three main classes of statistics for testing a simple null hypothesis <span class="math inline">\(\mathscr{H}_0: \boldsymbol{\theta}=\boldsymbol{\theta}_0\)</span> against the alternative <span class="math inline">\(\mathscr{H}_a: \boldsymbol{\theta} \neq \boldsymbol{\theta}_0\)</span> are <span class="math display">\[\begin{align*}
-W(\boldsymbol{\theta}_0) &amp;= (\widehat{\boldsymbol{\theta}}-\boldsymbol{\theta}_0)^\top j(\widehat{\boldsymbol{\theta}})(\widehat{\boldsymbol{\theta}}-\boldsymbol{\theta}_0), &amp;&amp;(\text{wald test}) \\
+<p>The three main classes of statistics for testing a simple null hypothesis <span class="math inline">\(\mathscr{H}_0: \boldsymbol{\theta}=\boldsymbol{\theta}_0\)</span> against the alternative <span class="math inline">\(\mathscr{H}_a: \boldsymbol{\theta} \neq \boldsymbol{\theta}_0\)</span> are<sup>1</sup> <span class="math display">\[\begin{align*}
+W(\boldsymbol{\theta}_0) &amp;= (\widehat{\boldsymbol{\theta}}-\boldsymbol{\theta}_0)^\top j(\widehat{\boldsymbol{\theta}})(\widehat{\boldsymbol{\theta}}-\boldsymbol{\theta}_0), &amp;&amp;(\text{Wald}) \\
 R(\boldsymbol{\theta}_0) &amp;= 2 \left\{ \ell(\widehat{\boldsymbol{\theta}})-\ell(\boldsymbol{\theta}_0)\right\}, &amp;&amp;(\text{likelihood ratio})\\
-S(\boldsymbol{\theta}_0) &amp;= U^\top(\boldsymbol{\theta}_0)i^{-1}(\boldsymbol{\theta}_0)U(\boldsymbol{\theta}_0), &amp;&amp; (\text{score test})
-\end{align*}\]</span> where <span class="math inline">\(\widehat{\boldsymbol{\theta}}\)</span> is the maximum likelihood estimate under the alternative and <span class="math inline">\(\boldsymbol{\theta}_0\)</span> is the null value of the parameter vector.</p>
-<p>If <span class="math inline">\(\mathscr{H}_0\)</span> is true, the three test statistics follow asymptotically a <span class="math inline">\(\chi^2_q\)</span> distribution under a null hypothesis <span class="math inline">\(\mathscr{H}_0,\)</span> where the degrees of freedom <span class="math inline">\(q\)</span> are the number of restrictions.</p>
-</section>
+S(\boldsymbol{\theta}_0) &amp;= U^\top(\boldsymbol{\theta}_0)i^{-1}(\boldsymbol{\theta}_0)U(\boldsymbol{\theta}_0). &amp;&amp; (\text{score})
+\end{align*}\]</span> If <span class="math inline">\(\mathscr{H}_0\)</span> is true, the three test statistics follow asymptotically a <span class="math inline">\(\chi^2_q\)</span> distribution under a null hypothesis <span class="math inline">\(\mathscr{H}_0,\)</span> where the degrees of freedom <span class="math inline">\(q\)</span> are the number of restrictions.</p>
+<aside><ol class="aside-footnotes"><li id="fn3"><p>If <span class="math inline">\(q \neq p\)</span>, then we replace <span class="math inline">\(\boldsymbol{\theta}_0\)</span> by <span class="math inline">\(\widehat{\boldsymbol{\theta}}_0\)</span>, optimizing over the remaining unconstrained parameters.</p></li></ol></aside></section>
 <section id="unidimensional-version-of-likelihood-statistics" class="slide level2">
 <h2>Unidimensional version of likelihood statistics</h2>
 <p>For scalar <span class="math inline">\(\theta\)</span> with <span class="math inline">\(q=1,\)</span> signed versions of these statistics exist, <span class="math display">\[\begin{align*}
@@ -905,7 +903,7 @@ Figure&nbsp;7: Signed likelihood root (left) and shifted profile log likelihood 
 Davison, A. C. 2003. <em>Statistical Models</em>. Cambridge University Press.
 </div>
 </div>
-</section></section>
+</section>
 
     </div>
   </div>

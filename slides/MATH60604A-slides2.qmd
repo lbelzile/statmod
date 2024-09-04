@@ -51,12 +51,9 @@ data(waiting, package = "hecstatmod")
 ```
 
 
-# Likelihood  {background-color="#002855"}
-
-
 ## Motivating example
 
-The data `waiting` contain the time in minutes from 17:59 until the next metro train departs from station *Université de Montréal* on the blue line of the Montreal subway, collected over three months (62 week days). 
+The data `waiting` contain the time in seconds from 17:59 until the next metro train departs from station *Université de Montréal* on the blue line of the Montreal subway, collected over three months (62 week days). 
 The observations are positive and range from $`r min(waiting)`$ to $`r max(waiting)`$ seconds. 
 
 ```{r}
@@ -252,7 +249,7 @@ since $\mathsf{E}(Y_i) = \lambda$ and expectation is a linear operator. Both exp
 
 ## Gradient-based optimization (Newton--Raphson algorithm)
 
-If we consider an initial value $\boldsymbol{\theta}^{\dagger},$ then under suitable **regularity conditions**, a first order Taylor series expansion of the score likelihood in a neighborhood $\boldsymbol{\theta}^{\dagger}$ of the MLE $\widehat{\boldsymbol{\theta}}$ gives
+If we consider an initial value $\boldsymbol{\theta}^{\dagger},$ then under suitable **regularity conditions**, a first order Taylor series expansion of the score in a neighborhood $\boldsymbol{\theta}^{\dagger}$ of the MLE $\widehat{\boldsymbol{\theta}}$ gives
 \begin{align*}
 \boldsymbol{0}_p & = U(\widehat{\boldsymbol{\theta}}) \stackrel{\cdot}{\simeq} \left.
 \frac{\partial \ell(\boldsymbol{\theta})}{\partial \boldsymbol{\theta}} \right|_{\boldsymbol{\theta} = \boldsymbol{\theta}^{\dagger}} + \left.
@@ -423,13 +420,14 @@ opt_weibull <- optim(
 # Parameter estimates - MLE
 mle_weibull <- opt_weibull$par
 ```
+
 ## Sampling distribution 
 
 The **sampling distribution** of an estimator $\widehat{\boldsymbol{\theta}}$ is the probability distribution induced by the underlying data (*recall that the data inputs are random, so the output is random too*).
 
 Denote the true value of the parameter vector $\boldsymbol{\theta}_0.$ Under suitable regularity conditions, an application of the central limit gives
 \begin{align*}
-i(\boldsymbol{\theta}_0)^{-1/2}U(\boldsymbol{\theta}_0) \stackrel{\cdot}{\sim}\mathsf{normal}(0,1).
+i(\boldsymbol{\theta}_0)^{-1/2}U(\boldsymbol{\theta}_0) \stackrel{\cdot}{\sim}\mathsf{normal}_p(\boldsymbol{0}_p, \mathsf{I}_p).
 \end{align*}
 
 Similar approximations for the sampling distribution of $\widehat{\boldsymbol{\theta}}$ show that
@@ -488,7 +486,7 @@ If $\phi = g(\boldsymbol{\theta})$, where $g: \mathbb{R}^p \to \mathbb{R}^k$ for
 $$\widehat{\phi} \stackrel{\cdot}{\sim}\mathsf{normal}(\phi_0, \nabla \phi^\top i(\boldsymbol{\theta}_0)^{-1} \nabla \phi),$$
 where $$\nabla \phi=[\partial \phi/\partial \theta_1, \ldots, \partial \phi/\partial \theta_p]^\top.$$ 
 
-The variance matrix and the gradient vector are evaluated at the maximum likelihood estimate $\widehat{\boldsymbol{\theta}}.$
+The variance matrix and the jacobian are evaluated at the maximum likelihood estimate $\widehat{\boldsymbol{\theta}}.$
 
 ## Probability of waiting for exponential model.
 
@@ -511,22 +509,24 @@ V_phi <- dphi(lambda_hat)^2 * V_lambda
 
 ## Comparison of nested models
 
-We consider a null hypothesis $\mathscr{H}_0$ that imposes restrictions on the possible values of $\boldsymbol{\theta}$ can take, relative to an unconstrained alternative $\mathscr{H}_1.$ 
+- We consider a null hypothesis $\mathscr{H}_0$ that imposes restrictions on the possible values of $\boldsymbol{\theta}$ can take, relative to an unconstrained alternative $\mathscr{H}_a.$ 
 
-There are two **nested** models: a *full* model (alternative), and a *reduced* or null model that is a subset of the full model where we impose $q$ restrictions on the parameters.
+- There are two **nested** models: a *full* model (alternative), and a *reduced* or null model that is a subset of the full model where we impose $q$ restrictions on the parameters.
 
-For example, the exponential distribution is a special case of the Weibull distribution if $\alpha=1$.
+- For example, the exponential distribution is a special case of the Weibull distribution if $\alpha=1$.
 
 
 ## Likelihood tests
 
- The null hypothesis $\mathscr{H}_0$ tested is: `the reduced model is an **adequate simplification** of the full model' and the likelihood provides three main classes of statistics for testing this hypothesis: these are
+Recall that the null hypothesis $\mathscr{H}_0$ tested is "the reduced model is an **adequate simplification** of the full model".
+
+The likelihood provides three main classes of statistics for testing this hypothesis, namely  
 
 - likelihood ratio tests statistics, denoted $R,$ which measure the drop in log likelihood (vertical distance) from $\ell(\widehat{\boldsymbol{\theta}})$ and $\ell(\widehat{\boldsymbol{\theta}}_0).$
 - Wald tests statistics, denoted $W,$ which consider the standardized horizontal distance between $\widehat{\boldsymbol{\theta}}$ and $\widehat{\boldsymbol{\theta}}_0.$
 - score tests statistics, denoted $S,$ which looks at the scaled slope of $\ell,$ evaluated *only* at $\widehat{\boldsymbol{\theta}}_0$ (derivative of $\ell$).
 
-
+where $\widehat{\boldsymbol{\theta}}_0$ is the MLE with the constraints under the null, and $\widehat{\boldsymbol{\theta}}$ the MLE of the full model.
 
 ## Visualizing likelihood tests
 
@@ -541,15 +541,15 @@ knitr::include_graphics('fig/02/likelihood_tests.png')
 
 ## Likelihood-based test statistics
 
-The three main classes of statistics for testing a simple null hypothesis $\mathscr{H}_0: \boldsymbol{\theta}=\boldsymbol{\theta}_0$ against the alternative $\mathscr{H}_a: \boldsymbol{\theta} \neq \boldsymbol{\theta}_0$ are 
+The three main classes of statistics for testing a simple null hypothesis $\mathscr{H}_0: \boldsymbol{\theta}=\boldsymbol{\theta}_0$ against the alternative $\mathscr{H}_a: \boldsymbol{\theta} \neq \boldsymbol{\theta}_0$ are^[If $q \neq p$, then we replace $\boldsymbol{\theta}_0$ by $\widehat{\boldsymbol{\theta}}_0$, optimizing over the remaining unconstrained parameters.] 
 \begin{align*}
- W(\boldsymbol{\theta}_0) &= (\widehat{\boldsymbol{\theta}}-\boldsymbol{\theta}_0)^\top j(\widehat{\boldsymbol{\theta}})(\widehat{\boldsymbol{\theta}}-\boldsymbol{\theta}_0), &&(\text{wald test}) \\
+ W(\boldsymbol{\theta}_0) &= (\widehat{\boldsymbol{\theta}}-\boldsymbol{\theta}_0)^\top j(\widehat{\boldsymbol{\theta}})(\widehat{\boldsymbol{\theta}}-\boldsymbol{\theta}_0), &&(\text{Wald}) \\
  R(\boldsymbol{\theta}_0) &= 2 \left\{ \ell(\widehat{\boldsymbol{\theta}})-\ell(\boldsymbol{\theta}_0)\right\}, &&(\text{likelihood ratio})\\
- S(\boldsymbol{\theta}_0) &= U^\top(\boldsymbol{\theta}_0)i^{-1}(\boldsymbol{\theta}_0)U(\boldsymbol{\theta}_0), && (\text{score test})
+ S(\boldsymbol{\theta}_0) &= U^\top(\boldsymbol{\theta}_0)i^{-1}(\boldsymbol{\theta}_0)U(\boldsymbol{\theta}_0). && (\text{score})
 \end{align*}
-where $\widehat{\boldsymbol{\theta}}$ is the maximum likelihood estimate under the alternative and $\boldsymbol{\theta}_0$ is the null value of the parameter vector. 
-
 If $\mathscr{H}_0$ is true, the three test statistics follow asymptotically a $\chi^2_q$ distribution under a null hypothesis $\mathscr{H}_0,$ where the degrees of freedom $q$ are the number of restrictions.
+
+
 
 ## Unidimensional version of likelihood statistics
 
