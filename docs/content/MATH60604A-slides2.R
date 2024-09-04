@@ -8,7 +8,7 @@ data(waiting, package = "hecstatmod")
 # If you get an error message, redownload the 'hecstatmod' package via
 # remotes::install_github("lbelzile/hecstatmod")
 #
-## Histogram of waiting time with rugs for the observations (left)
+## Histogram of waiting time with rugs for the observations
 ggplot(data = data.frame(time = waiting), mapping = aes(x = time)) +
   geom_histogram(bins = 10) +
   geom_rug() +
@@ -57,9 +57,9 @@ gr_nll_weibull <- function(pars, y) {
   shape <- pars[2]
   n <- length(y)
   grad_ll <- c(
-    scale = -n * shape / scale + shape * scale ^ (-shape - 1) * sum(y ^ shape),
+    scale = -n * shape / scale + shape * scale^(-shape - 1) * sum(y^shape),
     shape = n / shape - n * log(scale) + sum(log(y)) -
-      sum(log(y / scale) * (y / scale) ^ shape)
+      sum(log(y / scale) * (y / scale)^shape)
   )
   return(-grad_ll)
 }
@@ -111,12 +111,12 @@ lambda_hat <- mean(waiting)
 phi_hat <- exp(-60 / lambda_hat)
 # Jacobian of the transformation
 dphi <- function(lambda) {
-  60 * exp(-60 / lambda) / (lambda ^ 2)
+  60 * exp(-60 / lambda) / (lambda^2)
 }
 # Variance of the exponential scale
-V_lambda <- lambda_hat ^ 2 / length(waiting)
+V_lambda <- lambda_hat^2 / length(waiting)
 # Variance of the Pr(Y>60) - via delta-method
-V_phi <- dphi(lambda_hat) ^ 2 * V_lambda
+V_phi <- dphi(lambda_hat)^2 * V_lambda
 # Extract standard error and print
 (se_phi <- sqrt(V_phi))
 
@@ -183,7 +183,7 @@ ggplot() +
 # Calculate Wald statistic for alpha=1
 wald_exp <- (mle_weibull[2] - 1) / se_weibull[2]
 # Compute p-value
-pchisq(wald_exp ^ 2, df = 1, lower.tail = FALSE)
+pchisq(wald_exp^2, df = 1, lower.tail = FALSE)
 # p-value less than 5%, reject null
 # Obtain 95% confidence intervals
 mle_weibull[2] + qnorm(c(0.025, 0.975)) * se_weibull[2]
@@ -247,7 +247,7 @@ lrt_ub <- uniroot(
 
 # Conditional MLE for lambda
 lambda_alpha <- function(alpha, y = waiting) {
-  (mean(y ^ alpha)) ^ (1 / alpha)
+  (mean(y^alpha))^(1 / alpha)
 }
 # Profile log likelihood for alpha
 prof_alpha_weibull <- function(par, y = waiting) {
