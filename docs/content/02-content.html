@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -246,17 +266,47 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><a href="../exercises/index.html">Exercise sheet 3</a></li>
 </ul>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">S</th>
+<th style="text-align: left;">Content</th>
+<th style="text-align: center;">PDF</th>
+<th style="text-align: center;">Videos</th>
+<th style="text-align: center;">R</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Likelihood-based inference</td>
+<td style="text-align: center;"><a href="https://lbelzile.github.io/MATH60604A-slides/MATH60604A_w3_likelihood.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
+<td style="text-align: center;"><a href="https://youtu.be/IO3et3Uk4mQ"><span style="color: red;"><i class="fab fa-youtube fa-lg"></i></span></a></td>
+<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/code/MATH60604A_3_likelihood.R"><span style="color: #276dc2;"><i class="fab fa-r-project fa-lg"></i></span></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </section>
 <section id="additional-readings" class="level3">
 <h3 class="anchored" data-anchor-id="additional-readings">Additional readings</h3>
 <ul>
-<li><span class="citation" data-cites="Davison:2008">@Davison:2008</span>, Chapter 4</li>
+<li><a href="https://rpsychologist.com/d3/likelihood/"><em>Understanding Maximum Likelihood</em> by Kristoffer Magnusson</a></li>
+<li><span class="citation" data-cites="Davison:2003">Davison (<a href="#ref-Davison:2003" role="doc-biblioref">2003</a>)</span>, Chapter 4</li>
 </ul>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Davison:2003" class="csl-entry" role="listitem">
+Davison, A. C. (2003). <em>Statistical models</em>. Cambridge University Press.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

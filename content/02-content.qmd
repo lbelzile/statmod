@@ -36,7 +36,12 @@ title: "Likelihood-based inference"
 
 - [Exercise sheet 3](../exercises/index.qmd)
 
-### Additional readings
+```{r, echo=FALSE, eval=TRUE, message=FALSE}
+source("../files/get_slide_data.R")
+knitr::kable(sldat[which(sldat$S %in% c("3")),-3], align = "llccccc", row.names = FALSE)
+```
 
-- @Davison:2008, Chapter 4
+### Additional readings
+- [*Understanding Maximum Likelihood* by Kristoffer Magnusson](https://rpsychologist.com/d3/likelihood/)
+- @Davison:2003, Chapter 4
 

@@ -13,6 +13,8 @@ project:
     - "slides/libs/"
     - "slides/partials/"
     - "slides/*_files/"
+bibliography: files/bib/math60604.bib
+csl: files/bib/apa.csl
 
 # See https://quarto.org/docs/projects/code-execution.html#freeze
 execute:

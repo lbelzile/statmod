@@ -1,0 +1,15 @@
+{
+  "hash": "299ff4856e48dc392094b4ab1e015fb4",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Likelihood-based inference\"\n---\n\n\n\n### Learning objectives\n\n\n* Learn the terminology associated with likelihood-based inference\n* Derive closed-form expressions for the maximum likelihood estimator in simple models\n* Using numerical optimization, obtain parameter estimates and their standards errors using maximum likelihood\n* Use large-sample properties of the likelihood to derive confidence intervals and tests\n* Use information criteria for model selection\n\n### Content\n\n\n- Course notes: chapter [3 (Likelihood-based inference)](https://lbelzile.github.io/math60604a/likelihood.html)\n\n\n### In class\n\n- [Slides](../slides/MATH60604A-slides2.html) ([pdf](../slides/MATH60604A-slides2.pdf) and [code](MATH60604A-slides2.R))\n\n\n### Slides\n\n\n<p class=\"text-center\"><a class=\"btn btn-success btn-lg\" target=\"_blank\" href=\"../slides/MATH60604A-slides2.html\">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class=\"btn btn-success btn-lg\" target=\"_blank\" href=\"../slides/MATH60604A-slides2.pdf\" role=\"button\">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>\n\n<div class=\"ratio ratio-16x9\">\n<iframe class=\"slide-deck\" src=\"../slides/MATH60604A-slides2.html\"></iframe>\n</div>\n\n\n### After class\n\n- [Exercise sheet 3](../exercises/index.qmd)\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n\n\n|S  |Content                    |                                    PDF                                     |                                Videos                                 |                                      R                                      |\n|:--|:--------------------------|:--------------------------------------------------------------------------:|:---------------------------------------------------------------------:|:---------------------------------------------------------------------------:|\n|3  |Likelihood-based inference |[<span style='color: #4b5357;'><i class='fas fa-file-pdf fa-lg'></i></span>](https://lbelzile.github.io/MATH60604A-slides/MATH60604A_w3_likelihood.pdf)|[<span style='color: red;'><i class='fab fa-youtube fa-lg'></i></span>](https://youtu.be/IO3et3Uk4mQ)|[<span style='color: #276dc2;'><i class='fab fa-r-project fa-lg'></i></span>](https://raw.githubusercontent.com/lbelzile/statmod/main/files/code/MATH60604A_3_likelihood.R)|\n\n\n:::\n:::\n\n\n\n### Additional readings\n- [*Understanding Maximum Likelihood* by Kristoffer Magnusson](https://rpsychologist.com/d3/likelihood/)\n- @Davison:2003, Chapter 4\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
