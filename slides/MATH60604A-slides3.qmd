@@ -1,0 +1,95 @@
+---
+title: "Statistical modelling"
+author: "Léo Belzile, HEC Montréal"
+subtitle: "03. Linear models"
+date: today
+date-format: YYYY
+eval: true
+cache: true
+echo: true
+standalone: true
+bibliography: MATH60604A.bib
+format:
+  revealjs:
+    slide-number: true
+    preview-links: auto
+    code-block-height: 750px
+    theme: [simple, hecmontreal.scss]
+    title-slide-attributes:
+      data-background-color: "#002855"
+    logo: "fig/logo_hec_montreal_bleu_web.png"
+    width: 1600
+    height: 900
+---
+
+
+```{r}
+#| eval: true
+#| include: false
+#| cache: false
+hecbleu <- c("#002855")
+fcols <- c(gris = "#888b8d",
+           bleu = "#0072ce",
+           aqua = "#00aec7",
+           vert = "#26d07c",
+           rouge = "#ff585d",
+           rose = "#eb6fbd",
+           jaune = "#f3d03e")
+pcols <- c(gris = "#d9d9d6",
+           bleu = "#92c1e9",
+           agua = "#88dbdf",
+           vert = "#8fe2b0",
+           rouge = "#ffb1bb",
+           rose = "#eab8e4",
+           jaune = "#f2f0a1")
+library(ggplot2)
+theme_set(theme_classic())
+library(patchwork)
+knitr::opts_chunk$set(fig.retina = 3, collapse = TRUE)
+options(digits = 3, width = 75)
+```
+
+
+## What is in a model?
+
+A stochastic model typically combines
+
+- a distribution for the data
+- a formula linking the parameters or the mean of a response variable $Y$ conditional on explanatory variables $\mathbf{X}$
+
+Models are "golem" for obtaining answers to our questions.
+
+
+## Linear model
+
+A linear model is a model for the mean of a **response variable** $Y_i$ of a random sample of size $n$ as a **linear function** of observed **explanatories** (also called predictors, regressors or covariates) $X_1, \ldots, X_p$,
+\begin{align}
+\underset{\text{conditional mean}}{\mathsf{E}(Y_i \mid \boldsymbol{X}_i=\boldsymbol{x}_i)}=\mu_i=\underset{\substack{\text{linear combination (weighted sum)}\\ \text{of explanatory variables}}}{\beta_0 + \beta_1x_{i1} + \cdots + \beta_p x_{ip}}\equiv \mathbf{x}_i\boldsymbol{\beta}.
+\end{align}
+where 
+
+- $\mathbf{x}_i = (1, x_{i1}, \ldots, x_{ip})$ is a $(p+1)$ row vector containing the explanatories of observation $i$
+- $\boldsymbol{\beta} = (\beta_0, \ldots, \beta_p)^\top$ is a $p+1$ column vector of coefficients for the mean.
+
+## Alternative formulation
+
+For observation $i$, we can write
+\begin{align*}
+\underset{\text{observation}\vphantom{\mu_i}}{Y_i} = \underset{\text{mean } \mu_i}{\vphantom{Y_i}\mathbf{x}_i\boldsymbol{\beta}} + \underset{\text{error term}\vphantom{\mu_i}}{\vphantom{Y_i}\varepsilon_i},
+\end{align*}
+where $\varepsilon_i$ are independent additive error terms satisfying:
+
+- $\mathsf{E}(\varepsilon_i \mid \mathbf{x}_i) = 0$; we fix the expectation of $\varepsilon_i$ to zero to encode the fact we do not believe the model is systematically off.
+- $\mathsf{Var}(\varepsilon_i \mid \mathbf{x}_i) = \sigma^2$;  the variance term $\sigma^2$ is included to take into account the fact that no exact linear relationship links $\mathbf{x}_i$ and $Y_i$, or that measurements of $Y_i$ are subject to error. 
+
+
+## Comments on formulation
+
+- The model formulation is **conditional** on the values of the observed explanatories; this amounts to treating the $p$ explanatory variables $X_1, \ldots, X_p$  as fixed quantities (non-random, or known in advance).
+- The regression coefficients $\boldsymbol{\beta}$ is the same for all observations, but the vector of explanatories $\mathbf{x}_i$ may change from one observation to the next.
+- The model is **linear** in the coefficients $\beta_0, \ldots, \beta_p$, not in the explanatories.
+
+## Normal linear model
+
+## References
+
