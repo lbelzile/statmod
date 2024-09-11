@@ -57,12 +57,17 @@ A stochastic model typically combines
 - a distribution for the data
 - a formula linking the parameters or the mean of a response variable $Y$ conditional on explanatory variables $\mathbf{X}$
 
-Models are "golem" for obtaining answers to our questions.
+Models are "golems" for obtaining answers to our questions.
 
+## Use of statistical models
+
+1. Evaluate the effects of explanatory variables on the mean of a response variable.
+2. Test for effects of experimental manipulations or other explanatory variables on a response.
+3. Predict the response for new combinations of explanatories.
 
 ## Linear model
 
-A linear model is a model for the mean of a **response variable** $Y_i$ of a random sample of size $n$ as a **linear function** of observed **explanatories** (also called predictors, regressors or covariates) $X_1, \ldots, X_p$,
+A linear model is a model for the mean of a continuous **response variable** $Y_i$ of a random sample of size $n$ as a **linear function** of observed **explanatories** (also called predictors, regressors or covariates) $X_1, \ldots, X_p$,
 \begin{align}
 \underset{\text{conditional mean}}{\mathsf{E}(Y_i \mid \boldsymbol{X}_i=\boldsymbol{x}_i)}=\mu_i=\underset{\substack{\text{linear combination (weighted sum)}\\ \text{of explanatory variables}}}{\beta_0 + \beta_1x_{i1} + \cdots + \beta_p x_{ip}}\equiv \mathbf{x}_i\boldsymbol{\beta}.
 \end{align}
@@ -83,13 +88,652 @@ where $\varepsilon_i$ are independent additive error terms satisfying:
 - $\mathsf{Var}(\varepsilon_i \mid \mathbf{x}_i) = \sigma^2$;  the variance term $\sigma^2$ is included to take into account the fact that no exact linear relationship links $\mathbf{x}_i$ and $Y_i$, or that measurements of $Y_i$ are subject to error. 
 
 
+The normal linear model specifies that $$Y_i \mid \boldsymbol{X}_i=\boldsymbol{x}_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2).$$
+
 ## Comments on formulation
 
 - The model formulation is **conditional** on the values of the observed explanatories; this amounts to treating the $p$ explanatory variables $X_1, \ldots, X_p$  as fixed quantities (non-random, or known in advance).
 - The regression coefficients $\boldsymbol{\beta}$ is the same for all observations, but the vector of explanatories $\mathbf{x}_i$ may change from one observation to the next.
 - The model is **linear** in the coefficients $\beta_0, \ldots, \beta_p$, not in the explanatories.
 
-## Normal linear model
+## Notation
+
+
+To simplify the notation, we aggregate observations using vector-matrix notation as
+\begin{align*}
+\boldsymbol{Y} =
+ \begin{pmatrix}
+  Y_1 \\
+  Y_2 \\
+  \vdots \\
+  Y_n
+ \end{pmatrix},
+ \;
+% \boldsymbol{\varepsilon} =
+%\begin{pmatrix}
+%  \varepsilon_1 \\
+%  \varepsilon_2 \\
+%  \vdots \\
+%  \varepsilon_n
+% \end{pmatrix},
+ \;
+\mathbf{X} = \begin{pmatrix}
+1 & x_{11} & x_{12} & \cdots & x_{1p} \\
+1 & x_{21} & x_{22} & \cdots & x_{2p} \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & x_{n1} & x_{n2} & \cdots & x_{np}
+\end{pmatrix} , \;
+\boldsymbol{\beta} =
+ \begin{pmatrix}
+ \beta_0 \\
+  \beta_1 \\
+  \beta_2 \\
+  \vdots \\
+  \beta_p
+ \end{pmatrix}
+\end{align*}
+Notably, we use $\mathbf{X}$ for the $n \times (p+1)$ **model matrix** (also sometimes design matrix) concatenating a column of ones and the $p$ column vectors of explanatories.
+
+The $i$th row of $\mathbf{X}$ is denoted $\mathbf{x}_i$.
+
+## Motivating example 1 --- Consistency of product description  {.smaller}
+
+:::: {.columns}
+
+::: {.column width="40%"}
+Study 1 of @Lee.Choi:2019 (dataset `LC19_S1`, package `hecedsm`) considered descriptors and the impact on the perception of a product on the discrepancy between the text description and the image. 
+
+
+In their first experience, a set of six toothbrushes is sold, but the image shows either a pack of six, or a single one).
+
+
+The authors also measured the prior familiarity with the brand of the item. Participants were recruited using an online panel.
+
+:::
+
+
+::: {.column width="60%"}
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: '100%'
+knitr::include_graphics("fig/03/LeeChoi_toothbrush.jpg")
+```
+
+Variables include
+
+- `prodeval`: average product evaluation score of three 9 point scales (higher values are better)
+- `familiarity`: Likert scale from 1 to 7 for brand familiarity
+- `consistency`: image-text groups, either `consistent` or `inconsistent`
+:::
+
+::::
+
+## Motivating example 2 -- Teaching to read {.smaller}
+
+The `BSJ92` dataset in package `hecedsm` contains the results of an experimental study by @Baumann:1992 on the effectiveness of different reading strategies on understanding of children. 
+
+
+> Sixty-six fourth-grade students were randomly assigned to one of three experimental groups: (a) a Think-Aloud (TA) group, in which students were taught various comprehension monitoring strategies for reading stories (e.g., self-questioning, prediction, retelling, rereading) through the medium of thinking aloud; (b) a Directed Reading-Thinking Activity (DRTA) group, in which students were taught a predict-verify strategy for reading and responding to stories; or (c) a Directed Reading Activity (DRA) group, an instructed control, in which students engaged in a noninteractive, guided reading of stories.
+
+Variables include
+
+- `group`: factor for experimental group, one of directed reading-thinking activity (DRTA), think-aloud (TA) and directed reading group (DR)
+- `pretest1` score (out of 16) on pretest for the error detection task
+- `posttest1` score (out of 16) on an error detection task
+
+## Motivating example 3 --- College salary
+
+The `college` dataset from `hecstatmod`  contains observational data collected in a college in the United States. The goal of the administration was to investigate potential gender inequality in the salary of faculty members. 
+
+
+The data contains the following variables:
+
+-   `salary`: nine-month salary of professors during the 2008--2009 academic year (in thousands USD).
+-   `rank`: academic rank of the professor (`assistant`, `associate` or `full`).
+-   `field`: categorical variable for the field of expertise of the professor, one of `applied` or `theoretical`.
+-   `sex`: binary indicator for sex, either `man` or `woman`.
+-   `service`: number of years of service in the college.
+-   `years`: number of years since PhD.
+
+
+## 6. Motivating example 3 --- Suggesting amounts for donations
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Study 1 of @Moon.VanEpps:2023 considers proportion of donators to a charity. Participants in the online panel were provided with an opportunity to win 25$ and donate part of this amount to a charity of their choosing. The data provided include only people who did not exceed this amount and indicated donating a non-zero amount.
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: '100%'
+knitr::include_graphics("fig/01/Moon_VanEpps-giving.png")
+```
+
+Variables include 
+
+- `before`: did people donate before to this charity? 0 for no, 1 for yes.
+- `condition`: factor for the experimental condition, either an `open-ended` amount or a suggested `quantity`
+- `amount`: amount of proposed donation, `NA` if the person declined to donate
+
+:::
+
+::::
+
+## Exploratory data analysis
+
+Exploratory data analysis (EDA) is an iterative procedure by which we query the data, using auxiliary information, summary statistics and data visualizations, to better inform our modelling. 
+
+It is useful to get a better understanding of 
+
+- the features of the data (sampling frame, missing values, outliers) 
+- the nature of the observations, whether responses or explanatories
+- the relationship between them
+
+
+See [Chapter 11 of Alexander (2023)](https://tellingstorieswithdata.com/11-eda.html) for examples.
+
+
+## Checklist for EDA
+
+Check that 
+
+- categorical variables are properly code as factors.
+- missing values are properly declared as such using `NA` (strings, `999`, etc.)
+- there is no missingness patterns (`NA` for some logical values)
+- there are enough modalities of each level of categorical variables
+- there is no explanatory variable derived from the response variable.
+- the subset of observations used for statistical analysis is adequate.
+- there are no anomalies or outliers that would distort the results.
+
+## Model matrix of Example 1
+
+Consider a linear model for the average product evaluation score, `prodeval`, as a function of the familiarity of the brand and the experimental factor `consistency`.
+
+
+```{r}
+#| eval: true
+#| echo: true
+data(LC19_S1, package = "hecedsm")
+str(LC19_S1)
+length(unique(LC19_S1$prodeval))
+```
+
+ 
+The `prodeval` response is heavily discretized, with only 19 unique values ranging between 2.33 and 9.
+
+## Model matrix for Example 1
+
+Product `consistency` is coded `0` for consistent image/text descriptions and `1` if inconsistent. 
+
+```{r}
+#| eval: true
+#| echo: true
+modmat <- model.matrix(
+     ~ familiarity + consistency,
+     data = LC19_S1)
+tail(modmat, n = 5L) # first five lines
+dim(modmat) # dimension of the model matrix
+```
+
+## EDA for the `college` data of Example 3
+
+Salary increases with years of service, there is a more heterogeneity in the salary of higher ranked professors.
+
+```{r}
+#| label: fig-edacollege
+#| eval: true
+#| echo: false
+#| out-width: '100%'
+#| fig-width: 14
+#| fig-height: 4
+#| fig-cap: 'Salaries of professors
+#|   as a function of the number of years of service and the academic ranking'
+data(college, package = "hecstatmod")
+p1 <- ggplot(college, aes(y = salary, x = rank)) +
+  geom_boxplot() +
+  xlab("academic ranking") +
+  ylab("salary (in thousands USD)")
+p2 <- ggplot(college, aes(x = service, y = salary, col = sex)) +
+  geom_point() +
+  facet_wrap(~ rank, scales = "free") +
+  MetBrewer::scale_color_met_d("Hiroshige") +
+  xlab("years of service") +
+  ylab("salary (in thousands USD)") +
+  theme(legend.position = "bottom")
+library(patchwork)
+p1 + p2 + plot_layout(width = c(1,3))
+```
+
+Logically, assistant professors are either promoted or kicked out after at most 6 years according to the data. The limited number of years prevents large variability for their salaries.
+
+
+Variables `years` and `service`, are strongly correlated with a correlation of `r with(hecstatmod::college, cor(years, service))`.
+
+## EDA for the `college` data of Example 3
+
+Note the much smaller number of women in the sample: this will impact our power to detect differences between sex. A contingency table of sex and academic rank can be useful to see if the proportion of women is the same in each rank: women represent `r round(100*11/(56+11),0)`\% of assistant professors and `r round(100*10/(54+10),0)`\% of associate profs, but only `r round(100*18/(248+18),0)`\% of full professors and these are better paid on average.
+
+```{r}
+#| label: tableaucontingence
+#| eval: true
+#| echo: false
+#| fig-align: center
+knitr::kable(table(college$sex, college$rank),
+             caption = "Contingency table of the number of prof in the college by sex and academic rank.",
+             booktabs = TRUE)
+```
+
+## EDA for example 4 {.smaller}
+
+```{r}
+data(MV23_S1, package = "hecedsm")
+str(MV23_S1)
+summary(MV23_S1)
+```
+
+
+If we include `amount` as response variable, the 235 missing observations will be removed.
+
+- This is okay if we want to compare the average amount of people who donated
+- We need to transform `NA`s to zeros otherwise.
+
+The binary variables `donate` and `before` are both factors encoded as `0`/`1`.
+
+
+## What explanatories?
+
+In **experimental designs**, only the variables experimentally manipulated (random assignment to groups) are needed.
+
+- additional concomitant covariates added if they are correlated with the response to increase power (e.g., pre-test for @Baumann:1992, which gives a measure of the individual student ability).
+
+In observational settings, we need a model to account for potential confounders.
+
+## What explanatories
+
+Continuous variables typically included as linear terms (first-order approximation if the response $Y$ is of the form $\mathsf{E}(Y \mid \boldsymbol{X}) = f(\boldsymbol{X})$ for $f$ sufficiently smooth.
+
+- More complex functions can be included! But beware of the interpretation.
+
+
+Categorical variables (as `factor`) with $K$ levels are cast into a series of $K-1$ **dummy** variables.
+
+
+
+
+
+## Parameter interpretation
+
+
+In linear regression, the parameter $\beta_j$ measures the effect of the variable $X_j$ on the mean response variable $\mathsf{E}(Y \mid \boldsymbol{X})$ while controlling for all other variables in the model.
+
+- For every one unit increase in $X_j$, $Y$ increases on average by $\beta_j$ when all other variables are held constant. 
+\begin{align*}
+\beta_1 &= \mathsf{E}(Y \mid X_1=x_1+1,X_2=x_2, \ldots, X_p=x_p) \\
+& \qquad \qquad - \mathsf{E}(Y \mid X_1=x_1,X_2=x_2,\ldots,X_p=x_p) \\
+&= \left\{\beta_1 (x_1+1) + \beta_2 x_2 + \cdots \beta_p x_p \right\} \\
+& \qquad \qquad -\left\{\beta_1 x_1 + \beta_2 x_2 + \cdots \beta_p x_p \right\}
+\end{align*}
+
+The coefficient $\beta_j$ is the **marginal** effect of $X_j$ after all the other variables have been included in the model, $$\beta_j = \partial \mathsf{E}(Y \mid \boldsymbol{X})/ \partial X_j.$$ 
+
+
+## Interpretation of the intercept
+
+The mean model specification is
+\begin{align*}
+\mathsf{E}(Y_i \mid \boldsymbol{X}_i = \boldsymbol{x}_i) = \beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}.
+\end{align*}
+The **intercept** $\beta_0$ represents the mean value of $Y$ when **all** of the explanatory variables values are set to zero, $\boldsymbol{x}_i=\boldsymbol{0}_p$.
+\begin{align*}
+\beta_0 &= \mathsf{E}(Y \mid X_1=0,X_2=0,\ldots,X_p=0) \\
+&= \beta_0 + \beta_1 \times 0 + \beta_2 \times 0 + \cdots + \beta_p \times 0
+\end{align*}
+Of course, it is possible that this interpretation does not make sense in the context of the study. Centering continuous covariates (so that their sample mean is zero) makes the intercept more interpretable.
+
+
+## Linear models with a single binary variable
+
+Consider for example a linear model for the data from @Moon.VanEpps:2023 that includes the `amount` (in dollars, from 0 for people who did not donate, up to 25 dollars).
+
+The equation of the simple linear model that includes the binary variable `condition` is 
+\begin{align*}
+\mathsf{E}(\texttt{amount} \mid \texttt{condition})&= \beta_0 + \beta_1 \mathbf{1}_{\texttt{condition}=\texttt{quantity}}.
+\\&= \begin{cases}
+\beta_0, & \texttt{condition}=0, \\
+\beta_0 + \beta_1 & \texttt{condition}=1.
+\end{cases}
+\end{align*}
+
+- The intercept $\beta_0$ is the average of the control group
+- The average of the treatment group is $\beta_0 + \beta_1 = \mu_1$ and
+- $\beta_1=\mu_1-\mu_0$ represents the difference between the average donation amount of people given `open-ended` amounts and those who are offered suggested amounts (`quantity`) 
+
+## Simple linear regression with a binary explanatory
+
+```{r}
+#| label: fig-donation-moon
+#| eval: true
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Simple linear model for the `MV23_S1` data using the binary variable `condition` as explanatory with half-violin and jittered scatterplots. Circles indicate the sample means.
+#|   are realistic.'
+data("MV23_S1", package = "hecedsm")
+MV23_S1 <- MV23_S1 |>
+  dplyr::mutate(amount2 = ifelse(is.na(amount), 0, amount),
+                condbin = ifelse(condition == "quantity",1,0))
+coefs <- coef(lm(data = MV23_S1, amount2 ~ condbin))
+ggplot(data = MV23_S1, 
+   aes(x = condbin, y = amount2, group = condition)) +
+  see::geom_violindot(aes(col = condition), position_dots = position_jitter(width = 0.05)) +
+  geom_abline(intercept = coefs[1], slope = coefs[2]) +
+   scale_x_continuous(breaks = 0:1,
+                     limits = c(-0.1,1.5),
+                     labels = 0:1) +
+  theme(legend.position = "inside", 
+        legend.position.inside = c(.95, .95),
+        legend.justification = c("right", "top")) +
+  labs(x = "condition", y = "amount (in dollars)") +
+  stat_summary(fun = mean, aes(col = condition))
+```
+
+
+Even if the linear model defines a line, the latter is only meaningful when evaluated at $0$ or $1$
+
+
+Data are heavily discretized, with lots of ties and zeros, but the sample size $(n=`r nrow(MV23_S1)`$ is large.
+
+## Quadratic curve for the automobile data
+
+We consider a linear regression model for the fuel autonomy of cars as a function of the power of their motor (measured in horsepower) from the `auto` dataset. The postulated model,
+\begin{align*}
+\texttt{mpg}_i = \beta_0 + \beta_1 \texttt{horsepower}_i + \beta_2 \texttt{horsepower}_i^2 + \varepsilon_i,
+\end{align*}
+ includes a quadratic term. 
+ 
+ 
+The marginal effect of an increase of one unit in `horsepower` is $\beta_1 + 2\beta_2 \texttt{horsepower}$, which depends on the value of the explanatory.
+
+## Linear model with quadratic curve
+
+```{r}
+#| label: fig-autoquad2d
+#| echo: false
+#| eval: true
+#| fig-cap: Linear regression models for the fuel autonomy of cars as a function of motor power.
+data(auto, package = "hecstatmod")
+hecblue <- rgb(red = 0, green = 60, blue = 113, max = 255)
+mod <- lm(mpg ~ horsepower + I(horsepower^2),  data = auto)
+ggplot(data = auto, aes(x = horsepower, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = "y ~ x", se = FALSE, col = "gray") +
+  labs(x = "horsepower",
+       y = "fuel autonomy (in miles per US gallon)") +
+      geom_line(data = data.frame(horsepower = auto$horsepower, fitted = mod$fitted),
+                aes(horsepower, fitted), show.legend = FALSE)
+```
+
+## Discretization of continuous covariates
+
+We can always transform a continuous variable into a categorical one.
+
+- it allows one to fit more flexible functional relations between $X$ and $Y$
+- at the cost of additional coefficients.
+
+
+```{r}
+#| label: fig-auto-discre
+#| echo: false
+#| eval: true
+#| fig-cap: Piecewise-linear model for the fuel autonomy of cars as a function of motor power.
+hp_cut <- with(auto, cut(horsepower, 
+              breaks = c(0, quantile(horsepower, probs = c(0.2, 0.4, 0.6, 0.8)), 300)))
+mod <- lm(mpg ~ hp_cut, data = auto)
+hp_seq <- seq(50, 250, by = 0.1)
+cut_seq <- cut(hp_seq, breaks = c(0, quantile(auto$horsepower, probs = c(0.2, 0.4, 0.6, 0.8)), 300))
+pred_seq <- c(model.matrix(~cut_seq) %*% coef(mod))
+ggplot() +
+  geom_point(data = auto, aes(x = horsepower, y = mpg)) +
+   geom_line(
+     data = data.frame(
+        horsepower = hp_seq, 
+        fitted = pred_seq),
+    mapping = aes(x = horsepower, y = fitted), 
+    show.legend = FALSE) + 
+  labs(x = "horsepower",
+       y = "fuel autonomy (in miles per US gallon)") 
+```
+
+
+## Dummy coding for categorical variables
+
+Consider the @Baumann:1992 study and the sole inclusion of the `group` variable. The data are ordered by group: the first 22 observations are for group `DR`, the 22 next ones for group `DRTA` and the last 22 for `TA`. If we fit a model with `group` as categorical variables
+
+```{r}
+#| eval: true
+#| echo: true
+data(BSJ92, package = "hecedsm")
+class(BSJ92$group) # Check that group is a factor
+levels(BSJ92$group) # First level shown is reference
+# Print part of the model matrix 
+# (three individuals from different groups)
+model.matrix(~ group, data = BSJ92)[c(1,23,47),]
+# Compare with levels of factors recorded
+BSJ92$group[c(1,23,47)]
+```
+
+
+## ANOVA
+
+The mean model specification is $$\mathsf{E}(Y \mid \texttt{group})= \beta_0 + \beta_1\mathbf{1}_{\texttt{group}=\texttt{DRTA}} + \beta_2\mathbf{1}_{\texttt{group}=\texttt{TA}}.$$
+Since the variable `group` is categorical with $K=3$ levels, we need $K-1 = 2$ dummies.
+
+
+With the default **treatment** parametrization, we obtain
+
+-  $\mathbf{1}_{\texttt{group}=\texttt{DRTA}}=1$  if `group=DRTA` and zero otherwise.
+-  $\mathbf{1}_{\texttt{group}=\texttt{TA}}=1$ if `group=TA` and zero otherwise.
+
+Because the model includes an intercept and the model ultimately describes three group averages, we only need two additional variables. 
+
+## Categorical variables
+
+With the treatment parametrization, the group mean of the reference group equals the intercept coefficient, $\mu_{\texttt{DR}}=\beta_0$, 
+```{r}
+#| eval: true
+#| echo: false
+#| label: tbl-dummies-tr
+#| tbl-cap: "Parametrization of dummies  for a categorical variable with the default treatment contrasts."
+modmat_tr <- model.matrix(
+    ~ group, 
+    data = BSJ92)[c(1,23,47),]
+rownames(modmat_tr) <- BSJ92$group[c(1,23,47)]
+knitr::kable(modmat_tr, booktabs = TRUE, row.names = TRUE)
+```
+
+## Parameter interpretation
+
+When `group`=`DR` (baseline), both indicator variables `groupDRTA` and `groupTA` are zero. The average in each group is 
+
+- $\mu_{\texttt{DR}} = \beta_0$, 
+- $\mu_{\texttt{DRTA}}=\beta_0 + \beta_1$ and
+- $\mu_{\texttt{TA}} = \beta_0 + \beta_2$. 
+
+We thus find that $\beta_1$ is the difference in mean between group `DRTA` and group `DR`, and similarly $\beta_2=\mu_{\texttt{TA}}- \mu_{\texttt{DR}}$. 
+
+
+## Parameter interpretation {.smaller}
+
+```{r}
+# Fit a linear regression
+linmod <- lm(
+   posttest1 ~ pretest1 + group, 
+   data = BSJ92 |> 
+      dplyr::mutate( # mean-center pretest result
+        pretest1 = pretest1 - mean(pretest1)))
+coef(linmod) # Mean model coefficients
+```  
+
+- For each point score on the pre-test, the post-test score increases by `r as.numeric(coef(linmod)[1])` marks regardless of the group. 
+- The `DRTA` group has an average which is `r as.numeric(coef(linmod)[3])` higher than that of people with the same pre-test score from the baseline `DR` group.
+- The `TA` groups, *ceteris paribus* score  `r as.numeric(coef(linmod)[4])` points higher on average than those of the `DR` group.
+- Because we centered the continuous covariate `pretest1`, the intercept $\beta_0$ is the average post-test score of a person from the `DR` group who scored the overall average of all 66 students in the pre-test.
+
+## Parameter estimation
+
+
+Consider a model matrix $\mathbf{X}$ and a linear model formulation $\mathsf{E}(Y_i) = \mathbf{x}_i\boldsymbol{\beta}$.
+
+The linear model includes
+
+- $p+1$ mean parameters $\boldsymbol{\beta}$ and 
+- a standard deviation $\sigma$. 
+
+## Ordinary least squares problem
+
+We can try to find the parameter vector $\boldsymbol{\beta} \in \mathbb{R}^{p+1}$ that minimizes the mean squared error, i.e., the average squared vertical distance between the fitted values $\widehat{y}_i=\mathbf{x}_i\widehat{\boldsymbol{\beta}}$ and the observations $y_i$.
+
+
+The optimization problem is
+\begin{align*}
+\widehat{\boldsymbol{\beta}}&=\mathrm{arg min}_{\boldsymbol{\beta} \in \mathbb{R}^{p+1}}\sum_{i=1}^n (y_i-\mathbf{x}_i\boldsymbol{\beta})^2
+\\&=(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta}).
+\end{align*}
+
+
+## Ordinary least squares estimator
+
+If the $n \times p$ matrix  $\mathbf{X}$ is full-rank, meaning that it's columns are not linear combinations of one another, the quadratic form $\mathbf{X}^\top \mathbf{X}$ is invertible and we obtain the solution to the least square problems, 
+$$
+\widehat{\boldsymbol{\beta}} = \left(\mathbf{X}^\top \mathbf{X}\right)^{-1}\mathbf{X}^\top \boldsymbol{y}.
+$$ {#eq-ols}
+This is the **ordinary least squares estimator** (OLS). The explicit solution means that no numerical optimization is needed for linear models.
+
+## Orthogonal decomposition
+
+
+- The vector of fitted values $\widehat{\boldsymbol{y}} =\mathbf{X} \widehat{\boldsymbol{\beta}} = \mathbf{H}_{\mathbf{X}}\boldsymbol{y}$ is the projection of the response vector $\boldsymbol{y}$ on the linear span generated by the columns of $\mathbf{X}$.
+- The ordinary residuals $\boldsymbol{e} = \boldsymbol{y} - \widehat{\boldsymbol{y}}$ contains the difference
+- Simple algebraic manipulations show that the inner product between ordinary residuals and fitted values is zero, $$\widehat{\boldsymbol{y}}^\top \boldsymbol{e} = \sum_{i=1}^n \widehat{y}_ie_i=0,$$ so they are uncorrelated and $\widehat{\mathsf{cor}}(\widehat{\boldsymbol{y}}, \boldsymbol{e})=0$
+   - Similarly, $\mathbf{X}^\top\boldsymbol{e}=\boldsymbol{0}_{p+1}$.
+   - The mean of $\boldsymbol{e}$ must be zero provided that $\mathbf{1}_n$ is in the linear span of $\mathbf{X}$.
+   
+## Residuals
+
+
+```{r}
+#| eval: true
+#| echo: false
+#| label: fig-vertdist
+#| fig-cap: Ordinary residuals $e_i$ (vertical vectors) added to the regression line in the scatter $(x, y)$ (left) and the fit of response $y_i$ against fitted values $\widehat{y}_i$. The ordinary least squares line minimizes the average squared length of the ordinary residuals.
+set.seed(1234)
+n <- 100L
+x <- rexp(n = n, rate = 1/100)
+y <- 100*rt(n, df = 10) + 40 + 2*x
+ols <- lm(y ~ x)
+res <- resid(ols)
+yhat <- fitted(ols)
+df <- data.frame(x = x, y = y, res = res, fitted = yhat)
+vlines <- data.frame(x1 = x, 
+    y1 = yhat, 
+    y2 = yhat + res)
+vlines2 <- data.frame(x1 = yhat, 
+    y1 = y, 
+    y2 = y - res)
+g1 <- ggplot(data = df, 
+       aes(x = x, y = y)) +
+        geom_point() +
+  geom_smooth(method = "lm", 
+              formula = y ~ x,
+              se = FALSE, 
+              col ="black") +
+   labs(x = "explanatory",
+       y = "response") +
+        geom_segment(aes(x = x1, y = y1, xend = x1, yend = y2), arrow= arrow(length = unit(0.2,"cm")), color = "grey",
+                     data = vlines, show.legend = FALSE)
+g2 <- ggplot(data = df, aes(x = yhat, y = y)) +
+        geom_point() +
+geom_abline(intercept = 0, slope = 1) +
+   labs(x = "fitted values",
+       y = "response") +
+scale_x_continuous(limits = range(c(yhat, y)),
+                   expand = expansion()) + scale_y_continuous(limits = range(c(yhat, y)),
+                   expand = expansion()) +
+geom_segment(aes(x = x1, y = y1, xend = x1, yend = y2), 
+arrow= arrow(length = unit(0.2,"cm")), color = "grey",
+                     data = vlines2, show.legend = FALSE)
+g1 + g2
+```
+
+
+## Maximum likelihood estimation of the normal linear model
+
+Assuming $Y_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2)$ are independent, the log likelihood of the normal linear model is
+\begin{align*}
+\ell(\boldsymbol{\beta}, \sigma)&\propto-\frac{n}{2} \ln (\sigma^2) -\frac{1}{2\sigma^2}\left\{(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})\right\}^2.
+\end{align*}
+Maximizing the log likelihood with respect to $\boldsymbol{\beta}$ is equivalent to minimizing the sum of squared errors $\sum_{i=1}^n (y_i - \mathbf{x}_i\boldsymbol{\beta})^2$, regardless of the value of $\sigma$, and we recover the OLS estimator $\widehat{\boldsymbol{\beta}}$.
+
+## Maximum likelihood estimator of the variance 
+The MLE for $\sigma^2$ is obtained from the profile log likelihood for $\sigma^2$, excluding constant terms that don't depend on $\sigma^2$, is
+\begin{align*}
+\ell_{\mathrm{p}}(\sigma^2)
+&\propto-\frac{1}{2}\left\{n\ln\sigma^2+\frac{1}{\sigma^2}(\boldsymbol{y}-\mathbf{X}\hat{\boldsymbol{\beta}})^\top(\boldsymbol{y}-\mathbf{X}\hat{\boldsymbol{\beta}})\right\}.
+\end{align*}
+
+## MLE for the variance
+
+Differentiating each term with respect to $\sigma^2$ and setting the gradient equal to zero yields the maximum likelihood estimator
+\begin{align*}
+\widehat{\sigma}^2&=\frac{1}{n}(\boldsymbol{Y}-\mathbf{X}\hat{\boldsymbol{\beta}})^\top(\boldsymbol{Y}-\mathbf{X}\hat{\boldsymbol{\beta}})\\&= \frac{1}{n} \sum_{i=1}^n (y_i - \mathbf{x}_i\widehat{\boldsymbol{\beta}})^2\\&= \frac{\mathsf{SS}_e}{n};
+\end{align*}
+where $\mathsf{SS}_e$ is the sum of squared residuals. The usual unbiased estimator of $\sigma^2$ calculated by software is $S^2=\mathsf{SS}_e/(n-p-1)$, where the denominator is the sample size $n$ minus the number of mean parameters $\boldsymbol{\beta}$, $p+1$.
+
+## Observed information for normal linear regression
+
+The entries of the observed information matrix of the normal linear model are
+\begin{align*}
+-\frac{\partial^2 \ell(\boldsymbol{\beta}, \sigma^2)}{\partial \boldsymbol{\beta}\partial \boldsymbol{\beta}^\top} &= \frac{1}{\sigma^2} \frac{\partial \mathbf{X}^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})}{\partial \boldsymbol{\beta}^\top} =  \frac{\mathbf{X}^\top\mathbf{X}}{\sigma^2}\\
+-\frac{\partial^2 \ell(\boldsymbol{\beta}, \sigma^2)}{\partial \boldsymbol{\beta}\partial \sigma^2} &=- \frac{\mathbf{X}^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})}{\sigma^4}\\
+-\frac{\partial^2 \ell(\boldsymbol{\beta}, \sigma^2)}{\partial (\sigma^2)^2} &= -\frac{n}{2\sigma^4} + \frac{(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})}{\sigma^6}.
+\end{align*}
+
+## Information matrices for the normal linear regression
+
+If we evaluate the observed information at the MLE, we get
+\begin{align*}
+j(\widehat{\boldsymbol{\beta}}, \widehat{\sigma^2}) = 
+\begin{pmatrix}
+\frac{\mathbf{X}^\top\mathbf{X}}{\widehat{\sigma^2}} & \boldsymbol{0}_{p+1} \\  \boldsymbol{0}_{p+1}^\top & \frac{n}{2\widehat{\sigma^4}}
+\end{pmatrix}
+\end{align*}
+since $\widehat{\sigma}^2=\mathsf{SS}_e/n$ and the residuals are orthogonal to the model matrix. 
+
+Since $\mathsf{E}(Y \mid \mathbf{X})=\mathbf{X}\boldsymbol{\beta}$, the Fisher information is
+\begin{align*}
+i(\boldsymbol{\beta}, \sigma^2) = 
+\begin{pmatrix}
+\frac{\mathbf{X}^\top\mathbf{X}}{\sigma^2} & \boldsymbol{0}_{p+1} \\  \boldsymbol{0}_{p+1}^\top & \frac{n}{2\sigma^4}
+\end{pmatrix}
+\end{align*}
+
+## Remarks
+
+
+Since zero off-correlations in normal models amount to independence, the MLE for $\sigma^2$ and $\boldsymbol{\beta}$ are independent.
+
+
+Provided the $(p+1)$ square matrix $\mathbf{X}^\top\mathbf{X}$ is invertible, the large-sample variance
+
+- of the ordinary least squares estimator is $\mathsf{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2(\mathbf{X}^\top\mathbf{X})^{-1}$ and 
+- that of the MLE of the variance is $2\sigma^4/n$.
 
 ## References
 

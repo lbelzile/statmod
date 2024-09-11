@@ -1,0 +1,31 @@
+---
+title: "Linear models"
+---
+
+### Learning objectives
+
+
+* interpret the coefficients of a linear model (binary, continuous and categorical variables);
+* fit the model by least squares (using dedicated software), correctly accounting for categorical variables;
+
+### Content
+
+
+- Course notes: chapter [4 (Linear regression models)](https://lbelzile.github.io/math60604a/linearmodels.html), Sections 4.1--4.4.
+
+
+### In class
+
+- [Slides](../slides/MATH60604A-slides3.html) ([pdf](../slides/MATH60604A-slides3.pdf))
+
+
+### Slides
+
+
+<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides3.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides3.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
+
+<div class="ratio ratio-16x9">
+<iframe class="slide-deck" src="../slides/MATH60604A-slides3.html"></iframe>
+</div>
+
+
