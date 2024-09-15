@@ -254,7 +254,7 @@
     "href": "content/03-content.html",
     "title": "Linear models",
     "section": "",
-    "text": "Learning objectives\n\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;\n\n\n\nContent\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.1–4.4.\n\n\n\nIn class\n\nSlides (pdf)\n\n\n\nSlides\n\n  View slides in new window   Download PDF of slides",
+    "text": "Learning objectives\n\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;\n\n\n\nContent\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.1–4.4.\n\n\n\nIn class\n\nSlides (pdf and code)\n\n\n\nSlides\n\n  View slides in new window   Download PDF of slides",
     "crumbs": [
       "Content",
       "Pedagogical content",

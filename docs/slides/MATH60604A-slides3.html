@@ -8,7 +8,7 @@
 <link href="MATH60604A-slides3_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="MATH60604A-slides3_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="MATH60604A-slides3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.1">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Léo Belzile, HEC Montréal">
   <meta name="dcterms.date" content="2024-01-01">
@@ -468,8 +468,20 @@ Léo Belzile, HEC Montréal
 <ul>
 <li>The model formulation is <strong>conditional</strong> on the values of the observed explanatories; this amounts to treating the <span class="math inline">\(p\)</span> explanatory variables <span class="math inline">\(X_1, \ldots, X_p\)</span> as fixed quantities (non-random, or known in advance).</li>
 <li>The regression coefficients <span class="math inline">\(\boldsymbol{\beta}\)</span> is the same for all observations, but the vector of explanatories <span class="math inline">\(\mathbf{x}_i\)</span> may change from one observation to the next.</li>
-<li>The model is <strong>linear</strong> in the coefficients <span class="math inline">\(\beta_0, \ldots, \beta_p\)</span>, not in the explanatories.</li>
+<li>The model is <strong>linear</strong> in the coefficients <span class="math inline">\(\beta_0, \ldots, \beta_p\)</span>, not in the explanatories.
+<ul>
+<li>The mean model specification <span class="math inline">\(\mathsf{E}(Y \mid X =x) = \beta_0 + \beta_1 x^\beta_2\)</span> is nonlinear</li>
+<li>whereas <span class="math inline">\(\mathsf{E}(Y \mid X =x) = \beta_0 + \beta_1 x + \beta_2 x^2\)</span> is linear</li>
+<li>as is <span class="math inline">\(\mathsf{E}(Y \mid X =x) = \beta_0 + \sum_{j=1}^p\beta_j \mathbf{1}_{x \in (a_j, a_{j+1}]}\)</span> for <span class="math inline">\(a_1 &lt; \cdots &lt; a_{p+1}\)</span>, where <span class="math inline">\(\mathbf{1}_{\cdot}\)</span> is a binary indicator worth <span class="math inline">\(1\)</span> if the statement in the subscript is true and <span class="math inline">\(0\)</span> otherwise.</li>
+</ul></li>
 </ul>
+</section>
+<section id="illustration-of-more-complex-linear-models" class="slide level2">
+<h2>Illustration of more complex linear models</h2>
+
+<img data-src="MATH60604A-slides3_files/figure-revealjs/fig-autoquad2d-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;1: Linear regression models with quadratic trend (left) and a piecewise-linear model discretizing data based on quintiles (right) for the fuel autonomy of cars as a function of motor power.
+</p><p>We can always transform a continuous variable into a categorical one to fit more flexible functional relations between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, at the cost of additional coefficients.</p>
 </section>
 <section id="notation" class="slide level2">
 <h2>Notation</h2>
@@ -645,7 +657,7 @@ Léo Belzile, HEC Montréal
 <p>Salary increases with years of service, but there is more heterogeneity as we move up ranks.</p>
 
 <img data-src="MATH60604A-slides3_files/figure-revealjs/fig-edacollege-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;1: Salaries of professors as a function of the number of years of service and the academic ranking
+Figure&nbsp;2: Salaries of professors as a function of the number of years of service and the academic ranking
 </p><p>Logically, assistant professors are either promoted or kicked out after at most 6 years according to the data. The limited number of years prevents large variability for their salaries.</p>
 <p>Variables <code>years</code> and <code>service</code>, are strongly correlated with a correlation of 0.91.</p>
 </section>
@@ -764,37 +776,10 @@ Figure&nbsp;1: Salaries of professors as a function of the number of years of se
 <h2>Simple linear regression with a binary explanatory</h2>
 
 <img data-src="MATH60604A-slides3_files/figure-revealjs/fig-donation-moon-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p class="caption">
-Figure&nbsp;2: Simple linear model for the <code>MV23_S1</code> data using the binary variable <code>condition</code> as explanatory with half-violin and jittered scatterplots. Circles indicate the sample means.
+Figure&nbsp;3: Simple linear model for the <code>MV23_S1</code> data using the binary variable <code>condition</code> as explanatory with half-violin and jittered scatterplots. Circles indicate the sample means.
 </p><p>Even if the linear model defines a line, the latter is only meaningful when evaluated at <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>.</p>
 <p>Data are heavily discretized, with lots of ties and zeros, but the sample size <span class="math inline">\((n=869)\)</span> is large.</p>
 </section>
-<section id="quadratic-curve-for-the-automobile-data" class="slide level2">
-<h2>Quadratic curve for the automobile data</h2>
-<p>We consider a linear regression model for the fuel autonomy of cars as a function of the power of their motor (measured in horsepower) from the <code>auto</code> dataset. The postulated model, <span class="math display">\[\begin{align*}
-\texttt{mpg}_i = \beta_0 + \beta_1 \texttt{horsepower}_i + \beta_2 \texttt{horsepower}_i^2 + \varepsilon_i,
-\end{align*}\]</span> includes a quadratic term.</p>
-<ul>
-<li>Each increase of one unit in horsepower increases the average autonomy by <span class="math inline">\((\beta_1 + \beta_2) + 2\beta_2 \texttt{horsepower}\)</span> miles per gallon.</li>
-<li>The marginal effect of <code>horsepower</code> (slope) is <span class="math inline">\(\beta_1 + 2\beta_2 \texttt{horsepower}\)</span>, which depends on the value of the explanatory.</li>
-</ul>
-</section>
-<section id="linear-model-with-quadratic-curve" class="slide level2">
-<h2>Linear model with quadratic curve</h2>
-
-<img data-src="MATH60604A-slides3_files/figure-revealjs/fig-autoquad2d-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;3: Linear regression models for the fuel autonomy of cars as a function of motor power.
-</p></section>
-<section id="discretization-of-continuous-covariates" class="slide level2">
-<h2>Discretization of continuous covariates</h2>
-<p>We can always transform a continuous variable into a categorical one.</p>
-<ul>
-<li>it allows one to fit more flexible functional relations between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
-<li>at the cost of additional coefficients.</li>
-</ul>
-
-<img data-src="MATH60604A-slides3_files/figure-revealjs/fig-auto-discre-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;4: Piecewise-linear model for the fuel autonomy of cars as a function of motor power.
-</p></section>
 <section id="dummy-coding-for-categorical-variables" class="slide level2">
 <h2>Dummy coding for categorical variables</h2>
 <p>Consider the <span class="citation" data-cites="Baumann:1992">Baumann, Seifert-Kessell, and Jones (<a href="#/references" role="doc-biblioref" onclick="">1992</a>)</span> study and the sole inclusion of the <code>group</code> variable. The data are ordered by group: the first 22 observations are for group <code>DR</code>, the 22 next ones for group <code>DRTA</code> and the last 22 for <code>TA</code>. If we fit a model with <code>group</code> as categorical variables</p>
@@ -943,12 +928,12 @@ Table&nbsp;1: Parametrization of dummies for a categorical variable with the def
 <h2>Residuals</h2>
 
 <img data-src="MATH60604A-slides3_files/figure-revealjs/fig-vertdist-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;5: Ordinary residuals <span class="math inline">\(e_i\)</span> (vertical vectors) added to the regression line in the scatter <span class="math inline">\((x, y)\)</span> (left) and the fit of response <span class="math inline">\(y_i\)</span> against fitted values <span class="math inline">\(\widehat{y}_i\)</span>. The ordinary least squares line minimizes the average squared length of the ordinary residuals.
+Figure&nbsp;4: Ordinary residuals <span class="math inline">\(e_i\)</span> (vertical vectors) added to the regression line in the scatter <span class="math inline">\((x, y)\)</span> (left) and the fit of response <span class="math inline">\(y_i\)</span> against fitted values <span class="math inline">\(\widehat{y}_i\)</span>. The ordinary least squares line minimizes the average squared length of the ordinary residuals.
 </p></section>
 <section id="maximum-likelihood-estimation-of-the-normal-linear-model" class="slide level2">
 <h2>Maximum likelihood estimation of the normal linear model</h2>
 <p>Assuming <span class="math inline">\(Y_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2)\)</span> are independent, the log likelihood of the normal linear model is <span class="math display">\[\begin{align*}
-\ell(\boldsymbol{\beta}, \sigma)&amp;\propto-\frac{n}{2} \ln (\sigma^2) -\frac{1}{2\sigma^2}\left\{(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})\right\}^2.
+\ell(\boldsymbol{\beta}, \sigma)&amp;\propto-\frac{n}{2} \ln (\sigma^2) -\frac{(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})}{2\sigma^2}
 \end{align*}\]</span> Maximizing the log likelihood with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span> is equivalent to minimizing the sum of squared errors <span class="math inline">\(\sum_{i=1}^n (y_i - \mathbf{x}_i\boldsymbol{\beta})^2\)</span>, regardless of the value of <span class="math inline">\(\sigma\)</span>, and we recover the OLS estimator <span class="math inline">\(\widehat{\boldsymbol{\beta}}\)</span>.</p>
 </section>
 <section id="maximum-likelihood-estimator-of-the-variance" class="slide level2">
@@ -989,11 +974,11 @@ i(\boldsymbol{\beta}, \sigma^2) =
 </section>
 <section id="remarks" class="slide level2">
 <h2>Remarks</h2>
-<p>Since zero off-correlations in normal models amount to independence, the MLE for <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\boldsymbol{\beta}\)</span> are independent.</p>
-<p>Provided the <span class="math inline">\((p+1)\)</span> square matrix <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> is invertible, the large-sample variance</p>
+<p>Since zero off-correlations in normal models amount to independence, the MLE for <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\boldsymbol{\beta}\)</span> are asymptotically independent.</p>
+<p>Provided the <span class="math inline">\((p+1)\)</span> square matrix <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> is invertible, the large-sample variance of the coefficients are</p>
 <ul>
-<li>of the ordinary least squares estimator is <span class="math inline">\(\mathsf{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2(\mathbf{X}^\top\mathbf{X})^{-1}\)</span>,</li>
-<li>of the MLE of the variance is $<span class="math inline">\(\mathsf{Var}(\widehat{\sigma}^2) = 2\sigma^4/n\)</span>.</li>
+<li><span class="math inline">\(\mathsf{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2(\mathbf{X}^\top\mathbf{X})^{-1}\)</span>,</li>
+<li><span class="math inline">\(\mathsf{Var}(\widehat{\sigma}^2) = 2\sigma^4/n\)</span>.</li>
 </ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">

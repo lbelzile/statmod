@@ -16,7 +16,7 @@ title: "Linear models"
 
 ### In class
 
-- [Slides](../slides/MATH60604A-slides3.html) ([pdf](../slides/MATH60604A-slides3.pdf))
+- [Slides](../slides/MATH60604A-slides3.html) ([pdf](../slides/MATH60604A-slides3.pdf) and [code](MATH60604A-slides3.R))
 
 
 ### Slides
