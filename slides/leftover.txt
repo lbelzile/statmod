@@ -1,0 +1,127 @@
+
+## Quadratic curve for the automobile data
+
+We consider a linear regression model for the fuel autonomy of cars as a function of the power of their motor (measured in horsepower) from the `auto` dataset. The postulated model,
+\begin{align*}
+\texttt{mpg}_i = \beta_0 + \beta_1 \texttt{horsepower}_i + \beta_2 \texttt{horsepower}_i^2 + \varepsilon_i,
+\end{align*}
+includes a quadratic term. 
+
+
+The marginal effect of an increase of one unit in `horsepower` is $\beta_1 + 2\beta_2 \texttt{horsepower}$, which depends on the value of the explanatory.
+
+## Linear model with quadratic curve
+
+```{r}
+#| label: fig-autoquad2d
+#| echo: false
+#| eval: true
+#| fig-cap: Linear regression models for the fuel autonomy of cars as a function of motor power.
+data(auto, package = "hecstatmod")
+hecblue <- rgb(red = 0, green = 60, blue = 113, max = 255)
+mod <- lm(mpg ~ horsepower + I(horsepower^2),  data = auto)
+ggplot(data = auto, aes(x = horsepower, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = "y ~ x", se = FALSE, col = "gray") +
+  labs(x = "horsepower",
+       y = "fuel autonomy (in miles per US gallon)") +
+  geom_line(data = data.frame(horsepower = auto$horsepower, fitted = mod$fitted),
+            aes(horsepower, fitted), show.legend = FALSE)
+```
+
+## Discretization of continuous covariates
+
+We can always transform a continuous variable into a categorical one.
+
+- it allows one to fit more flexible functional relations between $X$ and $Y$
+  - at the cost of additional coefficients.
+
+
+```{r}
+#| label: fig-auto-discre
+#| echo: false
+#| eval: true
+#| fig-cap: Piecewise-linear model for the fuel autonomy of cars as a function of motor power.
+hp_cut <- with(auto, cut(horsepower, 
+                         breaks = c(0, quantile(horsepower, probs = c(0.2, 0.4, 0.6, 0.8)), 300)))
+mod <- lm(mpg ~ hp_cut, data = auto)
+hp_seq <- seq(50, 250, by = 0.1)
+cut_seq <- cut(hp_seq, breaks = c(0, quantile(auto$horsepower, probs = c(0.2, 0.4, 0.6, 0.8)), 300))
+pred_seq <- c(model.matrix(~cut_seq) %*% coef(mod))
+ggplot() +
+  geom_point(data = auto, aes(x = horsepower, y = mpg)) +
+  geom_line(
+    data = data.frame(
+      horsepower = hp_seq, 
+      fitted = pred_seq),
+    mapping = aes(x = horsepower, y = fitted), 
+    show.legend = FALSE) + 
+  labs(x = "horsepower",
+       y = "fuel autonomy (in miles per US gallon)") 
+```
+
+
+
+
+## Courbe quadratique pour données automobile
+
+Nous considérons un modèle de régression linéaire pour l'autonomie en carburant des voitures en fonction de la puissance de leur moteur (mesurée en chevaux-vapeur) à partir de l'ensemble de données `automobile`. Le modèle postulé est
+\begin{align*}
+\texttt{autonomie}_i = \beta_0 + \beta_1 \texttt{puissance}_i + \beta_2 \texttt{puissance}_i^2 + \varepsilon_i.
+\end{align*} 
+
+
+
+- Pour chaque augmentation d'un cheval-vapeur de la puissance, l'autonomie moyenne en augmente de $(\beta_1 + \beta_2) + 2\beta_2\texttt{puissance}$ miles par gallon.
+- L'effet marginal (dérivée) d'une augmentation de la `puissance`, qui dépend de la valeur de la variable explicative, est $\beta_1 + 2\beta_2 \texttt{puissance}$.
+
+
+## Modèle linéaire avec équation quadratique
+
+```{r}
+#| label: fig-autoquad2d
+#| echo: false
+#| eval: true
+#| fig-cap: Fonction de régression linéaire pour l'autonomie en fonction de la puissance.
+data(automobile, package = "hecmodstat")
+mod <- lm(autonomie ~ puissance + I(puissance^2),  data = automobile)
+ggplot(data = automobile, aes(x = puissance, y = autonomie)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = "y ~ x", se = FALSE, col = "grey") +
+  labs(#title = "Caractéristiques d'automobiles, circa 1983",
+    x = "puissance du moteur (en chevaux-vapeurs)",
+    y = "autonomie d'essence (en miles par gallon)") +
+  geom_line(data = data.frame(puissance = automobile$puissance, fitted = mod$fitted),
+            aes(puissance, fitted), show.legend = FALSE)
+```
+
+## Discrétisation de variables continues
+
+On peut toujours transformer une variable continue en une variable catégorielle.
+
+- elle permet d'ajuster des relations fonctionnelles plus souples entre $X$ et $Y$
+- au prix de coefficients supplémentaires.
+
+```{r}
+#| label: fig-auto-discre
+#| echo: false
+#| eval: true
+#| fig-cap: Fonction affine par morceaux de l'autonomie d'un véhicule en fonction de sa puissance.
+hp_cut <- with(automobile, cut(puissance, 
+              breaks = c(0, quantile(puissance, probs = c(0.2, 0.4, 0.6, 0.8)), 300)))
+mod <- lm(autonomie ~ hp_cut, data = automobile)
+hp_seq <- seq(50, 250, by = 0.1)
+cut_seq <- cut(hp_seq, breaks = c(0, quantile(automobile$puissance, probs = c(0.2, 0.4, 0.6, 0.8)), 300))
+pred_seq <- c(model.matrix(~cut_seq) %*% coef(mod))
+ggplot() +
+  geom_point(data = automobile, aes(x = puissance, y = autonomie)) +
+   geom_line(
+     data = data.frame(
+        puissance = hp_seq, 
+        fitted = pred_seq),
+    mapping = aes(x = puissance, y = fitted), 
+    show.legend = FALSE) + 
+  labs(x = "puissance",
+       y = "autonomie (en miles par gallon)") 
+```
+

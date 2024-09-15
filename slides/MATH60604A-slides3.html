@@ -771,30 +771,6 @@ Figure&nbsp;2: Simple linear model for the <code>MV23_S1</code> data using the b
 </p><p>Even if the linear model defines a line, the latter is only meaningful when evaluated at <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span></p>
 <p>Data are heavily discretized, with lots of ties and zeros, but the sample size <span class="math inline">\((n=869\)</span> is large.</p>
 </section>
-<section id="quadratic-curve-for-the-automobile-data" class="slide level2">
-<h2>Quadratic curve for the automobile data</h2>
-<p>We consider a linear regression model for the fuel autonomy of cars as a function of the power of their motor (measured in horsepower) from the <code>auto</code> dataset. The postulated model, <span class="math display">\[\begin{align*}
-\texttt{mpg}_i = \beta_0 + \beta_1 \texttt{horsepower}_i + \beta_2 \texttt{horsepower}_i^2 + \varepsilon_i,
-\end{align*}\]</span> includes a quadratic term.</p>
-<p>The marginal effect of an increase of one unit in <code>horsepower</code> is <span class="math inline">\(\beta_1 + 2\beta_2 \texttt{horsepower}\)</span>, which depends on the value of the explanatory.</p>
-</section>
-<section id="linear-model-with-quadratic-curve" class="slide level2">
-<h2>Linear model with quadratic curve</h2>
-
-<img data-src="MATH60604A-slides3_files/figure-revealjs/fig-autoquad2d-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;3: Linear regression models for the fuel autonomy of cars as a function of motor power.
-</p></section>
-<section id="discretization-of-continuous-covariates" class="slide level2">
-<h2>Discretization of continuous covariates</h2>
-<p>We can always transform a continuous variable into a categorical one.</p>
-<ul>
-<li>it allows one to fit more flexible functional relations between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
-<li>at the cost of additional coefficients.</li>
-</ul>
-
-<img data-src="MATH60604A-slides3_files/figure-revealjs/fig-auto-discre-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;4: Piecewise-linear model for the fuel autonomy of cars as a function of motor power.
-</p></section>
 <section id="dummy-coding-for-categorical-variables" class="slide level2">
 <h2>Dummy coding for categorical variables</h2>
 <p>Consider the <span class="citation" data-cites="Baumann:1992">Baumann, Seifert-Kessell, and Jones (<a href="#/references" role="doc-biblioref" onclick="">1992</a>)</span> study and the sole inclusion of the <code>group</code> variable. The data are ordered by group: the first 22 observations are for group <code>DR</code>, the 22 next ones for group <code>DRTA</code> and the last 22 for <code>TA</code>. If we fit a model with <code>group</code> as categorical variables</p>
@@ -943,12 +919,12 @@ Table&nbsp;1: Parametrization of dummies for a categorical variable with the def
 <h2>Residuals</h2>
 
 <img data-src="MATH60604A-slides3_files/figure-revealjs/fig-vertdist-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;5: Ordinary residuals <span class="math inline">\(e_i\)</span> (vertical vectors) added to the regression line in the scatter <span class="math inline">\((x, y)\)</span> (left) and the fit of response <span class="math inline">\(y_i\)</span> against fitted values <span class="math inline">\(\widehat{y}_i\)</span>. The ordinary least squares line minimizes the average squared length of the ordinary residuals.
+Figure&nbsp;3: Ordinary residuals <span class="math inline">\(e_i\)</span> (vertical vectors) added to the regression line in the scatter <span class="math inline">\((x, y)\)</span> (left) and the fit of response <span class="math inline">\(y_i\)</span> against fitted values <span class="math inline">\(\widehat{y}_i\)</span>. The ordinary least squares line minimizes the average squared length of the ordinary residuals.
 </p></section>
 <section id="maximum-likelihood-estimation-of-the-normal-linear-model" class="slide level2">
 <h2>Maximum likelihood estimation of the normal linear model</h2>
 <p>Assuming <span class="math inline">\(Y_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2)\)</span> are independent, the log likelihood of the normal linear model is <span class="math display">\[\begin{align*}
-\ell(\boldsymbol{\beta}, \sigma)&amp;\propto-\frac{n}{2} \ln (\sigma^2) -\frac{1}{2\sigma^2}\left\{(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})\right\}^2.
+\ell(\boldsymbol{\beta}, \sigma)&amp;\propto-\frac{n}{2} \ln (\sigma^2) -\frac{(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})}{2\sigma^2}
 \end{align*}\]</span> Maximizing the log likelihood with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span> is equivalent to minimizing the sum of squared errors <span class="math inline">\(\sum_{i=1}^n (y_i - \mathbf{x}_i\boldsymbol{\beta})^2\)</span>, regardless of the value of <span class="math inline">\(\sigma\)</span>, and we recover the OLS estimator <span class="math inline">\(\widehat{\boldsymbol{\beta}}\)</span>.</p>
 </section>
 <section id="maximum-likelihood-estimator-of-the-variance" class="slide level2">
@@ -989,7 +965,7 @@ i(\boldsymbol{\beta}, \sigma^2) =
 </section>
 <section id="remarks" class="slide level2">
 <h2>Remarks</h2>
-<p>Since zero off-correlations in normal models amount to independence, the MLE for <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\boldsymbol{\beta}\)</span> are independent.</p>
+<p>Since zero off-correlations in normal models amount to independence, the MLE for <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\boldsymbol{\beta}\)</span> are asymptotically independent.</p>
 <p>Provided the <span class="math inline">\((p+1)\)</span> square matrix <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> is invertible, the large-sample variance</p>
 <ul>
 <li>of the ordinary least squares estimator is <span class="math inline">\(\mathsf{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2(\mathbf{X}^\top\mathbf{X})^{-1}\)</span> and</li>

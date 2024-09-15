@@ -192,7 +192,7 @@ g2
 If $g(\boldsymbol{\theta}): \mathbb{R}^p \mapsto \mathbb{R}^k$ for $k \leq p$ is a function of the parameter vector, then $g(\widehat{\boldsymbol{\theta}})$ is the maximum likelihood estimator of $g(\boldsymbol{\theta})$.
 
 
-For example, we could compute the maximum likelihood estimate of the probability of waiting more than one minute, $\Pr(T>60) = \exp(-60/\widehat{\lambda})= 0.126,$ or using **R** built-in distribution function `pexp`.
+For example, we could compute the maximum likelihood estimate of the probability of waiting more than one minute for the exponential model, $\Pr_{\mathrm{exp}}(T>60 \mid T) = \exp(-60/\widehat{\lambda})= 0.126,$ or using **R** built-in distribution function `pexp`.
 
 ```{r}
 #| eval: true
@@ -549,7 +549,29 @@ The three main classes of statistics for testing a simple null hypothesis $\math
 \end{align*}
 If $\mathscr{H}_0$ is true, the three test statistics follow asymptotically a $\chi^2_q$ distribution under a null hypothesis $\mathscr{H}_0,$ where the degrees of freedom $q$ are the number of restrictions.
 
+## Asymptotic null distribution
 
+The null distribution is chi-square because we consider 
+
+:::{#prp-chisquare}
+
+If $\boldsymbol{Z} \sim \mathsf{normal}(\boldsymbol{0}_q, \mathbf{I}_q)$, then $\sum_{j=1}^p Z_j^2 = \boldsymbol{Z}^\top\boldsymbol{Z} \sim \chi^2_q$.
+
+:::
+
+```{r}
+data.grid <- expand.grid(x1 = seq(-5, 5, length.out = 201L), 
+                         x2 = seq(-5, 5, length.out = 201L))
+q.samp <- cbind(data.grid, 
+                dens = mvtnorm::dmvnorm(
+                  data.grid, 
+                  mean = rep(0,2), 
+                  sigma = diag(2)))
+ggplot(q.samp, aes(x=x1, y=x2, z=dens)) + 
+    geom_contour(breaks = ) +
+    coord_fixed(xlim = c(-5, 5), ylim = c(-5, 5), ratio = 1) 
+
+```
 
 ## Unidimensional version of likelihood statistics
 

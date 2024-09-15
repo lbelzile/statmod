@@ -450,67 +450,6 @@ Even if the linear model defines a line, the latter is only meaningful when eval
 
 Data are heavily discretized, with lots of ties and zeros, but the sample size $(n=`r nrow(MV23_S1)`$ is large.
 
-## Quadratic curve for the automobile data
-
-We consider a linear regression model for the fuel autonomy of cars as a function of the power of their motor (measured in horsepower) from the `auto` dataset. The postulated model,
-\begin{align*}
-\texttt{mpg}_i = \beta_0 + \beta_1 \texttt{horsepower}_i + \beta_2 \texttt{horsepower}_i^2 + \varepsilon_i,
-\end{align*}
- includes a quadratic term. 
- 
- 
-The marginal effect of an increase of one unit in `horsepower` is $\beta_1 + 2\beta_2 \texttt{horsepower}$, which depends on the value of the explanatory.
-
-## Linear model with quadratic curve
-
-```{r}
-#| label: fig-autoquad2d
-#| echo: false
-#| eval: true
-#| fig-cap: Linear regression models for the fuel autonomy of cars as a function of motor power.
-data(auto, package = "hecstatmod")
-hecblue <- rgb(red = 0, green = 60, blue = 113, max = 255)
-mod <- lm(mpg ~ horsepower + I(horsepower^2),  data = auto)
-ggplot(data = auto, aes(x = horsepower, y = mpg)) +
-  geom_point() +
-  geom_smooth(method = "lm", formula = "y ~ x", se = FALSE, col = "gray") +
-  labs(x = "horsepower",
-       y = "fuel autonomy (in miles per US gallon)") +
-      geom_line(data = data.frame(horsepower = auto$horsepower, fitted = mod$fitted),
-                aes(horsepower, fitted), show.legend = FALSE)
-```
-
-## Discretization of continuous covariates
-
-We can always transform a continuous variable into a categorical one.
-
-- it allows one to fit more flexible functional relations between $X$ and $Y$
-- at the cost of additional coefficients.
-
-
-```{r}
-#| label: fig-auto-discre
-#| echo: false
-#| eval: true
-#| fig-cap: Piecewise-linear model for the fuel autonomy of cars as a function of motor power.
-hp_cut <- with(auto, cut(horsepower, 
-              breaks = c(0, quantile(horsepower, probs = c(0.2, 0.4, 0.6, 0.8)), 300)))
-mod <- lm(mpg ~ hp_cut, data = auto)
-hp_seq <- seq(50, 250, by = 0.1)
-cut_seq <- cut(hp_seq, breaks = c(0, quantile(auto$horsepower, probs = c(0.2, 0.4, 0.6, 0.8)), 300))
-pred_seq <- c(model.matrix(~cut_seq) %*% coef(mod))
-ggplot() +
-  geom_point(data = auto, aes(x = horsepower, y = mpg)) +
-   geom_line(
-     data = data.frame(
-        horsepower = hp_seq, 
-        fitted = pred_seq),
-    mapping = aes(x = horsepower, y = fitted), 
-    show.legend = FALSE) + 
-  labs(x = "horsepower",
-       y = "fuel autonomy (in miles per US gallon)") 
-```
-
 
 ## Dummy coding for categorical variables
 
@@ -677,7 +616,7 @@ g1 + g2
 
 Assuming $Y_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2)$ are independent, the log likelihood of the normal linear model is
 \begin{align*}
-\ell(\boldsymbol{\beta}, \sigma)&\propto-\frac{n}{2} \ln (\sigma^2) -\frac{1}{2\sigma^2}\left\{(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})\right\}^2.
+\ell(\boldsymbol{\beta}, \sigma)&\propto-\frac{n}{2} \ln (\sigma^2) -\frac{(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})^\top(\boldsymbol{y}-\mathbf{X}\boldsymbol{\beta})}{2\sigma^2}
 \end{align*}
 Maximizing the log likelihood with respect to $\boldsymbol{\beta}$ is equivalent to minimizing the sum of squared errors $\sum_{i=1}^n (y_i - \mathbf{x}_i\boldsymbol{\beta})^2$, regardless of the value of $\sigma$, and we recover the OLS estimator $\widehat{\boldsymbol{\beta}}$.
 
@@ -727,7 +666,7 @@ i(\boldsymbol{\beta}, \sigma^2) =
 ## Remarks
 
 
-Since zero off-correlations in normal models amount to independence, the MLE for $\sigma^2$ and $\boldsymbol{\beta}$ are independent.
+Since zero off-correlations in normal models amount to independence, the MLE for $\sigma^2$ and $\boldsymbol{\beta}$ are asymptotically independent.
 
 
 Provided the $(p+1)$ square matrix $\mathbf{X}^\top\mathbf{X}$ is invertible, the large-sample variance
