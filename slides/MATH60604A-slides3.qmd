@@ -95,6 +95,47 @@ The normal linear model specifies that $$Y_i \mid \boldsymbol{X}_i=\boldsymbol{x
 - The model formulation is **conditional** on the values of the observed explanatories; this amounts to treating the $p$ explanatory variables $X_1, \ldots, X_p$  as fixed quantities (non-random, or known in advance).
 - The regression coefficients $\boldsymbol{\beta}$ is the same for all observations, but the vector of explanatories $\mathbf{x}_i$ may change from one observation to the next.
 - The model is **linear** in the coefficients $\beta_0, \ldots, \beta_p$, not in the explanatories.
+     - The mean model specification $\mathsf{E}(Y \mid X =x) = \beta_0 + \beta_1 x^\beta_2$ is nonlinear
+     - whereas $\mathsf{E}(Y \mid X =x) = \beta_0 + \beta_1 x + \beta_2 x^2$ is linear
+     - as is $\mathsf{E}(Y \mid X =x) = \beta_0 + \sum_{j=1}^p\beta_j \mathbf{1}_{x \in (a_j, a_{j+1}]}$ for $a_1 < \cdots < a_{p+1}$, where $\mathbf{1}_{\cdot}$ is a binary indicator worth $1$ if the statement in the subscript is true and $0$ otherwise.
+
+## Illustration of more complex linear models
+
+```{r}
+#| label: fig-autoquad2d
+#| echo: false
+#| eval: true
+#| fig-cap: Linear regression models with quadratic trend (left) and a piecewise-linear model discretizing data based on quintiles (right) for the fuel autonomy of cars as a function of motor power.
+data(auto, package = "hecstatmod")
+hecblue <- rgb(red = 0, green = 60, blue = 113, max = 255)
+mod <- lm(mpg ~ horsepower + I(horsepower^2),  data = auto)
+g1 <- ggplot(data = auto, aes(x = horsepower, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = "y ~ x", se = FALSE, col = "gray") +
+  labs(x = "horsepower",
+       y = "fuel autonomy (in miles per US gallon)") +
+      geom_line(data = data.frame(horsepower = auto$horsepower, fitted = mod$fitted),
+                aes(horsepower, fitted), show.legend = FALSE)
+hp_cut <- with(auto, cut(horsepower, 
+              breaks = c(0, quantile(horsepower, probs = c(0.2, 0.4, 0.6, 0.8)), 300)))
+mod <- lm(mpg ~ hp_cut, data = auto)
+hp_seq <- seq(50, 250, by = 0.1)
+cut_seq <- cut(hp_seq, breaks = c(0, quantile(auto$horsepower, probs = c(0.2, 0.4, 0.6, 0.8)), 300))
+pred_seq <- c(model.matrix(~cut_seq) %*% coef(mod))
+g2 <- ggplot() +
+  geom_point(data = auto, aes(x = horsepower, y = mpg)) +
+   geom_line(
+     data = data.frame(
+        horsepower = hp_seq, 
+        fitted = pred_seq),
+    mapping = aes(x = horsepower, y = fitted), 
+    show.legend = FALSE) + 
+  labs(x = "horsepower",
+       y = "fuel autonomy (in miles per US gallon)") 
+g1 + g2
+```
+
+We can always transform a continuous variable into a categorical one to fit more flexible functional relations between $X$ and $Y$, at the cost of additional coefficients.
 
 ## Notation
 
@@ -179,10 +220,10 @@ The `BSJ92` dataset in package `hecedsm` contains the results of an experimental
 Variables include
 
 - `group`: factor for experimental group, one of directed reading-thinking activity (DRTA), think-aloud (TA) and directed reading group (DR)
-- `pretest1` score (out of 16) on pretest for the error detection task
-- `posttest1` score (out of 16) on an error detection task
+- `pretest1`: score (out of 16) on pretest for the error detection task
+- `posttest1`: score (out of 16) on an error detection task
 
-## Motivating example 3 --- College salary
+## Motivating example 3 --- College salary  {.smaller}
 
 The `college` dataset from `hecstatmod`  contains observational data collected in a college in the United States. The goal of the administration was to investigate potential gender inequality in the salary of faculty members. 
 
@@ -197,7 +238,7 @@ The data contains the following variables:
 -   `years`: number of years since PhD.
 
 
-## 6. Motivating example 3 --- Suggesting amounts for donations
+## Motivating example 4 --- Suggesting amounts for donations {.smaller}
 
 
 :::: {.columns}
@@ -253,7 +294,7 @@ Check that
 - the subset of observations used for statistical analysis is adequate.
 - there are no anomalies or outliers that would distort the results.
 
-## Model matrix of Example 1
+## EDA for Example 1
 
 Consider a linear model for the average product evaluation score, `prodeval`, as a function of the familiarity of the brand and the experimental factor `consistency`.
 
@@ -283,9 +324,9 @@ tail(modmat, n = 5L) # first five lines
 dim(modmat) # dimension of the model matrix
 ```
 
-## EDA for the `college` data of Example 3
+## EDA for Example 3
 
-Salary increases with years of service, there is a more heterogeneity in the salary of higher ranked professors.
+Salary increases with years of service, but there is more heterogeneity as we move up ranks.
 
 ```{r}
 #| label: fig-edacollege
@@ -317,7 +358,7 @@ Logically, assistant professors are either promoted or kicked out after at most 
 
 Variables `years` and `service`, are strongly correlated with a correlation of `r with(hecstatmod::college, cor(years, service))`.
 
-## EDA for the `college` data of Example 3
+## EDA for Example 3
 
 Note the much smaller number of women in the sample: this will impact our power to detect differences between sex. A contingency table of sex and academic rank can be useful to see if the proportion of women is the same in each rank: women represent `r round(100*11/(56+11),0)`\% of assistant professors and `r round(100*10/(54+10),0)`\% of associate profs, but only `r round(100*18/(248+18),0)`\% of full professors and these are better paid on average.
 
@@ -331,7 +372,7 @@ knitr::kable(table(college$sex, college$rank),
              booktabs = TRUE)
 ```
 
-## EDA for example 4 {.smaller}
+## EDA for Example 4 {.smaller}
 
 ```{r}
 data(MV23_S1, package = "hecedsm")
@@ -354,20 +395,7 @@ In **experimental designs**, only the variables experimentally manipulated (rand
 
 - additional concomitant covariates added if they are correlated with the response to increase power (e.g., pre-test for @Baumann:1992, which gives a measure of the individual student ability).
 
-In observational settings, we need a model to account for potential confounders.
-
-## What explanatories
-
-Continuous variables typically included as linear terms (first-order approximation if the response $Y$ is of the form $\mathsf{E}(Y \mid \boldsymbol{X}) = f(\boldsymbol{X})$ for $f$ sufficiently smooth.
-
-- More complex functions can be included! But beware of the interpretation.
-
-
-Categorical variables (as `factor`) with $K$ levels are cast into a series of $K-1$ **dummy** variables.
-
-
-
-
+In observational settings, we need variables to isolate the effect and control for confounders (more later).
 
 ## Parameter interpretation
 
@@ -382,7 +410,13 @@ In linear regression, the parameter $\beta_j$ measures the effect of the variabl
 & \qquad \qquad -\left\{\beta_1 x_1 + \beta_2 x_2 + \cdots \beta_p x_p \right\}
 \end{align*}
 
-The coefficient $\beta_j$ is the **marginal** effect of $X_j$ after all the other variables have been included in the model, $$\beta_j = \partial \mathsf{E}(Y \mid \boldsymbol{X})/ \partial X_j.$$ 
+## Marginal effect
+
+We can also consider the slope of the mean response as a function of an explanatory.
+
+$$\text{marginal effect of }X_j =\frac{\partial \mathsf{E}(Y \mid \boldsymbol{X})}{\partial X_j}.$$ 
+
+The coefficient $\beta_j$ is also the **marginal** effect of $X_j$ in simple settings (only linear terms, no interactions).
 
 
 ## Interpretation of the intercept
@@ -423,8 +457,7 @@ The equation of the simple linear model that includes the binary variable `condi
 #| eval: true
 #| echo: false
 #| fig-align: 'center'
-#| fig-cap: 'Simple linear model for the `MV23_S1` data using the binary variable `condition` as explanatory with half-violin and jittered scatterplots. Circles indicate the sample means.
-#|   are realistic.'
+#| fig-cap: "Simple linear model for the `MV23_S1` data using the binary variable `condition` as explanatory with half-violin and jittered scatterplots. Circles indicate the sample means."
 data("MV23_S1", package = "hecedsm")
 MV23_S1 <- MV23_S1 |>
   dplyr::mutate(amount2 = ifelse(is.na(amount), 0, amount),
@@ -445,11 +478,10 @@ ggplot(data = MV23_S1,
 ```
 
 
-Even if the linear model defines a line, the latter is only meaningful when evaluated at $0$ or $1$
+Even if the linear model defines a line, the latter is only meaningful when evaluated at $0$ or $1$.
 
 
-Data are heavily discretized, with lots of ties and zeros, but the sample size $(n=`r nrow(MV23_S1)`$ is large.
-
+Data are heavily discretized, with lots of ties and zeros, but the sample size $(n=`r nrow(MV23_S1)`)$ is large.
 
 ## Dummy coding for categorical variables
 
@@ -533,7 +565,7 @@ Consider a model matrix $\mathbf{X}$ and a linear model formulation $\mathsf{E}(
 The linear model includes
 
 - $p+1$ mean parameters $\boldsymbol{\beta}$ and 
-- a standard deviation $\sigma$. 
+- a variance parameter $\sigma^2$. 
 
 ## Ordinary least squares problem
 
@@ -559,7 +591,7 @@ This is the **ordinary least squares estimator** (OLS). The explicit solution me
 
 
 - The vector of fitted values $\widehat{\boldsymbol{y}} =\mathbf{X} \widehat{\boldsymbol{\beta}} = \mathbf{H}_{\mathbf{X}}\boldsymbol{y}$ is the projection of the response vector $\boldsymbol{y}$ on the linear span generated by the columns of $\mathbf{X}$.
-- The ordinary residuals $\boldsymbol{e} = \boldsymbol{y} - \widehat{\boldsymbol{y}}$ contains the difference
+- The ordinary residuals $\boldsymbol{e} = \boldsymbol{y} - \widehat{\boldsymbol{y}}$ are the difference between observation and predictions.
 - Simple algebraic manipulations show that the inner product between ordinary residuals and fitted values is zero, $$\widehat{\boldsymbol{y}}^\top \boldsymbol{e} = \sum_{i=1}^n \widehat{y}_ie_i=0,$$ so they are uncorrelated and $\widehat{\mathsf{cor}}(\widehat{\boldsymbol{y}}, \boldsymbol{e})=0$
    - Similarly, $\mathbf{X}^\top\boldsymbol{e}=\boldsymbol{0}_{p+1}$.
    - The mean of $\boldsymbol{e}$ must be zero provided that $\mathbf{1}_n$ is in the linear span of $\mathbf{X}$.
@@ -669,10 +701,10 @@ i(\boldsymbol{\beta}, \sigma^2) =
 Since zero off-correlations in normal models amount to independence, the MLE for $\sigma^2$ and $\boldsymbol{\beta}$ are asymptotically independent.
 
 
-Provided the $(p+1)$ square matrix $\mathbf{X}^\top\mathbf{X}$ is invertible, the large-sample variance
+Provided the $(p+1)$ square matrix $\mathbf{X}^\top\mathbf{X}$ is invertible, the large-sample variance of the coefficients are
 
-- of the ordinary least squares estimator is $\mathsf{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2(\mathbf{X}^\top\mathbf{X})^{-1}$ and 
-- that of the MLE of the variance is $2\sigma^4/n$.
+- $\mathsf{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2(\mathbf{X}^\top\mathbf{X})^{-1}$,
+- $\mathsf{Var}(\widehat{\sigma}^2) = 2\sigma^4/n$.
 
 ## References
 

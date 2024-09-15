@@ -468,8 +468,20 @@ Léo Belzile, HEC Montréal
 <ul>
 <li>The model formulation is <strong>conditional</strong> on the values of the observed explanatories; this amounts to treating the <span class="math inline">\(p\)</span> explanatory variables <span class="math inline">\(X_1, \ldots, X_p\)</span> as fixed quantities (non-random, or known in advance).</li>
 <li>The regression coefficients <span class="math inline">\(\boldsymbol{\beta}\)</span> is the same for all observations, but the vector of explanatories <span class="math inline">\(\mathbf{x}_i\)</span> may change from one observation to the next.</li>
-<li>The model is <strong>linear</strong> in the coefficients <span class="math inline">\(\beta_0, \ldots, \beta_p\)</span>, not in the explanatories.</li>
+<li>The model is <strong>linear</strong> in the coefficients <span class="math inline">\(\beta_0, \ldots, \beta_p\)</span>, not in the explanatories.
+<ul>
+<li>The mean model specification <span class="math inline">\(\mathsf{E}(Y \mid X =x) = \beta_0 + \beta_1 x^\beta_2\)</span> is nonlinear</li>
+<li>whereas <span class="math inline">\(\mathsf{E}(Y \mid X =x) = \beta_0 + \beta_1 x + \beta_2 x^2\)</span> is linear</li>
+<li>as is <span class="math inline">\(\mathsf{E}(Y \mid X =x) = \beta_0 + \sum_{j=1}^p\beta_j \mathbf{1}_{x \in (a_j, a_{j+1}]}\)</span> for <span class="math inline">\(a_1 &lt; \cdots &lt; a_{p+1}\)</span>, where <span class="math inline">\(\mathbf{1}_{\cdot}\)</span> is a binary indicator worth <span class="math inline">\(1\)</span> if the statement in the subscript is true and <span class="math inline">\(0\)</span> otherwise.</li>
+</ul></li>
 </ul>
+</section>
+<section id="illustration-of-more-complex-linear-models" class="slide level2">
+<h2>Illustration of more complex linear models</h2>
+
+<img data-src="MATH60604A-slides3_files/figure-revealjs/fig-autoquad2d-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;1: Linear regression models with quadratic trend (left) and a piecewise-linear model discretizing data based on quintiles (right) for the fuel autonomy of cars as a function of motor power.
+</p><p>We can always transform a continuous variable into a categorical one to fit more flexible functional relations between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, at the cost of additional coefficients.</p>
 </section>
 <section id="notation" class="slide level2">
 <h2>Notation</h2>
@@ -541,11 +553,11 @@ Léo Belzile, HEC Montréal
 <p>Variables include</p>
 <ul>
 <li><code>group</code>: factor for experimental group, one of directed reading-thinking activity (DRTA), think-aloud (TA) and directed reading group (DR)</li>
-<li><code>pretest1</code> score (out of 16) on pretest for the error detection task</li>
-<li><code>posttest1</code> score (out of 16) on an error detection task</li>
+<li><code>pretest1</code>: score (out of 16) on pretest for the error detection task</li>
+<li><code>posttest1</code>: score (out of 16) on an error detection task</li>
 </ul>
 </section>
-<section id="motivating-example-3-college-salary" class="slide level2">
+<section id="motivating-example-3-college-salary" class="slide level2 smaller">
 <h2>Motivating example 3 — College salary</h2>
 <p>The <code>college</code> dataset from <code>hecstatmod</code> contains observational data collected in a college in the United States. The goal of the administration was to investigate potential gender inequality in the salary of faculty members.</p>
 <p>The data contains the following variables:</p>
@@ -558,8 +570,8 @@ Léo Belzile, HEC Montréal
 <li><code>years</code>: number of years since PhD.</li>
 </ul>
 </section>
-<section id="motivating-example-3-suggesting-amounts-for-donations" class="slide level2">
-<h2>6. Motivating example 3 — Suggesting amounts for donations</h2>
+<section id="motivating-example-4-suggesting-amounts-for-donations" class="slide level2 smaller">
+<h2>Motivating example 4 — Suggesting amounts for donations</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Study 1 of <span class="citation" data-cites="Moon.VanEpps:2023">Moon and VanEpps (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> considers proportion of donators to a charity. Participants in the online panel were provided with an opportunity to win 25$ and donate part of this amount to a charity of their choosing. The data provided include only people who did not exceed this amount and indicated donating a non-zero amount.</p>
@@ -605,8 +617,8 @@ Léo Belzile, HEC Montréal
 <li>there are no anomalies or outliers that would distort the results.</li>
 </ul>
 </section>
-<section id="model-matrix-of-example-1" class="slide level2">
-<h2>Model matrix of Example 1</h2>
+<section id="eda-for-example-1" class="slide level2">
+<h2>EDA for Example 1</h2>
 <p>Consider a linear model for the average product evaluation score, <code>prodeval</code>, as a function of the familiarity of the brand and the experimental factor <code>consistency</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">data</span>(LC19_S1, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
@@ -640,17 +652,17 @@ Léo Belzile, HEC Montréal
 <span id="cb2-12"><a href=""></a><span class="do">## [1] 96  3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="eda-for-the-college-data-of-example-3" class="slide level2">
-<h2>EDA for the <code>college</code> data of Example 3</h2>
-<p>Salary increases with years of service, there is a more heterogeneity in the salary of higher ranked professors.</p>
+<section id="eda-for-example-3" class="slide level2">
+<h2>EDA for Example 3</h2>
+<p>Salary increases with years of service, but there is more heterogeneity as we move up ranks.</p>
 
 <img data-src="MATH60604A-slides3_files/figure-revealjs/fig-edacollege-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;1: Salaries of professors as a function of the number of years of service and the academic ranking
+Figure&nbsp;2: Salaries of professors as a function of the number of years of service and the academic ranking
 </p><p>Logically, assistant professors are either promoted or kicked out after at most 6 years according to the data. The limited number of years prevents large variability for their salaries.</p>
 <p>Variables <code>years</code> and <code>service</code>, are strongly correlated with a correlation of 0.91.</p>
 </section>
-<section id="eda-for-the-college-data-of-example-3-1" class="slide level2">
-<h2>EDA for the <code>college</code> data of Example 3</h2>
+<section id="eda-for-example-3-1" class="slide level2">
+<h2>EDA for Example 3</h2>
 <p>Note the much smaller number of women in the sample: this will impact our power to detect differences between sex. A contingency table of sex and academic rank can be useful to see if the proportion of women is the same in each rank: women represent 16% of assistant professors and 16% of associate profs, but only 7% of full professors and these are better paid on average.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -683,7 +695,7 @@ Figure&nbsp;1: Salaries of professors as a function of the number of years of se
 </div>
 </section>
 <section id="eda-for-example-4" class="slide level2 smaller">
-<h2>EDA for example 4</h2>
+<h2>EDA for Example 4</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">data</span>(MV23_S1, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
 <span id="cb3-2"><a href=""></a><span class="fu">str</span>(MV23_S1)</span>
@@ -715,15 +727,7 @@ Figure&nbsp;1: Salaries of professors as a function of the number of years of se
 <ul>
 <li>additional concomitant covariates added if they are correlated with the response to increase power (e.g., pre-test for <span class="citation" data-cites="Baumann:1992">Baumann, Seifert-Kessell, and Jones (<a href="#/references" role="doc-biblioref" onclick="">1992</a>)</span>, which gives a measure of the individual student ability).</li>
 </ul>
-<p>In observational settings, we need a model to account for potential confounders.</p>
-</section>
-<section id="what-explanatories-1" class="slide level2">
-<h2>What explanatories</h2>
-<p>Continuous variables typically included as linear terms (first-order approximation if the response <span class="math inline">\(Y\)</span> is of the form <span class="math inline">\(\mathsf{E}(Y \mid \boldsymbol{X}) = f(\boldsymbol{X})\)</span> for <span class="math inline">\(f\)</span> sufficiently smooth.</p>
-<ul>
-<li>More complex functions can be included! But beware of the interpretation.</li>
-</ul>
-<p>Categorical variables (as <code>factor</code>) with <span class="math inline">\(K\)</span> levels are cast into a series of <span class="math inline">\(K-1\)</span> <strong>dummy</strong> variables.</p>
+<p>In observational settings, we need variables to isolate the effect and control for confounders (more later).</p>
 </section>
 <section id="parameter-interpretation" class="slide level2">
 <h2>Parameter interpretation</h2>
@@ -736,7 +740,12 @@ Figure&nbsp;1: Salaries of professors as a function of the number of years of se
 &amp; \qquad \qquad -\left\{\beta_1 x_1 + \beta_2 x_2 + \cdots \beta_p x_p \right\}
 \end{align*}\]</span></li>
 </ul>
-<p>The coefficient <span class="math inline">\(\beta_j\)</span> is the <strong>marginal</strong> effect of <span class="math inline">\(X_j\)</span> after all the other variables have been included in the model, <span class="math display">\[\beta_j = \partial \mathsf{E}(Y \mid \boldsymbol{X})/ \partial X_j.\]</span></p>
+</section>
+<section id="marginal-effect" class="slide level2">
+<h2>Marginal effect</h2>
+<p>We can also consider the slope of the mean response as a function of an explanatory.</p>
+<p><span class="math display">\[\text{marginal effect of }X_j =\frac{\partial \mathsf{E}(Y \mid \boldsymbol{X})}{\partial X_j}.\]</span></p>
+<p>The coefficient <span class="math inline">\(\beta_j\)</span> is also the <strong>marginal</strong> effect of <span class="math inline">\(X_j\)</span> in simple settings (only linear terms, no interactions).</p>
 </section>
 <section id="interpretation-of-the-intercept" class="slide level2">
 <h2>Interpretation of the intercept</h2>
@@ -767,9 +776,9 @@ Figure&nbsp;1: Salaries of professors as a function of the number of years of se
 <h2>Simple linear regression with a binary explanatory</h2>
 
 <img data-src="MATH60604A-slides3_files/figure-revealjs/fig-donation-moon-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p class="caption">
-Figure&nbsp;2: Simple linear model for the <code>MV23_S1</code> data using the binary variable <code>condition</code> as explanatory with half-violin and jittered scatterplots. Circles indicate the sample means. are realistic.
-</p><p>Even if the linear model defines a line, the latter is only meaningful when evaluated at <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span></p>
-<p>Data are heavily discretized, with lots of ties and zeros, but the sample size <span class="math inline">\((n=869\)</span> is large.</p>
+Figure&nbsp;3: Simple linear model for the <code>MV23_S1</code> data using the binary variable <code>condition</code> as explanatory with half-violin and jittered scatterplots. Circles indicate the sample means.
+</p><p>Even if the linear model defines a line, the latter is only meaningful when evaluated at <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>.</p>
+<p>Data are heavily discretized, with lots of ties and zeros, but the sample size <span class="math inline">\((n=869)\)</span> is large.</p>
 </section>
 <section id="dummy-coding-for-categorical-variables" class="slide level2">
 <h2>Dummy coding for categorical variables</h2>
@@ -886,7 +895,7 @@ Table&nbsp;1: Parametrization of dummies for a categorical variable with the def
 <p>The linear model includes</p>
 <ul>
 <li><span class="math inline">\(p+1\)</span> mean parameters <span class="math inline">\(\boldsymbol{\beta}\)</span> and</li>
-<li>a standard deviation <span class="math inline">\(\sigma\)</span>.</li>
+<li>a variance parameter <span class="math inline">\(\sigma^2\)</span>.</li>
 </ul>
 </section>
 <section id="ordinary-least-squares-problem" class="slide level2">
@@ -907,7 +916,7 @@ Table&nbsp;1: Parametrization of dummies for a categorical variable with the def
 <h2>Orthogonal decomposition</h2>
 <ul>
 <li>The vector of fitted values <span class="math inline">\(\widehat{\boldsymbol{y}} =\mathbf{X} \widehat{\boldsymbol{\beta}} = \mathbf{H}_{\mathbf{X}}\boldsymbol{y}\)</span> is the projection of the response vector <span class="math inline">\(\boldsymbol{y}\)</span> on the linear span generated by the columns of <span class="math inline">\(\mathbf{X}\)</span>.</li>
-<li>The ordinary residuals <span class="math inline">\(\boldsymbol{e} = \boldsymbol{y} - \widehat{\boldsymbol{y}}\)</span> contains the difference</li>
+<li>The ordinary residuals <span class="math inline">\(\boldsymbol{e} = \boldsymbol{y} - \widehat{\boldsymbol{y}}\)</span> are the difference between observation and predictions.</li>
 <li>Simple algebraic manipulations show that the inner product between ordinary residuals and fitted values is zero, <span class="math display">\[\widehat{\boldsymbol{y}}^\top \boldsymbol{e} = \sum_{i=1}^n \widehat{y}_ie_i=0,\]</span> so they are uncorrelated and <span class="math inline">\(\widehat{\mathsf{cor}}(\widehat{\boldsymbol{y}}, \boldsymbol{e})=0\)</span>
 <ul>
 <li>Similarly, <span class="math inline">\(\mathbf{X}^\top\boldsymbol{e}=\boldsymbol{0}_{p+1}\)</span>.</li>
@@ -919,7 +928,7 @@ Table&nbsp;1: Parametrization of dummies for a categorical variable with the def
 <h2>Residuals</h2>
 
 <img data-src="MATH60604A-slides3_files/figure-revealjs/fig-vertdist-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;3: Ordinary residuals <span class="math inline">\(e_i\)</span> (vertical vectors) added to the regression line in the scatter <span class="math inline">\((x, y)\)</span> (left) and the fit of response <span class="math inline">\(y_i\)</span> against fitted values <span class="math inline">\(\widehat{y}_i\)</span>. The ordinary least squares line minimizes the average squared length of the ordinary residuals.
+Figure&nbsp;4: Ordinary residuals <span class="math inline">\(e_i\)</span> (vertical vectors) added to the regression line in the scatter <span class="math inline">\((x, y)\)</span> (left) and the fit of response <span class="math inline">\(y_i\)</span> against fitted values <span class="math inline">\(\widehat{y}_i\)</span>. The ordinary least squares line minimizes the average squared length of the ordinary residuals.
 </p></section>
 <section id="maximum-likelihood-estimation-of-the-normal-linear-model" class="slide level2">
 <h2>Maximum likelihood estimation of the normal linear model</h2>
@@ -966,10 +975,10 @@ i(\boldsymbol{\beta}, \sigma^2) =
 <section id="remarks" class="slide level2">
 <h2>Remarks</h2>
 <p>Since zero off-correlations in normal models amount to independence, the MLE for <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\boldsymbol{\beta}\)</span> are asymptotically independent.</p>
-<p>Provided the <span class="math inline">\((p+1)\)</span> square matrix <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> is invertible, the large-sample variance</p>
+<p>Provided the <span class="math inline">\((p+1)\)</span> square matrix <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> is invertible, the large-sample variance of the coefficients are</p>
 <ul>
-<li>of the ordinary least squares estimator is <span class="math inline">\(\mathsf{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2(\mathbf{X}^\top\mathbf{X})^{-1}\)</span> and</li>
-<li>that of the MLE of the variance is <span class="math inline">\(2\sigma^4/n\)</span>.</li>
+<li><span class="math inline">\(\mathsf{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2(\mathbf{X}^\top\mathbf{X})^{-1}\)</span>,</li>
+<li><span class="math inline">\(\mathsf{Var}(\widehat{\sigma}^2) = 2\sigma^4/n\)</span>.</li>
 </ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
