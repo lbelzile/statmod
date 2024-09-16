@@ -4,7 +4,7 @@ title: "Linear models"
 
 ### Learning objectives
 
-
+* perform exploratory data analysis on a dataset for the purpose of regression modelling
 * interpret the coefficients of a linear model (binary, continuous and categorical variables);
 * fit the model by least squares (using dedicated software), correctly accounting for categorical variables;
 

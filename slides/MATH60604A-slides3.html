@@ -729,6 +729,15 @@ Figure&nbsp;2: Salaries of professors as a function of the number of years of se
 </ul>
 <p>In observational settings, we need variables to isolate the effect and control for confounders (more later).</p>
 </section>
+<section id="parameter-interpretation-intercept" class="slide level2">
+<h2>Parameter interpretation — intercept</h2>
+<p>The mean model specification is <span class="math display">\[\begin{align*}
+\mathsf{E}(Y_i \mid \boldsymbol{X}_i = \boldsymbol{x}_i) = \beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}.
+\end{align*}\]</span> The <strong>intercept</strong> <span class="math inline">\(\beta_0\)</span> represents the mean value of <span class="math inline">\(Y\)</span> when <strong>all</strong> of the explanatory variables values are set to zero, <span class="math inline">\(\boldsymbol{x}_i=\boldsymbol{0}_p\)</span>. <span class="math display">\[\begin{align*}
+\beta_0 &amp;= \mathsf{E}(Y \mid X_1=0,X_2=0,\ldots,X_p=0) \\
+&amp;= \beta_0 + \beta_1 \times 0 + \beta_2 \times 0 + \cdots + \beta_p \times 0
+\end{align*}\]</span> Of course, it is possible that this interpretation does not make sense in the context of the study. Centering continuous covariates (so that their sample mean is zero) makes the intercept more interpretable.</p>
+</section>
 <section id="parameter-interpretation" class="slide level2">
 <h2>Parameter interpretation</h2>
 <p>In linear regression, the parameter <span class="math inline">\(\beta_j\)</span> measures the effect of the variable <span class="math inline">\(X_j\)</span> on the mean response variable <span class="math inline">\(\mathsf{E}(Y \mid \boldsymbol{X})\)</span> while controlling for all other variables in the model.</p>
@@ -743,18 +752,9 @@ Figure&nbsp;2: Salaries of professors as a function of the number of years of se
 </section>
 <section id="marginal-effect" class="slide level2">
 <h2>Marginal effect</h2>
-<p>We can also consider the slope of the mean response as a function of an explanatory.</p>
+<p>We can also consider the slope of the mean response as a function of an explanatory, aka <strong>marginal effect</strong>:</p>
 <p><span class="math display">\[\text{marginal effect of }X_j =\frac{\partial \mathsf{E}(Y \mid \boldsymbol{X})}{\partial X_j}.\]</span></p>
-<p>The coefficient <span class="math inline">\(\beta_j\)</span> is also the <strong>marginal</strong> effect of <span class="math inline">\(X_j\)</span> in simple settings (only linear terms, no interactions).</p>
-</section>
-<section id="interpretation-of-the-intercept" class="slide level2">
-<h2>Interpretation of the intercept</h2>
-<p>The mean model specification is <span class="math display">\[\begin{align*}
-\mathsf{E}(Y_i \mid \boldsymbol{X}_i = \boldsymbol{x}_i) = \beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip}.
-\end{align*}\]</span> The <strong>intercept</strong> <span class="math inline">\(\beta_0\)</span> represents the mean value of <span class="math inline">\(Y\)</span> when <strong>all</strong> of the explanatory variables values are set to zero, <span class="math inline">\(\boldsymbol{x}_i=\boldsymbol{0}_p\)</span>. <span class="math display">\[\begin{align*}
-\beta_0 &amp;= \mathsf{E}(Y \mid X_1=0,X_2=0,\ldots,X_p=0) \\
-&amp;= \beta_0 + \beta_1 \times 0 + \beta_2 \times 0 + \cdots + \beta_p \times 0
-\end{align*}\]</span> Of course, it is possible that this interpretation does not make sense in the context of the study. Centering continuous covariates (so that their sample mean is zero) makes the intercept more interpretable.</p>
+<p>The coefficient <span class="math inline">\(\beta_j\)</span> is also the marginal effect of <span class="math inline">\(X_j\)</span> in simple settings (only linear terms, no interactions).</p>
 </section>
 <section id="linear-models-with-a-single-binary-variable" class="slide level2">
 <h2>Linear models with a single binary variable</h2>
@@ -869,24 +869,58 @@ Table&nbsp;1: Parametrization of dummies for a categorical variable with the def
 </ul>
 <p>We thus find that <span class="math inline">\(\beta_1\)</span> is the difference in mean between group <code>DRTA</code> and group <code>DR</code>, and similarly <span class="math inline">\(\beta_2=\mu_{\texttt{TA}}- \mu_{\texttt{DR}}\)</span>.</p>
 </section>
-<section id="parameter-interpretation-2" class="slide level2 smaller">
-<h2>Parameter interpretation</h2>
+<section id="model-for-college-data" class="slide level2">
+<h2>Model for college data</h2>
+<p>We consider a linear regression model for the <code>college</code> data that includes sex, academic rank, field of study and the number of years of service as explanatories.</p>
+<p>The postulated model is <span class="math display">\[\begin{align*}
+\texttt{salary} &amp;= \beta_0 + \beta_1 \texttt{sex}_{\texttt{woman}} +\beta_2 \texttt{field}_{\texttt{theoretical}} \\&amp;\quad +\beta_3 \texttt{rank}_{\texttt{associate}}
++\beta_4 \texttt{rank}_{\texttt{full}}  +\beta_5 \texttt{service} + \varepsilon.
+\end{align*}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Fit a linear regression</span></span>
-<span id="cb5-2"><a href=""></a>linmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb5-3"><a href=""></a>   posttest1 <span class="sc">~</span> pretest1 <span class="sc">+</span> group, </span>
-<span id="cb5-4"><a href=""></a>   <span class="at">data =</span> BSJ92 <span class="sc">|&gt;</span> </span>
-<span id="cb5-5"><a href=""></a>      dplyr<span class="sc">::</span><span class="fu">mutate</span>( <span class="co"># mean-center pretest result</span></span>
-<span id="cb5-6"><a href=""></a>        <span class="at">pretest1 =</span> pretest1 <span class="sc">-</span> <span class="fu">mean</span>(pretest1)))</span>
-<span id="cb5-7"><a href=""></a><span class="fu">coef</span>(linmod) <span class="co"># Mean model coefficients</span></span>
-<span id="cb5-8"><a href=""></a><span class="do">## (Intercept)    pretest1   groupDRTA     groupTA </span></span>
-<span id="cb5-9"><a href=""></a><span class="do">##       6.188       0.693       3.627       2.036</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top" style="width:100%;">
+<caption>Estimated coefficients of the linear model for the <span class="math inline">\(\texttt{college}\)</span> (in USD, rounded to the nearest dollar).</caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(\widehat{\beta}_0\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\widehat{\beta}_1\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\widehat{\beta}_2\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\widehat{\beta}_3\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\widehat{\beta}_4\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\widehat{\beta}_5\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">86596</td>
+<td style="text-align: left;">-4771</td>
+<td style="text-align: left;">-13473</td>
+<td style="text-align: left;">14560</td>
+<td style="text-align: left;">49160</td>
+<td style="text-align: left;">-89</td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+</section>
+<section id="parameter-interpretation-for-college-data" class="slide level2 smaller">
+<h2>Parameter interpretation for college data</h2>
 <ul>
-<li>For each point score on the pre-test, the post-test score increases by 6.188 marks regardless of the group.</li>
-<li>The <code>DRTA</code> group has an average which is 3.627 higher than that of people with the same pre-test score from the baseline <code>DR</code> group.</li>
-<li>The <code>TA</code> groups, <em>ceteris paribus</em> score 2.036 points higher on average than those of the <code>DR</code> group.</li>
-<li>Because we centered the continuous covariate <code>pretest1</code>, the intercept <span class="math inline">\(\beta_0\)</span> is the average post-test score of a person from the <code>DR</code> group who scored the overall average of all 66 students in the pre-test.</li>
+<li>The estimated intercept is <span class="math inline">\(\widehat{\beta}_0=86596\)</span> dollars; it corresponds to the mean salary of men assistant professors who just started the job and works in an applied domain.</li>
+<li>everything else being equal (same field, academic rank, and number of years of service), the estimated salary difference between a woman and is estimated at <span class="math inline">\(\widehat{\beta}_1=-4771\)</span> dollars.</li>
+<li><em>ceteris paribus</em>, the salary difference between a professor working in a theoretical field and one working in an applied field is <span class="math inline">\(\beta_2\)</span> dollars: our estimate of this difference is <span class="math inline">\(-13473\)</span> dollars, meaning applied pays more than theoretical.</li>
+<li><em>ceteris paribus</em>, the estimated mean salary difference between associate and assistant professors is <span class="math inline">\(\widehat{\beta}_3=14560\)</span> dollars.</li>
+<li><em>ceteris paribus</em>, the estimated mean salary difference between full and assistant professors is <span class="math inline">\(\widehat{\beta}_4=49160\)</span> dollars.</li>
+<li>within the same academic rank, every additional year of service leads to a mean salary increase of <span class="math inline">\(\widehat{\beta}_5=-89\)</span> dollars.</li>
 </ul>
 </section>
 <section id="parameter-estimation" class="slide level2">
@@ -941,13 +975,15 @@ Figure&nbsp;4: Ordinary residuals <span class="math inline">\(e_i\)</span> (vert
 <p>The MLE for <span class="math inline">\(\sigma^2\)</span> is obtained from the profile log likelihood for <span class="math inline">\(\sigma^2\)</span>, excluding constant terms that don’t depend on <span class="math inline">\(\sigma^2\)</span>, is <span class="math display">\[\begin{align*}
 \ell_{\mathrm{p}}(\sigma^2)
 &amp;\propto-\frac{1}{2}\left\{n\ln\sigma^2+\frac{1}{\sigma^2}(\boldsymbol{y}-\mathbf{X}\hat{\boldsymbol{\beta}})^\top(\boldsymbol{y}-\mathbf{X}\hat{\boldsymbol{\beta}})\right\}.
+\end{align*}\]</span> Differentiating each term with respect to <span class="math inline">\(\sigma^2\)</span> and setting the gradient to zero, we obtain <span class="math display">\[\begin{align*}
+\frac{\partial \ell_{\mathrm{p}}(\sigma^2)}{\partial \sigma^2} = -\frac{n}{2\sigma^2} + \frac{(\boldsymbol{y}-\mathbf{X}\hat{\boldsymbol{\beta}})^\top(\boldsymbol{y}-\mathbf{X}\hat{\boldsymbol{\beta}})}{2\sigma^4} = 0
 \end{align*}\]</span></p>
 </section>
 <section id="mle-for-the-variance" class="slide level2">
 <h2>MLE for the variance</h2>
-<p>Differentiating each term with respect to <span class="math inline">\(\sigma^2\)</span> and setting the gradient equal to zero yields the maximum likelihood estimator <span class="math display">\[\begin{align*}
-\widehat{\sigma}^2&amp;=\frac{1}{n}(\boldsymbol{Y}-\mathbf{X}\hat{\boldsymbol{\beta}})^\top(\boldsymbol{Y}-\mathbf{X}\hat{\boldsymbol{\beta}})\\&amp;= \frac{1}{n} \sum_{i=1}^n (y_i - \mathbf{x}_i\widehat{\boldsymbol{\beta}})^2\\&amp;= \frac{\mathsf{SS}_e}{n};
-\end{align*}\]</span> where <span class="math inline">\(\mathsf{SS}_e\)</span> is the sum of squared residuals. The usual unbiased estimator of <span class="math inline">\(\sigma^2\)</span> calculated by software is <span class="math inline">\(S^2=\mathsf{SS}_e/(n-p-1)\)</span>, where the denominator is the sample size <span class="math inline">\(n\)</span> minus the number of mean parameters <span class="math inline">\(\boldsymbol{\beta}\)</span>, <span class="math inline">\(p+1\)</span>.</p>
+<p>The maximum likelihood estimator is the mean squared residuals, <span class="math display">\[\begin{align*}
+\widehat{\sigma}^2&amp;=\frac{1}{n}(\boldsymbol{Y}-\mathbf{X}\hat{\boldsymbol{\beta}})^\top(\boldsymbol{Y}-\mathbf{X}\hat{\boldsymbol{\beta}})\\&amp;= \frac{1}{n} \sum_{i=1}^n (y_i - \mathbf{x}_i\widehat{\boldsymbol{\beta}})^2= \frac{\mathsf{SS}_e}{n}.
+\end{align*}\]</span> The usual unbiased estimator of <span class="math inline">\(\sigma^2\)</span> calculated by software is <span class="math display">\[S^2=\mathsf{SS}_e/(n-p-1),\]</span> where the denominator is the sample size minus the number of mean parameters.</p>
 </section>
 <section id="observed-information-for-normal-linear-regression" class="slide level2">
 <h2>Observed information for normal linear regression</h2>

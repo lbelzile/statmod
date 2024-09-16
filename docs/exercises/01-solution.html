@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.1">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Syllabus – Statistical modelling</title>
+<title>Statistical inference – Statistical modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,17 +102,46 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Statistical modelling</span>
     </a>
   </div>
@@ -89,15 +152,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./syllabus.html" aria-current="page"> 
+    <a class="nav-link" href="../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./content/index.html"> 
+    <a class="nav-link" href="../content/index.html"> 
 <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./exercises/index.html"> 
+    <a class="nav-link active" href="../exercises/index.html" aria-current="page"> 
 <span class="menu-text">Exercises</span></a>
   </li>  
   <li class="nav-item">
@@ -110,38 +173,74 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/01-exercise.html">Hypothesis testing</a></li><li class="breadcrumb-item"><a href="../exercises/01-solution.html">Solution 1</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Hypothesis testing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/01-exercise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/01-solution.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Solution 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of content</h2>
    
   <ul>
-  <li><a href="#course-description" id="toc-course-description" class="nav-link active" data-scroll-target="#course-description">Course description</a></li>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#target-audience" id="toc-target-audience" class="nav-link" data-scroll-target="#target-audience">Target audience</a></li>
-  <li><a href="#programming" id="toc-programming" class="nav-link" data-scroll-target="#programming">Programming</a></li>
-  <li><a href="#evaluations-and-grades" id="toc-evaluations-and-grades" class="nav-link" data-scroll-target="#evaluations-and-grades">Evaluations and grades</a></li>
-  <li><a href="#course-content" id="toc-course-content" class="nav-link" data-scroll-target="#course-content">Course content</a>
-  <ul class="collapse">
-  <li><a href="#intellectual-integrity-and-generative-artificial-intelligence" id="toc-intellectual-integrity-and-generative-artificial-intelligence" class="nav-link" data-scroll-target="#intellectual-integrity-and-generative-artificial-intelligence">Intellectual integrity and generative artificial intelligence</a></li>
-  <li><a href="#student-services" id="toc-student-services" class="nav-link" data-scroll-target="#student-services">Student services</a></li>
-  <li><a href="#harassment-and-sexual-violence" id="toc-harassment-and-sexual-violence" class="nav-link" data-scroll-target="#harassment-and-sexual-violence">Harassment and sexual violence</a></li>
-  <li><a href="#family-policy" id="toc-family-policy" class="nav-link" data-scroll-target="#family-policy">Family policy</a></li>
-  </ul></li>
+  <li><a href="#solution-to-exercise-1.1" id="toc-solution-to-exercise-1.1" class="nav-link active" data-scroll-target="#solution-to-exercise-1.1">Solution to Exercise 1.1</a></li>
+  <li><a href="#solution-to-exercise-1.2" id="toc-solution-to-exercise-1.2" class="nav-link" data-scroll-target="#solution-to-exercise-1.2">Solution to Exercise 1.2</a></li>
+  <li><a href="#solution-to-exercise-1.3" id="toc-solution-to-exercise-1.3" class="nav-link" data-scroll-target="#solution-to-exercise-1.3">Solution to Exercise 1.3</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/01-exercise.html">Hypothesis testing</a></li><li class="breadcrumb-item"><a href="../exercises/01-solution.html">Solution 1</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Syllabus</h1>
+<h1 class="title">Statistical inference</h1>
 </div>
 
 
@@ -158,210 +257,156 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="grid course-details course-details-smaller">
-<section id="instructor-1" class="level3 g-col-4">
-<h3 class="anchored" data-anchor-id="instructor-1">Instructor 1</h3>
-<ul>
-<li><i class="fa-solid fa-user" aria-hidden="true"></i> &nbsp; <a href="lbelzile.bitbucket.io"><span>Dr.&nbsp;Léo Belzile</span></a></li>
-<li><i class="fa-solid fa-university" aria-hidden="true"></i> &nbsp; CSC 4.850</li>
-<li><i class="fa-solid fa-envelope" aria-hidden="true"></i> &nbsp; <a href="mailto:leo.belzile@hec.ca">leo.belzile@hec.ca</a></li>
-</ul>
-</section>
-<section id="instructor-2" class="level3 g-col-4">
-<h3 class="anchored" data-anchor-id="instructor-2">Instructor 2</h3>
-<ul>
-<li><i class="fa-solid fa-user" aria-hidden="true"></i> &nbsp; <a href="https://www.hec.ca/en/profs/juliana.schulz.html"><span>Dr.&nbsp;Juliana Schulz</span></a></li>
-<li><i class="fa-solid fa-university" aria-hidden="true"></i> &nbsp; CSC 4.809</li>
-<li><i class="fa-solid fa-envelope" aria-hidden="true"></i> &nbsp; <a href="mailto:juliana.schulz@hec.ca">juliana.schulz@hec.ca</a></li>
-</ul>
-</section>
-<section id="course-details" class="level3 g-col-4">
-<h3 class="anchored" data-anchor-id="course-details">Course details</h3>
-<ul>
-<li><i class="fa-solid fa-calendar-alt" aria-hidden="true"></i> &nbsp; Fall 2024</li>
-<li><i class="fa-solid fa-calendar" aria-hidden="true"></i> &nbsp; Thursday</li>
-<li><i class="fa-solid fa-clock" aria-hidden="true"></i> &nbsp; 12:00–15:00</li>
-<li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> &nbsp; <a href="https://www.hec.ca/campus/cote_sainte_catherine/1er_etage/salles_cours/hdesmarais.html">Côte-Ste-Catherine, salle Hélène-Desmarais</a></li>
-</ul>
-</section>
+<section id="solution-to-exercise-1.1" class="level2">
+<h2 class="anchored" data-anchor-id="solution-to-exercise-1.1">Solution to Exercise 1.1</h2>
+<ol type="1">
+<li>The level of the test is 5%, so we should reject 5% of the time under the null.</li>
+<li>The curve is the power curve, i.e., the percentage of rejection of the null hypothesis for one-sample <span class="math inline">\(t\)</span>-test. The further away from the true value <span class="math inline">\(\mu\)</span>, the higher the ability to detect departures from <span class="math inline">\(\mathscr{H}_0\)</span>. Because we set <span class="math inline">\(\alpha=0.05\)</span>, the curve should be around 0.05 near <span class="math inline">\(\mu\)</span> and increase towards 1 as we move away from the true population mean.</li>
+<li>Power increases if the sample size <span class="math inline">\(n\)</span> increases, so we expect to see the curve be higher everywhere, but at <span class="math inline">\(\mu\)</span> where it should be close to <span class="math inline">\(0.05\)</span> if the test is calibrated.</li>
+<li>The data are clearly not symmetric and heavily discretized, yet the power curve of the one-sample <span class="math inline">\(t\)</span>-test is steadily increasing and the nominal level matches the type I error. This illustrates the robustness of the test to departures from normality.</li>
+</ol>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(renfe, <span class="at">package =</span> <span class="st">"hecstatmod"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>renfe_sub <span class="ot">&lt;-</span> renfe <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>         dplyr<span class="sc">::</span><span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">"AVE"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">as.list</span>(MASS<span class="sc">::</span><span class="fu">fitdistr</span>(renfe_sub<span class="sc">$</span>duration, <span class="st">"normal"</span>)<span class="sc">$</span>estimate)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> renfe_sub,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">sample =</span> duration)) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>(<span class="at">dparams =</span> <span class="fu">list</span>(<span class="at">mean =</span> params<span class="sc">$</span>mean, </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sd =</span> params<span class="sc">$</span>sd)) <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01-solution_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<section id="course-description" class="level2">
-<h2 class="anchored" data-anchor-id="course-description">Course description</h2>
-<p>The objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.</p>
-<p>The course will focus on regression models, including linear models, generalized linear models and models for longitudinal data with random effects and correlation structures. For each of these models, basic inference principles will be covered, notably hypothesis testing and estimation procedures.</p>
-<ul>
-<li>Basic principles in inference and statistical modeling</li>
-<li>Linear models</li>
-<li>Generalized linear models</li>
-<li>Models for longitudinal data and correlated data</li>
-<li>Introduction to survival analysis</li>
-</ul>
-</section>
-<section id="prerequisites" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<p>The course is of an overview course. Students should have basic training in statistics at the level of <a href="https://www.openintro.org/book/isrs/"><em>Introductory Statistics with Randomization and Simulation</em></a> (Chapters 1–4, excluding special topics).</p>
-</section>
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<p>The course learning objectives are listed <a href="./learningobjectives.html">here</a>.</p>
-</section>
-<section id="target-audience" class="level2">
-<h2 class="anchored" data-anchor-id="target-audience">Target audience</h2>
-<p>Statistical modelling is a compulsory course of the M.Sc. in Data Science and Business Analytics (Supervised Project stream) and an optional course for the Thesis stream. Please note this course is not credited in the “Intelligence d’affaires” specialization: the course is incompatible with MATH606019(A).</p>
-<!--
-
-
-## License
-
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-
-
-## Contributors
-
-- [Léo Belzile](https://www.hec.ca/en/profs/leo.belzile.html)
-  wrote the new version of the course notes and created most of the exercise sheets and the accompanying solutions.
-- [Denis Larocque](https://www.hec.ca/en/profs/denis.larocque.html)
-  wrote the initial course notes for _Analyse et inférence statistique_, a precursor to this course.
-- [Aurélie Labbe](https://www.hec.ca/en/profs/aurelie.labbe.html)
-  transformed these notes into slides and taught multiple iterations of the course, writing **R** scripts and some exercises.
-- [Kevin McGregor](https://kevmcgregor.com/) translated the slides from French to English.
-- [Juliana Schulz](https://www.hec.ca/en/profs/juliana.schulz.html) taught the first iteration of MATH60604A in the Fall 2019 and created the material for survival analysis.
-
--->
-</section>
-<section id="programming" class="level1">
-<h1>Programming</h1>
-<p>The course uses the <a href="https://cran.r-project.org/"><strong>R</strong></a> programming language. If you have never programmed before, you may find there is a steep learning curve. <strong>R</strong> has a vibrant user community, so most routines of interest have been contributed by other users and you can get support through help forums. You may want to look at <a href="https://alexd106.github.io/intro2R/index.html">Douglas et al.&nbsp;(2024) <em>An introduction to R</em></a>, <a href="https://bookdown.org/palmjulia/r_intro_script/">Julia Palms’ <em>Introduction to R</em></a>, the free <a href="https://cran.r-project.org/manuals.html">CRAN manuals</a> or similar introductions, or online courses, to brush up the basics of the programming language.</p>
-<p>Follow the <a href="./content/installation.html">instructions</a> to install <strong>R</strong>.</p>
-</section>
-<section id="evaluations-and-grades" class="level1">
-<h1>Evaluations and grades</h1>
-<p>Your final grade will be based on</p>
-<ul>
-<li>a three part group project, with due dates on Friday October 11th, November 8th and December 6th.</li>
-<li>a midterm evaluation taking place on Tuesday, October 29th, from 12:00-15:00, and</li>
-<li>a final examination which will take place on Thursday, December 12th, from 13:30-16:30.</li>
-</ul>
-<p>Students can bring in one-sided crib-sheet (letter paper) for the midterm, and a two-sided one for the final.</p>
-<p>Team work counts towards your final grade only if you score more than 50% on individual evaluations.</p>
-<div class="centered-table">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 40%">
-<col style="width: 12%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Assignment</th>
-<th style="text-align: center;">Points</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Course project (3 x 10 pt)</td>
-<td style="text-align: center;">30</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Midterm (30 pt)</td>
-<td style="text-align: center;">30</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Final examination (40 pt)</td>
-<td style="text-align: center;">40</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Total</td>
-<td style="text-align: center;">100</td>
-</tr>
-</tbody>
-</table>
+</div>
 </div>
 </section>
-<section id="course-content" class="level1">
-<h1>Course content</h1>
-<p>Below is a tentative schedule for the semester.</p>
+<section id="solution-to-exercise-1.2" class="level2">
+<h2 class="anchored" data-anchor-id="solution-to-exercise-1.2">Solution to Exercise 1.2</h2>
 <ol type="1">
-<li><strong>Introduction</strong>
-<ul>
-<li>Syllabus</li>
-<li>Motivating examples</li>
-<li>Review</li>
-<li>Statistical inference (bhypothesis testing)</li>
-</ul></li>
-<li><strong>Linear models</strong>
-<ul>
-<li>Parametrizations</li>
-<li>Parameter interpretation</li>
-<li>Coefficient of determination</li>
-</ul></li>
-<li><strong>Likelihood based inference</strong>
-<ul>
-<li>Likelihood</li>
-<li>Maximum likelihood estimation</li>
-<li>Hypothesis tests</li>
-</ul></li>
-<li><strong>Linear models</strong>
-<ul>
-<li>Predictions</li>
-<li>Interactions</li>
-<li>Collinearity</li>
-</ul></li>
-<li><strong>Diagnostics for linear model hypotheses</strong>
-<ul>
-<li>Linear model hypotheses</li>
-<li>Graphical diagnostics</li>
-<li>Extensions and remedies</li>
-</ul></li>
-<li><strong>Generalized linear models</strong>
-<ul>
-<li>Structure of GLMs</li>
-<li>Poisson regression</li>
-<li>Contingency tables</li>
-<li>Overdispersion</li>
-</ul></li>
+<li>The empirical coverage is 0.947. The coverage is not far from nominal coverage of 0.95, indicating the test is well calibrated.</li>
 </ol>
-<section id="intellectual-integrity-and-generative-artificial-intelligence" class="level2">
-<h2 class="anchored" data-anchor-id="intellectual-integrity-and-generative-artificial-intelligence">Intellectual integrity and generative artificial intelligence</h2>
-<p>Please don’t cheat! The <a href="https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/REG_intellectual-integrity-students-v2.pdf">official policy</a> lists the school rules regarding plagiarism and academic integrity.</p>
-<p>The midterm and final are closed book exams. Students can use generative artificial intelligence (AI) tools for the project to improve and edit the deliverables (either code or text), but only as a proof-reading tool. That is, the first draft of the text must be student’s original work. Any use of generative AI must be cited adequately and students should provide their work with</p>
-<ol type="a">
-<li>details about the tool used (name and version),</li>
-<li>the list of prompts,</li>
-<li>a copy of the original draft or code,</li>
-<li>a description of any modification to the proposed output,</li>
-<li>a short reflection on the usage of generative AI.</li>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(renfe_simu, <span class="at">package =</span> <span class="st">"hecstatmod"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>true_diff <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.28</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>coverage <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">with</span>(renfe_simu, cilb <span class="sc">&lt;</span> true_diff <span class="sc">&amp;</span> ciub <span class="sc">&gt;</span> true_diff))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>coverage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.947</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>The histogram for the mean difference in <a href="#fig-renfe-hist" class="quarto-xref">Figure&nbsp;1</a> looks symmetric and light-tailed, and centered around 0.28, whereas the <span class="math inline">\(p\)</span>-values are scattered in the unit interval, with some values closer to zero.</li>
 </ol>
-</section>
-<section id="student-services" class="level2">
-<h2 class="anchored" data-anchor-id="student-services">Student services</h2>
-<p>Students with special needs should feel free to approach me so we can best discuss accommodations. Do check out <a href="https://www.hec.ca/en/students/support-resources/support-disabled-students/index.html">HEC Montréal’s disabled students</a> and <a href="https://www.hec.ca/en/students/support-resources/psychological-support/index.html">psychological</a> support services.</p>
-</section>
-<section id="harassment-and-sexual-violence" class="level2">
-<h2 class="anchored" data-anchor-id="harassment-and-sexual-violence">Harassment and sexual violence</h2>
-<p>The Center for Harassment Intervention (BIMH) is the unique access point for all members of the community subject to harassment or sexual violence. You can reach them at 514 343-7020 or by email at <a href="mailto:harcelement@hec.ca"><code>harcelement@hec.ca</code></a> from Monday until Friday, from 8:30 until 4:30pm.</p>
-<p>If you are in an emergency situation or fear for your safety, call emergency services at 911, followed by HEC Montréal security services at 514 340-6611.</p>
-<p><a href="https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/policy-to-prevent-and-fight-sexual-violence.pdf">Check the school official policy on these matters</a> for more details.</p>
-</section>
-<section id="family-policy" class="level2">
-<h2 class="anchored" data-anchor-id="family-policy">Family policy</h2>
-<p>HEC now has an <a href="https://www.hec.ca/direction_services/secretariat_general/juridique/reglements_politiques/documents/DIR_parents-etudes.pdf">official family policy</a>, but the following guidelines reflect my own beliefs and commitments towards parent students<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<ol type="1">
-<li>Babies are welcome in class as often as necessary for support feeding relationship.</li>
-<li>You are welcome to bring your child to class in order to cover unforeseeable gaps in childcare.</li>
-<li>If you come with babies or toddler, I ask that you sit close to the door so that, in case your little one needs special attention and is disrupting the learning of other students, you may step outside of class until their needs are met. Seats close to the door are reserved for parents attending class with their child.</li>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork) </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> renfe_simu, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> meandif)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> true_diff, </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"gray"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"mean difference"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> renfe_simu,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> pval)) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">11</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>g1 <span class="sc">+</span> g2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-renfe-hist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-renfe-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-solution_files/figure-html/fig-renfe-hist-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-renfe-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Left: density plot of the mean difference price for high-speed train tickets from Madrid to Barcelona versus Barcelona to Madrid, along with average (gray vertical line). Right: histogram of p-values.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>The power is <span class="math inline">\(0.105\)</span>. Under the alternative regime (since <span class="math inline">\(\Delta=0.28\)</span>€), we only reject 10.5% of the time. While this number is low, it is due to the small size of the true mean difference, which is hard to detect unless the sample size is enormous. The estimated mean difference for the sample is <span class="math inline">\(0.274\)</span>€.</li>
 </ol>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(price <span class="sc">~</span> dest, <span class="at">data =</span> renfe_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  price by dest
+t = -1.9433, df = 9170.2, p-value = 0.05201
+alternative hypothesis: true difference in means between group Barcelona-Madrid and group Madrid-Barcelona is not equal to 0
+95 percent confidence interval:
+ -1.652691253  0.007157275
+sample estimates:
+mean in group Barcelona-Madrid mean in group Madrid-Barcelona 
+                      87.40053                       88.22329 </code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(renfe_simu<span class="sc">$</span>pval <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.105</code></pre>
+</div>
+</div>
+</section>
+<section id="solution-to-exercise-1.3" class="level2">
+<h2 class="anchored" data-anchor-id="solution-to-exercise-1.3">Solution to Exercise 1.3</h2>
+<p>Careful here, as the price of the <code>REXPRESS</code> tickets is fixed at 43.25€. The only random sample is for the other class of train!</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(renfe,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">t.test</span>(<span class="at">x =</span> price,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mu =</span> <span class="fl">43.25</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">conf.level =</span> <span class="fl">0.9</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">subset =</span> type <span class="sc">==</span> <span class="st">"AVE-TGV"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  price
+t = 197.9, df = 9999, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 43.25
+90 percent confidence interval:
+ 85.73892 86.45119
+sample estimates:
+mean of x 
+ 86.09505 </code></pre>
+</div>
+</div>
+<ul>
+<li>The null hypothesis is <span class="math inline">\(\mathscr{H}_0: \mu_{\text{AVE-TGV}}=43.25\)</span>€ against the alternative <span class="math inline">\(\mathscr{H}_1: \mu_{\text{AVE-TGV}}\neq 43.25\)</span>€, where <span class="math inline">\(\mu_{\text{AVE-TGV}}\)</span> is the average <code>AVE-TGV</code> ticket price.</li>
+<li>Since this is a one-sample location problem, we use a one-sample <span class="math inline">\(t\)</span>-test.</li>
+<li>The estimated mean difference is <span class="math inline">\(45.63\)</span>€<span class="math inline">\(= 88.88\)</span>€<span class="math inline">\(-43.25\)</span>€, with 90% confidence interval for the mean difference of <span class="math inline">\([44.14, 47.12]\)</span>.</li>
+<li>The <span class="math inline">\(t\)</span>-statistic is 50.519 with 428 degrees of freedom, and the <span class="math inline">\(p\)</span>-value is negligible.</li>
+<li>We strongly reject the null hypothesis that high-speed trains are the same price as RegioExpress ones.</li>
+</ul>
 
 
 </section>
-</section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Shamelessly stolen/adapted from similar policy by Drs. Melissa Cheney, Guy Grossman and Rohan Alexander<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
