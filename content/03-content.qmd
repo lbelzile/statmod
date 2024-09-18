@@ -11,7 +11,7 @@ title: "Linear models"
 ### Content
 
 
-- Course notes: chapter [4 (Linear regression models)](https://lbelzile.github.io/math60604a/linearmodels.html), Sections 4.1--4.4.
+- Course notes: chapter [4 (Linear regression models)](https://lbelzile.github.io/math60604a/linearmodels.html), Sections 4.1--4.2.
 
 
 ### In class

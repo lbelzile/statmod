@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="MATH60604A-slides4b_files/libs/clipboard/clipboard.min.js"></script>
-<script src="MATH60604A-slides4b_files/libs/quarto-html/tabby.min.js"></script>
-<script src="MATH60604A-slides4b_files/libs/quarto-html/popper.min.js"></script>
-<script src="MATH60604A-slides4b_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="MATH60604A-slides4b_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="MATH60604A-slides4b_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="MATH60604A-slides4b_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="MATH60604A-slides4b_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.1">
+<script src="MATH60604A-slides6_files/libs/clipboard/clipboard.min.js"></script>
+<script src="MATH60604A-slides6_files/libs/quarto-html/tabby.min.js"></script>
+<script src="MATH60604A-slides6_files/libs/quarto-html/popper.min.js"></script>
+<script src="MATH60604A-slides6_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="MATH60604A-slides6_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="MATH60604A-slides6_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="MATH60604A-slides6_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="MATH60604A-slides6_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Léo Belzile, HEC Montréal">
   <meta name="dcterms.date" content="2024-01-01">
@@ -16,8 +16,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="MATH60604A-slides4b_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="MATH60604A-slides4b_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="MATH60604A-slides6_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="MATH60604A-slides6_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,97 +30,12 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
-    /* CSS for citations */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-      margin-bottom: 0em;
-    }
-    .hanging-indent div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }  </style>
-  <link rel="stylesheet" href="MATH60604A-slides4b_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="MATH60604A-slides4b_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="MATH60604A-slides4b_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="MATH60604A-slides4b_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="MATH60604A-slides4b_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  </style>
+  <link rel="stylesheet" href="MATH60604A-slides6_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -425,174 +340,43 @@ Léo Belzile, HEC Montréal
 
   <p class="date">2024</p>
 </section>
-<section id="recap-of-the-previous-episode" class="slide level2">
-<h2>Recap of the previous episode</h2>
-<p>Assuming <span class="math inline">\(Y_i \sim \mathsf{normal}(\mathbf{x}_i \boldsymbol{\beta}, \sigma^2)\)</span> for <span class="math inline">\(i=1, \ldots, n\)</span> are independent, we showed that the ordinary least squares (OLS) estimator <span class="math display">\[\begin{align*}
-\widehat{\boldsymbol{\beta}} = \left(\mathbf{X}^\top \mathbf{X}\right)^{-1}\mathbf{X}^\top \boldsymbol{y} \sim \mathsf{normal}\left\{\boldsymbol{\beta}, \sigma^2 (\mathbf{X}^\top\mathbf{X})^{-1}\right\}.
+<section id="geometry" class="slide level2">
+<h2>Geometry</h2>
+<p>For an <span class="math inline">\(n\times p\)</span> matrix, the column space of <span class="math inline">\(\mathbf{X}\)</span> is <span class="math display">\[\begin{align*}
+\mathcal{S}(\mathbf{X}) =\{\mathbf{X}\boldsymbol{a}, \boldsymbol{a} \in \mathbb{R}^p\}
 \end{align*}\]</span></p>
-<ul>
-<li>We define the <span class="math inline">\(i\)</span>th ordinary residual as <span class="math inline">\(e_i = y_i - \mathbf{x}_i \widehat{\boldsymbol{\beta}}\)</span>.</li>
-<li>The <strong>sum of squared errors</strong> is <span class="math inline">\(\sum_{i=1}^n e_i^2 = \mathsf{SS}_e\)</span>.</li>
-<li>We can show that <span class="math inline">\(S^2=\mathsf{SS}_e/(n-p-1)\)</span> is an unbiased estimator of the variance <span class="math inline">\(\sigma^2\)</span>.</li>
-<li>More importantly, <span class="math inline">\(\mathsf{SS}_e \sim \sigma^2 \chi^2_{n-p-1}\)</span> and <span class="math inline">\(\mathsf{SS}_e\)</span> is independent of <span class="math inline">\(\widehat{\boldsymbol{\beta}}\)</span>.</li>
-</ul>
+<p>The linear model transforms <span class="math display">\[\boldsymbol{Y} = \underset{\text{mean } \boldsymbol{\mu}}{\mathbf{X}\boldsymbol{\beta}} + \underset{\text{errors}}{\boldsymbol{\varepsilon}}\]</span> and projects the observed response vector <span class="math inline">\(\boldsymbol{y}\)</span> onto the linear span of the model matrix <span class="math inline">\(\mathbf{X}\)</span>, <span class="math display">\[\begin{align*}
+\underset{\text{observations}}{\boldsymbol{y}} = \underset{\text{fitted values}}{\widehat{\boldsymbol{y}}} + \underset{\text{residuals}}{\boldsymbol{e}}
+\end{align*}\]</span> where <span class="math inline">\(\widehat{\boldsymbol{y}} = \mathbf{X}\widehat{\boldsymbol{\beta}}=\mathbf{H}_{\mathbf{X}}\boldsymbol{y}\)</span>, and where <span class="math inline">\(\mathbf{H}_{\mathbf{X}} = \mathbf{X}^\top(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}\)</span> is an <span class="math inline">\(n \times n\)</span> orthogonal projection matrix.</p>
+<div class=".aside">
+<p>Properties of orthogonal projection matrices: <span class="math inline">\(\mathbf{H}\)</span> is a symmetric <span class="math inline">\(n \times n\)</span> square matrix of rank <span class="math inline">\(n-p\)</span> satisfying <span class="math inline">\(\mathbf{H}\mathbf{H} = \mathbf{H}\)</span> and <span class="math inline">\(\mathbf{H} = \mathbf{H}^\top\)</span>.</p>
+</div>
 </section>
-<section id="prediction" class="slide level2">
-<h2>Prediction</h2>
-<p>If we want to predict the value of a new observation, say <span class="math inline">\(Y^*\)</span>, with known explanatories <span class="math inline">\(\mathbf{x}^* = (1, x^*_1, \ldots, x^*_p)\)</span>, the prediction of the value will be <span class="math inline">\(\widehat{y}^* = \mathbf{x}^*\widehat{\boldsymbol{\beta}}\)</span> because <span class="math display">\[\begin{align*}
-\mathsf{E}(\widehat{Y}^* \mid \mathbf{X}, \mathbf{x}^*) = \mathsf{E}(\mathbf{x}^*\widehat{\boldsymbol{\beta}}\mid \mathbf{X}, \mathbf{x}^*) = \mathbf{x}^*\boldsymbol{\beta}.
-\end{align*}\]</span></p>
-</section>
-<section id="prediction-uncertainty" class="slide level2">
-<h2>Prediction uncertainty</h2>
-<p>Individual observations vary more than averages: assuming the new observation is independent of those used to estimate the coefficients, <span class="math display">\[\begin{align*}
-\mathsf{Va}(\widehat{Y}^* - Y^* \mid \mathbf{X}, \mathbf{x}^*) &amp;= \mathsf{Va}(\mathbf{x}^*\widehat{\boldsymbol{\beta}} - Y^* \mid \mathbf{X}, \mathbf{x}^*)
-\\&amp;=\mathsf{Va}(\mathbf{x}^*\widehat{\boldsymbol{\beta}} \mid \mathbf{X}, \mathbf{x}^*) +\mathsf{Va}(Y^* \mid \mathbf{X}, \mathbf{x}^*)
-\\&amp; = \sigma^2\mathbf{x}^{*\vphantom{\top}}(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{x}^{*\top} + \sigma^2,
-\end{align*}\]</span></p>
-<p>The variability of new predictions is the sum of</p>
-<ul>
-<li>the uncertainty due to the estimators (based on random data) and</li>
-<li>the intrinsic variance of the new observation.</li>
-</ul>
-</section>
-<section id="distribution-of-predictions" class="slide level2">
-<h2>Distribution of predictions</h2>
-<p>The distribution of <span class="math inline">\(Y^*\)</span> is <span class="math inline">\(Y^* \mid \mathbf{x}^* \sim \mathsf{normal}(\mathbf{x}^*\boldsymbol{\beta}, \sigma^2)\)</span>.</p>
-<p>Using properties of the estimators, we can base the prediction interval on the Student distribution, as <span class="math display">\[\begin{align*}
-\frac{Y^*-\mathbf{x}^*\widehat{\boldsymbol{\beta}}}{\sqrt{S^2\{1+\mathbf{x}^*(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{x}^{*\top}\}}}\sim \mathsf{Student}(n-p-1).
-\end{align*}\]</span> where <span class="math inline">\(S^2=\mathsf{SS}_e/(n-p-1)\)</span> is the unbiased estimator of the variance <span class="math inline">\(\sigma^2\)</span>.</p>
-<p>We obtain <span class="math inline">\(1-\alpha\)</span> <strong>prediction interval</strong> for <span class="math inline">\(Y^*\)</span> by inverting the test statistic, <span class="math display">\[\begin{align*}
-\mathbf{x}^*\widehat{\boldsymbol{\beta}}\pm \mathfrak{t}_{n-p-1}(\alpha/2)\sqrt{S^2\{1+\mathbf{x}^*(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{x}^{*\top}\}}.
-\end{align*}\]</span></p>
-</section>
-<section id="inference-for-the-mean" class="slide level2">
-<h2>Inference for the mean</h2>
-<p>Given a <span class="math inline">\((p+1)\)</span> row vector of explanatories <span class="math inline">\(\mathbf{x}\)</span>, we can compute a summary <span class="math inline">\(\mu(\mathbf{x})=\mathbf{x}\boldsymbol{\beta}\)</span>.</p>
-<p>Similar calculations yield the formula for pointwise <strong>confidence intervals for the mean</strong>, <span class="math display">\[\begin{align*}
-\mathbf{x}^*\widehat{\boldsymbol{\beta}}\pm \mathfrak{t}_{n-p-1}(\alpha/2)\sqrt{S^2\mathbf{x}^*(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{x}^{*\top}}.
-\end{align*}\]</span> The two differ only because of the additional variance of individual observations.</p>
-</section>
-<section id="example" class="slide level2">
-<h2>Example</h2>
-<p><span class="citation" data-cites="Sokolova:2023">Sokolova, Krishna, and Döring (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> consider consumer bias when assessing how eco-friendly packages are. They conjecture that, paradoxically, consumers tend to view the packaging as being more eco-friendly when the amount of cardboard or paper surrounding the box is larger, relative to the sole plastic package (e.g., cereal boxes). In Study 2A, they measures</p>
-<ul>
-<li>the perceived environmental friendliness (PEF, variable <code>pef</code>) as a function of</li>
-<li>the <code>proportion</code> of paper wrapping (either none, half of the area of the plastic, equal or twice).</li>
-</ul>
-<p>We fit a simple linear regression of the form <span class="math display">\[\texttt{pef} = \beta_0 + \beta_1 \texttt{proportion} + \varepsilon\]</span> with <span class="math inline">\(\varepsilon \sim \mathsf{normal}(0,\sigma^2)\)</span> and observations are assumed independent.</p>
-</section>
-<section id="prediction-for-simple-linear-regression" class="slide level2">
-<h2>Prediction for simple linear regression</h2>
+<section id="visual-depiction-of-the-geometry" class="slide level2">
+<h2>Visual depiction of the geometry</h2>
 
-<img data-src="MATH60604A-slides4b_files/figure-revealjs/fig-predinterval-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;1: Mean predictions with prediction intervals (left) and confidence intervals for the mean (right).
-</p></section>
-<section id="width-of-intervals" class="slide level2">
-<h2>Width of intervals</h2>
-<div id="tbl-predints-soko" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-tbl">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-predints-soko-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Predictions with prediction intervals (left) and confidence intervals for the mean (right).
-</figcaption>
-<div aria-describedby="tbl-predints-soko-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<table class="do-not-create-environment cell caption-top">
-<thead>
-<tr class="header">
-<th style="text-align: center;"><code>proportion</code></th>
-<th style="text-align: center;">prediction</th>
-<th style="text-align: center;">lower</th>
-<th style="text-align: center;">upper</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">0.0</td>
-<td style="text-align: center;">2.41</td>
-<td style="text-align: center;">-0.168</td>
-<td style="text-align: center;">4.98</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">0.5</td>
-<td style="text-align: center;">2.67</td>
-<td style="text-align: center;">0.097</td>
-<td style="text-align: center;">5.24</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">1.0</td>
-<td style="text-align: center;">2.93</td>
-<td style="text-align: center;">0.361</td>
-<td style="text-align: center;">5.51</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">2.0</td>
-<td style="text-align: center;">3.46</td>
-<td style="text-align: center;">0.884</td>
-<td style="text-align: center;">6.04</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<table class="do-not-create-environment cell caption-top">
-<thead>
-<tr class="header">
-<th style="text-align: center;">mean</th>
-<th style="text-align: center;">lower CI</th>
-<th style="text-align: center;">upper CI</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">2.41</td>
-<td style="text-align: center;">2.27</td>
-<td style="text-align: center;">2.55</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">2.67</td>
-<td style="text-align: center;">2.57</td>
-<td style="text-align: center;">2.77</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">2.93</td>
-<td style="text-align: center;">2.84</td>
-<td style="text-align: center;">3.02</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">3.46</td>
-<td style="text-align: center;">3.30</td>
-<td style="text-align: center;">3.62</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</figure>
-</div>
-</section>
-<section id="predictions-in-r" class="slide level2">
-<h2>Predictions in <strong>R</strong></h2>
-<p>The generic <code>predict</code> takes as input</p>
+<img data-src="fig/04/OLSgeometry.png" class="quarto-figure quarto-figure-center r-stretch" width="341"></section>
+<section id="geometry-and-corollaries" class="slide level2">
+<h2>Geometry and corollaries</h2>
+<p>The geometric representation has deep implications for inference that are useful for model diagnostics.</p>
 <ul>
-<li>a model and</li>
-<li>a <code>newdata</code> argument containing a data frame with the same structure as the original data</li>
-<li></li>
+<li>By Pythagoras’ theorem, <span class="math inline">\(\|\boldsymbol{y}\|^2 = \|\widehat{\boldsymbol{y}}\|^2 + \|\boldsymbol{e}\|^2\)</span>.</li>
+<li>Assuming <span class="math inline">\(\mathbf{1}_n \in \mathcal{S}(\mathbf{X})\)</span> (e.g., the intercept is included in <span class="math inline">\(\mathbf{X}\)</span>), the sample mean of <span class="math inline">\(\boldsymbol{e}\)</span> is zero.</li>
+<li>A linear regression of <span class="math inline">\(\widehat{\boldsymbol{y}}\)</span> onto <span class="math inline">\(\boldsymbol{e}\)</span> has zero intercept and slope (they are uncorrelated).</li>
+<li>Idem for any column of <span class="math inline">\(\mathbf{X}\)</span>, since <span class="math inline">\(\mathbf{X}^\top\boldsymbol{e}=\boldsymbol{0}_{p+1}\)</span>.</li>
+<li>The fitted values <span class="math inline">\(\widehat{y}_i\)</span> for two model matrices <span class="math inline">\(\mathbf{X}_a\)</span> and <span class="math inline">\(\mathbf{X}_b\)</span>, are the same if they generate the same linear span, i.e., <span class="math inline">\(\mathcal{S}(\mathbf{X}_a) = \mathcal{S}(\mathbf{X}_b)\)</span>.</li>
+<li><span class="math inline">\(R^2 = \mathsf{cor}^2(\boldsymbol{y}, \widehat{\boldsymbol{y}})\)</span>, i.e., the coefficient of determination can be interpreted as the square of <a href="moments">Pearson’s linear correlation</a> between the response <span class="math inline">\(\boldsymbol{y}\)</span> and the fitted values <span class="math inline">\(\widehat{\boldsymbol{y}}\)</span>.</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">data</span>(SKD23_S2A, <span class="at">package =</span> <span class="st">"hecedsm"</span>) <span class="co"># load data</span></span>
-<span id="cb1-2"><a href=""></a>lm_simple <span class="ot">&lt;-</span> <span class="fu">lm</span>(pef <span class="sc">~</span> proportion, <span class="at">data =</span> SKD23_S2A) <span class="co"># fit simple linear regression</span></span>
-<span id="cb1-3"><a href=""></a><span class="fu">predict</span>(lm_simple,</span>
-<span id="cb1-4"><a href=""></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">proportion =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>)),</span>
-<span id="cb1-5"><a href=""></a>        <span class="at">interval =</span> <span class="st">"prediction"</span>) <span class="co"># prediction intervals</span></span>
-<span id="cb1-6"><a href=""></a><span class="fu">predict</span>(lm_simple,</span>
-<span id="cb1-7"><a href=""></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">proportion =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>)),</span>
-<span id="cb1-8"><a href=""></a>        <span class="at">interval =</span> <span class="st">"confidence"</span>) <span class="co"># confidence for mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
-<section id="references" class="slide level2 smaller scrollable">
+<section id="distribution-of-errors" class="slide level2">
+<h2>Distribution of errors</h2>
+<p>Since we define residuals as <span class="math inline">\((\mathbf{I}-\mathbf{H}_{\mathbf{X}})\mathbf{Y}\)</span>, it follows that <span class="math inline">\(E_i \sim \mathsf{normal}\{0, \sigma^2(1-h_{ii})\}\)</span>. Since <span class="math inline">\((\mathbf{I}-\mathbf{H}_{\mathbf{X}})\)</span> has rank <span class="math inline">\(p\)</span></p>
+<ul>
+<li>the residuals are linearly related (there are <span class="math inline">\(n-p\)</span> free components)</li>
+<li>the residuals are heteroscedastic, and their variance depends on the diagonal elements of the “hat matrix” <span class="math inline">\(\mathbf{H}_{\mathbf{X}}\)</span>.</li>
+</ul>
+</section>
+<section id="references" class="slide level2">
 <h2>References</h2>
 <div class="quarto-auto-generated-content">
 <p><img src="fig/logo_hec_montreal_bleu_web.png" class="slide-logo"></p>
@@ -600,29 +384,24 @@ Table&nbsp;1: Predictions with prediction intervals (left) and confidence interv
 
 </div>
 </div>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Sokolova:2023" class="csl-entry" role="listitem">
-Sokolova, Tatiana, Aradhna Krishna, and Tim Döring. 2023. <span>“Paper Meets Plastic: The Perceived Environmental Friendliness of Product Packaging.”</span> <em>Journal of Consumer Research</em> 50 (3): 468–91. <a href="https://doi.org/10.1093/jcr/ucad008">https://doi.org/10.1093/jcr/ucad008</a>.
-</div>
-</div>
 </section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="MATH60604A-slides4b_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="MATH60604A-slides6_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="MATH60604A-slides4b_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="MATH60604A-slides4b_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="MATH60604A-slides4b_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="MATH60604A-slides4b_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="MATH60604A-slides4b_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="MATH60604A-slides4b_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="MATH60604A-slides4b_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="MATH60604A-slides4b_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="MATH60604A-slides4b_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
