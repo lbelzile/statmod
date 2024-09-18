@@ -1,0 +1,104 @@
+---
+title: "Statistical modelling"
+author: "Léo Belzile, HEC Montréal"
+subtitle: "04. Linear models"
+date: today
+date-format: YYYY
+eval: true
+cache: true
+echo: true
+standalone: true
+bibliography: MATH60604A.bib
+format:
+  revealjs:
+    slide-number: true
+    preview-links: auto
+    code-block-height: 750px
+    theme: [simple, hecmontreal.scss]
+    title-slide-attributes:
+      data-background-color: "#002855"
+    logo: "fig/logo_hec_montreal_bleu_web.png"
+    width: 1600
+    height: 900
+---
+
+
+```{r}
+#| eval: true
+#| include: false
+#| cache: false
+hecbleu <- c("#002855")
+fcols <- c(gris = "#888b8d",
+           bleu = "#0072ce",
+           aqua = "#00aec7",
+           vert = "#26d07c",
+           rouge = "#ff585d",
+           rose = "#eb6fbd",
+           jaune = "#f3d03e")
+pcols <- c(gris = "#d9d9d6",
+           bleu = "#92c1e9",
+           agua = "#88dbdf",
+           vert = "#8fe2b0",
+           rouge = "#ffb1bb",
+           rose = "#eab8e4",
+           jaune = "#f2f0a1")
+library(ggplot2)
+theme_set(theme_classic())
+library(patchwork)
+knitr::opts_chunk$set(fig.retina = 3, collapse = TRUE)
+options(digits = 3, width = 75)
+```
+
+
+## Geometry
+
+
+For an $n\times p$ matrix, the column space of $\mathbf{X}$ is
+\begin{align*}
+\mathcal{S}(\mathbf{X}) =\{\mathbf{X}\boldsymbol{a}, \boldsymbol{a} \in \mathbb{R}^p\}
+\end{align*}
+
+The linear model transforms
+$$\boldsymbol{Y} = \underset{\text{mean } \boldsymbol{\mu}}{\mathbf{X}\boldsymbol{\beta}} + \underset{\text{errors}}{\boldsymbol{\varepsilon}}$$
+and projects the observed response vector $\boldsymbol{y}$ onto the linear span of the model matrix $\mathbf{X}$,
+\begin{align*}
+\underset{\text{observations}}{\boldsymbol{y}} = \underset{\text{fitted values}}{\widehat{\boldsymbol{y}}} + \underset{\text{residuals}}{\boldsymbol{e}}
+\end{align*}
+where $\widehat{\boldsymbol{y}} = \mathbf{X}\widehat{\boldsymbol{\beta}}=\mathbf{H}_{\mathbf{X}}\boldsymbol{y}$, and where $\mathbf{H}_{\mathbf{X}} = \mathbf{X}^\top(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}$ is an $n \times n$ orthogonal projection matrix.
+
+:::.aside
+Properties of orthogonal projection matrices: $\mathbf{H}$ is a symmetric $n \times n$ square matrix of rank $n-p$ satisfying $\mathbf{H}\mathbf{H} = \mathbf{H}$ and $\mathbf{H} = \mathbf{H}^\top$.
+
+:::
+
+
+## Visual depiction of the geometry
+
+```{r}
+#| eval: true
+#| echo: false
+#| fig-align: 'center'
+knitr::include_graphics("fig/04/OLSgeometry.png")
+```
+
+## Geometry and corollaries
+
+The geometric representation has deep implications for inference that are useful for model diagnostics.
+
+- By Pythagoras' theorem, $\|\boldsymbol{y}\|^2 = \|\widehat{\boldsymbol{y}}\|^2 + \|\boldsymbol{e}\|^2$.
+- Assuming $\mathbf{1}_n \in \mathcal{S}(\mathbf{X})$ (e.g., the intercept is included in $\mathbf{X}$), the sample mean of $\boldsymbol{e}$ is zero.
+- A linear regression of $\widehat{\boldsymbol{y}}$ onto $\boldsymbol{e}$ has zero intercept and slope (they are uncorrelated).
+- Idem for any column of $\mathbf{X}$, since $\mathbf{X}^\top\boldsymbol{e}=\boldsymbol{0}_{p+1}$.
+- The fitted values $\widehat{y}_i$ for two model matrices $\mathbf{X}_a$ and $\mathbf{X}_b$, are the same if they generate the same linear span, i.e., $\mathcal{S}(\mathbf{X}_a) = \mathcal{S}(\mathbf{X}_b)$.
+- $R^2 = \mathsf{cor}^2(\boldsymbol{y}, \widehat{\boldsymbol{y}})$, i.e., the coefficient of determination can be interpreted as the square of [Pearson's linear correlation](moments) between the response $\boldsymbol{y}$ and the fitted values $\widehat{\boldsymbol{y}}$.
+
+## Distribution of errors
+
+Since we define residuals as $(\mathbf{I}-\mathbf{H}_{\mathbf{X}})\mathbf{Y}$, it follows that $E_i \sim \mathsf{normal}\{0, \sigma^2(1-h_{ii})\}$. Since $(\mathbf{I}-\mathbf{H}_{\mathbf{X}})$ has rank $p$
+
+- the residuals are linearly related (there are $n-p$ free components)
+- the residuals are heteroscedastic, and their variance depends on the diagonal elements of the "hat matrix" $\mathbf{H}_{\mathbf{X}}$.
+
+
+## References
+
