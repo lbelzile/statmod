@@ -17,7 +17,7 @@ title: "Linear models"
 ### In class
 
 - [Slides](../slides/MATH60604A-slides4.html) ([pdf](../slides/MATH60604A-slides4.pdf) and [code](MATH60604A-slides4.R))
-- [Testing exercise](../exercises/linear-models-contrasts.qmd)
+- [Testing exercise](../exercises/linear-models-contrasts.qmd) and [code for the solution](../exercises/linear-models-contrasts.R)
 
 ### Slides
 

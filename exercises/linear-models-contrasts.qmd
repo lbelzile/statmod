@@ -10,19 +10,26 @@ The database `HBSC24_S4` from package `hecedsm` contains data for Study 4 of @Hu
 #| echo: true
 remotes::install_github("lbelzile/hecedsm")
 data(HBSC24_S4, package = "hecedsm")
+?hecedsm::HBSC24_S4
+# Fit regression for effect of mindset on perceived authenticity
+mod <- lm(authenticity ~ cond, data = HBSC24_S4)
+(emm <- emmeans::emmeans(mod, specs = "cond"))
+emm |>
+  contrasts(
+    method = list(C1 = c(), # fill in Contrast 1 here
+                  C2 = c()))  # fill in Contrast 2 here
+
 ```
 
 The following results are extracted from Section D *Authenticity and Social Learning Behavior* of the Supplementary material.
 
-> People wrote similar number of words during the mindset exercise across conditions $(M_{\text{transform}} = 56.2$, $\text{SD} = 19.3$; $M_{\text{new}} = 56.6$, $\text{SD} =  19.3$; $M_{\text{old}} = 57.7$, $\text{SD} =  16.2$; $\text{SD} =  22.9$; $F(2, 259) = .16$, $p = .854).$
-
-> We ran a regression with contrast coding to examine the role of mindset on perceived authenticity. Participants who reflected on their goal attainment as a transformation perceived their current state to be more authentic $(M = 5.98$, $\text{SD} =  .82v$ compared to participants who wrote about distancing from old state or arriving at a new state $(M_{\text{old}} = 5.62$, $\text{SD} =  1.18$; $M_{\text{new}} = 5.74$, $\text{SD} =  1.07$, contrast 1: $b = .10$, $\text{SE} =  .04$, $t(259) = 2.21$,  $p = .028).$
+> We ran a regression with contrast coding to examine the role of mindset on perceived authenticity. Participants who reflected on their goal attainment as a transformation perceived their current state to be more authentic $(M = 5.98$, $\text{SD} =  .82)$ compared to participants who wrote about distancing from old state or arriving at a new state $(M_{\text{old}} = 5.62$, $\text{SD} =  1.18$; $M_{\text{new}} = 5.74$, $\text{SD} =  1.07$, contrast 1: $b = .10$, $\text{SE} =  .04$, $t(259) = 2.21$,  $p = .028).$
 
 > Further, there was no difference between participants who reflected on their goal attainment as distancing from an old state compared to arriving at a new state (contrast 2: $b = .06$, $\text{SE} =  .08$, $t(259) = .79$,  $p = .433).$
 
 > We next examined how perceived authenticity affects information sharing. As expected, authenticity positively predicted information sharing ($b = 6.84$, $\text{SE} =  1.87$, $t(260) = 3.66$, $p <.001$).
 
-1. Using the description from the text, write down the weights for the two contrasts listed above.
+1. Using the description from the text, write down the weights for the two contrasts listed above if the order of the conditions is `change`, `new` and `old`.
 2. Perform a global test for the `authenticity` as a function of experimental condition (`cond`)
 3. Compute contrasts and report the values of the tests. Check the marginal means and the test statistics: can you reproduce the output of the authors.
 4. Perform a simple linear regression of `words` on `authenticity` and check whether the correlation is significant.

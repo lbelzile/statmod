@@ -291,15 +291,20 @@ window.Quarto = {
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"lbelzile/hecedsm"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HBSC24_S4, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HBSC24_S4, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>?hecedsm<span class="sc">::</span>HBSC24_S4</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit regression for effect of mindset on perceived authenticity</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(authenticity <span class="sc">~</span> cond, <span class="at">data =</span> HBSC24_S4)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>(emm <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(mod, <span class="at">specs =</span> <span class="st">"cond"</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>emm <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">contrasts</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="fu">list</span>(<span class="at">C1 =</span> <span class="fu">c</span>(), <span class="co"># fill in Contrast 1 here</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">C2 =</span> <span class="fu">c</span>()))  <span class="co"># fill in Contrast 2 here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>The following results are extracted from Section D <em>Authenticity and Social Learning Behavior</em> of the Supplementary material.</p>
 <blockquote class="blockquote">
-<p>People wrote similar number of words during the mindset exercise across conditions <span class="math inline">\((M_{\text{transform}} = 56.2\)</span>, <span class="math inline">\(\text{SD} = 19.3\)</span>; <span class="math inline">\(M_{\text{new}} = 56.6\)</span>, <span class="math inline">\(\text{SD} =  19.3\)</span>; <span class="math inline">\(M_{\text{old}} = 57.7\)</span>, <span class="math inline">\(\text{SD} =  16.2\)</span>; <span class="math inline">\(\text{SD} =  22.9\)</span>; <span class="math inline">\(F(2, 259) = .16\)</span>, <span class="math inline">\(p = .854).\)</span></p>
-</blockquote>
-<blockquote class="blockquote">
-<p>We ran a regression with contrast coding to examine the role of mindset on perceived authenticity. Participants who reflected on their goal attainment as a transformation perceived their current state to be more authentic <span class="math inline">\((M = 5.98\)</span>, <span class="math inline">\(\text{SD} =  .82v\)</span> compared to participants who wrote about distancing from old state or arriving at a new state <span class="math inline">\((M_{\text{old}} = 5.62\)</span>, <span class="math inline">\(\text{SD} =  1.18\)</span>; <span class="math inline">\(M_{\text{new}} = 5.74\)</span>, <span class="math inline">\(\text{SD} =  1.07\)</span>, contrast 1: <span class="math inline">\(b = .10\)</span>, <span class="math inline">\(\text{SE} =  .04\)</span>, <span class="math inline">\(t(259) = 2.21\)</span>, <span class="math inline">\(p = .028).\)</span></p>
+<p>We ran a regression with contrast coding to examine the role of mindset on perceived authenticity. Participants who reflected on their goal attainment as a transformation perceived their current state to be more authentic <span class="math inline">\((M = 5.98\)</span>, <span class="math inline">\(\text{SD} =  .82)\)</span> compared to participants who wrote about distancing from old state or arriving at a new state <span class="math inline">\((M_{\text{old}} = 5.62\)</span>, <span class="math inline">\(\text{SD} =  1.18\)</span>; <span class="math inline">\(M_{\text{new}} = 5.74\)</span>, <span class="math inline">\(\text{SD} =  1.07\)</span>, contrast 1: <span class="math inline">\(b = .10\)</span>, <span class="math inline">\(\text{SE} =  .04\)</span>, <span class="math inline">\(t(259) = 2.21\)</span>, <span class="math inline">\(p = .028).\)</span></p>
 </blockquote>
 <blockquote class="blockquote">
 <p>Further, there was no difference between participants who reflected on their goal attainment as distancing from an old state compared to arriving at a new state (contrast 2: <span class="math inline">\(b = .06\)</span>, <span class="math inline">\(\text{SE} =  .08\)</span>, <span class="math inline">\(t(259) = .79\)</span>, <span class="math inline">\(p = .433).\)</span></p>
@@ -308,7 +313,7 @@ window.Quarto = {
 <p>We next examined how perceived authenticity affects information sharing. As expected, authenticity positively predicted information sharing (<span class="math inline">\(b = 6.84\)</span>, <span class="math inline">\(\text{SE} =  1.87\)</span>, <span class="math inline">\(t(260) = 3.66\)</span>, <span class="math inline">\(p &lt;.001\)</span>).</p>
 </blockquote>
 <ol type="1">
-<li>Using the description from the text, write down the weights for the two contrasts listed above.</li>
+<li>Using the description from the text, write down the weights for the two contrasts listed above if the order of the conditions is <code>change</code>, <code>new</code> and <code>old</code>.</li>
 <li>Perform a global test for the <code>authenticity</code> as a function of experimental condition (<code>cond</code>)</li>
 <li>Compute contrasts and report the values of the tests. Check the marginal means and the test statistics: can you reproduce the output of the authors.</li>
 <li>Perform a simple linear regression of <code>words</code> on <code>authenticity</code> and check whether the correlation is significant.</li>

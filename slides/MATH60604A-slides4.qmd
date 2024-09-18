@@ -545,7 +545,7 @@ knitr::kable(contrasts_post,
   kableExtra::kable_styling()
 ```
 
-- The methods involving teaching aloud have a strong impact on reading comprehension relative to only directed reading.
+- The methods involving thinking aloud have a strong impact on reading comprehension relative to only directed reading.
 - The evidence is not as strong when we compare the method that combines directed reading-thinking activity and thinking aloud.
 
 ## Testing for offset
