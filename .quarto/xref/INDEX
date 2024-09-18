@@ -76,5 +76,11 @@
   },
   "exercises/01-solution.qmd": {
     "01-solution.html": "b06870f0"
+  },
+  "exercises/04-exercise.qmd": {
+    "04-exercise.html": "7572c365"
+  },
+  "exercises/linear-models-contrasts.qmd": {
+    "linear-models-contrasts.html": "3b2e24d9"
   }
 }

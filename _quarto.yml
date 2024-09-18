@@ -75,6 +75,10 @@ website:
               file: exercises/01-exercise.qmd
             - text: "Solution 1"
               file: exercises/01-solution.qmd
+        - section: "In class"
+          contents:
+            - text: "Contrasts"
+              file: exercises/linear-models-contrasts.qmd  
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor1.name_no_title >}}]({{< var instructor1.url >}}), [{{< var instructor2.name_no_title >}}]({{< var instructor2.url >}})<br>

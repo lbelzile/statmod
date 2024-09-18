@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercises – Statistical modelling</title>
+<title>Hypothesis testing in linear models – Statistical modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -68,6 +122,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -115,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/index.html">Exercises</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/linear-models-contrasts.html">In class</a></li><li class="breadcrumb-item"><a href="../exercises/linear-models-contrasts.html">Contrasts</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -129,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../exercises/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercises</span></a>
   </div>
 </li>
@@ -167,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/linear-models-contrasts.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/linear-models-contrasts.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Contrasts</span></a>
   </div>
 </li>
@@ -184,9 +267,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exercises/linear-models-contrasts.html">In class</a></li><li class="breadcrumb-item"><a href="../exercises/linear-models-contrasts.html">Contrasts</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exercises</h1>
+<h1 class="title">Hypothesis testing in linear models</h1>
 </div>
 
 
@@ -203,77 +286,42 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This webpage section contains exercises along with solutions sets and code.</p>
+<p>The database <code>HBSC24_S4</code> from package <code>hecedsm</code> contains data for Study 4 of <span class="citation" data-cites="Huang:2024">Huang et al. (<a href="#ref-Huang:2024" role="doc-biblioref">2024</a>)</span>.</p>
 <div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: left;">Chapter</th>
-<th style="text-align: center;">Exercise</th>
-<th style="text-align: center;">Solution</th>
-<th style="text-align: center;">R</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">Basics of statistical inference</td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise1.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise1-sol.pdf"><span style="color: #bfc2c5;"><i class="far fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise1.R"><span style="color: #276dc2;"><i class="fab fa-r-project fa-lg"></i></span></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">Linear regression</td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise2.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise2-sol.pdf"><span style="color: #bfc2c5;"><i class="far fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise2.R"><span style="color: #276dc2;"><i class="fab fa-r-project fa-lg"></i></span></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">Likelihood methods</td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise3.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise3-sol.pdf"><span style="color: #bfc2c5;"><i class="far fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise3.R"><span style="color: #276dc2;"><i class="fab fa-r-project fa-lg"></i></span></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">Generalized linear models</td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise4.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise4-sol.pdf"><span style="color: #bfc2c5;"><i class="far fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise4.R"><span style="color: #276dc2;"><i class="fab fa-r-project fa-lg"></i></span></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">Correlated and longitudinal data</td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise5.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise5-sol.pdf"><span style="color: #bfc2c5;"><i class="far fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise5.R"><span style="color: #276dc2;"><i class="fab fa-r-project fa-lg"></i></span></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">6</td>
-<td style="text-align: left;">Linear mixed models</td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise6.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise6-sol.pdf"><span style="color: #bfc2c5;"><i class="far fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise6.R"><span style="color: #276dc2;"><i class="fab fa-r-project fa-lg"></i></span></a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">Survival analysis</td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise7.pdf"><span style="color: #4b5357;"><i class="fas fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise7-sol.pdf"><span style="color: #bfc2c5;"><i class="far fa-file-pdf fa-lg"></i></span></a></td>
-<td style="text-align: center;"><a href="https://raw.githubusercontent.com/lbelzile/statmod/main/files/exercises/MATH60604A-Exercise7.R"><span style="color: #276dc2;"><i class="fab fa-r-project fa-lg"></i></span></a></td>
-</tr>
-</tbody>
-</table>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"lbelzile/hecedsm"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HBSC24_S4, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<p>The following results are extracted from Section D <em>Authenticity and Social Learning Behavior</em> of the Supplementary material.</p>
+<blockquote class="blockquote">
+<p>People wrote similar number of words during the mindset exercise across conditions <span class="math inline">\((M_{\text{transform}} = 56.2\)</span>, <span class="math inline">\(\text{SD} = 19.3\)</span>; <span class="math inline">\(M_{\text{new}} = 56.6\)</span>, <span class="math inline">\(\text{SD} =  19.3\)</span>; <span class="math inline">\(M_{\text{old}} = 57.7\)</span>, <span class="math inline">\(\text{SD} =  16.2\)</span>; <span class="math inline">\(\text{SD} =  22.9\)</span>; <span class="math inline">\(F(2, 259) = .16\)</span>, <span class="math inline">\(p = .854).\)</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>We ran a regression with contrast coding to examine the role of mindset on perceived authenticity. Participants who reflected on their goal attainment as a transformation perceived their current state to be more authentic <span class="math inline">\((M = 5.98\)</span>, <span class="math inline">\(\text{SD} =  .82v\)</span> compared to participants who wrote about distancing from old state or arriving at a new state <span class="math inline">\((M_{\text{old}} = 5.62\)</span>, <span class="math inline">\(\text{SD} =  1.18\)</span>; <span class="math inline">\(M_{\text{new}} = 5.74\)</span>, <span class="math inline">\(\text{SD} =  1.07\)</span>, contrast 1: <span class="math inline">\(b = .10\)</span>, <span class="math inline">\(\text{SE} =  .04\)</span>, <span class="math inline">\(t(259) = 2.21\)</span>, <span class="math inline">\(p = .028).\)</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Further, there was no difference between participants who reflected on their goal attainment as distancing from an old state compared to arriving at a new state (contrast 2: <span class="math inline">\(b = .06\)</span>, <span class="math inline">\(\text{SE} =  .08\)</span>, <span class="math inline">\(t(259) = .79\)</span>, <span class="math inline">\(p = .433).\)</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>We next examined how perceived authenticity affects information sharing. As expected, authenticity positively predicted information sharing (<span class="math inline">\(b = 6.84\)</span>, <span class="math inline">\(\text{SE} =  1.87\)</span>, <span class="math inline">\(t(260) = 3.66\)</span>, <span class="math inline">\(p &lt;.001\)</span>).</p>
+</blockquote>
+<ol type="1">
+<li>Using the description from the text, write down the weights for the two contrasts listed above.</li>
+<li>Perform a global test for the <code>authenticity</code> as a function of experimental condition (<code>cond</code>)</li>
+<li>Compute contrasts and report the values of the tests. Check the marginal means and the test statistics: can you reproduce the output of the authors.</li>
+<li>Perform a simple linear regression of <code>words</code> on <code>authenticity</code> and check whether the correlation is significant.</li>
+</ol>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Huang:2024" class="csl-entry" role="listitem">
+Huang, S., Brucks, M. S., Song, J., &amp; Campbell, M. C. (2024). Beyond achievement: Transformation mindset enhances authenticity after goal success. <em>Motivation Science</em>, <em>10</em>(3), 171–181. <a href="https://doi.org/10.1037/mot0000340">https://doi.org/10.1037/mot0000340</a>
 </div>
-
-
-
-</main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

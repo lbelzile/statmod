@@ -17,7 +17,7 @@ title: "Linear models"
 ### In class
 
 - [Slides](../slides/MATH60604A-slides4.html) ([pdf](../slides/MATH60604A-slides4.pdf) and [code](MATH60604A-slides4.R))
-
+- [Testing exercise](../exercises/linear-models-contrasts.qmd)
 
 ### Slides
 
@@ -27,4 +27,3 @@ title: "Linear models"
 <div class="ratio ratio-16x9">
 <iframe class="slide-deck" src="../slides/MATH60604A-slides4.html"></iframe>
 </div>
-
