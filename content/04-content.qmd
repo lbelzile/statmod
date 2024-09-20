@@ -4,9 +4,10 @@ title: "Linear models"
 
 ### Learning objectives
 
-* perform custom tests for model parameters (contrasts, tests of significance);
-- obtain predictions from a linear model using software; understand the distinction between estimated mean and predicted values;
-- test for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors;
+- perform custom tests for model parameters (contrasts, tests of significance);
+- obtain predictions from a linear model using software;
+- understand the distinction between estimated mean and predicted values;
+- test for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors.
 
 ### Content
 
