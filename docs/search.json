@@ -189,7 +189,7 @@
     "href": "content/04-content.html",
     "title": "Linear models",
     "section": "",
-    "text": "Learning objectives\n\nperform custom tests for model parameters (contrasts, tests of significance);\nobtain predictions from a linear model using software; understand the distinction between estimated mean and predicted values;\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors;\n\n\n\nContent\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.3–4.4.\n\n\n\nIn class\n\nSlides (pdf and code)\nTesting exercise and code for the solution\n\n\n\nSlides\n\n  View slides in new window   Download PDF of slides",
+    "text": "Learning objectives\n\nperform custom tests for model parameters (contrasts, tests of significance);\nobtain predictions from a linear model using software;\nunderstand the distinction between estimated mean and predicted values;\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors.\n\n\n\nContent\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.3–4.4.\n\n\n\nIn class\n\nSlides (pdf and code)\nTesting exercise and code for the solution\n\n\n\nSlides\n\n  View slides in new window   Download PDF of slides",
     "crumbs": [
       "Content",
       "Pedagogical content",
