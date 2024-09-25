@@ -1,0 +1,17 @@
+{
+  "hash": "622ac81f0846b3123333c7c4f175ab79",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Interactions\"\n\n---\n\n\n\n\nThe database `insurance` from package `hecstatmod` contains information about medical charges billed to 1338 Americans during 2003. @fig-insuranceinter1 shows a plot obtained from an exploratory data analysis, showing the potential interaction between smoking and body mass index.\n\n\n\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![Graph of `insurance` charges against body mass index, colored by smoking status.](interactions_files/figure-html/fig-insuranceinter1-1.png){#fig-insuranceinter1 fig-align='center' width=100%}\n:::\n:::\n\n\n\n\n1. Create a dummy variable `obesity` that indicates if a person `bmi` is equal or above 30.^[According to the World Health Organization, people with a $\\texttt{bmi} \\ge 25$ are overweight and those with $\\texttt{bmi} \\ge 30$ are obese. However, BMI is perceived as being a flawed indicator of health: see [this New York Times paper](https://www.nytimes.com/2024/09/06/health/body-roundness-index-bmi.html) for example.]\n2. Fit a model including suitable interactions with `obesity`, `smoker`, `bmi` and `age`.\n3. Write down the mean model equation for each combination of `obesity` and `smoker`.\n4. Test for the significance of the interactions and test whether the effect of `bmi` is the same for obese or not.\n\n\n",
+    "supporting": [
+      "interactions_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

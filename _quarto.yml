@@ -62,6 +62,8 @@ website:
               file: content/03-content.qmd
             - text: "Week 4"
               file: content/04-content.qmd
+            - text: "Week 5"
+              file: content/05-content.qmd
     - title: "Exercises"
       style: "docked"
       search: false
@@ -79,6 +81,8 @@ website:
           contents:
             - text: "Contrasts"
               file: exercises/linear-models-contrasts.qmd  
+            - text: "Interactions"
+              file: exercises/interactions.qmd  
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor1.name_no_title >}}]({{< var instructor1.url >}}), [{{< var instructor2.name_no_title >}}]({{< var instructor2.url >}})<br>

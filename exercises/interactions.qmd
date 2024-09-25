@@ -1,0 +1,50 @@
+---
+title: "Interactions"
+
+---
+
+The database `insurance` from package `hecstatmod` contains information about medical charges billed to 1338 Americans during 2003. @fig-insuranceinter1 shows a plot obtained from an exploratory data analysis, showing the potential interaction between smoking and body mass index.
+
+```{r}
+#| label: fig-insuranceinter1
+#| echo: false
+#| fig-align: 'center'
+#| out-width: '100%'
+#| fig-width: 12
+#| fig-height: 6
+#| fig-cap: "Graph of `insurance` charges against body mass index, colored by smoking status."
+library(ggplot2)
+theme_set(theme_classic())
+library(patchwork)
+data(insurance, package = "hecstatmod")
+insurance <- insurance |>
+  dplyr::mutate(obesity = factor(bmi >= 30, labels = c("normal","obese"))) |>
+  dplyr::mutate(smobese = droplevels(factor(interaction(obesity, smoker),
+                          levels = c("normal.no","obese.no","normal.yes","obese.yes"),
+                          labels = c("non-smoker","non-smoker","smoker non-obese","smoker obese"))))
+g1 <- ggplot(data = insurance,
+             aes(x = bmi, y = charges, col = smobese)) +
+  geom_point() +
+  geom_vline(xintercept = 30) +
+  MetBrewer::scale_color_met_d("Hiroshige") +
+  labs(x = "body mass index",
+       y = "", subtitle = "insurance charges (in USD)", col = "") +
+  scale_y_continuous(labels = scales::unit_format(unit = "K", scale = 1e-3),
+                     expand = c(0, 0), limits = c(0, max(insurance$charges)+100)) 
+g2 <- ggplot(data = insurance,
+             aes(x = age, y = charges, col = smobese)) +
+  geom_point() +
+  MetBrewer::scale_color_met_d("Hiroshige") +
+  labs(x = "age (in years)",
+       y = "", subtitle = "insurance charges (in USD)", col = "") +
+  scale_y_continuous(labels = scales::unit_format(unit = "K", scale = 1e-3),
+                     expand = c(0, 0), limits = c(0, max(insurance$charges)+100)) 
+g1 + g2 + plot_layout(guides = 'collect') & theme(legend.position = "bottom")
+```
+
+1. Create a dummy variable `obesity` that indicates if a person `bmi` is equal or above 30.^[According to the World Health Organization, people with a $\texttt{bmi} \ge 25$ are overweight and those with $\texttt{bmi} \ge 30$ are obese. However, BMI is perceived as being a flawed indicator of health: see [this New York Times paper](https://www.nytimes.com/2024/09/06/health/body-roundness-index-bmi.html) for example.]
+2. Fit a model including suitable interactions with `obesity`, `smoker`, `bmi` and `age`.
+3. Write down the mean model equation for each combination of `obesity` and `smoker`.
+4. Test for the significance of the interactions and test whether the effect of `bmi` is the same for obese or not.
+
+

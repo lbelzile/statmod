@@ -82,5 +82,8 @@
   },
   "exercises/linear-models-contrasts.qmd": {
     "linear-models-contrasts.html": "3b2e24d9"
+  },
+  "exercises/interactions.qmd": {
+    "interactions.html": "202fb73e"
   }
 }
