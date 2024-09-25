@@ -612,10 +612,10 @@ Table&nbsp;1: Patterns for means for each of the possible kinds of general outco
 <h2>Analysis of variance table</h2>
 <p>The analysis of variance table compares models with (or without) <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(AB\)</span>.</p>
 <p>If the sample is <strong>balanced</strong> (same number of observations per subgroup), we can uniquely decompose the variance as</p>
-<p><span class="math display">\[\underset{\text{total}}{\mathsf{SS}_{c}} = \underset{\text{factor $A$}}{\mathsf{SS}_A} + \underset{\text{factor $B$}}{\mathsf{SS}_B} + \underset{\text{interaction}}{\mathsf{SS}_{AB}} + \underset{\text{residual}}{\mathsf{SS}_e}\]</span> so</p>
+<p><span class="math display">\[\underset{\text{total}}{\mathsf{SS}_{c}} = \underset{\text{factor $A$}}{\mathsf{SS}_A} + \underset{\text{factor $B$}}{\mathsf{SS}_B} + \underset{\text{interaction}}{\mathsf{SS}_{AB}} + \underset{\text{residual}}{\mathsf{SS}_e}\]</span></p>
 <ul>
-<li>a model without <span class="math inline">\(AB\)</span> would have residual sum of squares of <span class="math inline">\(\mathsf{SS}_{AB} + \mathsf{SS}_e\)</span>, but <span class="math inline">\(n_a-1\)</span> fewer parameters.</li>
-<li>a model without <span class="math inline">\(A\)</span> (i.e., only factor <span class="math inline">\(B\)</span>) would have residual sum of squares of <span class="math inline">\(\mathsf{SS}_{A} + \mathsf{SS}_{AB} + \mathsf{SS}_e\)</span>, versus <span class="math inline">\(\mathsf{SS}_{AB} + \mathsf{SS}_e\)</span> for the alternative.</li>
+<li>a model without <span class="math inline">\(AB\)</span> would have residual sum of squares of <span class="math inline">\(\mathsf{SS}_{AB} + \mathsf{SS}_e\)</span>, but <span class="math inline">\((n_a-1)(n_b-1)\)</span> fewer parameters.</li>
+<li>a model without <span class="math inline">\(A\)</span> (i.e., only factor <span class="math inline">\(B\)</span>) would have <span class="math inline">\(n_a-1\)</span> fewer parameter, and residual sum of squares of <span class="math inline">\(\mathsf{SS}_{A} + \mathsf{SS}_{AB} + \mathsf{SS}_e\)</span>, versus <span class="math inline">\(\mathsf{SS}_{AB} + \mathsf{SS}_e\)</span> for the alternative.</li>
 <li>the difference in sum of squares is <span class="math inline">\(\mathsf{SS}_A\)</span> for <span class="math inline">\(A\)</span>, <span class="math inline">\(\mathsf{SS}_{AB}\)</span> for the interaction <span class="math inline">\(A \times B\)</span>, etc.</li>
 </ul>
 </section>

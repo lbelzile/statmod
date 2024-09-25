@@ -375,8 +375,9 @@ emm <- emmeans::emmeans(
   mod1,
   specs = c("debttype","purchase"))
 emmeans::emmip(emm,  debttype ~ purchase, CIs = TRUE) +
+  MetBrewer::scale_color_met_d(name = "Hiroshige") + 
   theme_classic() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") 
 ```
 No evidence of interaction.
 
@@ -423,7 +424,10 @@ emm <- emmeans(mod,
         specs = c("chefdax", "brandaction", "politideo"))
 emmip(object = emm, 
         formula = brandaction ~ chefdax | politideo, 
-        CIs = TRUE)
+        CIs = TRUE) +
+  MetBrewer::scale_color_met_d(name = "Hiroshige")  +
+  theme(legend.position = "bottom") 
+  
 ```
 
 Interaction between `chefdax` (ethnicity) and `ideology`.
@@ -440,10 +444,9 @@ The analysis of variance table compares models with (or without) $A$, $B$, $AB$.
 If the sample is **balanced** (same number of observations per subgroup), we can uniquely decompose the variance as
 
 $$\underset{\text{total}}{\mathsf{SS}_{c}} = \underset{\text{factor $A$}}{\mathsf{SS}_A} + \underset{\text{factor $B$}}{\mathsf{SS}_B} + \underset{\text{interaction}}{\mathsf{SS}_{AB}} + \underset{\text{residual}}{\mathsf{SS}_e}$$
-so 
 
-- a model without $AB$ would have residual sum of squares of $\mathsf{SS}_{AB} + \mathsf{SS}_e$, but $n_a-1$ fewer parameters.
-- a model without $A$ (i.e., only factor $B$) would have residual sum of squares of $\mathsf{SS}_{A} + \mathsf{SS}_{AB} + \mathsf{SS}_e$, versus $\mathsf{SS}_{AB} + \mathsf{SS}_e$ for the alternative.
+- a model without $AB$ would have residual sum of squares of $\mathsf{SS}_{AB} + \mathsf{SS}_e$, but $(n_a-1)(n_b-1)$ fewer parameters.
+- a model without $A$ (i.e., only factor $B$) would have $n_a-1$ fewer parameter, and residual sum of squares of $\mathsf{SS}_{A} + \mathsf{SS}_{AB} + \mathsf{SS}_e$, versus $\mathsf{SS}_{AB} + \mathsf{SS}_e$ for the alternative.
 - the difference in sum of squares is $\mathsf{SS}_A$ for $A$, $\mathsf{SS}_{AB}$ for the interaction $A \times B$, etc.
 
 ## Test statistic for ANOVA
