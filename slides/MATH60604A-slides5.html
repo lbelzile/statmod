@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="MATH60604A-slides6_files/libs/clipboard/clipboard.min.js"></script>
-<script src="MATH60604A-slides6_files/libs/quarto-html/tabby.min.js"></script>
-<script src="MATH60604A-slides6_files/libs/quarto-html/popper.min.js"></script>
-<script src="MATH60604A-slides6_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="MATH60604A-slides6_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="MATH60604A-slides6_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="MATH60604A-slides6_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="MATH60604A-slides6_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="MATH60604A-slides5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="MATH60604A-slides5_files/libs/quarto-html/tabby.min.js"></script>
+<script src="MATH60604A-slides5_files/libs/quarto-html/popper.min.js"></script>
+<script src="MATH60604A-slides5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="MATH60604A-slides5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="MATH60604A-slides5_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="MATH60604A-slides5_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="MATH60604A-slides5_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Léo Belzile, HEC Montréal">
@@ -16,8 +16,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="MATH60604A-slides6_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="MATH60604A-slides6_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="MATH60604A-slides5_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="MATH60604A-slides5_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,11 +96,11 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="MATH60604A-slides6_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="MATH60604A-slides5_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="MATH60604A-slides5_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="MATH60604A-slides5_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="MATH60604A-slides5_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="MATH60604A-slides5_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -386,6 +386,8 @@
       margin-right: 0; 
     }
   </style>
+  <script src="MATH60604A-slides5_files/libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="MATH60604A-slides5_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -393,7 +395,7 @@
 
 <section id="title-slide" data-background-color="#002855" class="quarto-title-block center">
   <h1 class="title">Statistical modelling</h1>
-  <p class="subtitle">04. Linear models</p>
+  <p class="subtitle">05. Linear models</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -405,192 +407,382 @@ Léo Belzile, HEC Montréal
 
   <p class="date">2024</p>
 </section>
-<section id="geometry" class="slide level2">
-<h2>Geometry</h2>
-<p>The linear model equation is <span class="math display">\[\boldsymbol{Y} = \underset{\text{mean } \boldsymbol{\mu}}{\mathbf{X}\boldsymbol{\beta}} + \underset{\text{errors}}{\boldsymbol{\varepsilon}}\]</span> and the fitted model gives the decomposition <span class="math display">\[\begin{align*}
-\underset{\text{observations}}{\boldsymbol{y}} = \underset{\text{fitted values}}{\widehat{\boldsymbol{y}}} + \underset{\text{residuals}}{\boldsymbol{e}}
-\end{align*}\]</span></p>
+<section id="interaction" class="slide level2">
+<h2>Interaction</h2>
+<p>An interaction occurs if some explanatory variables, when coupled together, have different impacts than the superposition of each.</p>
+<p>If <span class="math inline">\(X_j\)</span> and <span class="math inline">\(X_k\)</span> interact, the marginal effect of <span class="math inline">\(\mathsf{E}(Y \mid \boldsymbol{X})\)</span> with respect to <span class="math inline">\(X_j\)</span> is a function of <span class="math inline">\(X_k\)</span> or vice-versa.</p>
+<p>We will restrict attention to the cases where one or more of the explanatories is a categorical variable (factor).</p>
 </section>
-<section id="projection-matrices" class="slide level2">
-<h2>Projection matrices</h2>
-<p>For an <span class="math inline">\(n\times p\)</span> matrix, the column space of <span class="math inline">\(\mathbf{X}\)</span> is <span class="math display">\[\begin{align*}
-\mathcal{S}(\mathbf{X}) =\{\mathbf{X}\boldsymbol{a}, \boldsymbol{a} \in \mathbb{R}^p\}
-\end{align*}\]</span></p>
-<p>We can write the fitted values as the projection the observed response vector <span class="math inline">\(\boldsymbol{y}\)</span> onto the linear span of the model matrix <span class="math inline">\(\mathbf{X}\)</span>, <span class="math display">\[\begin{align*}
-\underset{\text{fitted values}}{\widehat{\boldsymbol{y}}} = \underset{\substack{\text{model matrix $\times$}\\\text{OLS estimator}}}{\mathbf{X} \widehat{\boldsymbol{\beta}}} = \underset{\text{projection matrix}}{\mathbf{X}^\top(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}}\boldsymbol{y} = \mathbf{H}_{\mathbf{X}}\boldsymbol{y}
-\end{align*}\]</span> where <span class="math inline">\(\mathbf{H}_{\mathbf{X}} = \mathbf{X}^\top(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}\)</span> is an <span class="math inline">\(n \times n\)</span> orthogonal projection matrix.</p>
-<ul>
-<li><span class="math inline">\(\mathbf{H}_{\mathbf{X}}\)</span> is a symmetric <span class="math inline">\(n \times n\)</span> square matrix of rank <span class="math inline">\(n-p\)</span>.</li>
-<li>An orthogonal projection matrix satisfies <span class="math inline">\(\mathbf{H}_{\mathbf{X}}\mathbf{H}_{\mathbf{X}} = \mathbf{H}_{\mathbf{X}}\)</span> and <span class="math inline">\(\mathbf{H}_{\mathbf{X}} = \mathbf{H}_{\mathbf{X}}^\top\)</span>.</li>
-</ul>
-</section>
-<section id="visual-depiction-of-the-geometry" class="slide level2">
-<h2>Visual depiction of the geometry</h2>
+<section id="insurance-premium" class="slide level2">
+<h2>Insurance premium</h2>
+<p>Smokers who have a BMI of 30 and above pay a hefty premium, but there is also seemingly a linear increase in the amount charged with BMI. We see no such behaviour for non-smokers.</p>
 
-<img data-src="fig/04/OLSgeometry.png" class="quarto-figure quarto-figure-center r-stretch" width="341"></section>
-<section id="consequences-of-orthogonality" class="slide level2">
-<h2>Consequences of orthogonality</h2>
-<p>The geometric representation has deep implications for inference that are useful for model diagnostics.</p>
-<ul>
-<li>Assuming <span class="math inline">\(\mathbf{1}_n \in \mathcal{S}(\mathbf{X})\)</span> (e.g., the intercept is included in <span class="math inline">\(\mathbf{X}\)</span>), the sample mean of <span class="math inline">\(\boldsymbol{e}\)</span> is zero.</li>
-<li>The fitted values <span class="math inline">\(\widehat{\boldsymbol{y}}\)</span> and <span class="math inline">\(\boldsymbol{e}\)</span> are uncorrelated</li>
-<li>Idem for any column of <span class="math inline">\(\mathbf{X}\)</span>, since <span class="math inline">\(\mathbf{X}^\top\boldsymbol{e}=\boldsymbol{0}_{p+1}\)</span>.</li>
-</ul>
-<div class="cell" data-knitr.digits.signif="true">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">data</span>(college, <span class="at">package =</span> <span class="st">"hecstatmod"</span>)</span>
-<span id="cb1-2"><a href=""></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> sex <span class="sc">+</span> field <span class="sc">+</span> rank <span class="sc">+</span> service, <span class="at">data =</span> college)</span>
-<span id="cb1-3"><a href=""></a><span class="co"># Zero correlations</span></span>
-<span id="cb1-4"><a href=""></a><span class="fu">cor</span>(<span class="fu">resid</span>(mod), <span class="fu">model.matrix</span>(mod))[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb1-5"><a href=""></a><span class="do">## [1] -4.9e-17 -1.6e-17  3.7e-18  2.9e-18  1.3e-17</span></span>
-<span id="cb1-6"><a href=""></a><span class="fu">cor</span>(<span class="fu">resid</span>(mod), <span class="fu">fitted</span>(mod))</span>
-<span id="cb1-7"><a href=""></a><span class="do">## [1] -2.7e-17</span></span>
-<span id="cb1-8"><a href=""></a><span class="co"># Mean zero errors</span></span>
-<span id="cb1-9"><a href=""></a><span class="fu">mean</span>(<span class="fu">resid</span>(mod))</span>
-<span id="cb1-10"><a href=""></a><span class="do">## [1] 1.5e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="graphical-diagnostics" class="slide level2">
-<h2>Graphical diagnostics</h2>
-<p>A linear regression of <span class="math inline">\(\widehat{\boldsymbol{y}}\)</span> (or any column of <span class="math inline">\(\mathbf{X}\)</span>) onto <span class="math inline">\(\boldsymbol{e}\)</span> has zero intercept and slope.</p>
-
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-zerocor-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;1: Plot of residuals against fitted values (left), and against the explanatory variable <code>service</code> (right) for the linear regression of the <code>college</code> data. The intercept and the slope of the simple linear regressions are zero.
-</p><p>Residual patterns due to forgotten interactions, nonlinear terms, etc. could be picked up from pair plots of ordinary residuals against the explanatories.</p>
-</section>
-<section id="invariance" class="slide level2">
-<h2>Invariance</h2>
-<p>The fitted values <span class="math inline">\(\widehat{y}_i\)</span> for two model matrices <span class="math inline">\(\mathbf{X}_a\)</span> and <span class="math inline">\(\mathbf{X}_b\)</span>, are the same if they generate the same linear span, i.e., <span class="math inline">\(\mathcal{S}(\mathbf{X}_a) = \mathcal{S}(\mathbf{X}_b)\)</span>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Scale variables, change parametrization of dummies, remove intercept</span></span>
-<span id="cb2-2"><a href=""></a>modB <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> sex <span class="sc">+</span> field <span class="sc">+</span> rank <span class="sc">+</span> service,</span>
-<span id="cb2-3"><a href=""></a>           <span class="at">data =</span> college <span class="sc">|&gt;</span> </span>
-<span id="cb2-4"><a href=""></a>            dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">service =</span> <span class="fu">scale</span>(service)),</span>
-<span id="cb2-5"><a href=""></a>           <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">rank =</span> contr.sum))</span>
-<span id="cb2-6"><a href=""></a><span class="fu">head</span>(<span class="fu">model.matrix</span>(mod), <span class="at">n =</span> <span class="dv">3</span>L)</span>
-<span id="cb2-7"><a href=""></a><span class="do">##   (Intercept) sexwoman fieldtheoretical rankassociate rankfull service</span></span>
-<span id="cb2-8"><a href=""></a><span class="do">## 1           1        0                0             0        1      18</span></span>
-<span id="cb2-9"><a href=""></a><span class="do">## 2           1        0                0             0        1      16</span></span>
-<span id="cb2-10"><a href=""></a><span class="do">## 3           1        0                0             0        0       3</span></span>
-<span id="cb2-11"><a href=""></a><span class="fu">head</span>(<span class="fu">model.matrix</span>(modB), <span class="at">n =</span> <span class="dv">3</span>L)</span>
-<span id="cb2-12"><a href=""></a><span class="do">##   sexman sexwoman fieldtheoretical rank1 rank2 service</span></span>
-<span id="cb2-13"><a href=""></a><span class="do">## 1      1        0                0    -1    -1    0.03</span></span>
-<span id="cb2-14"><a href=""></a><span class="do">## 2      1        0                0    -1    -1   -0.12</span></span>
-<span id="cb2-15"><a href=""></a><span class="do">## 3      1        0                0     1     0   -1.12</span></span>
-<span id="cb2-16"><a href=""></a><span class="co"># Model invariance</span></span>
-<span id="cb2-17"><a href=""></a><span class="fu">isTRUE</span>(<span class="fu">all.equal</span>(<span class="fu">fitted</span>(mod), <span class="fu">fitted</span>(modB)))</span>
-<span id="cb2-18"><a href=""></a><span class="do">## [1] TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="pearsons-linear-correlation-coefficient" class="slide level2">
-<h2>Pearson’s linear correlation coefficient</h2>
-<p>The Pearson correlation coefficient quantifies the strength of the linear relationship between two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. <span class="math display">\[\begin{align*}
-\rho= \mathsf{cor}(X, Y) =  \frac{{\mathsf{Co}}(X,Y)}{\sqrt{{\mathsf{Va}}(X){\mathsf{Va}}(Y)}}.
-\end{align*}\]</span></p>
-<ul>
-<li>The sample correlation <span class="math inline">\(\rho \in [-1, 1]\)</span>.</li>
-<li><span class="math inline">\(|\rho|=1\)</span> if and only if the <span class="math inline">\(n\)</span> observations fall exactly on a line.</li>
-<li>The larger <span class="math inline">\(|\rho|\)</span>, the less scattered the points are.</li>
-</ul>
-</section>
-<section id="properties-of-pearsons-linear-correlation-coefficient" class="slide level2">
-<h2>Properties of Pearson’s linear correlation coefficient</h2>
-<p>The sign determines the orientation of the slope (downward for negative, upward for positive).</p>
-<p>If <span class="math inline">\(\rho&gt;0\)</span> (or <span class="math inline">\(\rho&lt;0\)</span>), the two variables are positively (negatively) associated, meaning that <span class="math inline">\(Y\)</span> increases (decreases) on average with <span class="math inline">\(X\)</span>.</p>
-
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-scatterplot-corr-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;2: Scatterplots of observations with correlations of <span class="math inline">\(0.1\)</span>, <span class="math inline">\(0.5\)</span>, <span class="math inline">\(-0.75\)</span> and <span class="math inline">\(0.95\)</span> from <span class="math inline">\(A\)</span> to <span class="math inline">\(D\)</span>.
+<img data-src="MATH60604A-slides5_files/figure-revealjs/fig-insuranceinter1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p class="caption">
+Figure&nbsp;1: Graph of <code>insurance</code> charges against body mass index, colored by smoking status.
 </p></section>
-<section id="correlation-and-independence" class="slide level2">
-<h2>Correlation and independence</h2>
-<ul>
-<li>Independent variables are uncorrelated (not the other way around).</li>
-<li>A correlation of zero only implies that there is no <em>linear</em> dependence between two variables.</li>
-</ul>
+<section id="toy-example-1-continuous-vs-categorical" class="slide level2">
+<h2>Toy example 1 – continuous vs categorical</h2>
+<p>We consider a toy model for the <code>interaction</code> data. The base model, without interaction, is <span class="math display">\[\begin{align*}
+\texttt{intention}=\beta_0 + \beta_1 \texttt{sex} + \beta_2 \texttt{fixation} + \varepsilon,
+\end{align*}\]</span> where <span class="math inline">\(\texttt{sex=1}\)</span> for women and <span class="math inline">\(\texttt{sex=0}\)</span> for men.</p>
+<p>The effect of fixation in this model is the same regardless of sex.</p>
+<p>In order to add a different slope for men and women, we can create a new variable equal to the product <span class="math inline">\(\texttt{fixation}\times\texttt{sex}\)</span> and add it to the model, <span class="math display">\[\begin{align*}
+\mathsf{E}(\texttt{intention} \mid \cdot)= \beta_0 + \beta_1 \texttt{sex} + \beta_2\texttt{fixation}  + \beta_3 \texttt{fixation}\cdot \texttt{sex}.
+\end{align*}\]</span></p>
+</section>
+<section id="is-there-an-interaction" class="slide level2">
+<h2>Is there an interaction?</h2>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-datasaurus-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;3: Four datasets with dependent data having identical summary statistics and a linear correlation of -0.06.
+<img data-src="MATH60604A-slides5_files/figure-revealjs/fig-interaction-slope-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;2: Scatterplots and fitted lines for a model with a single continuous and binary explanatory, without (left) and with (right) an interaction term.
 </p></section>
-<section id="sum-of-squares-decomposition" class="slide level2">
-<h2>Sum of squares decomposition</h2>
-<p>Suppose that we do not use any explanatory variable (i.e., the intercept-only model). In this case, the fitted value for <span class="math inline">\(Y\)</span> is the overall mean and the sum of squared centered observations <span class="math display">\[\begin{align*}
-\mathsf{SS}_c=\sum_{i=1}^n (Y_i-\overline{Y})^2                                              
-\end{align*}\]</span> where <span class="math inline">\(\overline{Y}\)</span> represents the intercept-only fitted value.</p>
-<p>When we include the <span class="math inline">\(p\)</span> regressors, we get rather <span class="math display">\[\begin{align*}
-\mathsf{SS}_e=\sum_{i=1}^n (Y_i-\hat{Y}_i)^2
-\end{align*}\]</span> The <span class="math inline">\(\mathsf{SS}_e\)</span> is non-increasing when we include more variables.</p>
-</section>
-<section id="percentage-of-variance" class="slide level2">
-<h2>Percentage of variance</h2>
-<p>Consider the sum of squared residuals for two models:</p>
+<section id="parameter-interpretation" class="slide level2">
+<h2>Parameter interpretation</h2>
+<p>Depending on the value of the binary variable <span class="math inline">\(\texttt{sex}\)</span>, we get <span class="math display">\[\begin{align*}
+\mathsf{E}(\texttt{intention} \mid \cdot) =
+\begin{cases}
+(\beta_0 + \beta_1) + (\beta_2 + \beta_3)\texttt{fixation}, &amp; \texttt{sex}=1 \text{ (women)},\\
+  \beta_0 + \beta_2 \texttt{fixation}, &amp; \texttt{sex}=0 \text{ (men)}.
+\end{cases}
+\end{align*}\]</span> The interpretation of the coefficients in the model is as usual with the treatment contrast parametrization:</p>
 <ul>
-<li><span class="math inline">\(\mathsf{SS}_c\)</span> is for the intercept-only model</li>
-<li><span class="math inline">\(\mathsf{SS}_e\)</span> for the linear regression with model matrix <span class="math inline">\(\mathbf{X}\)</span>.</li>
+<li><span class="math inline">\(\beta_0\)</span> is the average buying intention when the fixation time is zero for men,</li>
+<li><span class="math inline">\(\beta_1\)</span> is the difference in intercept for women vs men,</li>
+<li><span class="math inline">\(\beta_2\)</span> is the unit increase in intention to buy per second of fixation for men,</li>
+<li><span class="math inline">\(\beta_3\)</span> is the difference in slope for women vs men.</li>
 </ul>
-<p>Consequently, <span class="math inline">\(\mathsf{SS}_c-\mathsf{SS}_e\)</span> is the reduction of the error associated with including <span class="math inline">\(\mathbf{X}\)</span> in the model <span class="math display">\[\begin{align*}
-R^2=\frac{\mathsf{SS}_c-\mathsf{SS}_e}{\mathsf{SS}_c}                                                     
-\end{align*}\]</span> This gives the proportion of the variability in <span class="math inline">\(Y\)</span> explained by <span class="math inline">\(\mathbf{X}\)</span>.</p>
 </section>
-<section id="coefficient-of-determination" class="slide level2">
-<h2>Coefficient of determination</h2>
-<p>We can show that the coefficient of determination is the square of Pearson’s linear correlation between the response <span class="math inline">\(\boldsymbol{y}\)</span> and the fitted values <span class="math inline">\(\widehat{\boldsymbol{y}}\)</span>, <span class="math display">\[R^2 = \mathsf{cor}^2(\boldsymbol{y}, \widehat{\boldsymbol{y}}).\]</span></p>
+<section id="testing-for-an-interaction" class="slide level2">
+<h2>Testing for an interaction</h2>
+<p>Testing whether the interaction is significant boils down to using the test <span class="math inline">\(\mathscr{H}_0: \beta_3=0\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">summary</span>(mod)<span class="sc">$</span>r.squared</span>
-<span id="cb3-2"><a href=""></a><span class="do">## [1] 0.45</span></span>
-<span id="cb3-3"><a href=""></a>y <span class="ot">&lt;-</span> college<span class="sc">$</span>salary</span>
-<span id="cb3-4"><a href=""></a>yhat <span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod)</span>
-<span id="cb3-5"><a href=""></a><span class="fu">cor</span>(y, yhat)<span class="sc">^</span><span class="dv">2</span> </span>
-<span id="cb3-6"><a href=""></a><span class="do">## [1] 0.45</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">data</span>(interaction, <span class="at">package =</span> <span class="st">"hecstatmod"</span>)</span>
+<span id="cb1-2"><a href=""></a><span class="co"># To specify an interaction use :</span></span>
+<span id="cb1-3"><a href=""></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(intention <span class="sc">~</span> sex <span class="sc">+</span> fixation <span class="sc">+</span>  sex<span class="sc">:</span>fixation, </span>
+<span id="cb1-4"><a href=""></a>          <span class="at">data =</span> interaction)</span>
+<span id="cb1-5"><a href=""></a><span class="co"># A shortcut is sex*fixation, which expands to the above</span></span>
+<span id="cb1-6"><a href=""></a><span class="fu">summary</span>(mod)<span class="sc">$</span>coefficients</span>
+<span id="cb1-7"><a href=""></a><span class="do">##              Estimate Std. Error t value Pr(&gt;|t|)</span></span>
+<span id="cb1-8"><a href=""></a><span class="do">## (Intercept)       2.7       0.28     9.7  1.0e-16</span></span>
+<span id="cb1-9"><a href=""></a><span class="do">## sex               1.3       0.38     3.5  7.7e-04</span></span>
+<span id="cb1-10"><a href=""></a><span class="do">## fixation          0.5       0.15     3.3  1.3e-03</span></span>
+<span id="cb1-11"><a href=""></a><span class="do">## sex:fixation      2.1       0.20    10.7  5.6e-19</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The model with the interaction is significantly better, meaning that the effect of fixation time on intention to buy varies according to sex.</p>
+</section>
+<section id="marginality-principle" class="slide level2">
+<h2>Marginality principle</h2>
+<p>All lower interaction terms should be included if an interaction is present.</p>
+<p>For example, we would <strong>not</strong> remove <span class="math inline">\(\texttt{fixation}\)</span> while keeping the interaction term <span class="math inline">\(\texttt{fixation*sex}\)</span>, even if we fail to reject <span class="math inline">\(\mathscr{H}_0:\beta_2=0\)</span> because otherwise <span class="math display">\[\begin{align*}
+&amp;\mathsf{E}(\texttt{intention} \mid \cdot) =
+\begin{cases}
+(\beta_0 + \beta_1) + \beta_3\texttt{fixation}, &amp; \texttt{sex}=1 \text{ (women)},\\
+  \beta_0, &amp;\texttt{sex}=0 \text{ (men)};                 
+\end{cases}
+\end{align*}\]</span><br>
+this implies that intention to buy is constant for men, regardless of the fixation time.</p>
+<p>As the choice of baseline is arbitrary, changing the dummy (<span class="math inline">\(\texttt{0}\)</span> for women, <span class="math inline">\(\texttt{1}\)</span> for men), would yield a different model and so potentially different inferences.</p>
+</section>
+<section id="example-2---categorical-vs-categorical" class="slide level2">
+<h2>Example 2 - categorical vs categorical</h2>
+<p>Consider a linear model with factors <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> and their interactions.</p>
+<p>This is a <strong>two-way ANOVA model</strong>, in which each subgroup <span class="math inline">\((a_i, b_j)\)</span> has a different mean <span class="math inline">\(\mu_{ij}\)</span>.</p>
+<p>e.g., if <span class="math inline">\(A\)</span> has <span class="math inline">\(n_a=3\)</span> levels and <span class="math inline">\(B\)</span> has <span class="math inline">\(n_b=2\)</span> levels.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\qquad B\)</span><br> <span class="math inline">\(A\)</span> <span class="math inline">\(\qquad\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(b_1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(b_2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\text{row mean}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(a_1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{11}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{12}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{1.}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{21}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{22}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{2.}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(a_3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{31}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{32}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{3.}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\text{column mean}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{.1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{.2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu\)</span></td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li><span class="math inline">\(R^2\)</span> always takes a value between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</li>
-<li><span class="math inline">\(R^2\)</span> is not a goodness-of-fit criterion: the coefficient is non-decreasing in the dimension of <span class="math inline">\(\mathbf{X}\)</span>, the more columns are added, the higher <span class="math inline">\(R^2\)</span>.</li>
+<li>Row, column and overall averages are <strong>equiweighted</strong> combinations of the cell means <span class="math inline">\(\mu_{ij}\)</span>.</li>
+<li>Sample estimates are obtained by replacing <span class="math inline">\(\mu_{ij}\)</span> in formulas by subgroup sample mean.</li>
 </ul>
 </section>
-<section id="distribution-of-errors" class="slide level2">
-<h2>Distribution of errors</h2>
-<p>Since we define residuals as <span class="math inline">\((\mathbf{I}-\mathbf{H}_{\mathbf{X}})\mathbf{Y}\)</span>, it follows that <span class="math inline">\(E_i \sim \mathsf{normal}\{0, \sigma^2(1-h_{ii})\}\)</span>. Since <span class="math inline">\((\mathbf{I}-\mathbf{H}_{\mathbf{X}})\)</span> has rank <span class="math inline">\(p\)</span></p>
-<ul>
-<li>The residuals are linearly related (there are <span class="math inline">\(n-p\)</span> free components).</li>
-<li>The residuals are heteroscedastic, and their variance depends on the diagonal elements of the “hat matrix” <span class="math inline">\(\mathbf{H}_{\mathbf{X}}\)</span>, the collection <span class="math inline">\(\{h_{ii}\}\)</span> for <span class="math inline">\((i=1, \ldots, n)\)</span>.</li>
-<li>If we further estimate <span class="math inline">\(\sigma^2\)</span> by <span class="math inline">\(S^2\)</span>, we introduce additional independence since <span class="math inline">\(S^2 = \sum_{i=1}^n e_i^2/(n-p-1)\)</span>, so <span class="math inline">\(e_i\)</span> appears in the formula of the sample variance…</li>
-</ul>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<p>The authors conducted a 2 by 2 between-subject comparison (two-way ANOVA) varying the type of debt (whether the money was advertised as <code>credit</code> or <code>loan</code>) and the type of purchase the latter would be used for (<code>discretionary</code> spending or <code>need</code> for necessary purchases). The response is the average of the likelihood and interest in the product, both measured using a 9 point Likert scale from 1 to 9.</p>
+<p>The mean model with an interaction can be written using the treatment contrast parametrization as <span class="math display">\[\begin{align*}
+\texttt{likelihood} &amp;= \beta_0 + \beta_1\mathbf{1}_{\texttt{purchase=need}} + \beta_2\mathbf{1}_{\texttt{debttype=loan}} \\&amp;\quad+ \beta_3\mathbf{1}_{\texttt{purchase=need}}\mathbf{1}_{\texttt{debttype=loan}} + \varepsilon
+\end{align*}\]</span></p>
 </section>
-<section id="externally-studentized-residuals" class="slide level2">
-<h2>Externally studentized residuals</h2>
-<ul>
-<li>We consider estimation of the standard deviation <span class="math inline">\(S_{(-i)}\)</span> by fitting the model to but the <span class="math inline">\(i\)</span>th observation (jackknife estimator) — there are explicit formulas for this, no need to refit the model!</li>
-<li>Then, <span class="math inline">\(e_i\)</span> is independent of <span class="math inline">\(S_{(-i)}\)</span></li>
-<li>The standardized quantities (residuals divided by std. dev.) <span class="math display">\[r_i = \frac{e_i}{S_{(-i)}(1-h_{ii})}\]</span> are the jackknife (or externally) studentized residuals. In <strong>R</strong>, use <code>rstudent</code>.</li>
-</ul>
-<p>The distribution of <span class="math inline">\(R \sim \mathsf{Student}(n-p-2)\)</span>, but the collection <span class="math inline">\(R_1, \ldots, R_n\)</span> are not independent.</p>
+<section id="analysis-of-variance-table" class="slide level2">
+<h2>Analysis of variance table</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 28%">
+<col style="width: 21%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>term</th>
+<th>degrees of freedom</th>
+<th>mean square</th>
+<th><span class="math inline">\(F\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><span class="math inline">\(n_a-1\)</span></td>
+<td><span class="math inline">\(\mathsf{MS}_{A}=\mathsf{SS}_A/(n_a-1)\)</span></td>
+<td><span class="math inline">\(\mathsf{MS}_{A}/\mathsf{MS}_{\text{res}}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(B\)</span></td>
+<td><span class="math inline">\(n_b-1\)</span></td>
+<td><span class="math inline">\(\mathsf{MS}_{B}=\mathsf{SS}_B/(n_b-1)\)</span></td>
+<td><span class="math inline">\(\mathsf{MS}_{B}/\mathsf{MS}_{\text{res}}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(AB\)</span></td>
+<td><span class="math inline">\((n_a-1)(n_b-1)\)</span></td>
+<td><span class="math inline">\(\mathsf{MS}_{AB}=\mathsf{SS}_{AB}/\{(n_a-1)(n_b-1)\}\)</span></td>
+<td><span class="math inline">\(\mathsf{MS}_{AB}/\mathsf{MS}_{\text{res}}\)</span></td>
+</tr>
+<tr class="even">
+<td>residuals</td>
+<td><span class="math inline">\(n-n_an_b\)</span></td>
+<td><span class="math inline">\(\mathsf{MS}_{\text{resid}}=\mathsf{RSS}_{a}/ (n-ab)\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>total</td>
+<td><span class="math inline">\(n-1\)</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><em>Read the table backward (starting with the interaction).</em></p>
+<p>The <strong>additive</strong> model with the treatment contrast parametrization has <span class="math inline">\(1 + (n_a-1) + (n_b-1)\)</span> parameters, with <span class="math inline">\(\mathsf{E}(Y \mid A=a_i, B=b_j) = \mu+ \alpha_i + \beta_j\)</span> and a suitable constraint on <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, e.g., <span class="math inline">\(\alpha_1=0\)</span> (treatment contrast) or <span class="math inline">\(\sum_{i=1}^{n_a}\alpha_i=0\)</span> (sum-to-zero constraint).</p>
 </section>
-<section id="leverage" class="slide level2">
-<h2>Leverage</h2>
-<ul>
-<li>The diagonal elements of the hat matrix <span class="math inline">\(h_{ii} = \partial \widehat{y}_i/\partial y_i\)</span> represent the <strong>leverage</strong> of an observations.</li>
-<li>Leverage values tell us how much each point impacts the fit: they are strictly positive, are bounded below by <span class="math inline">\(1/n\)</span> and above by <span class="math inline">\(1\)</span>.</li>
-<li>The sum of the leverage values is <span class="math inline">\(\sum_{i=1}^n h_i=p+1\)</span>: in a good design, each point has approximately the same contribution, with average weight <span class="math inline">\((p+1)/n\)</span>.</li>
-<li>Points with high leverage are those that have unusual combinations of explanatories.</li>
-<li>One condition for the OLS estimator <span class="math inline">\(\widehat{\boldsymbol{\beta}}\)</span> to be approximately normally distributed is that <span class="math inline">\(\max_{i=1}^n h_{ii} \to 0\)</span> as <span class="math inline">\(n \to \infty\)</span>: no observation dominates the fit.</li>
-</ul>
-</section>
-<section id="influential-observations-vs-outliers" class="slide level2">
-<h2>Influential observations vs outliers</h2>
-<p>It is important to distinguish betwen <strong>influential</strong> observations (which have unusual <span class="math inline">\(\mathbf{x}\)</span> value, i.e., far from the overall mean) and <strong>outliers</strong> (unusual value of the response <span class="math inline">\(y\)</span>). If an observation is both an outlier and has a high leverage, it is problematic.</p>
+<section id="main-effects-and-marginalization" class="slide level2">
+<h2>Main effects and marginalization</h2>
+<p><strong>Main effects</strong> are comparisons between row or column averages</p>
+<p>Obtained by <em>marginalization</em>, i.e., averaging over the other dimension.</p>
+<p>Main effects are misleading if there is an interaction.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\qquad B\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(b_1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(b_2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\text{column mean}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{.1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mu_{.2}\)</span></td>
+</tr>
+</tbody>
+</table>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-outliers" class="quarto-float quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-outliers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-outliers-1.png" width="960">
+<table class="table caption-top" data-quarto-postprocess="true" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">\(A\)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">\(\text{row mean}\)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">\(a_1\)</td>
+<td style="text-align: center; background-color: rgba(186, 225, 255, 255) !important;">\(\mu_{1.}\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\(a_2\)</td>
+<td style="text-align: center; background-color: rgba(255, 223, 186, 255) !important;">\(\mu_{2.}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\(a_3\)</td>
+<td style="text-align: center; background-color: rgba(255, 179, 186, 255) !important;">\(\mu_{3.}\)</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-outliers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Outlier and influential observation. The left panel shows an outlier, whereas the right panel shows an influential variable (rightmost <span class="math inline">\(x\)</span> value).
-</figcaption>
+</div>
+</section>
+<section id="simple-effects" class="slide level2">
+<h2>Simple effects</h2>
+<p>When there are interactions, the effect of <span class="math inline">\(A\)</span> depends on the value of <span class="math inline">\(B\)</span>.</p>
+<p><strong>Simple effects</strong> are comparisons between cell averages within a given row or column.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top" data-quarto-postprocess="true" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">\(A\)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">\(b_1\)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">\(a_1\)</td>
+<td style="text-align: center; background-color: rgba(186, 225, 255, 255) !important;">\(\mu_{11}\)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">\(a_2\)</td>
+<td style="text-align: center; background-color: rgba(255, 223, 186, 255) !important;">\(\mu_{21}\)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">\(a_3\)</td>
+<td style="text-align: center; background-color: rgba(255, 179, 186, 255) !important;">\(\mu_{31}\)</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Analysing Supplementary Study 5</span></span>
+<span id="cb2-2"><a href=""></a><span class="co"># of Sharma, Tully, and Cryder (2021)</span></span>
+<span id="cb2-3"><a href=""></a><span class="fu">data</span>(STC21_SS5, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb2-4"><a href=""></a>mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(likelihood <span class="sc">~</span> purchase<span class="sc">*</span>debttype, </span>
+<span id="cb2-5"><a href=""></a>           <span class="at">data =</span> STC21_SS5)</span>
+<span id="cb2-6"><a href=""></a><span class="co"># Compute means of rows/columns/cells</span></span>
+<span id="cb2-7"><a href=""></a><span class="fu">model.tables</span>(mod, <span class="at">type =</span> <span class="st">"means"</span>)</span>
+<span id="cb2-8"><a href=""></a><span class="do">## Tables of means</span></span>
+<span id="cb2-9"><a href=""></a><span class="do">## Grand mean</span></span>
+<span id="cb2-10"><a href=""></a><span class="do">##     </span></span>
+<span id="cb2-11"><a href=""></a><span class="do">## 4.9 </span></span>
+<span id="cb2-12"><a href=""></a><span class="do">## </span></span>
+<span id="cb2-13"><a href=""></a><span class="do">##  purchase </span></span>
+<span id="cb2-14"><a href=""></a><span class="do">##     discretionary    need</span></span>
+<span id="cb2-15"><a href=""></a><span class="do">##             4.182   5.579</span></span>
+<span id="cb2-16"><a href=""></a><span class="do">## rep       751.000 750.000</span></span>
+<span id="cb2-17"><a href=""></a><span class="do">## </span></span>
+<span id="cb2-18"><a href=""></a><span class="do">##  debttype </span></span>
+<span id="cb2-19"><a href=""></a><span class="do">##      credit    loan</span></span>
+<span id="cb2-20"><a href=""></a><span class="do">##       5.127   4.631</span></span>
+<span id="cb2-21"><a href=""></a><span class="do">## rep 753.000 748.000</span></span>
+<span id="cb2-22"><a href=""></a><span class="do">## </span></span>
+<span id="cb2-23"><a href=""></a><span class="do">##  purchase:debttype </span></span>
+<span id="cb2-24"><a href=""></a><span class="do">##                debttype</span></span>
+<span id="cb2-25"><a href=""></a><span class="do">## purchase        credit loan </span></span>
+<span id="cb2-26"><a href=""></a><span class="do">##   discretionary   4.5    3.8</span></span>
+<span id="cb2-27"><a href=""></a><span class="do">##   rep           392.0  359.0</span></span>
+<span id="cb2-28"><a href=""></a><span class="do">##   need            5.7    5.4</span></span>
+<span id="cb2-29"><a href=""></a><span class="do">##   rep           361.0  389.0</span></span>
+<span id="cb2-30"><a href=""></a><span class="co"># Analysis of variance reveals </span></span>
+<span id="cb2-31"><a href=""></a><span class="co"># non-significant interaction</span></span>
+<span id="cb2-32"><a href=""></a><span class="co"># of purchase and type</span></span>
+<span id="cb2-33"><a href=""></a>car<span class="sc">::</span><span class="fu">Anova</span>(mod, <span class="at">type =</span> <span class="dv">2</span>)</span>
+<span id="cb2-34"><a href=""></a><span class="do">## Anova Table (Type II tests)</span></span>
+<span id="cb2-35"><a href=""></a><span class="do">## </span></span>
+<span id="cb2-36"><a href=""></a><span class="do">## Response: likelihood</span></span>
+<span id="cb2-37"><a href=""></a><span class="do">##                   Sum Sq   Df F value  Pr(&gt;F)    </span></span>
+<span id="cb2-38"><a href=""></a><span class="do">## purchase             752    1   98.21 &lt; 2e-16 ***</span></span>
+<span id="cb2-39"><a href=""></a><span class="do">## debttype              92    1   12.04 0.00054 ***</span></span>
+<span id="cb2-40"><a href=""></a><span class="do">## purchase:debttype     14    1    1.79 0.18171    </span></span>
+<span id="cb2-41"><a href=""></a><span class="do">## Residuals          11467 1497                    </span></span>
+<span id="cb2-42"><a href=""></a><span class="do">## ---</span></span>
+<span id="cb2-43"><a href=""></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Since the interaction is not significant, we can only interpret the main effect of fixation. These conditional mean difference are termed marginal effect, because they are obtained by averaging out the other explanatory. The model however estimates the variance based on residuals from the full interaction model with four cell means, so differs from that obtained by (incorrectly) running a model with only <code>purchase</code> as explanatory.</p>
+<p>In the analysis of variance table, we focus exclusively on the last line with the sum of squares for <code>purchase:debttype</code>. The <span class="math inline">\(F\)</span> statistic is 1.79; using the <span class="math inline">\(\mathsf{F}\)</span> (1, 1497) distribution as benchmark, we obtain a <span class="math inline">\(p\)</span>-value of 0.18 so there is no evidence the effect of purchase depends on debt type.</p>
+</section>
+<section id="interaction-plot" class="slide level2">
+<h2>Interaction plot</h2>
+<p>Plot the averages (with confidence intervals) as a function of the explanatories.</p>
+<p>If lines are parallel, then there is no interaction.</p>
+</section>
+<section id="interaction-plots-for-2-by-2-designs" class="slide level2">
+<h2>Interaction plots for 2 by 2 designs</h2>
+
+<img data-src="MATH60604A-slides5_files/figure-revealjs/2by2-interaction-plot-1.png" style="width:70.0%" class="r-stretch"></section>
+<section id="cell-means-for-2-by-2-designs" class="slide level2">
+<h2>Cell means for 2 by 2 designs</h2>
+
+<img data-src="MATH60604A-slides5_files/figure-revealjs/2by2-interaction-1.png" style="width:70.0%" class="r-stretch"><p>???</p>
+<p>Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of Crump, Navarro and Suzuki (2019) by Matthew Crump (CC BY-SA 4.0 license)</p>
+</section>
+<section id="example-1-loans-versus-credit" class="slide level2">
+<h2>Example 1 : loans versus credit</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><a href="https://doi.org/10.1177/0022243721993816">Sharma, Tully, and Cryder (2021)</a> Supplementary study 5 consists of a <span class="math inline">\(2 \times 2\)</span> between-subject ANOVA with factors</p>
+<ul>
+<li>debt type (<code>debttype</code>), either “loan” or “credit”</li>
+<li><code>purchase</code> type, either <code>discretionary</code> or not (<code>need</code>)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="MATH60604A-slides5_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>No evidence of interaction.</p>
+</div></div>
+</section>
+<section id="example-2---psychological-distance" class="slide level2">
+<h2>Example 2 - psychological distance</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><a href="https://doi.org/10.1177/0956797614530571">Maglio and Polman (2014)</a> Study 1 uses a <span class="math inline">\(4 \times 2\)</span> between-subject ANOVA with factors</p>
+<ul>
+<li>subway <code>station</code>, one of Spadina, St.&nbsp;George, Bloor-Yonge and Sherbourne</li>
+<li><code>direction</code> of travel, either east or west</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="MATH60604A-slides5_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Clear evidence of interaction (symmetry?)</p>
+</div></div>
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
 <div class="quarto-auto-generated-content">
 <p><img src="fig/logo_hec_montreal_bleu_web.png" class="slide-logo"></p>
 <div class="footer footer-default">
@@ -602,19 +794,19 @@ Figure&nbsp;4: Outlier and influential observation. The left panel shows an outl
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="MATH60604A-slides5_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="MATH60604A-slides5_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="MATH60604A-slides5_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="MATH60604A-slides5_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="MATH60604A-slides5_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="MATH60604A-slides5_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="MATH60604A-slides5_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="MATH60604A-slides5_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="MATH60604A-slides5_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="MATH60604A-slides5_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

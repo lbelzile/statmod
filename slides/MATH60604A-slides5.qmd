@@ -1,0 +1,539 @@
+---
+title: "Statistical modelling"
+author: "Léo Belzile, HEC Montréal"
+subtitle: "05. Linear models"
+date: today
+date-format: YYYY
+eval: true
+cache: true
+echo: true
+fig-align: 'center'
+out-width: '100%'
+standalone: true
+bibliography: MATH60604A.bib
+format:
+  revealjs:
+    slide-number: true
+    preview-links: auto
+    code-block-height: 750px
+    theme: [simple, hecmontreal.scss]
+    title-slide-attributes:
+      data-background-color: "#002855"
+    logo: "fig/logo_hec_montreal_bleu_web.png"
+    width: 1600
+    height: 900
+---
+
+
+```{r}
+#| eval: true
+#| include: false
+#| cache: false
+hecbleu <- c("#002855")
+fcols <- c(gris = "#888b8d",
+           bleu = "#0072ce",
+           aqua = "#00aec7",
+           vert = "#26d07c",
+           rouge = "#ff585d",
+           rose = "#eb6fbd",
+           jaune = "#f3d03e")
+pcols <- c(gris = "#d9d9d6",
+           bleu = "#92c1e9",
+           agua = "#88dbdf",
+           vert = "#8fe2b0",
+           rouge = "#ffb1bb",
+           rose = "#eab8e4",
+           jaune = "#f2f0a1")
+library(ggplot2)
+theme_set(theme_classic())
+library(patchwork)
+knitr::opts_chunk$set(fig.retina = 3, collapse = TRUE)
+options(scipen=1, digits=2, width = 75)
+```
+
+## Interaction
+
+
+An interaction occurs if some explanatory variables, when coupled together, have different impacts than the superposition of each.
+
+If $X_j$ and $X_k$ interact, the marginal effect of $\mathsf{E}(Y \mid \boldsymbol{X})$ with respect to $X_j$ is a function of $X_k$ or vice-versa.
+
+We will restrict attention to the cases where one or more of the explanatories is a categorical variable (factor).
+
+## Insurance premium
+
+Smokers who have a BMI of 30 and above pay a hefty premium, but there is also seemingly a linear increase in the amount charged with BMI. We see no such behaviour for non-smokers. 
+
+
+```{r}
+#| label: fig-insuranceinter1
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: "Graph of `insurance` charges against body mass index, colored by smoking status."
+data(insurance, package = "hecstatmod")
+insurance <- insurance |>
+  dplyr::mutate(obesity = factor(bmi >= 30, labels = c("normal","obese"))) |>
+  dplyr::mutate(smobese = droplevels(factor(interaction(obesity, smoker),
+                          levels = c("normal.no","obese.no","normal.yes","obese.yes"),
+                          labels = c("non-smoker","non-smoker","smoker non-obese","smoker obese"))))
+
+g1 <- ggplot(data = insurance,
+             aes(x = bmi, y = charges, col = smobese)) +
+  geom_point() +
+  geom_vline(xintercept = 30) +
+  MetBrewer::scale_color_met_d("Hiroshige") +
+  labs(x = "body mass index",
+       y = "", subtitle = "insurance charges (in USD)", col = "") +
+  scale_y_continuous(labels = scales::unit_format(unit = "K", scale = 1e-3),
+                     expand = c(0, 0), limits = c(0, max(insurance$charges)+100),) 
+# g2 <- ggplot(data = insurance, aes(x = age, y = charges, col = smobese)) +
+#   geom_point() +
+#   labs(x = "age", y = "charges (in USD)") +
+#     scale_y_continuous(expand = c(0.5, 0), limits = c(0, NA))
+# g1 + g2 + plot_layout(guides = 'collect') & theme(legend.position = "bottom") & labs(col = "smoking/obesity status")
+g1
+
+```
+
+
+## Toy example 1 -- continuous vs categorical
+
+We consider a toy model for the `interaction` data. The base model, without interaction, is
+\begin{align*}
+\texttt{intention}=\beta_0 + \beta_1 \texttt{sex} + \beta_2 \texttt{fixation} + \varepsilon,
+\end{align*}
+where $\texttt{sex=1}$ for women and $\texttt{sex=0}$ for men.
+
+The effect of fixation in this model is the same regardless of sex. 
+
+
+
+In order to add a different slope for men and women, we can create a new variable equal to the product $\texttt{fixation}\times\texttt{sex}$  and add it to the model,
+\begin{align*}
+\mathsf{E}(\texttt{intention} \mid \cdot)= \beta_0 + \beta_1 \texttt{sex} + \beta_2\texttt{fixation}  + \beta_3 \texttt{fixation}\cdot \texttt{sex}.
+\end{align*} 
+
+## Is there an interaction?
+
+```{r}
+#| eval: true
+#| echo: false
+#| label: fig-interaction-slope
+#| fig-cap: "Scatterplots and fitted lines for a model with a single continuous and binary explanatory, without (left) and with (right) an interaction term." 
+data(interaction, package = "hecstatmod")
+interaction <- interaction |> 
+  dplyr::mutate(sex = factor(sex, levels = c(0,1),
+                             labels = c("men","women")))
+mod <- lm(intention ~ fixation + sex, data = interaction)
+predmod <- predict(mod)
+g1 <- ggplot(data = interaction,   
+       mapping = aes(
+  x = fixation, 
+  y = intention,
+  color = sex)) +
+ geom_point() +
+ geom_line(aes(y = predmod), linewidth = 1,
+           show.legend = FALSE) +
+ MetBrewer::scale_color_met_d(name = "Hiroshige") + 
+ labs(color = "sex",
+     x = "fixation time (in seconds)", 
+     y = "intention to buy")
+g2 <- ggplot(data = interaction,   
+       mapping = aes(x = fixation, 
+                     color = sex, 
+                     y = intention)) +
+ geom_point() +
+ geom_smooth(formula = y ~ x, se = FALSE, method = "lm", linewidth = 1,
+             show.legend = FALSE) +
+ MetBrewer::scale_color_met_d(name = "Hiroshige") + 
+ labs(color = "sex",
+     x = "fixation time (in seconds)", 
+     y = "intention to buy")
+g1 + g2 + plot_layout(guides = 'collect') & theme(legend.position = "bottom") 
+```
+
+
+## Parameter interpretation
+
+Depending on the value of the binary variable $\texttt{sex}$, we get
+\begin{align*}
+\mathsf{E}(\texttt{intention} \mid \cdot) = 
+\begin{cases}
+(\beta_0 + \beta_1) + (\beta_2 + \beta_3)\texttt{fixation}, & \texttt{sex}=1 \text{ (women)},\\
+  \beta_0 + \beta_2 \texttt{fixation}, & \texttt{sex}=0 \text{ (men)}.
+\end{cases}
+\end{align*} 
+The interpretation of the coefficients in the model is as usual with the treatment contrast parametrization:
+
+- $\beta_0$ is the average buying intention when the fixation time is zero for men,
+- $\beta_1$ is the difference in intercept for women vs men,
+- $\beta_2$ is the unit increase in intention to buy per second of fixation for men,
+- $\beta_3$ is the difference in slope for women vs men.
+
+## Testing for an interaction
+
+Testing whether the interaction is significant boils down to using the test $\mathscr{H}_0: \beta_3=0$.
+
+```{r}
+#| eval: true
+#| echo: true
+data(interaction, package = "hecstatmod")
+# To specify an interaction use :
+mod <- lm(intention ~ sex + fixation +  sex:fixation, 
+          data = interaction)
+# A shortcut is sex*fixation, which expands to the above
+summary(mod)$coefficients
+```
+The model with the interaction is significantly better, meaning that the effect of fixation time on intention to buy varies according to sex.
+
+## Marginality principle
+
+All lower interaction terms should be included if an interaction is present.
+
+For example, we would **not** remove $\texttt{fixation}$ while keeping the interaction term $\texttt{fixation*sex}$, even if we fail to reject $\mathscr{H}_0:\beta_2=0$ because otherwise
+\begin{align*}
+&\mathsf{E}(\texttt{intention} \mid \cdot) =
+\begin{cases}
+(\beta_0 + \beta_1) + \beta_3\texttt{fixation}, & \texttt{sex}=1 \text{ (women)},\\
+  \beta_0, &\texttt{sex}=0 \text{ (men)};                 
+\end{cases}
+\end{align*}  
+this implies that intention to buy is constant for men, regardless of the fixation time.
+
+As the choice of baseline is arbitrary, changing the dummy \texttt{sex} ($\texttt{0}$ for women, $\texttt{1}$ for men), would yield a different model and so potentially different inferences.
+
+
+
+## Example 2 - categorical vs categorical
+
+Consider a linear model with factors $A$ and $B$ and their interactions.
+
+This is a **two-way ANOVA model**, in which each subgroup $(a_i, b_j)$ has a different mean $\mu_{ij}$.
+
+e.g., if $A$ has $n_a=3$ levels and $B$ has $n_b=2$ levels.
+
+
+| $\qquad B$<br> $A$ $\qquad$ | $b_1$ | $b_2$ | $\text{row mean}$ |
+|------------|:----------:|:-----:|:-----:|
+| $a_1$ | $\mu_{11}$ | $\mu_{12}$ | $\mu_{1.}$ |
+|  $a_2$  | $\mu_{21}$ | $\mu_{22}$ | $\mu_{2.}$ |
+| $a_3$|  $\mu_{31}$ | $\mu_{32}$ | $\mu_{3.}$ |
+|$\text{column mean}$ | $\mu_{.1}$ | $\mu_{.2}$ | $\mu$ |
+
+- Row, column and overall averages are **equiweighted** combinations of the cell means $\mu_{ij}$.
+- Sample estimates are obtained by replacing $\mu_{ij}$ in formulas by subgroup sample mean.
+
+## Example
+
+The authors conducted a 2 by 2 between-subject comparison (two-way ANOVA) varying the type of debt (whether the money was advertised as `credit` or `loan`) and the type of purchase the latter would be used for (`discretionary` spending or `need` for necessary purchases). The response is the average of the likelihood and interest in the product, both measured using a 9 point Likert scale from 1 to 9.
+
+The mean model with an interaction can be written using the treatment contrast parametrization as
+\begin{align*}
+\texttt{likelihood} &= \beta_0 + \beta_1\mathbf{1}_{\texttt{purchase=need}} + \beta_2\mathbf{1}_{\texttt{debttype=loan}} \\&\quad+ \beta_3\mathbf{1}_{\texttt{purchase=need}}\mathbf{1}_{\texttt{debttype=loan}} + \varepsilon
+\end{align*}
+
+
+
+## Analysis of variance table
+
+| term | degrees of freedom | mean square | $F$ | 
+|------|--------|------|--------|
+| $A$  | $n_a-1$   | $\mathsf{MS}_{A}=\mathsf{SS}_A/(n_a-1)$ | $\mathsf{MS}_{A}/\mathsf{MS}_{\text{res}}$ |
+| $B$  | $n_b-1$   | $\mathsf{MS}_{B}=\mathsf{SS}_B/(n_b-1)$ | $\mathsf{MS}_{B}/\mathsf{MS}_{\text{res}}$ |
+| $AB$ | $(n_a-1)(n_b-1)$ | $\mathsf{MS}_{AB}=\mathsf{SS}_{AB}/\{(n_a-1)(n_b-1)\}$ | $\mathsf{MS}_{AB}/\mathsf{MS}_{\text{res}}$ |
+| residuals | $n-n_an_b$ | $\mathsf{MS}_{\text{resid}}=\mathsf{RSS}_{a}/ (n-ab)$ | |
+| total | $n-1$ | | 
+
+*Read the table backward (starting with the interaction).*
+
+## Additive model
+
+The **additive** model with the treatment contrast parametrization has $1 + (n_a-1) + (n_b-1)$ parameters, with $$\mathsf{E}(Y \mid A=a_i, B=b_j) = \mu+ \alpha_i + \beta_j.$$ 
+We need a suitable constraint on $\alpha$ and $\beta$, e.g., $\alpha_1=0$ (treatment contrast) or $\sum_{i=1}^{n_a}\alpha_i=0$ (sum-to-zero constraint).
+
+
+
+## Main effects and marginalization
+
+**Main effects** are comparisons between row or column averages
+
+Obtained by *marginalization*, i.e., averaging over the other dimension.
+
+Main effects are misleading if there is an interaction.
+
+| $\qquad B$ | $b_1$ | $b_2$ |
+|---------------------|:----------:|:----------:|
+|$\text{column mean}$ | $\mu_{.1}$ | $\mu_{.2}$ |
+
+
+```{r}
+#| echo: false
+#| warning: false
+library(kableExtra)
+# list of all the icons used in table
+# making table with gt
+data.frame(A = c("\\(a_1\\)", "\\(a_2\\)", "\\(a_3\\)"),
+           response = c("\\(\\mu_{1.}\\)",
+                        "\\(\\mu_{2.}\\)",
+                        "\\(\\mu_{3.}\\)")) |> 
+  kbl(align = "c", 
+      escape = FALSE, 
+      col.names = c("\\(A\\)","\\(\\text{row mean}\\)")) |>
+  kable_styling(full_width = FALSE) |>
+  column_spec(2, background = c("#bae1ff", "#ffdfba", "#ffb3ba"))
+```
+
+
+
+## Simple effects
+
+When there are interactions, the effect of $A$ depends on the value of $B$.
+
+**Simple effects** are comparisons between cell averages within a given row or column.
+
+
+
+```{r}
+#| echo: false
+#| warning: false
+library(kableExtra)
+# list of all the icons used in table
+# making table with gt
+data.frame(A = c("\\(a_1\\)", "\\(a_2\\)", "\\(a_3\\)"),
+           response = c("\\(\\mu_{11}\\)",
+                        "\\(\\mu_{21}\\)",
+                        "\\(\\mu_{31}\\)")) |> 
+  kbl(align = "c", 
+      escape = FALSE, 
+      col.names = c("\\(A\\)","\\(b_1\\)")) |>
+  kable_styling(full_width = FALSE) |>
+  column_spec(2, background = c("#bae1ff", "#ffdfba", "#ffb3ba"))
+```
+
+## 
+
+```{r}
+#| eval: true
+#| echo: true
+# Analysing Supplementary Study 5
+# of Sharma, Tully, and Cryder (2021)
+data(STC21_SS5, package = "hecedsm")
+mod <- aov(likelihood ~ purchase*debttype, 
+           data = STC21_SS5)
+# Compute means of rows/columns/cells
+model.tables(mod, type = "means")
+# Analysis of variance reveals 
+# non-significant interaction
+# of purchase and type
+car::Anova(mod, type = 2)
+```
+
+Since the interaction is not significant, we can only interpret the main effect of fixation. These conditional mean difference are termed marginal effect, because they are obtained by averaging out the other explanatory. The model however estimates the variance based on residuals from the full interaction model with four cell means, so differs from that obtained by (incorrectly) running a model with only `purchase` as explanatory.
+
+In the analysis of variance table, we focus exclusively on the last line with the sum of squares for `purchase:debttype`. The $F$ statistic is `r round(car::Anova(mod, type = 3)[4,3],2)`; using the $\mathsf{F}$ (`r car::Anova(mod, type = 3)[4,2]`, `r car::Anova(mod, type = 3)[5,2]`) distribution as benchmark, we obtain a $p$-value of `r format.pval(car::Anova(mod, type = 3)[4,4], digits=2)` so there is no evidence the effect of purchase depends on debt type.
+
+## Interaction plot
+
+Plot the averages (with confidence intervals) as a function of the explanatories.
+
+If lines are parallel, then there is no interaction.
+
+
+## Interaction plots for 2 by 2 designs
+
+```{r}
+#| label: 2by2-interaction-plot
+#| eval: true
+#| echo: false
+#| fig.width: 8
+#| fig.height: 3
+#| out.width: "70%"
+p1 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(5, 5, 5, 5)
+)
+p2 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(10, 10, 5, 5)
+)
+p3 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(5, 10, 5, 10)
+)
+p4 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(5, 10, 10, 15)
+)
+p5 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(5, 10, 10, 5)
+)
+p6 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(10, 13, 5, 2)
+)
+p7 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(2, 12, 5, 9)
+)
+p8 <- data.frame(
+  factorA = c("a1", "a1", "a2", "a2"),
+  factorB = c("b1", "b2", "b1", "b2"),
+  means = c(10, 18, 5, 7)
+)
+all_22s <- rbind(p1, p2, p3, p4, p5, p6, p7, p8)
+#table object to beincluded with ggplot
+
+type <- factor(rep(1:8, each = 4), 
+               labels = c("no effect",
+                          "main effect of A only",
+                          "main effect of B only",
+                          "both main effects",
+                          "interaction only",
+                          "main effect of A and interaction",
+                          "main effect of B and interaction",
+                          "both main effects and interaction" ))
+all_22s <- cbind(all_22s, type)
+options(ggplot2.discrete.colour= MetBrewer::met.brewer(name = "Hiroshige", 2))
+ggplot(all_22s, 
+       mapping = aes(x = factorA, 
+                     y = means, 
+                     type = type,
+                     group = factorB, 
+                     color = factorB))+
+  geom_point() +
+  geom_line() +
+  labs(x = "factor A",
+       subtitle = "mean response",
+       y = "",
+       color = "factor B") +
+  facet_wrap(~type, nrow = 2) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
+
+
+
+
+
+## Cell means for 2 by 2 designs
+
+```{r}
+#| label: 2by2-interaction
+#| eval: true
+#| echo: false
+#| fig.width: 8
+#| fig.height: 3
+#| out.width: "70%"
+m1 <- matrix(p1$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab1 <- gridExtra::tableGrob(m1,rows = c("a1","a2"),)
+m2 <- matrix(p2$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab2 <- gridExtra::tableGrob(m2)
+m3 <- matrix(p3$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab3 <- gridExtra::tableGrob(m3)
+m4 <- matrix(p4$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab4 <- gridExtra::tableGrob(m4)
+m5 <- matrix(p5$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab5 <- gridExtra::tableGrob(m5)
+m6 <- matrix(p6$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab6 <- gridExtra::tableGrob(m6)
+m7 <- matrix(p7$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab7 <- gridExtra::tableGrob(m7)
+m8 <- matrix(p8$means, nrow = 2, byrow = TRUE, dimnames = list(A = c("a1", "a2"), B = c("b1","b2")))
+tab8 <- gridExtra::tableGrob(m8)
+gridExtra::grid.arrange(tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, nrow = 2)
+```
+
+
+
+
+???
+
+Line graph for example patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design. Illustration adapted from Figure 10.2 of Crump, Navarro and Suzuki (2019) by Matthew Crump (CC BY-SA 4.0 license)
+
+---
+ 
+## Example 1 : loans versus credit
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+[Sharma, Tully, and Cryder (2021)](https://doi.org/10.1177/0022243721993816) Supplementary study 5 consists of a $2 \times 2$ between-subject ANOVA with factors
+
+- debt type (`debttype`), either "loan" or "credit"
+- `purchase` type, either `discretionary` or not (`need`)
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: '100%'
+#| fig-width: 5
+#| fig-height: 4
+options(contrasts = c("contr.sum","contr.poly"))
+data(STC21_SS5, package = "hecedsm")
+mod1 <- lm(likelihood ~ purchase * debttype, data = STC21_SS5)
+emm <- emmeans::emmeans(
+  mod1,
+  specs = c("debttype","purchase"))
+emmeans::emmip(emm,  debttype ~ purchase, CIs = TRUE) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
+No evidence of interaction.
+
+:::
+
+::::
+
+
+
+## Example 2 - psychological distance
+
+:::: {.columns}
+
+::: {.column width="50%"}
+[Maglio and Polman (2014)](https://doi.org/10.1177/0956797614530571) Study 1 uses a $4 \times 2$ between-subject ANOVA with factors
+
+- subway `station`, one of Spadina, St. George, Bloor-Yonge and Sherbourne
+- `direction` of travel, either east or west
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| eval: true
+#| echo: false
+#| out-width: '100%'
+#| fig-width: 5
+#| fig-height: 4
+data(MP14_S1, package = "hecedsm")
+mod2 <- lm(distance ~ station * direction, data = MP14_S1)
+emm <- emmeans::emmeans(
+  mod2,
+  specs = c("station","direction"))
+emmeans::emmip(emm,   direction ~ station, CIs = TRUE) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
+Clear evidence of interaction (symmetry?)
+
+:::
+
+::::
+
+
+## References
+
