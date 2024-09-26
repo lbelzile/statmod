@@ -5,7 +5,7 @@ subtitle: "05. Linear models"
 date: today
 date-format: YYYY
 eval: true
-cache: true
+cache: false
 echo: true
 fig-align: 'center'
 out-width: '100%'
@@ -52,12 +52,13 @@ knitr::opts_chunk$set(fig.retina = 3, collapse = TRUE)
 options(scipen=1, digits=2, width = 75)
 options(knitr.kable.NA = '')
 library(kableExtra)
+library(emmeans)
 ```
 
 ## Interaction
 
 
-An interaction occurs if some explanatory variables, when coupled together, have different impacts than the superposition of each.
+An **interaction** occurs if some explanatory variables, when coupled together, have different impacts than the superposition of each.
 
 If $X_j$ and $X_k$ interact, the marginal effect of $\mathsf{E}(Y \mid \boldsymbol{X})$ with respect to $X_j$ is a function of $X_k$ or vice-versa.
 
@@ -96,7 +97,7 @@ ggplot(data = insurance,
 
 We consider a toy model for the `interaction` data. The base model, without interaction, is
 \begin{align*}
-\texttt{intention}=\beta_0 + \beta_1 \texttt{sex} + \beta_2 \texttt{fixation} + \varepsilon,
+\mathsf{E}(\texttt{intention} \mid \cdot)=\beta_0 + \beta_1 \texttt{sex} + \beta_2 \texttt{fixation},
 \end{align*}
 where $\texttt{sex=1}$ for women and $\texttt{sex=0}$ for men.
 
@@ -168,7 +169,7 @@ The interpretation of the coefficients in the model is as usual with the treatme
 
 ## Testing for an interaction
 
-Testing whether the interaction is significant boils down to using the test $\mathscr{H}_0: \beta_3=0$.
+Whether the interaction is significant boils down to testing $\mathscr{H}_0: \beta_3=0$.
 
 ```{r}
 #| eval: true
@@ -216,16 +217,50 @@ e.g., if $A$ has $n_a=3$ levels and $B$ has $n_b=2$ levels.
 | $a_3$|  $\mu_{31}$ | $\mu_{32}$ | $\mu_{3.}$ |
 |$\text{column mean}$ | $\mu_{.1}$ | $\mu_{.2}$ | $\mu$ |
 
-- Row, column and overall averages are **equiweighted** combinations of the cell means $\mu_{ij}$.
 - Sample estimates are obtained by replacing $\mu_{ij}$ by subgroup sample means.
+- Row averages $\mu_{i.}$, column averages $\mu_{.j}$ and the global average $\mu$ are **equiweighted** combinations of the cell means $\mu_{ij}$.
+
+
+## Example 1 - perception of debt
+
+@Sharma.Tully.Cryder:2021 conducted a 2 by 2 between-subjects comparison (two-way ANOVA) varying 
+
+- the type of debt (whether the money was advertised as `credit` or `loan`) and 
+- the type of purchase the latter would be used for (`discretionary` spending or `need` for necessary purchases). 
+
+```{r}
+#| eval: true
+#| echo: true
+data(STC21_SS5, package = "hecedsm")
+mod1 <- lm(likelihood ~ purchase * debttype, data = STC21_SS5)
+```
+
+The response is the average of the likelihood and interest in the product, both measured using a 9 point Likert scale from 1 to 9.
+
+
+
+## Example 2 - Perceptions of cultural appropriation by ideology
+
+We consider a three-way ANOVA from @Lin.Kim.Uduehi.Keinan:2024. Their Study 4 focused on cultural appropriation for a soul food recipe, an Afro-American tradition, that appears in a cookbook from Chef Dax.
+
+
+The authors manipulated the ethnicity of Chef Dax, who was either black (or not), and the description of the way he obtained the recipes (by peeking without permission in kitchens, by asking permission or no mention for control).
+
+```{r}
+#| eval: true
+#| echo: true
+data(LKUK24_S4, package = "hecedsm")
+mod2 <- lm(appropriation ~ politideo * chefdax * brandaction,
+           data = LKUK24_S4)
+```
+
+Authors postulated that the perception of appropriation would vary by political ideology (liberal or conservative). The study results in a 3 by 2 by 2 three-way ANOVA.
 
 
 
 ## Interaction plot
 
-Plot the averages (with confidence intervals) as a function of the explanatories.
-
-If lines are parallel, then there is no interaction.
+Plot the averages (with confidence intervals) as a function of the explanatories. If lines are parallel, then there is no interaction.
 
 
 
@@ -314,6 +349,8 @@ ggplot(all_22s,
 
 ## Cell means for 2 by 2 designs
 
+Refer to the previous slide for the scenarios.
+
 ```{r}
 #| label: tbl-2by2-interaction
 #| tbl-cap: "Patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design."
@@ -347,7 +384,7 @@ gridExtra::grid.arrange(tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, nrow = 2
 
 ---
  
-## Example 1 : loans versus credit
+## Interaction plot for Example 1
 
 :::: {.columns}
 
@@ -368,13 +405,10 @@ Supplementary study 5 of @Sharma.Tully.Cryder:2021 consists of a $2 \times 2$ be
 #| out-width: '100%'
 #| fig-width: 5
 #| fig-height: 4
-options(contrasts = c("contr.sum","contr.poly"))
-data(STC21_SS5, package = "hecedsm")
-mod1 <- lm(likelihood ~ purchase * debttype, data = STC21_SS5)
-emm <- emmeans::emmeans(
+emm1 <- emmeans::emmeans(
   mod1,
   specs = c("debttype","purchase"))
-emmeans::emmip(emm,  debttype ~ purchase, CIs = TRUE) +
+emmeans::emmip(emm1,  debttype ~ purchase, CIs = TRUE) +
   MetBrewer::scale_color_met_d(name = "Hiroshige") + 
   theme_classic() +
   theme(legend.position = "bottom") 
@@ -392,7 +426,7 @@ No evidence of interaction.
 :::: {.columns}
 
 ::: {.column width="50%"}
-Study 4 of @Lin.Kim.Uduehi.Keinan:2024 uses a $3 \times 2 \times 2$ between-subject ANOVA focused on cultural appropriation for a soul food recipe cookbook from Chef Dax with factors
+Study 4 of @Lin.Kim.Uduehi.Keinan:2024 uses a $3 \times 2 \times 2$ between-subject ANOVA  with factors
 
 - `chefdax`: ethnicity, either `black` or `not black`
 - `politideo`: political ideology, either `conservative` or `liberal`
@@ -416,21 +450,17 @@ Study 4 of @Lin.Kim.Uduehi.Keinan:2024 uses a $3 \times 2 \times 2$ between-subj
 # emmeans::emmip(emm,   direction ~ station, CIs = TRUE) +
 #   theme_classic() +
 #   theme(legend.position = "bottom")
-library(emmeans)
-data(LKUK24_S4, package = "hecedsm")
-mod <- lm(appropriation ~ politideo * chefdax * brandaction,
-          data = LKUK24_S4)
-emm <- emmeans(mod, 
+emm2 <- emmeans(mod2, 
         specs = c("chefdax", "brandaction", "politideo"))
-emmip(object = emm, 
-        formula = brandaction ~ chefdax | politideo, 
+emmip(object = emm2, 
+        formula = politideo ~ chefdax | brandaction, 
         CIs = TRUE) +
   MetBrewer::scale_color_met_d(name = "Hiroshige")  +
   theme(legend.position = "bottom") 
   
 ```
 
-Interaction between `chefdax` (ethnicity) and `ideology`.
+Evidence of an interaction between `chefdax` (ethnicity) and `ideology`.
 
 :::
 
@@ -451,15 +481,14 @@ $$\underset{\text{total}}{\mathsf{SS}_{c}} = \underset{\text{factor $A$}}{\maths
 
 ## Test statistic for ANOVA
 
-
-If the alternative model has $n_an_b$ parameters for the mean, and we impose $n_a-1$ linear restrictions under the null hypothesis to the model estimated based on $n$ independent observations, the test statistic is
+Consider removal of $A$ in a balanced design. If the alternative model has $n_an_b$ parameters for the mean, and we impose $n_a-1$ linear restrictions under the null hypothesis to the model estimated based on $n$ independent observations, the test statistic is
 
 \begin{align*}
 F = \frac{\mathsf{SS}_A/(n_a-1)}{\mathsf{SS}_{e}/ (n-n_an_b)}
 \end{align*}
 
 - The numerator is the difference in sum of squares, denoted $\mathsf{SS}_A$, from models fitted under $\mathscr{H}_0$ and $\mathscr{H}_a$, divided by degrees of freedom $n_a-1$ (number of additional parameters).
-- The denominator is an estimator of the variance (termed mean squared error of residuals).
+- The denominator is equal to $S^2$, the unbiased estimator of the variance.
 
 ## Analysis of variance table
 
@@ -471,9 +500,12 @@ F = \frac{\mathsf{SS}_A/(n_a-1)}{\mathsf{SS}_{e}/ (n-n_an_b)}
 | residuals | $n-n_an_b$ | $\mathsf{MS}_{\text{res}}=\mathsf{SS}_{e}/ (n-ab)$ | |
 | total | $n-1$ | | 
 
+*Read the table backward (starting with the interaction).*
+
+
 ## Comparing nested models with unbalanced data
 
-We are comparing nested models, but depending on the decomposition, these are different models!
+Depending on the decomposition, we are comparing different nested models!
 
 
 ```{r}
@@ -482,39 +514,38 @@ We are comparing nested models, but depending on the decomposition, these are di
 #| echo: false
 #| tbl-cap: "Sum of square decompositions in ANOVA tables. Comparison of sum of squares between null, versus alternative model."
 tabSS <- cbind("type 1" = c("intercept vs $A$", "$A$ vs $(A,B)$","$(A,B)$ vs $(A,B,AB)$"),
- "type II" = c("$B$ vs $(A,B)$","$A$ vs $(A,B)$","$(A,B)$ vs $(A,B,AB)$"),
-"type III" = c("$(B, AB)$ vs $(A,B, AB)$","$(A, AB)$ vs $(A,B,AB)$","$(A,B)$ vs $(A,B,AB)$"))
+ "type 2" = c("$B$ vs $(A,B)$","$A$ vs $(A,B)$","$(A,B)$ vs $(A,B,AB)$"),
+"type 3" = c("$(B, AB)$ vs $(A,B, AB)$","$(A, AB)$ vs $(A,B,AB)$","$(A,B)$ vs $(A,B,AB)$"))
 rownames(tabSS) <- c("$\\boldsymbol{A}$","$\\boldsymbol{B}$","$\\boldsymbol{AB}$")
 knitr::kable(tabSS, booktabs = TRUE)
 ```
 
 
-*Read the table backward (starting with the interaction).*
+Use the type 2 sum of square by default (default with `car::Anova`). Type 1 decomposition (`anova`) is sequential, while type 3 does not respect marginality principles.
 
-Use the type II sum of square by default (default with `car::Anova`). Type I decomposition (`anova`) is sequential, while type III does not respect marginality principles.
-
-## Example 1 - perception of debt
-
-@Sharma.Tully.Cryder:2021 conducted a 2 by 2 between-subjects comparison (two-way ANOVA) varying 
-
-- the type of debt (whether the money was advertised as `credit` or `loan`) and 
-- the type of purchase the latter would be used for (`discretionary` spending or `need` for necessary purchases). 
-
-The response is the average of the likelihood and interest in the product, both measured using a 9 point Likert scale from 1 to 9.
+## Mean model for Example 1
 
 The mean model with an interaction can be written using the treatment contrast parametrization as
 \begin{align*}
-\texttt{likelihood} &= \beta_0 + \beta_1\mathbf{1}_{\texttt{purchase=need}} + \beta_2\mathbf{1}_{\texttt{debttype=loan}} \\&\quad+ \beta_3\mathbf{1}_{\texttt{purchase=need}}\mathbf{1}_{\texttt{debttype=loan}} + \varepsilon
+\mathsf{E}(\texttt{likelihood} \mid \cdot) &= \beta_0 + \beta_1\mathbf{1}_{\texttt{purchase=need}} + \beta_2\mathbf{1}_{\texttt{debttype=loan}} \\&\quad+ \beta_3\mathbf{1}_{\texttt{purchase=need}}\mathbf{1}_{\texttt{debttype=loan}}.
 \end{align*}
 
+We can retrieve the average of each subgroup and deduce the interpretation of coefficients:
 
-## Additive model
+- $\mu_1 = \beta_0$ for `purchase=discretionnary` and `debttype=credit`
+- $\mu_2 = \beta_0 + \beta_1$ for `purchase=need` and `debttype=credit`
+- $\mu_1 = \beta_0 + \beta_2$ for `purchase=discretionnary` and `debttype=loan`
+- $\mu_2 = \beta_0 + \beta_1 + \beta_2 + \beta_3$ for `purchase=need` and `debttype=loan`
+
+Thus, $\beta_3$ represents the difference in means $\mu_1 + \mu_4 - \mu_2 - \mu_3$.
+<!--
+Additive model
 
 The **additive** model with the treatment contrast parametrization has $1 + (n_a-1) + (n_b-1)$ parameters, with $$\mathsf{E}(Y \mid A=a_i, B=b_j) = \mu+ \alpha_i + \beta_j.$$ 
 We need a suitable constraint on $\alpha$ and $\beta$, e.g., $\alpha_1=0$ (treatment contrast) or $\sum_{i=1}^{n_a}\alpha_i=0$ (sum-to-zero constraint).
 
 The last line of the ANOVA table with the $F$-statistics gives the $p$-value for the test comparing the model with and without the interaction term.
-
+-->
 
 ## Fitting ANOVA and extracting group means
 
@@ -524,29 +555,27 @@ The last line of the ANOVA table with the $F$-statistics gives the $p$-value for
 # Analysing Supplementary Study 5
 # of Sharma, Tully, and Cryder (2021)
 data(STC21_SS5, package = "hecedsm")
-# Use 'aov' to fit models to balanced data, with categorical variables
+# Use 'aov' to fit models with categorical variables
 # Equivalent to 'lm' with sum-to-zero contrasts
-mod <- aov(likelihood ~ purchase*debttype, 
+aov_mod1 <- aov(likelihood ~ purchase*debttype, 
            data = STC21_SS5)
 # Check counts per subcategory (data are unbalanced)
 xtabs(~purchase + debttype, data = STC21_SS5)
 # Compute overall/rows/columns/cells means
-means <- model.tables(mod, type = "means")
+mean_groups <- model.tables(aov_mod1, type = "means")
 ```
 
-## Comparing models
+## Model comparison
 
 ```{r}
 #| eval: true
 #| echo: true
-# Analysis of variance reveals  non-significant
-# interaction of purchase and type
-car::Anova(mod, type = 2)
+car::Anova(mod1, type = 2)
 ```
 
 In the analysis of variance table, we focus exclusively on the line `purchase:debttype`. 
 
-The $F$ statistic is `r round(car::Anova(mod, type = 3)[4,3],2)`; using the $\mathsf{Fisher}$ (`r car::Anova(mod, type = 3)[4,2]`, `r car::Anova(mod, type = 3)[5,2]`) distribution as null distribution, we obtain a $p$-value of `r format.pval(car::Anova(mod, type = 3)[4,4], digits=2)` so there is no evidence the effect of purchase depends on debt type.
+The $F$ statistic is `r round(car::Anova(mod1, type = 3)[4,3],2)`; using the $\mathsf{Fisher}$ (`r car::Anova(mod1, type = 3)[4,2]`, `r car::Anova(mod1, type = 3)[5,2]`) distribution as null distribution, we obtain a $p$-value of `r format.pval(car::Anova(mod1, type = 3)[4,4], digits=2)` so there is no evidence the effect of purchase depends on debt type.
 
 
 ## Main effects and marginalization
@@ -603,36 +632,21 @@ data.frame(A = c("\\(a_1\\)", "\\(a_2\\)", "\\(a_3\\)"),
 
 ## Example of main effects
 
-Since the interaction is not significant, we can interpret the main effect of fixation.
+Since the interaction is not significant, we can extract the main effect of `debttype` and compute the pairwise difference.
 
 ```{r}
 #| eval: true
 #| echo: true
 # Pairwise comparisons within levels of purchase
 # Using the main effects
-emmeans::emmeans(mod, 
-                 # what variable to keep (so average over "debttype")
-                 specs = "purchase", 
+emmeans::emmeans(mod1, 
+                 # what variable to keep (so average over "purchase")
+                 specs = "debttype", 
                  contr = "pairwise")
 ```
 
 
-## Example 2 - Perceptions of cultural appropriation by ideology
-
-We consider a three-way ANOVA from @Lin.Kim.Uduehi.Keinan:2024. Their Study 4 focused on cultural appropriation for soul food recipe cookbook from Chef Dax, who was either black (or not), manipulating the description of the way he obtained the recipes (by peeking without permission in kitchens, by asking permission or no mention for control).
-
-```{r}
-#| eval: true
-#| echo: true
-data(LKUK24_S4, package = "hecedsm")
-mod <- lm(appropriation ~ politideo * chefdax * brandaction,
-   data = LKUK24_S4)
-```
-
-Authors postulated that the perception of appropriation would vary by political ideology (liberal or conservative). The study results in a 3 by 2 by 2 three-way ANOVA.
-
-
-## Example 2
+## ANOVA table for Example 2 {.smaller}
 
 For the $K$-way ANOVA, we always start with estimating the full model with all $K$-way interaction (provided there are enough data to estimate the latter, which implies there are repetitions).
 
@@ -642,7 +656,7 @@ For the $K$-way ANOVA, we always start with estimating the full model with all $
 #| label: tbl-anova-LKUK24
 #| tbl-cap: "Analysis of variance table (type II decomposition) for the data from Study 4 of Lin et al. (2024)." 
 options(knitr.kable.na = '')
-broom::tidy(car::Anova(mod, type = 2)) |>
+broom::tidy(car::Anova(mod2, type = 2)) |>
   dplyr::mutate(p.value = ifelse(is.na(p.value), NA, format.pval(p.value, digits = 2, eps = 1e-3))) |>
   knitr::kable(digits = 2, 
                col.names = c("term", "sum of squares","df","stat","p-value"),
@@ -663,17 +677,23 @@ Collapse to a 2 by 2 two-way ANOVA, averaging over `brandaction`.
 #| warning: false
 # Marginal means for political ideology/Chef Dax
 # Compute simple effects, by political ideology
-emmeans(mod, 
+(emm2 <- emmeans(mod2, 
          specs = "chefdax", 
-         by = "politideo",
-         contrast = "pairwise")
+         by = "politideo"))
 ```
 
-## Interpretation
+## Pairwise contrasts between ethnicity, by political ideology
+
+```{r}
+#| eval: true
+#| echo: true
+emm2 |> contrast(method = "pairwise")
+```
+
 
 We see that the liberals are much more likely to view Chef Dax cookbook as an instance of cultural appropriation if he is not black; there is limited evidence of any difference between conservatives and liberal when Chef Dax is black.
 
-Both differences are statistically significative, but the differences (and thus evidence of an effect) is much stronger for left-leaning respondents.
+We can also compare marginal effects for ideology separately for `black` or `not black`. Both differences are statistically significative, but the differences (and thus evidence of an effect) is much stronger for left-leaning respondents.
 
 ## Comparisons of main effects of brandaction
 
@@ -686,7 +706,7 @@ We expect participants will view peeking less favorably than if Chef Dax asked f
 #| message: false
 #| warning: false
 # Marginal mean for brandaction
-emm_brand <- emmeans(mod, specs = c("brandaction")) 
+emm_brand <- emmeans(mod2, specs = c("brandaction")) 
 emm_brand
 # Joint F test for the main effect of brandaction
 emm_brand |> pairs() |> joint_tests()

@@ -429,7 +429,7 @@ Léo Belzile, HEC Montréal
 </section>
 <section id="interaction" class="slide level2">
 <h2>Interaction</h2>
-<p>An interaction occurs if some explanatory variables, when coupled together, have different impacts than the superposition of each.</p>
+<p>An <strong>interaction</strong> occurs if some explanatory variables, when coupled together, have different impacts than the superposition of each.</p>
 <p>If <span class="math inline">\(X_j\)</span> and <span class="math inline">\(X_k\)</span> interact, the marginal effect of <span class="math inline">\(\mathsf{E}(Y \mid \boldsymbol{X})\)</span> with respect to <span class="math inline">\(X_j\)</span> is a function of <span class="math inline">\(X_k\)</span> or vice-versa.</p>
 <p>We will restrict attention to the cases where one or more of the explanatories is a categorical variable (factor).</p>
 </section>
@@ -443,7 +443,7 @@ Figure&nbsp;1: Graph of <code>insurance</code> charges against body mass index, 
 <section id="toy-example-1-continuous-vs-categorical" class="slide level2">
 <h2>Toy example 1 – continuous vs categorical</h2>
 <p>We consider a toy model for the <code>interaction</code> data. The base model, without interaction, is <span class="math display">\[\begin{align*}
-\texttt{intention}=\beta_0 + \beta_1 \texttt{sex} + \beta_2 \texttt{fixation} + \varepsilon,
+\mathsf{E}(\texttt{intention} \mid \cdot)=\beta_0 + \beta_1 \texttt{sex} + \beta_2 \texttt{fixation},
 \end{align*}\]</span> where <span class="math inline">\(\texttt{sex=1}\)</span> for women and <span class="math inline">\(\texttt{sex=0}\)</span> for men.</p>
 <p>The effect of fixation in this model is the same regardless of sex.</p>
 <p>In order to add a different slope for men and women, we can create a new variable equal to the product <span class="math inline">\(\texttt{fixation}\times\texttt{sex}\)</span> and add it to the model, <span class="math display">\[\begin{align*}
@@ -474,7 +474,7 @@ Figure&nbsp;2: Scatterplots and fitted lines for a model with a single continuou
 </section>
 <section id="testing-for-an-interaction" class="slide level2">
 <h2>Testing for an interaction</h2>
-<p>Testing whether the interaction is significant boils down to using the test <span class="math inline">\(\mathscr{H}_0: \beta_3=0\)</span>.</p>
+<p>Whether the interaction is significant boils down to testing <span class="math inline">\(\mathscr{H}_0: \beta_3=0\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">data</span>(interaction, <span class="at">package =</span> <span class="st">"hecstatmod"</span>)</span>
 <span id="cb1-2"><a href=""></a><span class="co"># To specify an interaction use :</span></span>
@@ -545,26 +545,50 @@ this implies that intention to buy is constant for men, regardless of the fixati
 </tbody>
 </table>
 <ul>
-<li>Row, column and overall averages are <strong>equiweighted</strong> combinations of the cell means <span class="math inline">\(\mu_{ij}\)</span>.</li>
 <li>Sample estimates are obtained by replacing <span class="math inline">\(\mu_{ij}\)</span> by subgroup sample means.</li>
+<li>Row averages <span class="math inline">\(\mu_{i.}\)</span>, column averages <span class="math inline">\(\mu_{.j}\)</span> and the global average <span class="math inline">\(\mu\)</span> are <strong>equiweighted</strong> combinations of the cell means <span class="math inline">\(\mu_{ij}\)</span>.</li>
 </ul>
+</section>
+<section id="example-1---perception-of-debt" class="slide level2">
+<h2>Example 1 - perception of debt</h2>
+<p><span class="citation" data-cites="Sharma.Tully.Cryder:2021">Sharma, Tully, and Cryder (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> conducted a 2 by 2 between-subjects comparison (two-way ANOVA) varying</p>
+<ul>
+<li>the type of debt (whether the money was advertised as <code>credit</code> or <code>loan</code>) and</li>
+<li>the type of purchase the latter would be used for (<code>discretionary</code> spending or <code>need</code> for necessary purchases).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">data</span>(STC21_SS5, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb2-2"><a href=""></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(likelihood <span class="sc">~</span> purchase <span class="sc">*</span> debttype, <span class="at">data =</span> STC21_SS5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The response is the average of the likelihood and interest in the product, both measured using a 9 point Likert scale from 1 to 9.</p>
+</section>
+<section id="example-2---perceptions-of-cultural-appropriation-by-ideology" class="slide level2">
+<h2>Example 2 - Perceptions of cultural appropriation by ideology</h2>
+<p>We consider a three-way ANOVA from <span class="citation" data-cites="Lin.Kim.Uduehi.Keinan:2024">Lin et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>. Their Study 4 focused on cultural appropriation for a soul food recipe, an Afro-American tradition, that appears in a cookbook from Chef Dax.</p>
+<p>The authors manipulated the ethnicity of Chef Dax, who was either black (or not), and the description of the way he obtained the recipes (by peeking without permission in kitchens, by asking permission or no mention for control).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">data</span>(LKUK24_S4, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb3-2"><a href=""></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(appropriation <span class="sc">~</span> politideo <span class="sc">*</span> chefdax <span class="sc">*</span> brandaction,</span>
+<span id="cb3-3"><a href=""></a>           <span class="at">data =</span> LKUK24_S4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Authors postulated that the perception of appropriation would vary by political ideology (liberal or conservative). The study results in a 3 by 2 by 2 three-way ANOVA.</p>
 </section>
 <section id="interaction-plot" class="slide level2">
 <h2>Interaction plot</h2>
-<p>Plot the averages (with confidence intervals) as a function of the explanatories.</p>
-<p>If lines are parallel, then there is no interaction.</p>
+<p>Plot the averages (with confidence intervals) as a function of the explanatories. If lines are parallel, then there is no interaction.</p>
 
 <img data-src="MATH60604A-slides5a_files/figure-revealjs/fig-2by2-interaction-plot-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;3: Interaction plots for 2 by 2 designs. Illustration adapted from Figure 10.2 of Crump, Navarro and Suzuki (2019) by Matthew Crump (CC BY-SA 4.0 license)
 </p></section>
 <section id="cell-means-for-2-by-2-designs" class="slide level2">
 <h2>Cell means for 2 by 2 designs</h2>
+<p>Refer to the previous slide for the scenarios.</p>
 
 <img data-src="MATH60604A-slides5a_files/figure-revealjs/tbl-2by2-interaction-1.png" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption">
 Table&nbsp;1: Patterns for means for each of the possible kinds of general outcomes in a 2 by 2 design.
 </p></section>
-<section id="example-1-loans-versus-credit" class="slide level2">
-<h2>Example 1 : loans versus credit</h2>
+<section id="interaction-plot-for-example-1" class="slide level2">
+<h2>Interaction plot for Example 1</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Supplementary study 5 of <span class="citation" data-cites="Sharma.Tully.Cryder:2021">Sharma, Tully, and Cryder (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> consists of a <span class="math inline">\(2 \times 2\)</span> between-subject (i.e., no repeated measure per individual) ANOVA with factors</p>
@@ -577,7 +601,7 @@ Table&nbsp;1: Patterns for means for each of the possible kinds of general outco
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="MATH60604A-slides5a_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:100.0%"></p>
+<p><img data-src="MATH60604A-slides5a_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -589,7 +613,7 @@ Table&nbsp;1: Patterns for means for each of the possible kinds of general outco
 <h2>Example 2 - cultural appropriation</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Study 4 of <span class="citation" data-cites="Lin.Kim.Uduehi.Keinan:2024">Lin et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> uses a <span class="math inline">\(3 \times 2 \times 2\)</span> between-subject ANOVA focused on cultural appropriation for a soul food recipe cookbook from Chef Dax with factors</p>
+<p>Study 4 of <span class="citation" data-cites="Lin.Kim.Uduehi.Keinan:2024">Lin et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> uses a <span class="math inline">\(3 \times 2 \times 2\)</span> between-subject ANOVA with factors</p>
 <ul>
 <li><code>chefdax</code>: ethnicity, either <code>black</code> or <code>not black</code></li>
 <li><code>politideo</code>: political ideology, either <code>conservative</code> or <code>liberal</code></li>
@@ -600,12 +624,12 @@ Table&nbsp;1: Patterns for means for each of the possible kinds of general outco
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="MATH60604A-slides5a_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:100.0%"></p>
+<p><img data-src="MATH60604A-slides5a_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Interaction between <code>chefdax</code> (ethnicity) and <code>ideology</code>.</p>
+<p>Evidence of an interaction between <code>chefdax</code> (ethnicity) and <code>ideology</code>.</p>
 </div></div>
 </section>
 <section id="analysis-of-variance-table" class="slide level2">
@@ -621,13 +645,13 @@ Table&nbsp;1: Patterns for means for each of the possible kinds of general outco
 </section>
 <section id="test-statistic-for-anova" class="slide level2">
 <h2>Test statistic for ANOVA</h2>
-<p>If the alternative model has <span class="math inline">\(n_an_b\)</span> parameters for the mean, and we impose <span class="math inline">\(n_a-1\)</span> linear restrictions under the null hypothesis to the model estimated based on <span class="math inline">\(n\)</span> independent observations, the test statistic is</p>
+<p>Consider removal of <span class="math inline">\(A\)</span> in a balanced design. If the alternative model has <span class="math inline">\(n_an_b\)</span> parameters for the mean, and we impose <span class="math inline">\(n_a-1\)</span> linear restrictions under the null hypothesis to the model estimated based on <span class="math inline">\(n\)</span> independent observations, the test statistic is</p>
 <p><span class="math display">\[\begin{align*}
 F = \frac{\mathsf{SS}_A/(n_a-1)}{\mathsf{SS}_{e}/ (n-n_an_b)}
 \end{align*}\]</span></p>
 <ul>
 <li>The numerator is the difference in sum of squares, denoted <span class="math inline">\(\mathsf{SS}_A\)</span>, from models fitted under <span class="math inline">\(\mathscr{H}_0\)</span> and <span class="math inline">\(\mathscr{H}_a\)</span>, divided by degrees of freedom <span class="math inline">\(n_a-1\)</span> (number of additional parameters).</li>
-<li>The denominator is an estimator of the variance (termed mean squared error of residuals).</li>
+<li>The denominator is equal to <span class="math inline">\(S^2\)</span>, the unbiased estimator of the variance.</li>
 </ul>
 </section>
 <section id="analysis-of-variance-table-1" class="slide level2">
@@ -680,10 +704,11 @@ F = \frac{\mathsf{SS}_A/(n_a-1)}{\mathsf{SS}_{e}/ (n-n_an_b)}
 </tr>
 </tbody>
 </table>
+<p><em>Read the table backward (starting with the interaction).</em></p>
 </section>
 <section id="comparing-nested-models-with-unbalanced-data" class="slide level2">
 <h2>Comparing nested models with unbalanced data</h2>
-<p>We are comparing nested models, but depending on the decomposition, these are different models!</p>
+<p>Depending on the decomposition, we are comparing different nested models!</p>
 <div class="cell">
 <div id="tbl-ssdecompo" class="cell quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-tbl">
@@ -703,8 +728,8 @@ Table&nbsp;2: Sum of square decompositions in ANOVA tables. Comparison of sum of
 <tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: left;">type 1</th>
-<th style="text-align: left;">type II</th>
-<th style="text-align: left;">type III</th>
+<th style="text-align: left;">type 2</th>
+<th style="text-align: left;">type 3</th>
 </tr>
 </thead>
 <tbody>
@@ -733,62 +758,63 @@ Table&nbsp;2: Sum of square decompositions in ANOVA tables. Comparison of sum of
 </figure>
 </div>
 </div>
-<p><em>Read the table backward (starting with the interaction).</em></p>
-<p>Use the type II sum of square by default (default with <code>car::Anova</code>). Type I decomposition (<code>anova</code>) is sequential, while type III does not respect marginality principles.</p>
+<p>Use the type 2 sum of square by default (default with <code>car::Anova</code>). Type 1 decomposition (<code>anova</code>) is sequential, while type 3 does not respect marginality principles.</p>
 </section>
-<section id="example-1---perception-of-debt" class="slide level2">
-<h2>Example 1 - perception of debt</h2>
-<p><span class="citation" data-cites="Sharma.Tully.Cryder:2021">Sharma, Tully, and Cryder (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> conducted a 2 by 2 between-subjects comparison (two-way ANOVA) varying</p>
-<ul>
-<li>the type of debt (whether the money was advertised as <code>credit</code> or <code>loan</code>) and</li>
-<li>the type of purchase the latter would be used for (<code>discretionary</code> spending or <code>need</code> for necessary purchases).</li>
-</ul>
-<p>The response is the average of the likelihood and interest in the product, both measured using a 9 point Likert scale from 1 to 9.</p>
+<section id="mean-model-for-example-1" class="slide level2">
+<h2>Mean model for Example 1</h2>
 <p>The mean model with an interaction can be written using the treatment contrast parametrization as <span class="math display">\[\begin{align*}
-\texttt{likelihood} &amp;= \beta_0 + \beta_1\mathbf{1}_{\texttt{purchase=need}} + \beta_2\mathbf{1}_{\texttt{debttype=loan}} \\&amp;\quad+ \beta_3\mathbf{1}_{\texttt{purchase=need}}\mathbf{1}_{\texttt{debttype=loan}} + \varepsilon
+\mathsf{E}(\texttt{likelihood} \mid \cdot) &amp;= \beta_0 + \beta_1\mathbf{1}_{\texttt{purchase=need}} + \beta_2\mathbf{1}_{\texttt{debttype=loan}} \\&amp;\quad+ \beta_3\mathbf{1}_{\texttt{purchase=need}}\mathbf{1}_{\texttt{debttype=loan}}.
 \end{align*}\]</span></p>
-</section>
-<section id="additive-model" class="slide level2">
-<h2>Additive model</h2>
-<p>The <strong>additive</strong> model with the treatment contrast parametrization has <span class="math inline">\(1 + (n_a-1) + (n_b-1)\)</span> parameters, with <span class="math display">\[\mathsf{E}(Y \mid A=a_i, B=b_j) = \mu+ \alpha_i + \beta_j.\]</span> We need a suitable constraint on <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, e.g., <span class="math inline">\(\alpha_1=0\)</span> (treatment contrast) or <span class="math inline">\(\sum_{i=1}^{n_a}\alpha_i=0\)</span> (sum-to-zero constraint).</p>
-<p>The last line of the ANOVA table with the <span class="math inline">\(F\)</span>-statistics gives the <span class="math inline">\(p\)</span>-value for the test comparing the model with and without the interaction term.</p>
+<p>We can retrieve the average of each subgroup and deduce the interpretation of coefficients:</p>
+<ul>
+<li><span class="math inline">\(\mu_1 = \beta_0\)</span> for <code>purchase=discretionnary</code> and <code>debttype=credit</code></li>
+<li><span class="math inline">\(\mu_2 = \beta_0 + \beta_1\)</span> for <code>purchase=need</code> and <code>debttype=credit</code></li>
+<li><span class="math inline">\(\mu_1 = \beta_0 + \beta_2\)</span> for <code>purchase=discretionnary</code> and <code>debttype=loan</code></li>
+<li><span class="math inline">\(\mu_2 = \beta_0 + \beta_1 + \beta_2 + \beta_3\)</span> for <code>purchase=need</code> and <code>debttype=loan</code></li>
+</ul>
+<p>Thus, <span class="math inline">\(\beta_3\)</span> represents the difference in means <span class="math inline">\(\mu_1 + \mu_4 - \mu_2 - \mu_3\)</span>. <!--
+Additive model
+
+The **additive** model with the treatment contrast parametrization has $1 + (n_a-1) + (n_b-1)$ parameters, with $$\mathsf{E}(Y \mid A=a_i, B=b_j) = \mu+ \alpha_i + \beta_j.$$ 
+We need a suitable constraint on $\alpha$ and $\beta$, e.g., $\alpha_1=0$ (treatment contrast) or $\sum_{i=1}^{n_a}\alpha_i=0$ (sum-to-zero constraint).
+
+The last line of the ANOVA table with the $F$-statistics gives the $p$-value for the test comparing the model with and without the interaction term.
+--></p>
 </section>
 <section id="fitting-anova-and-extracting-group-means" class="slide level2">
 <h2>Fitting ANOVA and extracting group means</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Analysing Supplementary Study 5</span></span>
-<span id="cb2-2"><a href=""></a><span class="co"># of Sharma, Tully, and Cryder (2021)</span></span>
-<span id="cb2-3"><a href=""></a><span class="fu">data</span>(STC21_SS5, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb2-4"><a href=""></a><span class="co"># Use 'aov' to fit models to balanced data, with categorical variables</span></span>
-<span id="cb2-5"><a href=""></a><span class="co"># Equivalent to 'lm' with sum-to-zero contrasts</span></span>
-<span id="cb2-6"><a href=""></a>mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(likelihood <span class="sc">~</span> purchase<span class="sc">*</span>debttype, </span>
-<span id="cb2-7"><a href=""></a>           <span class="at">data =</span> STC21_SS5)</span>
-<span id="cb2-8"><a href=""></a><span class="co"># Check counts per subcategory (data are unbalanced)</span></span>
-<span id="cb2-9"><a href=""></a><span class="fu">xtabs</span>(<span class="sc">~</span>purchase <span class="sc">+</span> debttype, <span class="at">data =</span> STC21_SS5)</span>
-<span id="cb2-10"><a href=""></a><span class="do">##                debttype</span></span>
-<span id="cb2-11"><a href=""></a><span class="do">## purchase        credit loan</span></span>
-<span id="cb2-12"><a href=""></a><span class="do">##   discretionary    392  359</span></span>
-<span id="cb2-13"><a href=""></a><span class="do">##   need             361  389</span></span>
-<span id="cb2-14"><a href=""></a><span class="co"># Compute overall/rows/columns/cells means</span></span>
-<span id="cb2-15"><a href=""></a>means <span class="ot">&lt;-</span> <span class="fu">model.tables</span>(mod, <span class="at">type =</span> <span class="st">"means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># Analysing Supplementary Study 5</span></span>
+<span id="cb4-2"><a href=""></a><span class="co"># of Sharma, Tully, and Cryder (2021)</span></span>
+<span id="cb4-3"><a href=""></a><span class="fu">data</span>(STC21_SS5, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
+<span id="cb4-4"><a href=""></a><span class="co"># Use 'aov' to fit models with categorical variables</span></span>
+<span id="cb4-5"><a href=""></a><span class="co"># Equivalent to 'lm' with sum-to-zero contrasts</span></span>
+<span id="cb4-6"><a href=""></a>aov_mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(likelihood <span class="sc">~</span> purchase<span class="sc">*</span>debttype, </span>
+<span id="cb4-7"><a href=""></a>           <span class="at">data =</span> STC21_SS5)</span>
+<span id="cb4-8"><a href=""></a><span class="co"># Check counts per subcategory (data are unbalanced)</span></span>
+<span id="cb4-9"><a href=""></a><span class="fu">xtabs</span>(<span class="sc">~</span>purchase <span class="sc">+</span> debttype, <span class="at">data =</span> STC21_SS5)</span>
+<span id="cb4-10"><a href=""></a><span class="do">##                debttype</span></span>
+<span id="cb4-11"><a href=""></a><span class="do">## purchase        credit loan</span></span>
+<span id="cb4-12"><a href=""></a><span class="do">##   discretionary    392  359</span></span>
+<span id="cb4-13"><a href=""></a><span class="do">##   need             361  389</span></span>
+<span id="cb4-14"><a href=""></a><span class="co"># Compute overall/rows/columns/cells means</span></span>
+<span id="cb4-15"><a href=""></a>mean_groups <span class="ot">&lt;-</span> <span class="fu">model.tables</span>(aov_mod1, <span class="at">type =</span> <span class="st">"means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="comparing-models" class="slide level2">
-<h2>Comparing models</h2>
+<section id="model-comparison" class="slide level2">
+<h2>Model comparison</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Analysis of variance reveals  non-significant</span></span>
-<span id="cb3-2"><a href=""></a><span class="co"># interaction of purchase and type</span></span>
-<span id="cb3-3"><a href=""></a>car<span class="sc">::</span><span class="fu">Anova</span>(mod, <span class="at">type =</span> <span class="dv">2</span>)</span>
-<span id="cb3-4"><a href=""></a><span class="do">## Anova Table (Type II tests)</span></span>
-<span id="cb3-5"><a href=""></a><span class="do">## </span></span>
-<span id="cb3-6"><a href=""></a><span class="do">## Response: likelihood</span></span>
-<span id="cb3-7"><a href=""></a><span class="do">##                   Sum Sq   Df F value  Pr(&gt;F)    </span></span>
-<span id="cb3-8"><a href=""></a><span class="do">## purchase             752    1   98.21 &lt; 2e-16 ***</span></span>
-<span id="cb3-9"><a href=""></a><span class="do">## debttype              92    1   12.04 0.00054 ***</span></span>
-<span id="cb3-10"><a href=""></a><span class="do">## purchase:debttype     14    1    1.79 0.18171    </span></span>
-<span id="cb3-11"><a href=""></a><span class="do">## Residuals          11467 1497                    </span></span>
-<span id="cb3-12"><a href=""></a><span class="do">## ---</span></span>
-<span id="cb3-13"><a href=""></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>car<span class="sc">::</span><span class="fu">Anova</span>(mod1, <span class="at">type =</span> <span class="dv">2</span>)</span>
+<span id="cb5-2"><a href=""></a><span class="do">## Anova Table (Type II tests)</span></span>
+<span id="cb5-3"><a href=""></a><span class="do">## </span></span>
+<span id="cb5-4"><a href=""></a><span class="do">## Response: likelihood</span></span>
+<span id="cb5-5"><a href=""></a><span class="do">##                   Sum Sq   Df F value  Pr(&gt;F)    </span></span>
+<span id="cb5-6"><a href=""></a><span class="do">## purchase             752    1   98.21 &lt; 2e-16 ***</span></span>
+<span id="cb5-7"><a href=""></a><span class="do">## debttype              92    1   12.04 0.00054 ***</span></span>
+<span id="cb5-8"><a href=""></a><span class="do">## purchase:debttype     14    1    1.79 0.18171    </span></span>
+<span id="cb5-9"><a href=""></a><span class="do">## Residuals          11467 1497                    </span></span>
+<span id="cb5-10"><a href=""></a><span class="do">## ---</span></span>
+<span id="cb5-11"><a href=""></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In the analysis of variance table, we focus exclusively on the line <code>purchase:debttype</code>.</p>
 <p>The <span class="math inline">\(F\)</span> statistic is 1.79; using the <span class="math inline">\(\mathsf{Fisher}\)</span> (1, 1497) distribution as null distribution, we obtain a <span class="math inline">\(p\)</span>-value of 0.18 so there is no evidence the effect of purchase depends on debt type.</p>
@@ -863,41 +889,31 @@ Table&nbsp;2: Sum of square decompositions in ANOVA tables. Comparison of sum of
 </section>
 <section id="example-of-main-effects" class="slide level2">
 <h2>Example of main effects</h2>
-<p>Since the interaction is not significant, we can interpret the main effect of fixation.</p>
+<p>Since the interaction is not significant, we can extract the main effect of <code>debttype</code> and compute the pairwise difference.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># Pairwise comparisons within levels of purchase</span></span>
-<span id="cb4-2"><a href=""></a><span class="co"># Using the main effects</span></span>
-<span id="cb4-3"><a href=""></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(mod, </span>
-<span id="cb4-4"><a href=""></a>                 <span class="co"># what variable to keep (so average over "debttype")</span></span>
-<span id="cb4-5"><a href=""></a>                 <span class="at">specs =</span> <span class="st">"purchase"</span>, </span>
-<span id="cb4-6"><a href=""></a>                 <span class="at">contr =</span> <span class="st">"pairwise"</span>)</span>
-<span id="cb4-7"><a href=""></a><span class="do">## $emmeans</span></span>
-<span id="cb4-8"><a href=""></a><span class="do">##  purchase      emmean    SE   df lower.CL upper.CL</span></span>
-<span id="cb4-9"><a href=""></a><span class="do">##  discretionary    4.2 0.101 1497      4.0      4.4</span></span>
-<span id="cb4-10"><a href=""></a><span class="do">##  need             5.6 0.101 1497      5.4      5.8</span></span>
-<span id="cb4-11"><a href=""></a><span class="do">## </span></span>
-<span id="cb4-12"><a href=""></a><span class="do">## Results are averaged over the levels of: debttype </span></span>
-<span id="cb4-13"><a href=""></a><span class="do">## Confidence level used: 0.95 </span></span>
-<span id="cb4-14"><a href=""></a><span class="do">## </span></span>
-<span id="cb4-15"><a href=""></a><span class="do">## $contrasts</span></span>
-<span id="cb4-16"><a href=""></a><span class="do">##  contrast             estimate    SE   df t.ratio p.value</span></span>
-<span id="cb4-17"><a href=""></a><span class="do">##  discretionary - need    -1.42 0.143 1497  -9.900  &lt;.0001</span></span>
-<span id="cb4-18"><a href=""></a><span class="do">## </span></span>
-<span id="cb4-19"><a href=""></a><span class="do">## Results are averaged over the levels of: debttype</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="co"># Pairwise comparisons within levels of purchase</span></span>
+<span id="cb6-2"><a href=""></a><span class="co"># Using the main effects</span></span>
+<span id="cb6-3"><a href=""></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(mod1, </span>
+<span id="cb6-4"><a href=""></a>                 <span class="co"># what variable to keep (so average over "purchase")</span></span>
+<span id="cb6-5"><a href=""></a>                 <span class="at">specs =</span> <span class="st">"debttype"</span>, </span>
+<span id="cb6-6"><a href=""></a>                 <span class="at">contr =</span> <span class="st">"pairwise"</span>)</span>
+<span id="cb6-7"><a href=""></a><span class="do">## $emmeans</span></span>
+<span id="cb6-8"><a href=""></a><span class="do">##  debttype emmean    SE   df lower.CL upper.CL</span></span>
+<span id="cb6-9"><a href=""></a><span class="do">##  credit      5.1 0.101 1497      4.9      5.3</span></span>
+<span id="cb6-10"><a href=""></a><span class="do">##  loan        4.6 0.101 1497      4.4      4.8</span></span>
+<span id="cb6-11"><a href=""></a><span class="do">## </span></span>
+<span id="cb6-12"><a href=""></a><span class="do">## Results are averaged over the levels of: purchase </span></span>
+<span id="cb6-13"><a href=""></a><span class="do">## Confidence level used: 0.95 </span></span>
+<span id="cb6-14"><a href=""></a><span class="do">## </span></span>
+<span id="cb6-15"><a href=""></a><span class="do">## $contrasts</span></span>
+<span id="cb6-16"><a href=""></a><span class="do">##  contrast      estimate    SE   df t.ratio p.value</span></span>
+<span id="cb6-17"><a href=""></a><span class="do">##  credit - loan      0.5 0.143 1497   3.500  0.0005</span></span>
+<span id="cb6-18"><a href=""></a><span class="do">## </span></span>
+<span id="cb6-19"><a href=""></a><span class="do">## Results are averaged over the levels of: purchase</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="example-2---perceptions-of-cultural-appropriation-by-ideology" class="slide level2">
-<h2>Example 2 - Perceptions of cultural appropriation by ideology</h2>
-<p>We consider a three-way ANOVA from <span class="citation" data-cites="Lin.Kim.Uduehi.Keinan:2024">Lin et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>. Their Study 4 focused on cultural appropriation for soul food recipe cookbook from Chef Dax, who was either black (or not), manipulating the description of the way he obtained the recipes (by peeking without permission in kitchens, by asking permission or no mention for control).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">data</span>(LKUK24_S4, <span class="at">package =</span> <span class="st">"hecedsm"</span>)</span>
-<span id="cb5-2"><a href=""></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(appropriation <span class="sc">~</span> politideo <span class="sc">*</span> chefdax <span class="sc">*</span> brandaction,</span>
-<span id="cb5-3"><a href=""></a>   <span class="at">data =</span> LKUK24_S4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Authors postulated that the perception of appropriation would vary by political ideology (liberal or conservative). The study results in a 3 by 2 by 2 three-way ANOVA.</p>
-</section>
-<section id="example-2" class="slide level2">
-<h2>Example 2</h2>
+<section id="anova-table-for-example-2" class="slide level2 smaller">
+<h2>ANOVA table for Example 2</h2>
 <p>For the <span class="math inline">\(K\)</span>-way ANOVA, we always start with estimating the full model with all <span class="math inline">\(K\)</span>-way interaction (provided there are enough data to estimate the latter, which implies there are repetitions).</p>
 <div class="cell">
 <div id="tbl-anova-LKUK24" class="cell quarto-float quarto-figure quarto-figure-center">
@@ -987,49 +1003,60 @@ Table&nbsp;3: Analysis of variance table (type II decomposition) for the data fr
 <h2>Dimension reduction and simple effects</h2>
 <p>Collapse to a 2 by 2 two-way ANOVA, averaging over <code>brandaction</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="co"># Marginal means for political ideology/Chef Dax</span></span>
-<span id="cb6-2"><a href=""></a><span class="co"># Compute simple effects, by political ideology</span></span>
-<span id="cb6-3"><a href=""></a><span class="fu">emmeans</span>(mod, </span>
-<span id="cb6-4"><a href=""></a>         <span class="at">specs =</span> <span class="st">"chefdax"</span>, </span>
-<span id="cb6-5"><a href=""></a>         <span class="at">by =</span> <span class="st">"politideo"</span>,</span>
-<span id="cb6-6"><a href=""></a>         <span class="at">contrast =</span> <span class="st">"pairwise"</span>)</span>
-<span id="cb6-7"><a href=""></a><span class="do">## politideo = conservative:</span></span>
-<span id="cb6-8"><a href=""></a><span class="do">##  chefdax   emmean    SE  df lower.CL upper.CL</span></span>
-<span id="cb6-9"><a href=""></a><span class="do">##  not black    2.4 0.142 699      2.1      2.7</span></span>
-<span id="cb6-10"><a href=""></a><span class="do">##  black        1.7 0.149 699      1.4      2.0</span></span>
-<span id="cb6-11"><a href=""></a><span class="do">## </span></span>
-<span id="cb6-12"><a href=""></a><span class="do">## politideo = liberal:</span></span>
-<span id="cb6-13"><a href=""></a><span class="do">##  chefdax   emmean    SE  df lower.CL upper.CL</span></span>
-<span id="cb6-14"><a href=""></a><span class="do">##  not black    3.6 0.097 699      3.4      3.8</span></span>
-<span id="cb6-15"><a href=""></a><span class="do">##  black        1.6 0.095 699      1.4      1.8</span></span>
-<span id="cb6-16"><a href=""></a><span class="do">## </span></span>
-<span id="cb6-17"><a href=""></a><span class="do">## Results are averaged over the levels of: brandaction </span></span>
-<span id="cb6-18"><a href=""></a><span class="do">## Confidence level used: 0.95</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># Marginal means for political ideology/Chef Dax</span></span>
+<span id="cb7-2"><a href=""></a><span class="co"># Compute simple effects, by political ideology</span></span>
+<span id="cb7-3"><a href=""></a>(emm2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod2, </span>
+<span id="cb7-4"><a href=""></a>         <span class="at">specs =</span> <span class="st">"chefdax"</span>, </span>
+<span id="cb7-5"><a href=""></a>         <span class="at">by =</span> <span class="st">"politideo"</span>))</span>
+<span id="cb7-6"><a href=""></a><span class="do">## politideo = conservative:</span></span>
+<span id="cb7-7"><a href=""></a><span class="do">##  chefdax   emmean    SE  df lower.CL upper.CL</span></span>
+<span id="cb7-8"><a href=""></a><span class="do">##  not black    2.4 0.142 699      2.1      2.7</span></span>
+<span id="cb7-9"><a href=""></a><span class="do">##  black        1.7 0.149 699      1.4      2.0</span></span>
+<span id="cb7-10"><a href=""></a><span class="do">## </span></span>
+<span id="cb7-11"><a href=""></a><span class="do">## politideo = liberal:</span></span>
+<span id="cb7-12"><a href=""></a><span class="do">##  chefdax   emmean    SE  df lower.CL upper.CL</span></span>
+<span id="cb7-13"><a href=""></a><span class="do">##  not black    3.6 0.097 699      3.4      3.8</span></span>
+<span id="cb7-14"><a href=""></a><span class="do">##  black        1.6 0.095 699      1.4      1.8</span></span>
+<span id="cb7-15"><a href=""></a><span class="do">## </span></span>
+<span id="cb7-16"><a href=""></a><span class="do">## Results are averaged over the levels of: brandaction </span></span>
+<span id="cb7-17"><a href=""></a><span class="do">## Confidence level used: 0.95</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="interpretation" class="slide level2">
-<h2>Interpretation</h2>
+<section id="pairwise-contrasts-between-ethnicity-by-political-ideology" class="slide level2">
+<h2>Pairwise contrasts between ethnicity, by political ideology</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>emm2 <span class="sc">|&gt;</span> <span class="fu">contrast</span>(<span class="at">method =</span> <span class="st">"pairwise"</span>)</span>
+<span id="cb8-2"><a href=""></a><span class="do">## politideo = conservative:</span></span>
+<span id="cb8-3"><a href=""></a><span class="do">##  contrast          estimate    SE  df t.ratio p.value</span></span>
+<span id="cb8-4"><a href=""></a><span class="do">##  not black - black     0.71 0.206 699   3.400  0.0006</span></span>
+<span id="cb8-5"><a href=""></a><span class="do">## </span></span>
+<span id="cb8-6"><a href=""></a><span class="do">## politideo = liberal:</span></span>
+<span id="cb8-7"><a href=""></a><span class="do">##  contrast          estimate    SE  df t.ratio p.value</span></span>
+<span id="cb8-8"><a href=""></a><span class="do">##  not black - black     2.03 0.135 699  15.000  &lt;.0001</span></span>
+<span id="cb8-9"><a href=""></a><span class="do">## </span></span>
+<span id="cb8-10"><a href=""></a><span class="do">## Results are averaged over the levels of: brandaction</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We see that the liberals are much more likely to view Chef Dax cookbook as an instance of cultural appropriation if he is not black; there is limited evidence of any difference between conservatives and liberal when Chef Dax is black.</p>
-<p>Both differences are statistically significative, but the differences (and thus evidence of an effect) is much stronger for left-leaning respondents.</p>
+<p>We can also compare marginal effects for ideology separately for <code>black</code> or <code>not black</code>. Both differences are statistically significative, but the differences (and thus evidence of an effect) is much stronger for left-leaning respondents.</p>
 </section>
 <section id="comparisons-of-main-effects-of-brandaction" class="slide level2">
 <h2>Comparisons of main effects of brandaction</h2>
 <p>We expect participants will view peeking less favorably than if Chef Dax asked for permission to publish the recipes. It’s tricky to know the effect of the control, as we are not bringing the point to the attention of participants in this instance.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># Marginal mean for brandaction</span></span>
-<span id="cb7-2"><a href=""></a>emm_brand <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod, <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"brandaction"</span>)) </span>
-<span id="cb7-3"><a href=""></a>emm_brand</span>
-<span id="cb7-4"><a href=""></a><span class="do">##  brandaction emmean    SE  df lower.CL upper.CL</span></span>
-<span id="cb7-5"><a href=""></a><span class="do">##  peeking       2.56 0.108 699     2.35     2.77</span></span>
-<span id="cb7-6"><a href=""></a><span class="do">##  permission    2.29 0.105 699     2.09     2.50</span></span>
-<span id="cb7-7"><a href=""></a><span class="do">##  control       2.07 0.108 699     1.86     2.28</span></span>
-<span id="cb7-8"><a href=""></a><span class="do">## </span></span>
-<span id="cb7-9"><a href=""></a><span class="do">## Results are averaged over the levels of: politideo, chefdax </span></span>
-<span id="cb7-10"><a href=""></a><span class="do">## Confidence level used: 0.95</span></span>
-<span id="cb7-11"><a href=""></a><span class="co"># Joint F test for the main effect of brandaction</span></span>
-<span id="cb7-12"><a href=""></a>emm_brand <span class="sc">|&gt;</span> <span class="fu">pairs</span>() <span class="sc">|&gt;</span> <span class="fu">joint_tests</span>()</span>
-<span id="cb7-13"><a href=""></a><span class="do">##  model term df1 df2 F.ratio p.value</span></span>
-<span id="cb7-14"><a href=""></a><span class="do">##  contrast     2 699   5.100  0.0064</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="co"># Marginal mean for brandaction</span></span>
+<span id="cb9-2"><a href=""></a>emm_brand <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod2, <span class="at">specs =</span> <span class="fu">c</span>(<span class="st">"brandaction"</span>)) </span>
+<span id="cb9-3"><a href=""></a>emm_brand</span>
+<span id="cb9-4"><a href=""></a><span class="do">##  brandaction emmean    SE  df lower.CL upper.CL</span></span>
+<span id="cb9-5"><a href=""></a><span class="do">##  peeking       2.56 0.108 699     2.35     2.77</span></span>
+<span id="cb9-6"><a href=""></a><span class="do">##  permission    2.29 0.105 699     2.09     2.50</span></span>
+<span id="cb9-7"><a href=""></a><span class="do">##  control       2.07 0.108 699     1.86     2.28</span></span>
+<span id="cb9-8"><a href=""></a><span class="do">## </span></span>
+<span id="cb9-9"><a href=""></a><span class="do">## Results are averaged over the levels of: politideo, chefdax </span></span>
+<span id="cb9-10"><a href=""></a><span class="do">## Confidence level used: 0.95</span></span>
+<span id="cb9-11"><a href=""></a><span class="co"># Joint F test for the main effect of brandaction</span></span>
+<span id="cb9-12"><a href=""></a>emm_brand <span class="sc">|&gt;</span> <span class="fu">pairs</span>() <span class="sc">|&gt;</span> <span class="fu">joint_tests</span>()</span>
+<span id="cb9-13"><a href=""></a><span class="do">##  model term df1 df2 F.ratio p.value</span></span>
+<span id="cb9-14"><a href=""></a><span class="do">##  contrast     2 699   5.100  0.0064</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A joint <span class="math inline">\(F\)</span>-test, obtained by collapsing everything to a one-way ANOVA, shows that there are indeed differences.</p>
 </section>
@@ -1038,13 +1065,13 @@ Table&nbsp;3: Analysis of variance table (type II decomposition) for the data fr
 <p>We can view the multiway ANOVA as a one-way analysis of variance with <span class="math inline">\(n_a \times n_b \times \cdots\)</span> levels, corresponding to each sub-group.</p>
 <p>Marginal effects, interactions, and simple effects correspond to particular <strong>linear contrasts</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(likelihood <span class="sc">~</span> group,</span>
-<span id="cb8-2"><a href=""></a>          <span class="at">data =</span> STC21_SS5 <span class="sc">|&gt;</span> </span>
-<span id="cb8-3"><a href=""></a>            dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">interaction</span>(debttype, purchase)))</span>
-<span id="cb8-4"><a href=""></a><span class="fu">emmeans</span>(mod, <span class="at">specs =</span> <span class="st">"group"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-5"><a href=""></a>  <span class="fu">contrast</span>(<span class="at">method =</span> <span class="fu">list</span>(<span class="at">main_pairwise =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>))</span>
-<span id="cb8-6"><a href=""></a><span class="do">##  contrast      estimate    SE   df t.ratio p.value</span></span>
-<span id="cb8-7"><a href=""></a><span class="do">##  main_pairwise      0.5 0.143 1497   3.500  0.0005</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(likelihood <span class="sc">~</span> group,</span>
+<span id="cb10-2"><a href=""></a>          <span class="at">data =</span> STC21_SS5 <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href=""></a>            dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">interaction</span>(debttype, purchase)))</span>
+<span id="cb10-4"><a href=""></a><span class="fu">emmeans</span>(mod, <span class="at">specs =</span> <span class="st">"group"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-5"><a href=""></a>  <span class="fu">contrast</span>(<span class="at">method =</span> <span class="fu">list</span>(<span class="at">main_pairwise =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>))</span>
+<span id="cb10-6"><a href=""></a><span class="do">##  contrast      estimate    SE   df t.ratio p.value</span></span>
+<span id="cb10-7"><a href=""></a><span class="do">##  main_pairwise      0.5 0.143 1497   3.500  0.0005</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="recap-1" class="slide level2">

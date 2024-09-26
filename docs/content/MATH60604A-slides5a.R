@@ -49,20 +49,52 @@ summary(mod)$coefficients
 
 
 # Example 1
+#
+# Analysing Supplementary Study 5
+# of Sharma, Tully, and Cryder (2021)
+data(STC21_SS5, package = "hecedsm")
+# Check counts per subcategory (data are unbalanced)
+xtabs(~purchase + debttype, data = STC21_SS5)
+# Use 'aov' to fit models with categorical variables
+# Equivalent to 'lm' with sum-to-zero contrasts
+aov_mod <- aov(likelihood ~ purchase*debttype,
+               data = STC21_SS5)
+# Compute overall/rows/columns/cells means
+model.tables(x = aov_mod,
+             type = "means")
 # Fit model with sum-to-zero contrasts
 options(contrasts = c("contr.sum","contr.poly"))
-data(STC21_SS5, package = "hecedsm")
 # Fit 2x2 ANOVA model with interaction
 mod1 <- lm(likelihood ~ purchase * debttype, data = STC21_SS5)
 # Extract marginal means of all four groups
 emm <- emmeans::emmeans(
   mod1,
   specs = c("debttype","purchase"))
+# Test for interaction
+car::Anova(mod1, type = 2)
+# Interaction is not significant
+# Compute marginal effects of debttype
+# Using the main effects
+emmeans::emmeans(mod,
+                 # what variable to keep (so average over "purchase")
+                 specs = "debttype",
+                 contr = "pairwise")
+
 # Produce an interaction plot
 emmeans::emmip(emm,  debttype ~ purchase, CIs = TRUE) +
   theme_classic() +
   theme(legend.position = "bottom")
 # Also ?interaction.plot
+
+# We can also compute these by casting the multiway ANOVA
+# into a one-way ANOVA with more categories
+# and compute contrasts as before
+mod <- lm(likelihood ~ group,
+          data = STC21_SS5 |>
+            dplyr::mutate(group = interaction(debttype, purchase)))
+emmeans(mod, specs = "group") |>
+  contrast(method = list(main_pairwise = c(1,-1,1,-1)/2))
+# Or compute custom contrasts based on the parts of the data above.
 
 # Example 2
 
@@ -78,46 +110,23 @@ emmip(object = emm,
         formula = brandaction ~ chefdax | politideo,
         CIs = TRUE) # add 95% confidence intervals for mean
 
-
-# Analysing Supplementary Study 5
-# of Sharma, Tully, and Cryder (2021)
-data(STC21_SS5, package = "hecedsm")
-# Use 'aov' to fit models to balanced data, with categorical variables
-# Equivalent to 'lm' with sum-to-zero contrasts
-# Check counts per subcategory (data are unbalanced)
-xtabs(~purchase + debttype, data = STC21_SS5)
-# Compute overall/rows/columns/cells means
-model.tables(x = aov(likelihood ~ purchase*debttype,
-                  data = STC21_SS5),
-             type = "means")
-
 # Unbalanced data, use type II sum of square decomposition
 # Analysis of variance reveals non-significant
 # interaction of purchase and type
 car::Anova(mod, type = 2)
 
-
-# Pairwise comparisons within levels of purchase
-# Using the main effects
-emmeans::emmeans(mod,
-                 # what variable to keep (so average over "debttype")
-                 specs = "purchase",
-                 contr = "pairwise")
-
-# Example 2
-data(LKUK24_S4, package = "hecedsm")
-mod <- lm(appropriation ~ politideo * chefdax * brandaction,
-   data = LKUK24_S4)
-# ANOVA table
-car::Anova(mod, type = 2)
 # Reveals an interaction between political ideology and Chef Dax
+
+
 
 # Marginal means for political ideology/Chef Dax
 # Compute simple effects, by political ideology
-emmeans(mod,
+emm <- emmeans(mod,
          specs = "chefdax",  # variable to keep
-         by = "politideo", # variable to condition on
-         contrast = "pairwise") # follow-up contrasts
+         by = "politideo") # variable to condition on
+emm
+# Follow-up with pairwise contrasts
+emm |> contrast(method = "pairwise")
 
 # Marginal mean for brandaction
 # Main effects since not interacting with others
@@ -127,13 +136,3 @@ emm_brand |> pairs() |> joint_tests()
 # Note the degrees of freedom: even though we average,
 # the denominator of the F-test is based on the residuals
 # of the full three-way model.
-
-# We can also compute these by casting the multiway ANOVA
-# into a one-way ANOVA with more categories
-# and compute contrasts as before
-mod <- lm(likelihood ~ group,
-          data = STC21_SS5 |>
-            dplyr::mutate(group = interaction(debttype, purchase)))
-emmeans(mod, specs = "group") |>
-  contrast(method = list(main_pairwise = c(1,-1,1,-1)/2))
-# Or compute custom contrasts based on the parts of the data above.
