@@ -84,7 +84,7 @@ where $\mathbf{H}_{\mathbf{X}} = \mathbf{X}^\top(\mathbf{X}^\top\mathbf{X})^{-1}
 #| eval: true
 #| echo: false
 #| fig-align: 'center'
-knitr::include_graphics("fig/04/OLSgeometry.png")
+knitr::include_graphics("fig/05/OLSgeometry.png")
 ```
 
 ## Consequences of orthogonality
