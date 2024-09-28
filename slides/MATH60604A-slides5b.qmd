@@ -1,7 +1,7 @@
 ---
 title: "Statistical modelling"
 author: "Léo Belzile, HEC Montréal"
-subtitle: "05. Linear models (supplement)"
+subtitle: "05. Linear models (geometry)"
 date: today
 date-format: YYYY
 eval: true
@@ -51,30 +51,32 @@ options(digits = 2, width = 75)
 ```
 
 
-## Geometry
+## Column space geometry
 
 
 The linear model equation is
-$$\boldsymbol{Y} = \underset{\text{mean } \boldsymbol{\mu}}{\mathbf{X}\boldsymbol{\beta}} + \underset{\text{errors}}{\boldsymbol{\varepsilon}}$$
-and the fitted model gives the decomposition
+$$\boldsymbol{Y} = \underset{\text{mean } \boldsymbol{\mu}}{\mathbf{X}\boldsymbol{\beta}} + \underset{\text{errors}}{\vphantom{\beta}\boldsymbol{\varepsilon}}$$
+and assume that $\mathsf{E}(\boldsymbol{\varepsilon} \mid \mathbf{X})= \boldsymbol{0}_n$ and $\mathsf{Va}(\boldsymbol{\varepsilon} \mid \mathbf{X}) = \sigma^2\mathbf{I}_n$.
+
+The fitted model gives the decomposition
 \begin{align*}
-\underset{\text{observations}}{\boldsymbol{y}} = \underset{\text{fitted values}}{\widehat{\boldsymbol{y}}} + \underset{\text{residuals}}{\boldsymbol{e}}
+\underset{\text{observations}}{\boldsymbol{y}} = \underset{\text{fitted values}}{\widehat{\boldsymbol{y}}} + \underset{\text{residuals}}{\vphantom{y}\boldsymbol{e}}
 \end{align*}
 
 ## Projection matrices
 
-For an $n\times p$ matrix, the column space of $\mathbf{X}$ is
+For an $n\times (p+1)$ matrix, the column space of $\mathbf{X}$ is
 \begin{align*}
-\mathcal{S}(\mathbf{X}) =\{\mathbf{X}\boldsymbol{a}, \boldsymbol{a} \in \mathbb{R}^p\}
+\mathcal{S}(\mathbf{X}) =\{\mathbf{X}\boldsymbol{a}, \boldsymbol{a} \in \mathbb{R}^{p+1}\}
 \end{align*}
 
 We can write the fitted values as the projection the observed response vector $\boldsymbol{y}$ onto the linear span of the model matrix $\mathbf{X}$,
 \begin{align*}
- \underset{\text{fitted values}}{\widehat{\boldsymbol{y}}} = \underset{\substack{\text{model matrix $\times$}\\\text{OLS estimator}}}{\mathbf{X} \widehat{\boldsymbol{\beta}}} = \underset{\text{projection matrix}}{\mathbf{X}^\top(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}}\boldsymbol{y} = \mathbf{H}_{\mathbf{X}}\boldsymbol{y}
+ \underset{\text{fitted values}}{\widehat{\boldsymbol{y}}} = \underset{\substack{\text{model matrix $\times$}\\\text{OLS estimator}}}{\mathbf{X} \widehat{\boldsymbol{\beta}}} = \underset{\text{projection matrix}}{\mathbf{X}(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top}\boldsymbol{y} = \mathbf{H}_{\mathbf{X}}\boldsymbol{y}
 \end{align*}
-where $\mathbf{H}_{\mathbf{X}} = \mathbf{X}^\top(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}$ is an $n \times n$ orthogonal projection matrix.
+where $\mathbf{H}_{\mathbf{X}} = \mathbf{X}(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top$ is an $n \times n$ orthogonal projection matrix.
 
-- $\mathbf{H}_{\mathbf{X}}$ is a symmetric $n \times n$ square matrix of rank $n-p$.
+- $\mathbf{H}_{\mathbf{X}}$ is a symmetric $n \times n$ square matrix of rank $p+1$.
 - An orthogonal projection matrix satisfies $\mathbf{H}_{\mathbf{X}}\mathbf{H}_{\mathbf{X}} = \mathbf{H}_{\mathbf{X}}$ and $\mathbf{H}_{\mathbf{X}} = \mathbf{H}_{\mathbf{X}}^\top$.
 
 
@@ -91,10 +93,9 @@ knitr::include_graphics("fig/05/OLSgeometry.png")
 
 The geometric representation has deep implications for inference that are useful for model diagnostics.
 
-- Assuming $\mathbf{1}_n \in \mathcal{S}(\mathbf{X})$ (e.g., the intercept is included in $\mathbf{X}$), the sample mean of $\boldsymbol{e}$ is zero.
 - The fitted values $\widehat{\boldsymbol{y}}$ and $\boldsymbol{e}$ are uncorrelated
 - Idem for any column of $\mathbf{X}$, since $\mathbf{X}^\top\boldsymbol{e}=\boldsymbol{0}_{p+1}$.
-
+- Assuming $\mathbf{1}_n \in \mathcal{S}(\mathbf{X})$ (e.g., the intercept is included in $\mathbf{X}$), the sample mean of $\boldsymbol{e}$ is zero.
 
 ```{r}
 #| eval: true
@@ -141,157 +142,54 @@ Residual patterns due to forgotten interactions, nonlinear terms, etc. could be 
 The fitted values $\widehat{y}_i$ for two model matrices $\mathbf{X}_a$ and $\mathbf{X}_b$, are the same if they generate the same linear span, i.e., $\mathcal{S}(\mathbf{X}_a) = \mathcal{S}(\mathbf{X}_b)$.
 
 ```{r}
-# Scale variables, change parametrization of dummies, remove intercept
-modB <- lm(salary ~ 0 + sex + field + rank + service,
+data(college, package = "hecstatmod")
+modA <- lm(salary ~ sex +  rank + service, data = college)
+modB <- lm(salary ~ 0 + sex + rank + service, # 0+ = remove intercept
            data = college |> 
-            dplyr::mutate(service = scale(service)),
-           contrasts = list(rank = contr.sum))
-head(model.matrix(mod), n = 3L)
+            dplyr::mutate(service = scale(service)), # standardize variable (mean zero, unit std. dev)
+           contrasts = list(rank = contr.sum)) # change parametrization of dummies
+head(model.matrix(modA), n = 3L)
 head(model.matrix(modB), n = 3L)
 # Model invariance
-isTRUE(all.equal(fitted(mod), fitted(modB)))
-```
-
-
-## Pearson's linear correlation coefficient
-
-The Pearson correlation coefficient quantifies the strength of the linear relationship between two random variables $X$ and $Y$. 
-\begin{align*}
-\rho= \mathsf{cor}(X, Y) =  \frac{{\mathsf{Co}}(X,Y)}{\sqrt{{\mathsf{Va}}(X){\mathsf{Va}}(Y)}}. 
-\end{align*}
-
-- The sample correlation $\rho \in [-1, 1]$.
-- $|\rho|=1$ if and only if the $n$ observations fall exactly on a line.
-- The larger $|\rho|$, the less scattered the points are.
-
-## Properties of Pearson's linear correlation coefficient
-
-The sign determines the orientation of the slope (downward for negative, upward for positive). 
-
-If $\rho>0$ (or $\rho<0$), the two variables are positively (negatively) associated, meaning that $Y$ increases (decreases) on average with $X$.
-
-```{r}
-#| eval: true
-#| echo: false
-#| fig-width: 12
-#| fig-height: 3
-#| out-width: '100%'
-#| label: fig-scatterplot-corr
-#| fig-cap: "Scatterplots of observations with correlations of $0.1$, $0.5$, $-0.75$ and $0.95$ from $A$ to $D$." 
-set.seed(1234)
-xdat <- rbind(
-  MASS::mvrnorm(n = 100, mu = c(0,0), Sigma = cbind(c(1, 0.1), c(0.1,1))),
-  MASS::mvrnorm(n = 100, mu = c(0,0), Sigma = cbind(c(1, 0.5), c(0.5,1))),
-  MASS::mvrnorm(n = 100, mu = c(0,0), Sigma = cbind(c(1, -0.75), c(-0.75,1))),
-  MASS::mvrnorm(n = 100, mu = c(0,0), Sigma = cbind(c(1, 0.95), c(0.95,1)))
-)
-colnames(xdat) <- c("x","y")
-data.frame(dataset = factor(rep(LETTERS[1:4], each = 100)),
-           xdat) |>
-ggplot(mapping = aes(x = x, y = y, group = dataset)) +
-  geom_point() +
-  geom_smooth(se = FALSE, formula = y ~ x, method = "lm", col = "grey") + 
-  facet_wrap(~dataset, nrow = 1, ncol = 4, scales = "free") +
-  labs(x = "", y = "")
-
-```
-
-
-## Correlation and independence
-
-- Independent variables are uncorrelated (not the other way around).
-- A correlation of zero only implies that there is no *linear* dependence between two variables.
-
-```{r}
-#| eval: true
-#| echo: false
-#| out-width: '100%'
-#| fig-width: 12
-#| fig-height: 3
-#| label: fig-datasaurus
-#| fig-cap: "Four datasets with dependent data having identical summary statistics and a linear correlation of -0.06."
-datasauRus::datasaurus_dozen |>
-  dplyr::filter(dataset %in% c("dino","bullseye","star","x_shape")) |>
-  ggplot(mapping = aes(x = x, y = y, group = dataset)) +
-  geom_point() + 
-  geom_smooth(se = FALSE, formula = y ~ x, method = "lm", col = "grey") + 
-  facet_wrap(~dataset, nrow = 1, ncol = 4) + labs(x = "", y = "")
+isTRUE(all.equal(fitted(modA), fitted(modB)))
 ```
 
 
 
-## Sum of squares decomposition
+## Distribution of ordinary residuals
 
-Suppose that we do not use any explanatory variable (i.e., the intercept-only model). In this case, the fitted value for $Y$ is the overall mean and the sum of squared centered observations
-\begin{align*}
-\mathsf{SS}_c=\sum_{i=1}^n (Y_i-\overline{Y})^2                                              
-\end{align*}
-where $\overline{Y}$ represents the intercept-only fitted value.
+Since we define residuals as $$\boldsymbol{E}=(\mathbf{I}-\mathbf{H}_{\mathbf{X}})\mathbf{Y},$$ it follows if $Y_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2)$ that
 
-When we include the $p$ regressors,  we get rather
-\begin{align*}
-\mathsf{SS}_e=\sum_{i=1}^n (Y_i-\hat{Y}_i)^2 
-\end{align*}
-The $\mathsf{SS}_e$ is non-increasing when we include more variables.
-
-## Percentage of variance
-
-Consider the sum of squared residuals for two models:
-
-- $\mathsf{SS}_c$ is for the intercept-only model
-- $\mathsf{SS}_e$ for the linear regression with model matrix $\mathbf{X}$. 
-
-Consequently, $\mathsf{SS}_c-\mathsf{SS}_e$ is the reduction of the error associated with including $\mathbf{X}$ in the model
-\begin{align*}
-R^2=\frac{\mathsf{SS}_c-\mathsf{SS}_e}{\mathsf{SS}_c}                                                     
-\end{align*}
-This gives the proportion of the variability in $Y$ explained by $\mathbf{X}$.
- 
-
-## Coefficient of determination
-
-We can show that the coefficient of determination is the square of Pearson's linear correlation between the response $\boldsymbol{y}$ and the fitted values $\widehat{\boldsymbol{y}}$,
-$$R^2 = \mathsf{cor}^2(\boldsymbol{y}, \widehat{\boldsymbol{y}}).$$
-
-  
-
-```{r}
-#| eval: true
-#| echo: true
-summary(mod)$r.squared
-y <- college$salary
-yhat <- fitted(mod)
-cor(y, yhat)^2 
-```
-
-- $R^2$ always takes a value between $0$ and $1$.
-- $R^2$ is not a goodness-of-fit criterion: the coefficient is non-decreasing in the dimension of $\mathbf{X}$, the more columns are added, the higher $R^2$.
-
-## Distribution of errors
-
-Since we define residuals as $(\mathbf{I}-\mathbf{H}_{\mathbf{X}})\mathbf{Y}$, it follows that $E_i \sim \mathsf{normal}\{0, \sigma^2(1-h_{ii})\}$. Since $(\mathbf{I}-\mathbf{H}_{\mathbf{X}})$ has rank $p$
-
-- The residuals are linearly related (there are $n-p$ free components).
+- The marginal distribution of the errors is $E_i \sim \mathsf{normal}\{0, \sigma^2(1-h_{ii})\}$.
 - The residuals are heteroscedastic, and their variance depends on the diagonal elements of the "hat matrix" $\mathbf{H}_{\mathbf{X}}$, the collection $\{h_{ii}\}$ for $(i=1, \ldots, n)$.
-- If we further estimate $\sigma^2$ by $S^2$, we introduce additional independence since $S^2 = \sum_{i=1}^n e_i^2/(n-p-1)$, so $e_i$ appears in the formula of the sample variance...
+- Since $\mathbf{I}-\mathbf{H}_{\mathbf{X}}$ has rank $n-p-1$, the residuals are linearly related (there are $n-p-1$ free components).
+- We can show that $\mathsf{Cov}(e_i, e_j) = -\sigma^2h_{ij}$: residuals are correlated.
+
+## Variance estimation and standardization
+
+We want to standardize residuals to have mean zero and unit variance, but $\sigma^2$ is unknown.
+
+- If we estimate $\sigma^2$ by $S^2$, we introduce additional dependence since $S^2 = \sum_{i=1}^n e_i^2/(n-p-1)$, and $e_i$ appears in the formula of the sample variance...
+- We consider estimation of the standard deviation $S_{-i}$ by fitting the model to but the $i$th observation (jackknife estimator). Then, $e_i$ is independent of $S_{-i}$
+- No need to refit the model! The formula can be written as
+$$S_{-i}^2= \frac{(n-p-1)S^2 - e_i^2/(1-h_{ii})}{n-p-2}.$$
 
 ## Externally studentized residuals
 
-- We consider estimation of the standard deviation $S_{(-i)}$ by fitting the model to but the $i$th observation (jackknife estimator) --- there are explicit formulas for this, no need to refit the model!
-- Then, $e_i$ is independent of $S_{(-i)}$
-- The standardized quantities (residuals divided by std. dev.)
-$$r_i = \frac{e_i}{S_{(-i)}(1-h_{ii})}$$
-are the jackknife (or externally) studentized residuals. In **R**, use `rstudent`.
+Define the jackknife (or externally) studentized residuals as
+$$r_i = \frac{e_i}{S_{-i}(1-h_{ii})^{1/2}}.$$
 
-The distribution of $R \sim \mathsf{Student}(n-p-2)$, but the collection $R_1, \ldots, R_n$ are not independent.
+- In **R**, use `rstudent` to obtain the values.
+- The marginal distribution of $R_i$ is $\mathsf{Student}(n-p-2)$ for $i=1, \ldots, n$.
+- But the collection $R_1, \ldots, R_n$ are not independent.
 
 ## Leverage
 
-- The diagonal elements of the hat matrix $h_{ii} = \partial \widehat{y}_i/\partial y_i$ represent the **leverage** of an observations.
+- The diagonal elements of the hat matrix $h_{ii} = \partial \widehat{y}_i/\partial y_i$ represent the **leverage** of an observation.
 - Leverage values tell us how much each point impacts the fit: they are strictly positive, are bounded below by $1/n$ and above by $1$.
-- The sum of the leverage values is $\sum_{i=1}^n h_i=p+1$: in a good design, each point has approximately the same contribution, with average weight $(p+1)/n$.
+- The sum of the leverage values is $\sum_{i=1}^n h_{ii}=p+1$: in a good design, each point has approximately the same contribution, with average weight $(p+1)/n$.
 - Points with high leverage are those that have unusual combinations of explanatories. 
-- One condition for the OLS estimator $\widehat{\boldsymbol{\beta}}$ to be approximately normally distributed is that $\max_{i=1}^n h_{ii} \to 0$ as $n \to \infty$: no observation dominates the fit.
+- One condition for the OLS estimator $\widehat{\boldsymbol{\beta}}$ to be consistent and asymptotically normal is that $\max_{i=1}^n h_{ii} \to 0$ as $n \to \infty$: no observation dominates the fit.
 
 ## Influential observations vs outliers
 
@@ -316,3 +214,16 @@ ggplot(data = dat, aes(x=x, y=y), colour=group) +
   theme(legend.position = "none", strip.text = element_blank(), )
 ```
 
+
+## Cook distance
+
+The Cook distance of an observation measures the standardized squared prediction error for data when we base the OLS estimator on all but the $i$th observation, say $\widehat{\boldsymbol{\beta}}_{-i}$, and the predictions are $\widehat{\boldsymbol{y}}_{-i}=\mathbf{X}\widehat{\boldsymbol{\beta}}_{-i}$. 
+
+Cook distance is defined as
+
+$$
+C_i =\frac{1}{(p+1)S^2}\left(\widehat{\boldsymbol{y}}-\widehat{\boldsymbol{y}}_{-i}\right)^\top \left(\widehat{\boldsymbol{y}}-\widehat{\boldsymbol{y}}_{-i}\right)=
+\frac{r_i^2h_{ii}}{(p+1)(1-h_{ii})}.
+$$
+
+It is large when either $r_i$ or $h_{ii}$ are large (or both).

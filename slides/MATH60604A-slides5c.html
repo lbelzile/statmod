@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="MATH60604A-slides5b_files/libs/clipboard/clipboard.min.js"></script>
-<script src="MATH60604A-slides5b_files/libs/quarto-html/tabby.min.js"></script>
-<script src="MATH60604A-slides5b_files/libs/quarto-html/popper.min.js"></script>
-<script src="MATH60604A-slides5b_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="MATH60604A-slides5b_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="MATH60604A-slides5b_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="MATH60604A-slides5b_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="MATH60604A-slides5b_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="MATH60604A-slides5c_files/libs/clipboard/clipboard.min.js"></script>
+<script src="MATH60604A-slides5c_files/libs/quarto-html/tabby.min.js"></script>
+<script src="MATH60604A-slides5c_files/libs/quarto-html/popper.min.js"></script>
+<script src="MATH60604A-slides5c_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="MATH60604A-slides5c_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="MATH60604A-slides5c_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="MATH60604A-slides5c_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="MATH60604A-slides5c_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Léo Belzile, HEC Montréal">
@@ -16,8 +16,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="MATH60604A-slides5b_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="MATH60604A-slides5b_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="MATH60604A-slides5c_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="MATH60604A-slides5c_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,11 +96,11 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="MATH60604A-slides5b_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="MATH60604A-slides5b_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="MATH60604A-slides5b_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="MATH60604A-slides5b_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="MATH60604A-slides5b_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="MATH60604A-slides5c_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="MATH60604A-slides5c_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="MATH60604A-slides5c_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="MATH60604A-slides5c_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="MATH60604A-slides5c_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -393,7 +393,7 @@
 
 <section id="title-slide" data-background-color="#002855" class="quarto-title-block center">
   <h1 class="title">Statistical modelling</h1>
-  <p class="subtitle">05. Linear models (geometry)</p>
+  <p class="subtitle">05. Linear models (coefficient of determination)</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -405,138 +405,75 @@ Léo Belzile, HEC Montréal
 
   <p class="date">2024</p>
 </section>
-<section id="column-space-geometry" class="slide level2">
-<h2>Column space geometry</h2>
-<p>The linear model equation is <span class="math display">\[\boldsymbol{Y} = \underset{\text{mean } \boldsymbol{\mu}}{\mathbf{X}\boldsymbol{\beta}} + \underset{\text{errors}}{\vphantom{\beta}\boldsymbol{\varepsilon}}\]</span> and assume that <span class="math inline">\(\mathsf{E}(\boldsymbol{\varepsilon} \mid \mathbf{X})= \boldsymbol{0}_n\)</span> and <span class="math inline">\(\mathsf{Va}(\boldsymbol{\varepsilon} \mid \mathbf{X}) = \sigma^2\mathbf{I}_n\)</span>.</p>
-<p>The fitted model gives the decomposition <span class="math display">\[\begin{align*}
-\underset{\text{observations}}{\boldsymbol{y}} = \underset{\text{fitted values}}{\widehat{\boldsymbol{y}}} + \underset{\text{residuals}}{\vphantom{y}\boldsymbol{e}}
+<section id="pearsons-linear-correlation-coefficient" class="slide level2">
+<h2>Pearson’s linear correlation coefficient</h2>
+<p>The Pearson correlation coefficient quantifies the strength of the linear relationship between two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. <span class="math display">\[\begin{align*}
+\rho= \mathsf{cor}(X, Y) =  \frac{{\mathsf{Co}}(X,Y)}{\sqrt{{\mathsf{Va}}(X){\mathsf{Va}}(Y)}}.
 \end{align*}\]</span></p>
-</section>
-<section id="projection-matrices" class="slide level2">
-<h2>Projection matrices</h2>
-<p>For an <span class="math inline">\(n\times (p+1)\)</span> matrix, the column space of <span class="math inline">\(\mathbf{X}\)</span> is <span class="math display">\[\begin{align*}
-\mathcal{S}(\mathbf{X}) =\{\mathbf{X}\boldsymbol{a}, \boldsymbol{a} \in \mathbb{R}^{p+1}\}
-\end{align*}\]</span></p>
-<p>We can write the fitted values as the projection the observed response vector <span class="math inline">\(\boldsymbol{y}\)</span> onto the linear span of the model matrix <span class="math inline">\(\mathbf{X}\)</span>, <span class="math display">\[\begin{align*}
-\underset{\text{fitted values}}{\widehat{\boldsymbol{y}}} = \underset{\substack{\text{model matrix $\times$}\\\text{OLS estimator}}}{\mathbf{X} \widehat{\boldsymbol{\beta}}} = \underset{\text{projection matrix}}{\mathbf{X}(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top}\boldsymbol{y} = \mathbf{H}_{\mathbf{X}}\boldsymbol{y}
-\end{align*}\]</span> where <span class="math inline">\(\mathbf{H}_{\mathbf{X}} = \mathbf{X}(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\)</span> is an <span class="math inline">\(n \times n\)</span> orthogonal projection matrix.</p>
 <ul>
-<li><span class="math inline">\(\mathbf{H}_{\mathbf{X}}\)</span> is a symmetric <span class="math inline">\(n \times n\)</span> square matrix of rank <span class="math inline">\(p+1\)</span>.</li>
-<li>An orthogonal projection matrix satisfies <span class="math inline">\(\mathbf{H}_{\mathbf{X}}\mathbf{H}_{\mathbf{X}} = \mathbf{H}_{\mathbf{X}}\)</span> and <span class="math inline">\(\mathbf{H}_{\mathbf{X}} = \mathbf{H}_{\mathbf{X}}^\top\)</span>.</li>
+<li>The sample correlation <span class="math inline">\(\rho \in [-1, 1]\)</span>.</li>
+<li><span class="math inline">\(|\rho|=1\)</span> if and only if the <span class="math inline">\(n\)</span> observations fall exactly on a line.</li>
+<li>The larger <span class="math inline">\(|\rho|\)</span>, the less scattered the points are.</li>
 </ul>
 </section>
-<section id="visual-depiction-of-the-geometry" class="slide level2">
-<h2>Visual depiction of the geometry</h2>
+<section id="properties-of-pearsons-linear-correlation-coefficient" class="slide level2">
+<h2>Properties of Pearson’s linear correlation coefficient</h2>
+<p>The sign determines the orientation of the slope.</p>
+<ul>
+<li>If <span class="math inline">\(\rho&gt;0\)</span>, the variables are positively associated, meaning <span class="math inline">\(Y\)</span> increases on average with <span class="math inline">\(X\)</span>.</li>
+<li>If <span class="math inline">\(\rho &lt;0\)</span>, the association is negative and <span class="math inline">\(Y\)</span> decreases on average with <span class="math inline">\(X\)</span>.</li>
+</ul>
 
-<img data-src="fig/05/OLSgeometry.png" class="quarto-figure quarto-figure-center r-stretch" width="341"></section>
-<section id="consequences-of-orthogonality" class="slide level2">
-<h2>Consequences of orthogonality</h2>
-<p>The geometric representation has deep implications for inference that are useful for model diagnostics.</p>
+<img data-src="MATH60604A-slides5c_files/figure-revealjs/fig-scatterplot-corr-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;1: Scatterplots of observations with correlations of <span class="math inline">\(0.1\)</span>, <span class="math inline">\(0.5\)</span>, <span class="math inline">\(-0.75\)</span> and <span class="math inline">\(0.95\)</span> from <span class="math inline">\(A\)</span> to <span class="math inline">\(D\)</span>.
+</p></section>
+<section id="correlation-and-independence" class="slide level2">
+<h2>Correlation and independence</h2>
 <ul>
-<li>The fitted values <span class="math inline">\(\widehat{\boldsymbol{y}}\)</span> and <span class="math inline">\(\boldsymbol{e}\)</span> are uncorrelated</li>
-<li>Idem for any column of <span class="math inline">\(\mathbf{X}\)</span>, since <span class="math inline">\(\mathbf{X}^\top\boldsymbol{e}=\boldsymbol{0}_{p+1}\)</span>.</li>
-<li>Assuming <span class="math inline">\(\mathbf{1}_n \in \mathcal{S}(\mathbf{X})\)</span> (e.g., the intercept is included in <span class="math inline">\(\mathbf{X}\)</span>), the sample mean of <span class="math inline">\(\boldsymbol{e}\)</span> is zero.</li>
+<li>Independent variables are uncorrelated (not the other way around).</li>
+<li>A correlation of zero only implies that there is no <em>linear</em> dependence between two variables.</li>
 </ul>
-<div class="cell" data-knitr.digits.signif="true">
+
+<img data-src="MATH60604A-slides5c_files/figure-revealjs/fig-datasaurus-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;2: Four datasets with dependent data having identical summary statistics and a linear correlation of -0.06.
+</p></section>
+<section id="sum-of-squares-decomposition" class="slide level2">
+<h2>Sum of squares decomposition</h2>
+<p>Suppose that we do not use any explanatory variable (i.e., the intercept-only model). In this case, the fitted value for <span class="math inline">\(Y\)</span> is the overall mean and the sum of squared centered observations <span class="math display">\[\begin{align*}
+\mathsf{SS}_c=\sum_{i=1}^n (Y_i-\overline{Y})^2                                              
+\end{align*}\]</span> where <span class="math inline">\(\overline{Y}\)</span> represents the intercept-only fitted value.</p>
+<p>When we include the <span class="math inline">\(p\)</span> regressors, we get rather <span class="math display">\[\begin{align*}
+\mathsf{SS}_e=\sum_{i=1}^n (Y_i-\widehat{Y}_i)^2
+\end{align*}\]</span> The <span class="math inline">\(\mathsf{SS}_e\)</span> is non-increasing when we include more variables.</p>
+</section>
+<section id="percentage-of-variance" class="slide level2">
+<h2>Percentage of variance</h2>
+<p>Consider the sum of squared residuals for two models:</p>
+<ul>
+<li><span class="math inline">\(\mathsf{SS}_c\)</span> is for the intercept-only model</li>
+<li><span class="math inline">\(\mathsf{SS}_e\)</span> for the linear regression with model matrix <span class="math inline">\(\mathbf{X}\)</span>.</li>
+</ul>
+<p>Consequently, <span class="math inline">\(\mathsf{SS}_c-\mathsf{SS}_e\)</span> is the reduction of the error associated with including <span class="math inline">\(\mathbf{X}\)</span> in the model <span class="math display">\[\begin{align*}
+R^2=\frac{\mathsf{SS}_c-\mathsf{SS}_e}{\mathsf{SS}_c}                                                     
+\end{align*}\]</span> This gives the proportion of the variability in <span class="math inline">\(\boldsymbol{Y}\)</span> explained by <span class="math inline">\(\mathbf{X}\)</span>.</p>
+</section>
+<section id="coefficient-of-determination" class="slide level2">
+<h2>Coefficient of determination</h2>
+<p>We can show that the coefficient of determination is the square of Pearson’s linear correlation between the response <span class="math inline">\(\boldsymbol{y}\)</span> and the fitted values <span class="math inline">\(\widehat{\boldsymbol{y}}\)</span>, <span class="math display">\[R^2 = \mathsf{cor}^2(\boldsymbol{y}, \widehat{\boldsymbol{y}}).\]</span></p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">data</span>(college, <span class="at">package =</span> <span class="st">"hecstatmod"</span>)</span>
 <span id="cb1-2"><a href=""></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> sex <span class="sc">+</span> field <span class="sc">+</span> rank <span class="sc">+</span> service, <span class="at">data =</span> college)</span>
-<span id="cb1-3"><a href=""></a><span class="co"># Zero correlations</span></span>
-<span id="cb1-4"><a href=""></a><span class="fu">cor</span>(<span class="fu">resid</span>(mod), <span class="fu">model.matrix</span>(mod))[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb1-5"><a href=""></a><span class="do">## [1] -4.9e-17 -1.6e-17  3.7e-18  2.9e-18  1.3e-17</span></span>
-<span id="cb1-6"><a href=""></a><span class="fu">cor</span>(<span class="fu">resid</span>(mod), <span class="fu">fitted</span>(mod))</span>
-<span id="cb1-7"><a href=""></a><span class="do">## [1] -2.7e-17</span></span>
-<span id="cb1-8"><a href=""></a><span class="co"># Mean zero errors</span></span>
-<span id="cb1-9"><a href=""></a><span class="fu">mean</span>(<span class="fu">resid</span>(mod))</span>
-<span id="cb1-10"><a href=""></a><span class="do">## [1] 1.5e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href=""></a><span class="fu">summary</span>(mod)<span class="sc">$</span>r.squared <span class="co"># R-squared from output</span></span>
+<span id="cb1-4"><a href=""></a><span class="do">## [1] 0.45</span></span>
+<span id="cb1-5"><a href=""></a>y <span class="ot">&lt;-</span> college<span class="sc">$</span>salary <span class="co"># response vector</span></span>
+<span id="cb1-6"><a href=""></a>yhat <span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod) <span class="co"># fitted value</span></span>
+<span id="cb1-7"><a href=""></a><span class="fu">cor</span>(y, yhat)<span class="sc">^</span><span class="dv">2</span> </span>
+<span id="cb1-8"><a href=""></a><span class="do">## [1] 0.45</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="graphical-diagnostics" class="slide level2">
-<h2>Graphical diagnostics</h2>
-<p>A linear regression of <span class="math inline">\(\widehat{\boldsymbol{y}}\)</span> (or any column of <span class="math inline">\(\mathbf{X}\)</span>) onto <span class="math inline">\(\boldsymbol{e}\)</span> has zero intercept and slope.</p>
-
-<img data-src="MATH60604A-slides5b_files/figure-revealjs/fig-zerocor-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;1: Plot of residuals against fitted values (left), and against the explanatory variable <code>service</code> (right) for the linear regression of the <code>college</code> data. The intercept and the slope of the simple linear regressions are zero.
-</p><p>Residual patterns due to forgotten interactions, nonlinear terms, etc. could be picked up from pair plots of ordinary residuals against the explanatories.</p>
-</section>
-<section id="invariance" class="slide level2">
-<h2>Invariance</h2>
-<p>The fitted values <span class="math inline">\(\widehat{y}_i\)</span> for two model matrices <span class="math inline">\(\mathbf{X}_a\)</span> and <span class="math inline">\(\mathbf{X}_b\)</span>, are the same if they generate the same linear span, i.e., <span class="math inline">\(\mathcal{S}(\mathbf{X}_a) = \mathcal{S}(\mathbf{X}_b)\)</span>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">data</span>(college, <span class="at">package =</span> <span class="st">"hecstatmod"</span>)</span>
-<span id="cb2-2"><a href=""></a>modA <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> sex <span class="sc">+</span>  rank <span class="sc">+</span> service, <span class="at">data =</span> college)</span>
-<span id="cb2-3"><a href=""></a>modB <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> sex <span class="sc">+</span> rank <span class="sc">+</span> service, <span class="co"># 0+ = remove intercept</span></span>
-<span id="cb2-4"><a href=""></a>           <span class="at">data =</span> college <span class="sc">|&gt;</span> </span>
-<span id="cb2-5"><a href=""></a>            dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">service =</span> <span class="fu">scale</span>(service)), <span class="co"># standardize variable (mean zero, unit std. dev)</span></span>
-<span id="cb2-6"><a href=""></a>           <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">rank =</span> contr.sum)) <span class="co"># change parametrization of dummies</span></span>
-<span id="cb2-7"><a href=""></a><span class="fu">head</span>(<span class="fu">model.matrix</span>(modA), <span class="at">n =</span> <span class="dv">3</span>L)</span>
-<span id="cb2-8"><a href=""></a><span class="do">##   (Intercept) sexwoman rankassociate rankfull service</span></span>
-<span id="cb2-9"><a href=""></a><span class="do">## 1           1        0             0        1      18</span></span>
-<span id="cb2-10"><a href=""></a><span class="do">## 2           1        0             0        1      16</span></span>
-<span id="cb2-11"><a href=""></a><span class="do">## 3           1        0             0        0       3</span></span>
-<span id="cb2-12"><a href=""></a><span class="fu">head</span>(<span class="fu">model.matrix</span>(modB), <span class="at">n =</span> <span class="dv">3</span>L)</span>
-<span id="cb2-13"><a href=""></a><span class="do">##   sexman sexwoman rank1 rank2 service</span></span>
-<span id="cb2-14"><a href=""></a><span class="do">## 1      1        0    -1    -1    0.03</span></span>
-<span id="cb2-15"><a href=""></a><span class="do">## 2      1        0    -1    -1   -0.12</span></span>
-<span id="cb2-16"><a href=""></a><span class="do">## 3      1        0     1     0   -1.12</span></span>
-<span id="cb2-17"><a href=""></a><span class="co"># Model invariance</span></span>
-<span id="cb2-18"><a href=""></a><span class="fu">isTRUE</span>(<span class="fu">all.equal</span>(<span class="fu">fitted</span>(modA), <span class="fu">fitted</span>(modB)))</span>
-<span id="cb2-19"><a href=""></a><span class="do">## [1] TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="distribution-of-ordinary-residuals" class="slide level2">
-<h2>Distribution of ordinary residuals</h2>
-<p>Since we define residuals as <span class="math display">\[\boldsymbol{E}=(\mathbf{I}-\mathbf{H}_{\mathbf{X}})\mathbf{Y},\]</span> it follows if <span class="math inline">\(Y_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2)\)</span> that</p>
 <ul>
-<li>The marginal distribution of the errors is <span class="math inline">\(E_i \sim \mathsf{normal}\{0, \sigma^2(1-h_{ii})\}\)</span>.</li>
-<li>The residuals are heteroscedastic, and their variance depends on the diagonal elements of the “hat matrix” <span class="math inline">\(\mathbf{H}_{\mathbf{X}}\)</span>, the collection <span class="math inline">\(\{h_{ii}\}\)</span> for <span class="math inline">\((i=1, \ldots, n)\)</span>.</li>
-<li>Since <span class="math inline">\(\mathbf{I}-\mathbf{H}_{\mathbf{X}}\)</span> has rank <span class="math inline">\(n-p-1\)</span>, the residuals are linearly related (there are <span class="math inline">\(n-p-1\)</span> free components).</li>
-<li>We can show that <span class="math inline">\(\mathsf{Cov}(e_i, e_j) = -\sigma^2h_{ij}\)</span>: residuals are correlated.</li>
+<li><span class="math inline">\(R^2\)</span> always takes a value between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</li>
+<li><span class="math inline">\(R^2\)</span> is not a goodness-of-fit criterion: the coefficient is non-decreasing so the more explanatories are added to <span class="math inline">\(\mathbf{X}\)</span>, the higher the <span class="math inline">\(R^2\)</span>.</li>
 </ul>
-</section>
-<section id="variance-estimation-and-standardization" class="slide level2">
-<h2>Variance estimation and standardization</h2>
-<p>We want to standardize residuals to have mean zero and unit variance, but <span class="math inline">\(\sigma^2\)</span> is unknown.</p>
-<ul>
-<li>If we estimate <span class="math inline">\(\sigma^2\)</span> by <span class="math inline">\(S^2\)</span>, we introduce additional dependence since <span class="math inline">\(S^2 = \sum_{i=1}^n e_i^2/(n-p-1)\)</span>, and <span class="math inline">\(e_i\)</span> appears in the formula of the sample variance…</li>
-<li>We consider estimation of the standard deviation <span class="math inline">\(S_{-i}\)</span> by fitting the model to but the <span class="math inline">\(i\)</span>th observation (jackknife estimator). Then, <span class="math inline">\(e_i\)</span> is independent of <span class="math inline">\(S_{-i}\)</span></li>
-<li>No need to refit the model! The formula can be written as <span class="math display">\[S_{-i}^2= \frac{(n-p-1)S^2 - e_i^2/(1-h_{ii})}{n-p-2}.\]</span></li>
-</ul>
-</section>
-<section id="externally-studentized-residuals" class="slide level2">
-<h2>Externally studentized residuals</h2>
-<p>Define the jackknife (or externally) studentized residuals as <span class="math display">\[r_i = \frac{e_i}{S_{-i}(1-h_{ii})^{1/2}}.\]</span></p>
-<ul>
-<li>In <strong>R</strong>, use <code>rstudent</code> to obtain the values.</li>
-<li>The marginal distribution of <span class="math inline">\(R_i\)</span> is <span class="math inline">\(\mathsf{Student}(n-p-2)\)</span> for <span class="math inline">\(i=1, \ldots, n\)</span>.</li>
-<li>But the collection <span class="math inline">\(R_1, \ldots, R_n\)</span> are not independent.</li>
-</ul>
-</section>
-<section id="leverage" class="slide level2">
-<h2>Leverage</h2>
-<ul>
-<li>The diagonal elements of the hat matrix <span class="math inline">\(h_{ii} = \partial \widehat{y}_i/\partial y_i\)</span> represent the <strong>leverage</strong> of an observation.</li>
-<li>Leverage values tell us how much each point impacts the fit: they are strictly positive, are bounded below by <span class="math inline">\(1/n\)</span> and above by <span class="math inline">\(1\)</span>.</li>
-<li>The sum of the leverage values is <span class="math inline">\(\sum_{i=1}^n h_{ii}=p+1\)</span>: in a good design, each point has approximately the same contribution, with average weight <span class="math inline">\((p+1)/n\)</span>.</li>
-<li>Points with high leverage are those that have unusual combinations of explanatories.</li>
-<li>One condition for the OLS estimator <span class="math inline">\(\widehat{\boldsymbol{\beta}}\)</span> to be consistent and asymptotically normal is that <span class="math inline">\(\max_{i=1}^n h_{ii} \to 0\)</span> as <span class="math inline">\(n \to \infty\)</span>: no observation dominates the fit.</li>
-</ul>
-</section>
-<section id="influential-observations-vs-outliers" class="slide level2">
-<h2>Influential observations vs outliers</h2>
-<p>It is important to distinguish betwen <strong>influential</strong> observations (which have unusual <span class="math inline">\(\mathbf{x}\)</span> value, i.e., far from the overall mean) and <strong>outliers</strong> (unusual value of the response <span class="math inline">\(y\)</span>). If an observation is both an outlier and has a high leverage, it is problematic.</p>
-
-<img data-src="MATH60604A-slides5b_files/figure-revealjs/fig-outliers-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;2: Outlier and influential observation. The left panel shows an outlier, whereas the right panel shows an influential variable (rightmost <span class="math inline">\(x\)</span> value).
-</p></section>
-<section id="cook-distance" class="slide level2">
-<h2>Cook distance</h2>
-<p>The Cook distance of an observation measures the standardized squared prediction error for data when we base the OLS estimator on all but the <span class="math inline">\(i\)</span>th observation, say <span class="math inline">\(\widehat{\boldsymbol{\beta}}_{-i}\)</span>, and the predictions are <span class="math inline">\(\widehat{\boldsymbol{y}}_{-i}=\mathbf{X}\widehat{\boldsymbol{\beta}}_{-i}\)</span>.</p>
-<p>Cook distance is defined as</p>
-<p><span class="math display">\[
-C_i =\frac{1}{(p+1)S^2}\left(\widehat{\boldsymbol{y}}-\widehat{\boldsymbol{y}}_{-i}\right)^\top \left(\widehat{\boldsymbol{y}}-\widehat{\boldsymbol{y}}_{-i}\right)=
-\frac{r_i^2h_{ii}}{(p+1)(1-h_{ii})}.
-\]</span></p>
-<p>It is large when either <span class="math inline">\(r_i\)</span> or <span class="math inline">\(h_{ii}\)</span> are large (or both).</p>
 <div class="quarto-auto-generated-content">
 <p><img src="fig/logo_hec_montreal_bleu_web.png" class="slide-logo"></p>
 <div class="footer footer-default">
@@ -548,19 +485,19 @@ C_i =\frac{1}{(p+1)S^2}\left(\widehat{\boldsymbol{y}}-\widehat{\boldsymbol{y}}_{
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="MATH60604A-slides5b_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="MATH60604A-slides5c_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="MATH60604A-slides5b_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="MATH60604A-slides5b_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="MATH60604A-slides5b_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="MATH60604A-slides5b_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="MATH60604A-slides5b_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="MATH60604A-slides5c_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="MATH60604A-slides5c_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="MATH60604A-slides5c_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="MATH60604A-slides5c_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="MATH60604A-slides5c_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="MATH60604A-slides5b_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="MATH60604A-slides5b_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="MATH60604A-slides5b_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="MATH60604A-slides5b_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="MATH60604A-slides5c_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="MATH60604A-slides5c_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="MATH60604A-slides5c_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="MATH60604A-slides5c_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
