@@ -2,7 +2,7 @@
 title: "Likelihood-based inference"
 ---
 
-### Learning objectives
+## Learning objectives
 
 
 * Learn the terminology associated with likelihood-based inference
@@ -11,18 +11,18 @@ title: "Likelihood-based inference"
 * Use large-sample properties of the likelihood to derive confidence intervals and tests
 * Use information criteria for model selection
 
-### Content
+## Content
 
 
 - Course notes: chapter [3 (Likelihood-based inference)](https://lbelzile.github.io/math60604a/likelihood.html)
 
 
-### In class
+## In class
 
 - [Slides](../slides/MATH60604A-slides2.html) ([pdf](../slides/MATH60604A-slides2.pdf) and [code](MATH60604A-slides2.R))
 
 
-### Slides
+## Slides
 
 
 <p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides2.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides2.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
@@ -32,7 +32,7 @@ title: "Likelihood-based inference"
 </div>
 
 
-### After class
+## After class
 
 - [Exercise sheet 3](../exercises/index.qmd)
 
@@ -41,7 +41,8 @@ source("../files/get_slide_data.R")
 knitr::kable(sldat[which(sldat$S %in% c("3")),-3], align = "llccccc", row.names = FALSE)
 ```
 
-### Additional readings
+## Additional readings
+
 - [*Understanding Maximum Likelihood* by Kristoffer Magnusson](https://rpsychologist.com/d3/likelihood/)
 - @Davison:2003, Chapter 4
 

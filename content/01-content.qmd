@@ -2,14 +2,14 @@
 title: "Statistical inference"
 ---
 
-### Learning objectives
+## Learning objectives
 
 - Understanding the role of uncertainty in decision making.
 - Understanding the importance of signal-to-noise ratio as a measure of evidence.
 - Formulating the null and alternative hypotheses attached to a problem statement.
 - Understanding and correctly interpreting $p$-values and confidence intervals;
 
-### Content
+## Content
 
  
 :::{.callout-warning}
@@ -20,13 +20,13 @@ These readings should normally be completed before class, to ensure timely under
 - [Install **R** and RStudio](installation.qmd)
 
 
-### In class
+## In class
 
 - [Syllabus](../slides/MATH60604A-syllabus.pdf)
 - [Slides](../slides/MATH60604A-slides1.html) ([pdf](../slides/MATH60604A-slides1.pdf) and [code](MATH60604A-slides1.R))
 - Activity: [reporting conclusion of tests](MATH60604A-week1-workshop.R)
 
-### Slides
+## Slides
 
 
 <p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides1.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides1.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
@@ -36,11 +36,11 @@ These readings should normally be completed before class, to ensure timely under
 </div>
 
 
-### After class
+## After class
 
 - [Exercise sheet 1](../exercises/01-exercise.qmd)
 
-### Additional readings
+## Additional readings
 
 - [Permutation tests](https://www.jwilber.me/permutationtest/)
 

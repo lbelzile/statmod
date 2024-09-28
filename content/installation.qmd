@@ -80,6 +80,27 @@ include_graphics("../files/img/install/install-r-tidyverse.png", error = FALSE)
 
 Notice also that RStudio will generate a line of code for you and run it: `install.packages("tidyverse")`. You can also just paste and run this instead of using the packages panel.
 
+The following chunk will install all **R** packages that are used throughout the course.
+
+```{r}
+#| echo: true
+#| eval: false
+lib <- c("afex", "broom", "car", "dplyr", "emmeans",
+         "ggplot2", "Hmisc", "lme4", "lmerTest", 
+         "marginaleffects", "MASS", "multcomp", "nlme", 
+         "patchwork", "poorman", "remotes", "survminer",
+         "survival", "tidyr", "tinytable")
+for(pack in lib){
+  if(!require(pack, quietly = TRUE)){
+    install.packages(pack)
+  }
+}
+remotes::install_github("lbelzile/hecstatmod")
+remotes::install_github("lbelzile/hecedsm")
+```
+
+*Note*: not all data sets are currently documented in `hecstatmod`. Please re-install the package periodically to benefit from the latest features.
+
 
 ### Install `tinytex`
 

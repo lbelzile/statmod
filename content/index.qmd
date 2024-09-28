@@ -9,7 +9,7 @@ readers have access to course notes, sample code and exercises sheets.
 
 ## R packages and data
 
-You can access the data sets in **R** by installing the `hecstatmod` package from Github using the following commands (uncomment the first line to install the  `remotes` and `learnr` libraries --- do only once):
+You can access the data sets in **R** by installing the `hecstatmod` package. The following chunk will install all **R** packages that are used throughout the course.
 
 
 ```{r}

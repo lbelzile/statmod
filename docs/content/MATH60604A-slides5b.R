@@ -40,6 +40,25 @@ head(model.matrix(modB), n = 3L)
 isTRUE(all.equal(fitted(mod), fitted(modB)))
 
 
+# Residuals and other similar quantities
+e <- resid(modA) # ordinary residuals
+r <- rstudent(modA) # ext. studentized resid
+# Q-Q plot of jackknife studentized residuals
+car::qqPlot(modA, id = FALSE)
+
+# Number of observations
+n <- nrow(modA$model)
+# Number of mean parameters
+nbetas <- length(coef(modA))
+## Calculate leverage
+leverage <- hatvalues(modA)
+# Which points have high leverage?
+which(leverage > 2*nbetas/n)
+?influence.measures
+## Cook distance
+distCook <- cooks.distance(modA)
+
+
 # Definition of the coefficient of determination
 summary(mod)$r.squared # output from "lm"
 y <- college$salary
