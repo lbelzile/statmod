@@ -6,7 +6,7 @@ date: today
 date-format: YYYY
 eval: true
 cache: false
-echo: true
+echo: false
 fig-align: 'center'
 out-width: '100%'
 standalone: true
@@ -29,7 +29,8 @@ format:
 #| eval: true
 #| include: false
 #| cache: false
-hecbleu <- c("#002855")
+hecblue <- c("#002855")
+
 fcols <- c(gris = "#888b8d",
            bleu = "#0072ce",
            aqua = "#00aec7",
@@ -57,57 +58,301 @@ library(emmeans)
 
 ## Model assumptions
 
+There are four main assumptions of the linear model specification $$Y_i \mid \mathbf{x}_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2).$$
+
+- linearity and additivity: the mean of $Y_i \mid \mathbf{x}_i$ is $\beta_0 + \beta_1x_{i1} + \cdots + \beta_p x_{ip}$.
+- homoscedasticity: the error variance $\sigma^2$ is constant
+- independence of the errors/observations conditional on covariates
+- normality
+
 ## Read the fine prints
+
+
+When we perform an hypothesis test, we merely fail to reject the null hypothesis, either because the latter is true or else due to lack of evidence. 
+
+- The same goes for checking the validity of model assumptions.
+- Our strategy is to create graphical diagnostic tools to ensure that there is no gross violation of these hypothesis. 
+- Beware of over-interpreting diagnostic plots: the human eye is very good at finding spurious patterns...
+
+The `plot` method in **R** generates a series of diagnostics plots.
 
 ## Assumption 1 - mean model specification
 
-## Linearity
 
-## Diagnostics for linearity
+The mean of $Y_i \mid \mathbf{x}_i$ is $\beta_0 + \beta_1x_{i1} + \cdots + \beta_p x_{ip}$.
+
+Implicitly,
+
+- All interactions are included.
+- There are no omitted explanatories from the model,
+- The relationship between $Y_i$ and $X_j$ is linear.
+
+## Diagnostic plots for linearity
+
 
 - Plots of residuals $\boldsymbol{e}$ against fitted values $\widehat{\boldsymbol{y}}$
 - Plot of residuals $\boldsymbol{e}$ against columns from the model matrix, $\mathbf{X}$
+- Plot of residuals $\boldsymbol{e}$ against omitted variables
+
+
+Any local pattern or patterns (e.g., quadratic trend, cycles, changepoints, subgroups) are indicative of misspecification of the mean model.
+
+Use local smoother (GAM or LOESS) to detect trends.
+
+## Illustration of residual plots
+
 
 Look for pattern in the $y$-axis, not the $x$-axis!
 
-## Added variable plots
 
-  - Remove the column of the model matrix $\mathbf{X}$ corresponding to explanatory variable $X_j$ to obtain $\mathbf{X}_{-j}$
-  - fit a regression of $\boldsymbol{y}$ as a function of $\mathbf{X}_{-j}$
-  - fit a linear regression of $\boldsymbol{X}_j$ as a function of $\mathbf{X}_{-j}$
-  - plot both residuals. The regression slope is exactly $\beta_j$.
-  
-Useful for collinearity
+```{r}
+#| label: fig-regdiaglin
+#| echo: false
+#| fig-cap: Scatterplots of residuals against fitted values. The first two plots show
+#|   no departure from linearity (mean zero). The third plot shows a clear quadratic
+#|   pattern, suggesting the mean model is misspecified. Note that the distribution of
+#|   the fitted value need not be uniform, as in the second panel which shows more high
+#|   fitted values.
+par(pch = 19, col = scales::alpha("black", 0.8), bty = "l")
+par(mar=c(3.1, 3.1, 1, 1), mgp=c(1.7, 0.6, 0), font.main=1, cex.main=0.8)
+par(mfrow=c(1, 3))
+x1 <- 1:200
+x2 <- (1:200)^2
+set.seed(1)
+lm1 <- lm(rnorm(200)~x1)
+lm2 <- lm(rnorm(200) ~ x2)
+s1 <- scale(sin(x1/45)*2+rnorm(200))
+lm3 <- lm(s1 ~ x1)
+car::residualPlot(lm1,ylab="residuals", xlab = "fitted values", col.quad = hecblue)
+car::residualPlot(lm2,ylab="residuals", xlab = "fitted values", col.quad = hecblue)
+car::residualPlot(lm3,ylab="residuals", xlab = "fitted values", col.quad = hecblue)
+```
 
-## Omitted variables
+## Examples 
 
 
-## Remedies
+```{r}
+#| fig-cap: "Scatterplot of residuals against explanatory (left) and an omitted covariate (right). We can pick up a forgotten interaction between BMI and smoker/obese and a linear trend for the number of children."
+#| label: fig-residplots
+data(insurance, package = "hecstatmod")
+insurance <- insurance |>
+  dplyr::mutate(obesity = factor(bmi >= 30, levels = c(FALSE, TRUE), 
+                                 labels = c("non-obese","obese")))
+mod0 <- lm(charges ~ age + obesity*smoker, data = insurance)
+mod1 <- lm(charges ~ age + obesity*smoker*bmi, data = insurance)
+mod2 <- lm(charges ~ age + obesity*smoker*bmi + children, data = insurance)
+g1 <- ggplot(data = data.frame(e = resid(mod0),
+                         x = insurance$bmi, 
+                         col = interaction(insurance$obesity, insurance$smoker)),
+       mapping = aes(x = x, y = e, color = col)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ x, show.legend = FALSE) +
+  MetBrewer::scale_color_met_d(name = "Hiroshige") + 
+  labs(x = "body mass index", y = "ordinary residuals",
+       color = "obese/smoker") +
+  theme(legend.position = "bottom")
+g2 <- ggplot(data = data.frame(e = resid(mod1),
+                         x = insurance$children),
+       mapping = aes(x = x, y = e)) +
+  geom_jitter() +
+  geom_smooth(method = "lm", formula = y ~ x, col = "grey") +
+  MetBrewer::scale_color_met_d(name = "Hiroshige") + 
+  labs(x = "number of children", y = "ordinary residuals")
+g1 + g2
+```
 
-- Fix the mean model (include interactions if necessary, etc.)
-- Specify the effect of nonlinear terms via penalized splines.
+## Examples - `college` data
+
+```{r}
+#| eval: true
+#| echo: true
+#| out-width: '100%'
+#| fig-align: 'center'
+#| fig-width: 10
+#| fig-height: 8
+data(college, package = "hecstatmod")
+linmod.college1 <- lm(salary ~ rank + field + sex + service + years, data = college)
+car::residualPlots(linmod.college1, test = FALSE, layout = c(2,3))
+```
+
+## Remedy for mean model specification
+
+Fix the mean model
+
+- Add covariates that are important explanatories
+- Include interactions if necessary
+- For residual patterns, specify the effect of nonlinear terms via penalized splines
 
 ## Assumption 2: homoskedasticity (equal variance)
 
+The variance is the same for all observations, $\mathsf{Va}(Y_i \mid \mathbf{x}_i) = \sigma^2$
+
+Typical ways this can fail
+
+- Variance can vary per levels of a categorical variable
+- Variance increases with the response (typically multiplicative models)
+- Data are drawn from a distribution whose variance depends on the mean, e.g., Poisson
+
+## Diagnostic for equal variance
+
+Use externally studentized residuals $r_i$, which have equal variance.
+
+- Test equality of variance per group (e.g., fit an ANOVA model to $|r_i|$ as a function of a categorical variable).
+- Plot (absolute value of) standardized residuals $r_i$ against fitted values
+
+## Examples
+
+
+```{r}
+#| label: fig-diagfitvalhomosce
+#| echo: false
+#| fig-cap: Plot of externally studentized residuals against fitted value (left) and categorical
+#|   explanatory (right). Both clearly display heteroscedasticity.
+par(mar=c(3.1,3.1,1.6,1),
+    mgp=c(1.7,0.6,0),font.main=1,cex.main=0.8,
+    mfrow= c(1,3),  pch = 19, bty = "l")
+set.seed(1)
+x1 <- sort(100+3*rnorm(200,0,10))
+s1 <- scale(rnorm(200)*(x1-30)^2)
+fithetero <- rstudent(lm(s1~x1))
+plot(x1,s1,xlab="fitted values",ylab="jackknife studentized residuals")
+plot(x1,abs(fithetero),xlab="fitted values",ylab="|jackknife studentized residuals|")
+car::gamLine(x1, abs(fithetero), spread = TRUE, col = hecblue)
+set.seed(1)
+fitlmh <- lm(c(rnorm(100, sd = 0.5), rnorm(100, sd = 3), rnorm(30, sd = 1.5)) ~ (xcat <- factor(c(rep(1,100), rep(2, 100), rep(3, 30)))))
+boxplot(rstudent(fitlmh) ~ xcat, xlab = "group", ylab="jackknife studentized residuals")
+```
+
+## Example with `college` data
+
+There is a plethora of tests of heteroscedasticity
+
+- Bartlett test (normal likelihood ratio test for different variance, but very sensitive to normality assumption so not recommended)
+- Levene test (fit ANOVA to $|r_{ij} - \overline{r_{j}}|$ for data from group $j=1, \ldots, n)$
+- Breusch--Pagan test (popular in economics, fits linear regression to $e_i^2$)
+
+```{r}
+#| eval: true
+#| echo: true
+# Fit ANOVA to |rstudent - mean|rstudent||
+car::leveneTest(rstudent(linmod.college1) ~ rank, center = "mean", data = college)
+# Likelihood ratio test for Normal data, with studentized residuals 
+bartlett.test(rstudent(linmod.college1) ~ rank, data = college)
+```
+
 ## Consequences of unequal variance
 
-## Remedies 1
 
-Generalize the variance structure to specify
+```{r}
+#| label: fig-simuWelchnull
+#| echo: false
+#| cache: true
+#| fig-cap: Histogram of the null distribution of $p$-values obtained through simulation
+#|   using the classical analysis of variance $F$-test (left) and Welch's unequal variance
+#|   alternative (right), based on 10 000 simulations. Each simulated sample consist
+#|   of 50 observations from a $\mathsf{normal}(0, 1)$ distribution and 10 observations from
+#|   $\mathsf{normal}(0, 9)$. The uniform distribution would have 5% in each of the 20 bins
+#|   used for the display.
+set.seed(1234)
+n1 <- 50
+n2 <- 10
+mu1 <- 0
+mu2 <- 0
+sd1 <- 1
+sd2 <- 3
+nrep <- 1e4
+pvalsF <- rep(0, nrep)
+pvalsW <- rep(0, nrep)
+group <- factor(c(rep(0, n1), rep(1, n2)))
+for(i in seq_len(nrep)){
+dat <- c(rnorm(n = n1, mean = mu1, sd = sd1),
+         rnorm(n = n2, mean = mu2, sd = sd2))
+pvalsW[i] <- t.test(dat ~ group)$p.value
+pvalsF[i] <- t.test(dat ~ group, var.equal = TRUE)$p.value
+}
+g1 <- ggplot(data = data.frame("pvalue" = pvalsF),
+       aes(x = pvalue)) +
+  # bin into 20 compartments,
+  # specifying boundaries to avoid artifacts
+  geom_histogram(breaks = seq(0, 1, by = 0.05),
+                 aes(y = after_stat(width*density)),
+                 alpha = 0.2) +
+  stat_function(fun = function(x){1/20}, #uniform distribution
+                col = "blue") +
+  labs(x = "p-value",
+       y = "percentage",
+       caption = "two sample t-test (equal variance)") +
+   scale_x_continuous(expand = c(0, 0),
+                      limits = c(0, 1),
+                      breaks = c(0,0.5,1))
+g2 <- ggplot(data = data.frame("pvalue" = pvalsW),
+       aes(x = pvalue)) +
+  # bin into 20 compartments,
+  # specifying boundaries to avoid artifacts
+  geom_histogram(breaks = seq(0, 1, by = 0.05),
+                 aes(y = after_stat(width*density)),
+                 alpha = 0.2) +
+  stat_function(fun = function(x){0.05}, #uniform distribution
+                col = "blue") +
+  labs(x = "p-value",
+       y = "percentage",
+       caption = "Welch t-test (unequal variance)") +
+   scale_x_continuous(expand = c(0, 0),
+                      limits = c(0, 1),
+                      breaks = c(0,0.5,1))
+theme_set(theme_classic())
+g1 + g2
+```
 
-## Example of unequal variance models - ANOVA
+##  Remedy 1 - specify the variance structure
 
-Specify a model win
+Specify a function for the variance, e.g., 
 
-## Fitting via generalized least squares
+- $\sigma_j$ for level $j$ of a categorical variable, 
+- $\sigma^2(v) = |v|^{2\theta}$ for some covariate $v$ and parameter $\theta \geq 0$
 
 
+The model is fitted via restricted maximum likelihood using the function `gls` from package `nlme`.
 
-## Remedies 2
+## Example of heteroscedasticity for the `college` data
 
-Sandwich matrix for the errors
+For the college data, we set $Y_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2_{\mathsf{rank}_i})$ with three different variance parameters. This seemingly corrects the heteroscedasticity.
 
-## Remedies 3 
+
+```{r}
+#| eval: true
+#| echo: true
+#| fig-align: 'center'
+library(nlme) # R package for mixed models and variance specification
+linmod.college2 <- nlme::gls(
+  model = salary ~ rank + field + sex + service, # mean specification
+  weights = nlme::varIdent(form = ~1 | rank), # constant variance per rank
+  data = college)
+plot(linmod.college2)
+```
+
+
+## Remedy 2 - use a sandwich matrix for the errors
+
+Economists often use **sandwich** estimators, whereby we replace the covariance matrix of $\boldsymbol{\beta}$, $S^2(\mathbf{X}^\top\mathbf{X})^{-1}$, by a sandwich estimator of the form
+
+$$\widehat{\mathsf{Va}}_{\mathsf{HCE}}(\boldsymbol{\widehat{\beta}}) = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\boldsymbol{\Omega}\mathbf{X}(\mathbf{X}^\top\mathbf{X})^{-1}$$
+with $\boldsymbol{\Omega}$ a diagonal matrix.
+
+Popular choices imply taking $\mathrm{diag}(\boldsymbol{\Omega})_i = e_i^2$.
+
+## Example of sandwich matrix
+
+```{r}
+library(sandwich)
+vcov_mat <- vcovHC(linmod.college1)
+# Wald tests with sandwich matrix
+rbind(coef(linmod.college1) / sqrt(diag(vcov_mat)), # HCE corrected Wald-tests
+      coef(linmod.college1) / sqrt(diag(vcov(linmod.college1))) # regular tests
+)
+```
+
+## Remedy 3 
 
 Variance-stabilizing transformations
 
@@ -132,11 +377,19 @@ Q-Q plot of externally studentized residuals
 
 Subgroup analysis
 
-## Remedie 1
+## Remedy 1
 
 GLM
 
 ## Diagnostics for outliers
+
+
+```{r}
+#| eval: true
+#| echo: false
+car::residualPlots(mod2, test = FALSE)
+```
+
 
 ## Remedy
 

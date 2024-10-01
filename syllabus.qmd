@@ -51,14 +51,17 @@ The course will focus on regression models, including linear models, generalized
 - Models for longitudinal data and correlated data
 - Introduction to survival analysis
 
+
+## Learning objectives
+
+The course learning objectives are listed [here](learningobjectives.qmd).
+
+
 ## Prerequisites
 
 
 The course is of an overview course. Students should have basic training in statistics at the level of [_Introductory Statistics with Randomization and Simulation_](https://www.openintro.org/book/isrs/) (Chapters 1--4, excluding special topics).
 
-## Learning objectives
-
-The course learning objectives are listed [here](learningobjectives.qmd).
 
 ## Target audience
 
