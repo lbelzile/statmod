@@ -1,0 +1,74 @@
+---
+title: "Linear models"
+---
+
+## Learning objectives
+
+- 
+
+
+## Content
+
+
+- Course notes: chapter [4 (Linear regression models)](https://lbelzile.github.io/math60604a/linearmodels.html), Sections 4.7--4.8.
+
+
+## In class
+
+- [Slides](../slides/MATH60604A-slides5a.html) ([pdf](../slides/MATH60604A-slides5a.pdf) and [code](MATH60604A-slides5a.R))
+- [Exercise: interactions](../exercises/interactions.qmd)
+
+
+## After class 
+
+- Watch the videos of @sec-videos
+- [Slides on geometry of OLS](../slides/MATH60604A-slides5b.html) ([pdf](../slides/MATH60604A-slides5b.pdf) and [code](MATH60604A-slides5b.R))
+- [Slides on coefficient of determination](../slides/MATH60604A-slides5c.html) ([pdf](../slides/MATH60604A-slides5c.pdf))
+- Exercises 2.1, 2.3 and 2.8
+
+
+
+## Slides
+
+
+<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5a.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5a.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
+
+<div class="ratio ratio-16x9">
+<iframe class="slide-deck" src="../slides/MATH60604A-slides5a.html"></iframe>
+</div>
+
+
+<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5b.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5b.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
+
+<div class="ratio ratio-16x9">
+<iframe class="slide-deck" src="../slides/MATH60604A-slides5b.html"></iframe>
+</div>
+
+
+
+
+<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5c.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5c.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
+
+<div class="ratio ratio-16x9">
+<iframe class="slide-deck" src="../slides/MATH60604A-slides5c.html"></iframe>
+</div>
+
+## Videos {#sec-videos}
+
+
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("files", "youtube-playlist.R"))
+playlist_id <- "PLUB8VZzxA8ItMV0PT6lSI6t8Kf-YBPBjj"
+slide_details <- tibble::tribble(
+~title, ~youtube_id,
+"Geometry of least squares", "_amnAMAfvwg",
+"Coefficient of determination", "ZFEI7gHJgSY"
+)
+
+```
+
+
+```{r show-youtube-list, echo=FALSE, results="asis"}
+youtube_list(slide_details, playlist_id, example = TRUE)
+```
+

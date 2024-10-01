@@ -1,0 +1,152 @@
+---
+title: "Statistical modelling"
+author: "Léo Belzile, HEC Montréal"
+subtitle: "06. Linear models"
+date: today
+date-format: YYYY
+eval: true
+cache: false
+echo: true
+fig-align: 'center'
+out-width: '100%'
+standalone: true
+bibliography: MATH60604A.bib
+format:
+  revealjs:
+    slide-number: true
+    preview-links: auto
+    code-block-height: 750px
+    theme: [simple, hecmontreal.scss]
+    title-slide-attributes:
+      data-background-color: "#002855"
+    logo: "fig/logo_hec_montreal_bleu_web.png"
+    width: 1600
+    height: 900
+---
+
+
+```{r}
+#| eval: true
+#| include: false
+#| cache: false
+hecbleu <- c("#002855")
+fcols <- c(gris = "#888b8d",
+           bleu = "#0072ce",
+           aqua = "#00aec7",
+           vert = "#26d07c",
+           rouge = "#ff585d",
+           rose = "#eb6fbd",
+           jaune = "#f3d03e")
+pcols <- c(gris = "#d9d9d6",
+           bleu = "#92c1e9",
+           agua = "#88dbdf",
+           vert = "#8fe2b0",
+           rouge = "#ffb1bb",
+           rose = "#eab8e4",
+           jaune = "#f2f0a1")
+library(ggplot2)
+library(knitr)
+theme_set(theme_classic())
+library(patchwork)
+knitr::opts_chunk$set(fig.retina = 3, collapse = TRUE)
+options(scipen=1, digits=2, width = 75)
+options(knitr.kable.NA = '')
+library(kableExtra)
+library(emmeans)
+```
+
+## Model assumptions
+
+## Read the fine prints
+
+## Assumption 1 - mean model specification
+
+## Linearity
+
+## Diagnostics for linearity
+
+- Plots of residuals $\boldsymbol{e}$ against fitted values $\widehat{\boldsymbol{y}}$
+- Plot of residuals $\boldsymbol{e}$ against columns from the model matrix, $\mathbf{X}$
+
+Look for pattern in the $y$-axis, not the $x$-axis!
+
+## Added variable plots
+
+  - Remove the column of the model matrix $\mathbf{X}$ corresponding to explanatory variable $X_j$ to obtain $\mathbf{X}_{-j}$
+  - fit a regression of $\boldsymbol{y}$ as a function of $\mathbf{X}_{-j}$
+  - fit a linear regression of $\boldsymbol{X}_j$ as a function of $\mathbf{X}_{-j}$
+  - plot both residuals. The regression slope is exactly $\beta_j$.
+  
+Useful for collinearity
+
+## Omitted variables
+
+
+## Remedies
+
+- Fix the mean model (include interactions if necessary, etc.)
+- Specify the effect of nonlinear terms via penalized splines.
+
+## Assumption 2: homoskedasticity (equal variance)
+
+## Consequences of unequal variance
+
+## Remedies 1
+
+Generalize the variance structure to specify
+
+## Example of unequal variance models - ANOVA
+
+Specify a model win
+
+## Fitting via generalized least squares
+
+
+
+## Remedies 2
+
+Sandwich matrix for the errors
+
+## Remedies 3 
+
+Variance-stabilizing transformations
+
+## Independence assumption
+
+## Group structure
+
+## Time series and longitudinal data
+
+Plot lagged residuals
+Correlogram
+
+## Normality assumption
+
+## Quantile-quantile plot of 
+
+Q-Q plot of externally studentized residuals
+
+## Is normality needed?
+
+## Watch out! Coefficient estimation
+
+Subgroup analysis
+
+## Remedie 1
+
+GLM
+
+## Diagnostics for outliers
+
+## Remedy
+
+Robust regression
+
+## Transformations
+
+## Log linear model
+
+## Box--Cox transformation
+
+## References
+
