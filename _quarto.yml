@@ -64,6 +64,8 @@ website:
               file: content/04-content.qmd
             - text: "Week 5"
               file: content/05-content.qmd
+            - text: "Week 6"
+              file: content/06-content.qmd
     - title: "Exercises"
       style: "docked"
       search: false

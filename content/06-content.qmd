@@ -4,7 +4,11 @@ title: "Linear models"
 
 ## Learning objectives
 
-- 
+- list the assumptions of the linear model and understand their meaning;
+- use graphical diagnostic tools to validate the model assumptions.
+- interpret the coefficients of the log-linear model on a meaningful scale;
+- conceptualize the notion of collinearity and understand its impacts on statistical inference.
+
 
 
 ## Content
@@ -15,60 +19,14 @@ title: "Linear models"
 
 ## In class
 
-- [Slides](../slides/MATH60604A-slides5a.html) ([pdf](../slides/MATH60604A-slides5a.pdf) and [code](MATH60604A-slides5a.R))
-- [Exercise: interactions](../exercises/interactions.qmd)
-
-
-## After class 
-
-- Watch the videos of @sec-videos
-- [Slides on geometry of OLS](../slides/MATH60604A-slides5b.html) ([pdf](../slides/MATH60604A-slides5b.pdf) and [code](MATH60604A-slides5b.R))
-- [Slides on coefficient of determination](../slides/MATH60604A-slides5c.html) ([pdf](../slides/MATH60604A-slides5c.pdf))
-- Exercises 2.1, 2.3 and 2.8
-
-
+- [Slides](../slides/MATH60604A-slides6.html) ([pdf](../slides/MATH60604A-slides6.pdf) and [code](MATH60604A-slides6.R))
 
 ## Slides
 
 
-<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5a.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5a.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
+<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides6.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides6.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
 
 <div class="ratio ratio-16x9">
-<iframe class="slide-deck" src="../slides/MATH60604A-slides5a.html"></iframe>
+<iframe class="slide-deck" src="../slides/MATH60604A-slides6.html"></iframe>
 </div>
-
-
-<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5b.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5b.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
-
-<div class="ratio ratio-16x9">
-<iframe class="slide-deck" src="../slides/MATH60604A-slides5b.html"></iframe>
-</div>
-
-
-
-
-<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5c.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides5c.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
-
-<div class="ratio ratio-16x9">
-<iframe class="slide-deck" src="../slides/MATH60604A-slides5c.html"></iframe>
-</div>
-
-## Videos {#sec-videos}
-
-
-```{r slides-videos, echo=FALSE, include=FALSE}
-source(here::here("files", "youtube-playlist.R"))
-playlist_id <- "PLUB8VZzxA8ItMV0PT6lSI6t8Kf-YBPBjj"
-slide_details <- tibble::tribble(
-~title, ~youtube_id,
-"Geometry of least squares", "_amnAMAfvwg",
-"Coefficient of determination", "ZFEI7gHJgSY"
-)
-
-```
-
-
-```{r show-youtube-list, echo=FALSE, results="asis"}
-youtube_list(slide_details, playlist_id, example = TRUE)
-```
 

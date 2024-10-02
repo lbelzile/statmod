@@ -36,18 +36,18 @@
     "text": "Course description\nThe objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.\nThe course will focus on regression models, including linear models, generalized linear models and models for longitudinal data with random effects and correlation structures. For each of these models, basic inference principles will be covered, notably hypothesis testing and estimation procedures.\n\nBasic principles in inference and statistical modeling\nLinear models\nGeneralized linear models\nModels for longitudinal data and correlated data\nIntroduction to survival analysis"
   },
   {
-    "objectID": "syllabus.html#prerequisites",
-    "href": "syllabus.html#prerequisites",
-    "title": "Syllabus",
-    "section": "Prerequisites",
-    "text": "Prerequisites\nThe course is of an overview course. Students should have basic training in statistics at the level of Introductory Statistics with Randomization and Simulation (Chapters 1–4, excluding special topics)."
-  },
-  {
     "objectID": "syllabus.html#learning-objectives",
     "href": "syllabus.html#learning-objectives",
     "title": "Syllabus",
     "section": "Learning objectives",
     "text": "Learning objectives\nThe course learning objectives are listed here."
+  },
+  {
+    "objectID": "syllabus.html#prerequisites",
+    "href": "syllabus.html#prerequisites",
+    "title": "Syllabus",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nThe course is of an overview course. Students should have basic training in statistics at the level of Introductory Statistics with Randomization and Simulation (Chapters 1–4, excluding special topics)."
   },
   {
     "objectID": "syllabus.html#target-audience",
@@ -229,63 +229,123 @@
     ]
   },
   {
-    "objectID": "content/04-content.html",
-    "href": "content/04-content.html",
+    "objectID": "content/06-content.html",
+    "href": "content/06-content.html",
     "title": "Linear models",
     "section": "",
-    "text": "perform custom tests for model parameters (contrasts, tests of significance);\nobtain predictions from a linear model using software;\nunderstand the distinction between estimated mean and predicted values;\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors.",
+    "text": "list the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.\ninterpret the coefficients of the log-linear model on a meaningful scale;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 4"
+      "Week 6"
     ]
   },
   {
-    "objectID": "content/04-content.html#learning-objectives",
-    "href": "content/04-content.html#learning-objectives",
+    "objectID": "content/06-content.html#learning-objectives",
+    "href": "content/06-content.html#learning-objectives",
     "title": "Linear models",
     "section": "",
-    "text": "perform custom tests for model parameters (contrasts, tests of significance);\nobtain predictions from a linear model using software;\nunderstand the distinction between estimated mean and predicted values;\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors.",
+    "text": "list the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.\ninterpret the coefficients of the log-linear model on a meaningful scale;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 4"
+      "Week 6"
     ]
   },
   {
-    "objectID": "content/04-content.html#content",
-    "href": "content/04-content.html#content",
+    "objectID": "content/06-content.html#content",
+    "href": "content/06-content.html#content",
     "title": "Linear models",
     "section": "Content",
-    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.3–4.4.",
+    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.7–4.8.",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 4"
+      "Week 6"
     ]
   },
   {
-    "objectID": "content/04-content.html#in-class",
-    "href": "content/04-content.html#in-class",
+    "objectID": "content/06-content.html#in-class",
+    "href": "content/06-content.html#in-class",
     "title": "Linear models",
     "section": "In class",
-    "text": "In class\n\nSlides (pdf and code)\nTesting exercise and code for the solution",
+    "text": "In class\n\nSlides (pdf and code)",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 4"
+      "Week 6"
     ]
   },
   {
-    "objectID": "content/04-content.html#slides",
-    "href": "content/04-content.html#slides",
+    "objectID": "content/06-content.html#slides",
+    "href": "content/06-content.html#slides",
     "title": "Linear models",
     "section": "Slides",
     "text": "Slides\n\n  View slides in new window   Download PDF of slides",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 4"
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "content/03-content.html",
+    "href": "content/03-content.html",
+    "title": "Linear models",
+    "section": "",
+    "text": "perform exploratory data analysis on a dataset for the purpose of regression modelling\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "content/03-content.html#learning-objectives",
+    "href": "content/03-content.html#learning-objectives",
+    "title": "Linear models",
+    "section": "",
+    "text": "perform exploratory data analysis on a dataset for the purpose of regression modelling\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "content/03-content.html#content",
+    "href": "content/03-content.html#content",
+    "title": "Linear models",
+    "section": "Content",
+    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.1–4.2.",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "content/03-content.html#in-class",
+    "href": "content/03-content.html#in-class",
+    "title": "Linear models",
+    "section": "In class",
+    "text": "In class\n\nSlides (pdf and code)",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "content/03-content.html#slides",
+    "href": "content/03-content.html#slides",
+    "title": "Linear models",
+    "section": "Slides",
+    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 3"
     ]
   },
   {
@@ -373,63 +433,63 @@
     ]
   },
   {
-    "objectID": "content/03-content.html",
-    "href": "content/03-content.html",
+    "objectID": "content/04-content.html",
+    "href": "content/04-content.html",
     "title": "Linear models",
     "section": "",
-    "text": "perform exploratory data analysis on a dataset for the purpose of regression modelling\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;",
+    "text": "perform custom tests for model parameters (contrasts, tests of significance);\nobtain predictions from a linear model using software;\nunderstand the distinction between estimated mean and predicted values;\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors.",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 3"
+      "Week 4"
     ]
   },
   {
-    "objectID": "content/03-content.html#learning-objectives",
-    "href": "content/03-content.html#learning-objectives",
+    "objectID": "content/04-content.html#learning-objectives",
+    "href": "content/04-content.html#learning-objectives",
     "title": "Linear models",
     "section": "",
-    "text": "perform exploratory data analysis on a dataset for the purpose of regression modelling\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;",
+    "text": "perform custom tests for model parameters (contrasts, tests of significance);\nobtain predictions from a linear model using software;\nunderstand the distinction between estimated mean and predicted values;\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors.",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 3"
+      "Week 4"
     ]
   },
   {
-    "objectID": "content/03-content.html#content",
-    "href": "content/03-content.html#content",
+    "objectID": "content/04-content.html#content",
+    "href": "content/04-content.html#content",
     "title": "Linear models",
     "section": "Content",
-    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.1–4.2.",
+    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.3–4.4.",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 3"
+      "Week 4"
     ]
   },
   {
-    "objectID": "content/03-content.html#in-class",
-    "href": "content/03-content.html#in-class",
+    "objectID": "content/04-content.html#in-class",
+    "href": "content/04-content.html#in-class",
     "title": "Linear models",
     "section": "In class",
-    "text": "In class\n\nSlides (pdf and code)",
+    "text": "In class\n\nSlides (pdf and code)\nTesting exercise and code for the solution",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 3"
+      "Week 4"
     ]
   },
   {
-    "objectID": "content/03-content.html#slides",
-    "href": "content/03-content.html#slides",
+    "objectID": "content/04-content.html#slides",
+    "href": "content/04-content.html#slides",
     "title": "Linear models",
     "section": "Slides",
     "text": "Slides\n\n  View slides in new window   Download PDF of slides",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 3"
+      "Week 4"
     ]
   },
   {

@@ -8,7 +8,7 @@
 <link href="MATH60604A-slides6_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="MATH60604A-slides6_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="MATH60604A-slides6_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.56">
+  <meta name="generator" content="quarto-1.6.1">
 
   <meta name="author" content="Léo Belzile, HEC Montréal">
   <meta name="dcterms.date" content="2024-01-01">
@@ -95,7 +95,27 @@
     code span.va { color: #111111; } /* Variable */
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="MATH60604A-slides6_files/libs/revealjs/dist/theme/quarto.css">
   <link href="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -417,13 +437,12 @@ Léo Belzile, HEC Montréal
 </section>
 <section id="read-the-fine-prints" class="slide level2">
 <h2>Read the fine prints</h2>
-<p>When we perform an hypothesis test, we merely fail to reject the null hypothesis, either because the latter is true or else due to lack of evidence.</p>
+<p>Our strategy is to create graphical diagnostic tools or tests to ensure that there is no gross violation of the model underlying assumptions.</p>
 <ul>
+<li>When we perform an hypothesis test, we merely fail to reject the null hypothesis, either because the latter is true or else due to lack of evidence.</li>
 <li>The same goes for checking the validity of model assumptions.</li>
-<li>Our strategy is to create graphical diagnostic tools to ensure that there is no gross violation of these hypothesis.</li>
 <li>Beware of over-interpreting diagnostic plots: the human eye is very good at finding spurious patterns…</li>
 </ul>
-<p>The <code>plot</code> method in <strong>R</strong> generates a series of diagnostics plots.</p>
 </section>
 <section id="assumption-1---mean-model-specification" class="slide level2">
 <h2>Assumption 1 - mean model specification</h2>
@@ -433,6 +452,7 @@ Léo Belzile, HEC Montréal
 <li>All interactions are included.</li>
 <li>There are no omitted explanatories from the model,</li>
 <li>The relationship between <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_j\)</span> is linear.</li>
+<li>The effect is additive.</li>
 </ul>
 </section>
 <section id="diagnostic-plots-for-linearity" class="slide level2">
@@ -445,8 +465,8 @@ Léo Belzile, HEC Montréal
 <p>Any local pattern or patterns (e.g., quadratic trend, cycles, changepoints, subgroups) are indicative of misspecification of the mean model.</p>
 <p>Use local smoother (GAM or LOESS) to detect trends.</p>
 </section>
-<section id="illustration-of-residual-plots" class="slide level2">
-<h2>Illustration of residual plots</h2>
+<section id="examples-of-residual-plots" class="slide level2">
+<h2>Examples of residual plots</h2>
 <p>Look for pattern in the <span class="math inline">\(y\)</span>-axis, not the <span class="math inline">\(x\)</span>-axis!</p>
 
 <img data-src="MATH60604A-slides6_files/figure-revealjs/fig-regdiaglin-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
@@ -458,8 +478,8 @@ Figure&nbsp;1: Scatterplots of residuals against fitted values. The first two pl
 <img data-src="MATH60604A-slides6_files/figure-revealjs/fig-residplots-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;2: Scatterplot of residuals against explanatory (left) and an omitted covariate (right). We can pick up a forgotten interaction between BMI and smoker/obese and a linear trend for the number of children.
 </p></section>
-<section id="examples---college-data" class="slide level2">
-<h2>Examples - <code>college</code> data</h2>
+<section id="examples-for-the-college-data" class="slide level2">
+<h2>Examples for the college data</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">data</span>(college, <span class="at">package =</span> <span class="st">"hecstatmod"</span>)</span>
 <span id="cb1-2"><a href=""></a>linmod.college1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> rank <span class="sc">+</span> field <span class="sc">+</span> sex <span class="sc">+</span> service <span class="sc">+</span> years, <span class="at">data =</span> college)</span>
@@ -474,14 +494,15 @@ Figure&nbsp;2: Scatterplot of residuals against explanatory (left) and an omitte
 <li>Add covariates that are important explanatories</li>
 <li>Include interactions if necessary</li>
 <li>For residual patterns, specify the effect of nonlinear terms via penalized splines</li>
+<li>Transformations</li>
 </ul>
 </section>
 <section id="assumption-2-homoskedasticity-equal-variance" class="slide level2">
 <h2>Assumption 2: homoskedasticity (equal variance)</h2>
 <p>The variance is the same for all observations, <span class="math inline">\(\mathsf{Va}(Y_i \mid \mathbf{x}_i) = \sigma^2\)</span></p>
-<p>Typical ways this can fail</p>
+<p>Typical heteroscedasticity patterns arise when</p>
 <ul>
-<li>Variance can vary per levels of a categorical variable</li>
+<li>Variance varies per levels of a categorical variable</li>
 <li>Variance increases with the response (typically multiplicative models)</li>
 <li>Data are drawn from a distribution whose variance depends on the mean, e.g., Poisson</li>
 </ul>
@@ -489,41 +510,40 @@ Figure&nbsp;2: Scatterplot of residuals against explanatory (left) and an omitte
 <section id="diagnostic-for-equal-variance" class="slide level2">
 <h2>Diagnostic for equal variance</h2>
 <p>Use externally studentized residuals <span class="math inline">\(r_i\)</span>, which have equal variance.</p>
+<p>Hypothesis tests:</p>
 <ul>
-<li>Test equality of variance per group (e.g., fit an ANOVA model to <span class="math inline">\(|r_i|\)</span> as a function of a categorical variable).</li>
-<li>Plot (absolute value of) standardized residuals <span class="math inline">\(r_i\)</span> against fitted values</li>
+<li>Levene test (fit ANOVA to <span class="math inline">\(|r_{ij} - \overline{r_{j}}|\)</span> as a function of group index <span class="math inline">\(j \in \{1, \ldots, J\}\)</span>)</li>
+<li>Breusch–Pagan test (popular in economics, fits linear regression to <span class="math inline">\(e_i^2\)</span>)</li>
+<li>Bartlett test (normal likelihood ratio test for different variance, but very sensitive to normality assumption so not recommended)</li>
+</ul>
+<p>Graphical diagnostics</p>
+<ul>
+<li>Plot (absolute value of) <span class="math inline">\(r_i\)</span> against fitted values (spread-level plot)</li>
 </ul>
 </section>
-<section id="examples-1" class="slide level2">
-<h2>Examples</h2>
+<section id="examples-of-spread-level-plots" class="slide level2">
+<h2>Examples of spread level plots</h2>
 
 <img data-src="MATH60604A-slides6_files/figure-revealjs/fig-diagfitvalhomosce-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;3: Plot of externally studentized residuals against fitted value (left) and categorical explanatory (right). Both clearly display heteroscedasticity.
 </p></section>
-<section id="example-with-college-data" class="slide level2">
-<h2>Example with <code>college</code> data</h2>
-<p>There is a plethora of tests of heteroscedasticity</p>
-<ul>
-<li>Bartlett test (normal likelihood ratio test for different variance, but very sensitive to normality assumption so not recommended)</li>
-<li>Levene test (fit ANOVA to <span class="math inline">\(|r_{ij} - \overline{r_{j}}|\)</span> for data from group <span class="math inline">\(j=1, \ldots, n)\)</span></li>
-<li>Breusch–Pagan test (popular in economics, fits linear regression to <span class="math inline">\(e_i^2\)</span>)</li>
-</ul>
+<section id="heteroscedasticity-tests-for-college-data" class="slide level2">
+<h2>Heteroscedasticity tests for college data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Fit ANOVA to |rstudent - mean|rstudent||</span></span>
-<span id="cb2-2"><a href=""></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(<span class="fu">rstudent</span>(linmod.college1) <span class="sc">~</span> rank, <span class="at">center =</span> <span class="st">"mean"</span>, <span class="at">data =</span> college)</span>
-<span id="cb2-3"><a href=""></a><span class="do">## Levene's Test for Homogeneity of Variance (center = "mean")</span></span>
-<span id="cb2-4"><a href=""></a><span class="do">##        Df F value Pr(&gt;F)    </span></span>
-<span id="cb2-5"><a href=""></a><span class="do">## group   2      50 &lt;2e-16 ***</span></span>
-<span id="cb2-6"><a href=""></a><span class="do">##       394                   </span></span>
-<span id="cb2-7"><a href=""></a><span class="do">## ---</span></span>
-<span id="cb2-8"><a href=""></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb2-9"><a href=""></a><span class="co"># Likelihood ratio test for Normal data, with studentized residuals </span></span>
-<span id="cb2-10"><a href=""></a><span class="fu">bartlett.test</span>(<span class="fu">rstudent</span>(linmod.college1) <span class="sc">~</span> rank, <span class="at">data =</span> college)</span>
-<span id="cb2-11"><a href=""></a><span class="do">## </span></span>
-<span id="cb2-12"><a href=""></a><span class="do">##  Bartlett test of homogeneity of variances</span></span>
-<span id="cb2-13"><a href=""></a><span class="do">## </span></span>
-<span id="cb2-14"><a href=""></a><span class="do">## data:  rstudent(linmod.college1) by rank</span></span>
-<span id="cb2-15"><a href=""></a><span class="do">## Bartlett's K-squared = 158, df = 2, p-value &lt;2e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href=""></a>r <span class="ot">&lt;-</span> <span class="fu">rstudent</span>(linmod.college1)</span>
+<span id="cb2-3"><a href=""></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(r <span class="sc">~</span> rank, <span class="at">center =</span> <span class="st">"mean"</span>, <span class="at">data =</span> college)</span>
+<span id="cb2-4"><a href=""></a><span class="do">## Levene's Test for Homogeneity of Variance (center = "mean")</span></span>
+<span id="cb2-5"><a href=""></a><span class="do">##        Df F value Pr(&gt;F)    </span></span>
+<span id="cb2-6"><a href=""></a><span class="do">## group   2      50 &lt;2e-16 ***</span></span>
+<span id="cb2-7"><a href=""></a><span class="do">##       394                   </span></span>
+<span id="cb2-8"><a href=""></a><span class="do">## ---</span></span>
+<span id="cb2-9"><a href=""></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb2-10"><a href=""></a><span class="co"># Breusch-Pagan (with a score test)</span></span>
+<span id="cb2-11"><a href=""></a>car<span class="sc">::</span><span class="fu">ncvTest</span>(linmod.college1, <span class="at">var.formula =</span>  <span class="sc">~</span> rank)</span>
+<span id="cb2-12"><a href=""></a><span class="do">## Non-constant Variance Score Test </span></span>
+<span id="cb2-13"><a href=""></a><span class="do">## Variance formula: ~ rank </span></span>
+<span id="cb2-14"><a href=""></a><span class="do">## Chisquare = 70, Df = 2, p = 6e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="consequences-of-unequal-variance" class="slide level2">
@@ -537,12 +557,13 @@ Figure&nbsp;4: Histogram of the null distribution of <span class="math inline">\
 <p>Specify a function for the variance, e.g.,</p>
 <ul>
 <li><span class="math inline">\(\sigma_j\)</span> for level <span class="math inline">\(j\)</span> of a categorical variable,</li>
-<li><span class="math inline">\(\sigma^2(v) = |v|^m\)</span> for some covariate <span class="math inline">\(v\)</span> and power <span class="math inline">\(m \geq 0\)</span></li>
+<li><span class="math inline">\(\sigma^2(\boldsymbol{v}_i) = g(\boldsymbol{v}_i; \boldsymbol{\theta})\)</span> for some suitable transformation <span class="math inline">\(g(\cdot): \mathbb{R} \to (0, \infty)\)</span>, some covariate vector <span class="math inline">\(\boldsymbol{v}\)</span> and parameter <span class="math inline">\(\boldsymbol{\theta}\)</span>.</li>
 </ul>
-<p>The model is fitted via restricted maximum likelihood using the function <code>gls</code> from package <code>nlme</code>.</p>
+<p>A model specification enables the use of likelihood ratio tests.</p>
+<p>The model can be fitted via restricted maximum likelihood using the function <code>gls</code> from package <code>nlme</code>.</p>
 </section>
 <section id="example-of-heteroscedasticity-for-the-college-data" class="slide level2">
-<h2>Example of heteroscedasticity for the <code>college</code> data</h2>
+<h2>Example of heteroscedasticity for the college data</h2>
 <p>For the college data, we set <span class="math inline">\(Y_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2_{\mathsf{rank}_i})\)</span> with three different variance parameters. This seemingly corrects the heteroscedasticity.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(nlme) <span class="co"># R package for mixed models and variance specification</span></span>
@@ -556,76 +577,255 @@ Figure&nbsp;4: Histogram of the null distribution of <span class="math inline">\
 <img data-src="MATH60604A-slides6_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="remedy-2---use-a-sandwich-matrix-for-the-errors" class="slide level2">
 <h2>Remedy 2 - use a sandwich matrix for the errors</h2>
-<p>Economists often use <strong>sandwich</strong> estimators, whereby we replace the covariance matrix of <span class="math inline">\(\boldsymbol{\beta}\)</span>, <span class="math inline">\(S^2(\mathbf{X}^\top\mathbf{X})^{-1}\)</span>, by a sandwich estimator of the form</p>
+<p>Economists often use <strong>sandwich</strong> estimators <span class="citation" data-cites="White:1980">(<a href="#/references" role="doc-biblioref" onclick="">White 1980</a>)</span>, whereby we replace the estimator of the covariance matrix of <span class="math inline">\(\widehat{\boldsymbol{\beta}}\)</span>, usually <span class="math inline">\(S^2(\mathbf{X}^\top\mathbf{X})^{-1}\)</span>, by a sandwich estimator of the form</p>
 <p><span class="math display">\[\widehat{\mathsf{Va}}_{\mathsf{HCE}}(\boldsymbol{\widehat{\beta}}) = (\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\boldsymbol{\Omega}\mathbf{X}(\mathbf{X}^\top\mathbf{X})^{-1}\]</span> with <span class="math inline">\(\boldsymbol{\Omega}\)</span> a diagonal matrix.</p>
-<p>Popular choices imply taking <span class="math inline">\(\mathrm{diag}(\boldsymbol{\Omega})_i = e_i^2\)</span>.</p>
+<p>Popular choices are heteroscedastic consistent matrices <span class="citation" data-cites="McKinnon.White:1985">(<a href="#/references" role="doc-biblioref" onclick="">MacKinnon and White 1985</a>)</span>, e.g., taking <span class="math inline">\(\mathrm{diag}(\boldsymbol{\Omega})_i = e_i^2/(1-h_{ii})^2\)</span>, the so-called HC<span class="math inline">\({}_3\)</span>.</p>
 </section>
 <section id="example-of-sandwich-matrix" class="slide level2">
 <h2>Example of sandwich matrix</h2>
+<p>Replace <span class="math inline">\(\mathsf{Va}(\widehat{\boldsymbol{\beta}})\)</span> by <span class="math inline">\(\widehat{\mathsf{Va}}_{\mathsf{HCE}}(\boldsymbol{\widehat{\beta}})\)</span> in the formula of Wald tests.</p>
 <div class="cell">
-<pre><code>##      (Intercept) rankassociate rankfull fieldtheoretical sexwoman service
-## [1,]          55           5.8       14             -6.2     -1.9    -1.6
-## [2,]          28           3.1       11             -6.2     -1.2    -2.3
-##      years
-## [1,]   1.7
-## [2,]   2.2</code></pre>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>vcov_HCE <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">hccm</span>(linmod.college1)</span>
+<span id="cb4-2"><a href=""></a><span class="co"># Wald tests with sandwich matrix</span></span>
+<span id="cb4-3"><a href=""></a>w <span class="ot">&lt;-</span> <span class="fu">coef</span>(linmod.college1) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(vcov_HCE))</span>
+<span id="cb4-4"><a href=""></a><span class="co"># Variance ratios</span></span>
+<span id="cb4-5"><a href=""></a><span class="fu">diag</span>(vcov_HCE) <span class="sc">/</span> <span class="fu">diag</span>(<span class="fu">vcov</span>(linmod.college1))</span>
+<span id="cb4-6"><a href=""></a><span class="do">##      (Intercept)    rankassociate         rankfull fieldtheoretical </span></span>
+<span id="cb4-7"><a href=""></a><span class="do">##             0.27             0.29             0.62             0.99 </span></span>
+<span id="cb4-8"><a href=""></a><span class="do">##         sexwoman          service            years </span></span>
+<span id="cb4-9"><a href=""></a><span class="do">##             0.41             2.19             1.76</span></span>
+<span id="cb4-10"><a href=""></a><span class="co"># Compute p-values</span></span>
+<span id="cb4-11"><a href=""></a>pval <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="fu">abs</span>(w), </span>
+<span id="cb4-12"><a href=""></a>             <span class="at">df =</span> linmod.college1<span class="sc">$</span>df.residual,</span>
+<span id="cb4-13"><a href=""></a>             <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="remedy-3" class="slide level2">
-<h2>Remedy 3</h2>
-<p>Variance-stabilizing transformations</p>
+<section id="multiplicative-structure" class="slide level2">
+<h2>Multiplicative structure</h2>
+<p>Multiplicative data of the form <span class="math display">\[\begin{align*}
+\left(\begin{matrix} \text{quantity depending}\\
+\text{on the treatment used}\end{matrix}\right) \times
+\left(\begin{matrix} \text{quantity depending only }\\
+\text{on the particular unit}
+\end{matrix}\right)
+\end{align*}\]</span> tend to have higher variability when the response is larger.</p>
+</section>
+<section id="remedy-3---variance-stabilizing-transformations" class="slide level2">
+<h2>Remedy 3 - Variance-stabilizing transformations</h2>
+<p>A log-transformation of the response, <span class="math inline">\(\ln Y\)</span>, makes the model <strong>additive</strong>, assuming <span class="math inline">\(Y &gt; 0\)</span>.</p>
+<p>Write the log-linear model <span class="math display">\[\begin{align*}
+\ln Y = \beta_0+ \beta_0 +\beta_1 X_1 +\cdots + \beta_pX_p + \varepsilon
+\end{align*}\]</span> in the original response scale as <span class="math display">\[\begin{align*}
+Y &amp;= \exp\left(\beta_0 +\beta_1 X_1 +\cdots + \beta_pX_p\right)\cdot \exp(\varepsilon),
+\end{align*}\]</span> and thus <span class="math display">\[\begin{align*}
+\mathsf{E}(Y \mid \mathbf{X}) = \exp(\beta_0 +\beta_1 X_1 +\cdots + \beta_pX_p) \times \mathsf{E}\{\exp(\varepsilon) \mid \mathbf{X}\}.
+\end{align*}\]</span></p>
+</section>
+<section id="lognormal-model" class="slide level2">
+<h2>Lognormal model</h2>
+<p>If <span class="math inline">\(\varepsilon \mid \mathbf{x} \sim \mathsf{normal}(\mu,\sigma^2)\)</span>, then <span class="math inline">\(\mathsf{E}\{\exp(\varepsilon) \mid \mathbf{x}\}= \exp(\mu+\sigma^2/2)\)</span> and <span class="math inline">\(\exp(\varepsilon)\)</span> follows a log-normal distribution.</p>
+<p>An increase of one unit of <span class="math inline">\(X_j\)</span> leads to a <span class="math inline">\(\beta_j\)</span> increase of <span class="math inline">\(\ln Y\)</span> without interaction or nonlinear term for <span class="math inline">\(X_j\)</span>, and this translates into a multiplicative increase of a factor <span class="math inline">\(\exp(\beta_j)\)</span> on the original data scale for <span class="math inline">\(Y\)</span>.</p>
+<ul>
+<li>If <span class="math inline">\(\beta_j=0\)</span>, <span class="math inline">\(\exp(\beta_j)=1\)</span> and there is no change</li>
+<li>If <span class="math inline">\(\beta_j &lt; 0\)</span>, <span class="math inline">\(\exp(\beta_j)&lt;1\)</span> and the mean decreases with <span class="math inline">\(X_j\)</span></li>
+<li>If <span class="math inline">\(\beta_j &gt; 0\)</span>, <span class="math inline">\(\exp(\beta_j)&gt;1\)</span> and the mean increases with <span class="math inline">\(X_j\)</span></li>
+</ul>
+</section>
+<section id="interpretation-of-log-linear-models" class="slide level2">
+<h2>Interpretation of log linear models</h2>
+<p>Compare the ratio of <span class="math inline">\(\mathsf{E}(Y \mid X_1=x+1)\)</span> to <span class="math inline">\(\mathsf{E}(Y \mid X_1=x)\)</span>, <span class="math display">\[\begin{align*}
+\frac{\mathsf{E}(Y \mid X_1=x+1, X_2, \ldots, X_p)}{\mathsf{E}(Y \mid X_1=x,  X_2, \ldots, X_p)} = \frac{\exp\{\beta_1(x+1)\}}{\exp(\beta_1 x)} = \exp(\beta_1).
+\end{align*}\]</span> Thus, <span class="math inline">\(\exp(\beta_1)\)</span> represents the ratio of the mean of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X_1=x+1\)</span> in comparison to that when <span class="math inline">\(X_1=x\)</span>, <em>ceteris paribus</em> (and provided this statement is meaningful).</p>
+<p>The percentage change is</p>
+<ul>
+<li><span class="math inline">\(1-\exp(\beta_j)\)</span> if <span class="math inline">\(\beta_j &lt;0\)</span> and</li>
+<li><span class="math inline">\(\exp(\beta_j)-1\)</span> if <span class="math inline">\(\beta_j&gt;0\)</span>.</li>
+</ul>
+</section>
+<section id="more-general-transformations" class="slide level2">
+<h2>More general transformations</h2>
+<p>Consider the case where both <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1\)</span> is log-transformed, so that <span class="math display">\[\begin{align*}
+Y= X_1^{\beta_1}\exp(\beta_0 + \beta_2X_2 + \cdots + \beta_pX_p + \varepsilon)
+\end{align*}\]</span> Taking the derivative of the left hand side with respect to <span class="math inline">\(X_1&gt;0\)</span>, we get <span class="math display">\[\begin{align*}
+\frac{\partial Y}{\partial X_1}&amp;= \beta_1 X_1^{\beta_1-1}\exp(\beta_0 + \beta_2X_2 + \cdots + \beta_pX_p + \varepsilon)= \frac{\beta_1 Y}{X_1}
+\end{align*}\]</span> and thus we can rearrange the expression so that <span class="math display">\[\begin{align*}
+\frac{\partial X_1}{X_1}\beta_1 = \frac{\partial Y}{Y};
+\end{align*}\]</span> this is a partial <strong>elasticity</strong>, so <span class="math inline">\(\beta_1\)</span> is interpreted as a <span class="math inline">\(\beta_1\)</span> percentage change in <span class="math inline">\(Y\)</span> for each percentage increase of <span class="math inline">\(X_1\)</span>, <em>ceteris paribus</em>.</p>
 </section>
 <section id="independence-assumption" class="slide level2">
 <h2>Independence assumption</h2>
+<p>Follows from sampling scheme (<em>random sample</em>), need context to infer whether this assumption holds.</p>
+<p>Typical violations include</p>
+<ul>
+<li>repeated measures (correlated observations).</li>
+<li>longitudinal data: repeated measurements are taken from the same subjects (few time points)</li>
+<li>time series: observations observed at multiple time periods or in space.</li>
+</ul>
 </section>
-<section id="group-structure" class="slide level2">
-<h2>Group structure</h2>
+<section id="consequences-of-dependence" class="slide level2">
+<h2>Consequences of dependence</h2>
+<p>Nearby things are more alike, so the amount of ‘new information’ is smaller than the sample size.</p>
+<p>When observations are positively correlated, the estimated standard errors reported by the software are too small.</p>
+<p>This means we are overconfident and will reject the null hypothesis more often then we should if the null is true (inflated Type I error, or false positive).</p>
+</section>
+<section id="consequences-of-correlated-data" class="slide level2">
+<h2>Consequences of correlated data</h2>
+
+<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-plotLevelIndep-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;5: Percentage of rejection of the null hypothesis for the <span class="math inline">\(F\)</span>-test of equality of means for the one way ANOVA with data generated with equal mean and variance from an equicorrelation model (within group observations are correlated, between group observations are independent). The nominal level of the test is 5%.
+</p></section>
+<section id="fixes-for-group-structure-and-autocorrelation" class="slide level2">
+<h2>Fixes for group structure and autocorrelation</h2>
+<p>Chapter 6 will deal with <strong>correlated data</strong></p>
+<p>The main idea is to assume instead that <span class="math display">\[\boldsymbol{Y} \mid \mathbf{X} \sim \mathsf{normal}_n(\mathbf{X}\boldsymbol{\beta}, \boldsymbol{\Sigma})\]</span> and model explicitly the <span class="math inline">\(n \times n\)</span> variance matrix <span class="math inline">\(\boldsymbol{\Sigma}\)</span>, parametrized in terms of covariance parameters <span class="math inline">\(\boldsymbol{\psi}\)</span>.</p>
 </section>
 <section id="time-series-and-longitudinal-data" class="slide level2">
 <h2>Time series and longitudinal data</h2>
-<p>Plot lagged residuals Correlogram</p>
+<p>For time series, we can look instead at a correlogram, i.e., a bar plot of the correlation between two observations <span class="math inline">\(h\)</span> units apart as a function of the lag <span class="math inline">\(h\)</span>.</p>
+<p>For <span class="math inline">\(y_1, \ldots, y_n\)</span> and constant time lags <span class="math inline">\(h=0, 1, \ldots\)</span> units, the autocorrelation at lag <span class="math inline">\(h\)</span> is <span class="citation" data-cites="Brockwell.Davis:2016">(<a href="#/references" role="doc-biblioref" onclick="">Brockwell and Davis 2016</a>, Definition 1.4.4)</span> <span class="math display">\[\begin{align*}
+r(h) = \frac{\gamma(h)}{\gamma(0)}, \qquad \gamma(h) = \frac{1}{n}\sum_{i=1}^{n-|h|} (y_i-\overline{y})(y_{i+h} - \overline{y})
+\end{align*}\]</span></p>
 </section>
+<section id="example-of-correlogram" class="slide level2">
+<h2>Example of correlogram</h2>
+
+<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-correlogram-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;6: Correlogram of independent observations (left) and the ordinary residuals of the log-linear model fitted to the air passengers data (right). While the mean model of the latter is seemingly correctly specified, there is residual dependence between monthly observations and yearly (at lag 12). The blue lines give approximate pointwise 95% confidence intervals for white noise (uncorrelated observations).
+</p></section>
 <section id="normality-assumption" class="slide level2">
 <h2>Normality assumption</h2>
+<p>Without doubt the least important assumption.</p>
+<p>Ordinary least squares are <strong>best linear unbiased estimators</strong> (BLUE) if the data are independent and the variance is constant, regardless of normality.</p>
+<p>They are still unbiased and consistent if the variance is misspecified.</p>
+<p>Tests for <strong>parameters</strong> are valid provided that each coefficient estimator is based on a <strong>sufficient number of observations</strong>.</p>
+<ul>
+<li>watch out for interactions with categorical variables (small subgroups).</li>
+</ul>
 </section>
-<section id="quantile-quantile-plot-of" class="slide level2">
-<h2>Quantile-quantile plot of</h2>
-<p>Q-Q plot of externally studentized residuals</p>
-</section>
-<section id="is-normality-needed" class="slide level2">
-<h2>Is normality needed?</h2>
-</section>
-<section id="watch-out-coefficient-estimation" class="slide level2">
-<h2>Watch out! Coefficient estimation</h2>
-<p>Subgroup analysis</p>
-</section>
-<section id="remedy-1" class="slide level2">
-<h2>Remedy 1</h2>
-<p>GLM</p>
-</section>
-<section id="diagnostics-for-outliers" class="slide level2">
-<h2>Diagnostics for outliers</h2>
+<section id="quantile-quantile-plots" class="slide level2">
+<h2>Quantile-quantile plots</h2>
+<p>Produce Student quantile-quantile plots of externally studentized residuals <span class="math inline">\(R_i \sim \mathsf{Student}(n-p-2)\)</span>.</p>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
-<section id="remedy" class="slide level2">
-<h2>Remedy</h2>
-<p>Robust regression</p>
-</section>
-<section id="transformations" class="slide level2">
-<h2>Transformations</h2>
-</section>
-<section id="log-linear-model" class="slide level2">
-<h2>Log linear model</h2>
+<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-qqplotresid-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;7: Histogram (left) and Student quantile-quantile plot (right) of the jackknife studentized residuals. The left panel includes a kernel density estimate (black), with the density of Student distribution (blue) superimposed. The right panel includes pointwise 95% confidence bands calculated using a bootstrap.
+</p></section>
+<section id="interpretation-of-quantile-quantile-plots" class="slide level2">
+<h2>Interpretation of quantile-quantile plots</h2>
+
+<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-qqplotsbad-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;8: Quantile-quantile plots of non-normal data, showing typical look of behaviour of discrete (top left), heavy tailed (top right), skewed (bottom left) and bimodal data (bottom right).
+</p></section>
+<section id="remedy-for-normality" class="slide level2">
+<h2>Remedy for normality</h2>
+<ul>
+<li>If data arise from different families (Poisson or negative binomial counts, binomial data for proportions and binary, etc.), use <strong>generalized linear models</strong>.</li>
+<li>Box–Cox type transformations</li>
+</ul>
 </section>
 <section id="boxcox-transformation" class="slide level2">
 <h2>Box–Cox transformation</h2>
+<p>For strictly positive data, one can consider a Box–Cox transformation, <span class="math display">\[\begin{align*}
+y(\lambda)= \begin{cases}
+(y^{\lambda}-1)/\lambda, &amp; \lambda \neq 0\\
+\ln(y), &amp; \lambda=0.
+\end{cases}
+\end{align*}\]</span> The cases</p>
+<ul>
+<li><span class="math inline">\(\lambda=-1\)</span> (inverse),</li>
+<li><span class="math inline">\(\lambda=1\)</span> (identity) and</li>
+<li><span class="math inline">\(\lambda=0\)</span> (log-linear model)</li>
+</ul>
+<p>are perhaps the most important because they yield interpretable models.</p>
 </section>
-<section id="references" class="slide level2">
+<section id="inference-for-boxcox-models" class="slide level2">
+<h2>Inference for Box–Cox models</h2>
+<p>If we assume that <span class="math inline">\(\boldsymbol{Y}(\lambda) \sim \mathsf{normal}(\mathbf{X}\boldsymbol{\beta}, \sigma^2 \mathbf{I}_n)\)</span>, then the likelihood is <span class="math display">\[\begin{align*}
+L(\lambda, \boldsymbol{\beta}, \sigma; \boldsymbol{y}, \mathbf{X}) &amp;= (2\pi\sigma^2)^{-n/2} J(\lambda, \boldsymbol{y}) \times\\&amp; \quad \exp \left[ - \frac{1}{2\sigma^2}\{\boldsymbol{y}(\lambda) - \mathbf{X}\boldsymbol{\beta}\}^\top\{\boldsymbol{y}(\lambda) - \mathbf{X}\boldsymbol{\beta}\}\right],
+\end{align*}\]</span> where <span class="math inline">\(J\)</span> denotes the Jacobian of the Box–Cox transformation, <span class="math inline">\(J(\lambda, \boldsymbol{y})=\prod_{i=1}^n y_i^{\lambda-1}\)</span>.</p>
+</section>
+<section id="profiling-lambda" class="slide level2">
+<h2>Profiling <span class="math inline">\(\lambda\)</span></h2>
+<p>For each given value of <span class="math inline">\(\lambda\)</span>, the maximum likelihood estimator is that of the usual regression model, with <span class="math inline">\(\boldsymbol{y}\)</span> replaced by <span class="math inline">\(\boldsymbol{y}(\lambda)\)</span>.</p>
+<p>The profile log likelihood for <span class="math inline">\(\lambda\)</span> is <span class="math display">\[\begin{align*}
+\ell_{\mathsf{p}}(\lambda) = -\frac{n}{2}\ln(2\pi \widehat{\sigma}^2_\lambda) - \frac{n}{2} + (\lambda - 1)\sum_{i=1}^n \ln(y_i)
+\end{align*}\]</span></p>
+</section>
+<section id="boxcox-transform-for-the-poison-data" class="slide level2">
+<h2>Box–Cox transform for the poison data</h2>
+<p><span class="citation" data-cites="Box.Cox:1964">Box and Cox (<a href="#/references" role="doc-biblioref" onclick="">1964</a>)</span> considered survival time for 48 animals based on a randomized trial. The <code>poisons</code> data are balanced, with 3 poisons were administered with 4 treatments to four animals each.</p>
+<p>We could consider a two-way ANOVA without interaction, given the few observations for each combination. The model would be of the form <span class="math display">\[\begin{align*}
+Y &amp;= \beta_0 + \beta_1 \texttt{poison}_2 + \beta_2\texttt{poison}_3  +\beta_3\texttt{treatment}_2 \\ &amp;\qquad+ \beta_4\texttt{treatment}_3
++\beta_5\texttt{treatment}_4 + \varepsilon
+\end{align*}\]</span></p>
+</section>
+<section id="diagnostic-plots-for-poison-data" class="slide level2">
+<h2>Diagnostic plots for poison data</h2>
+
+<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-poisonplots-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p class="caption">
+Figure&nbsp;9: Diagnostic plots for the poison data: ordinary residuals (jittered) for the linear model for survival time as a function of poison and treatment and fitted values against residuals.
+</p></section>
+<section id="profile-plot" class="slide level2">
+<h2>Profile plot</h2>
+
+<img data-src="MATH60604A-slides6_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>The profile log likelihood for the Box–Cox transform parameter, suggests a value of <span class="math inline">\(\lambda=-1\)</span> would be within the 95% confidence interval.</p>
+</section>
+<section id="model-with-transformation" class="slide level2">
+<h2>Model with transformation</h2>
+<p>The reciprocal response <span class="math inline">\(Y^{-1}\)</span> corresponds to the speed of action of the poison depending on both poison type and treatment.</p>
+
+<img data-src="MATH60604A-slides6_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>The diagnostics plot at the bottom right for this model show no residual structure.</p>
+</section>
+<section id="comment-about-transformations" class="slide level2">
+<h2>Comment about transformations</h2>
+<p>We cannot compare models fitted to <span class="math inline">\(Y_i\)</span> versus <span class="math inline">\(\ln Y_i\)</span> using, e.g., information criteria or test, because models have different responses.</p>
+<p>We can use however the Box–Cox likelihood, which includes the <strong>Jacobian</strong> of the transformation, to assess the goodness of fit and compare the model with <span class="math inline">\(\lambda=0\)</span> versus <span class="math inline">\(\lambda=-1\)</span>.</p>
+</section>
+<section id="diagnostics-for-outliers" class="slide level2">
+<h2>Diagnostics for outliers</h2>
+<p>Outliers can impact the fit, the more so if they have high leverage.</p>
+<p>Plot the Cook distance <span class="math inline">\(C_i\)</span> as a function of the leverage <span class="math inline">\(h_{ii}\)</span>, where <span class="math display">\[\begin{align*}
+C_i=\frac{r_i^2h_{ii}}{(p+1)(1-h_{ii})}.
+\end{align*}\]</span></p>
+</section>
+<section id="diagnostic-plots-for-the-insurance-data" class="slide level2">
+<h2>Diagnostic plots for the insurance data</h2>
+
+<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-cook-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;10: Diagnostic plots for outliers.
+</p></section>
+<section id="remedies-for-outliers" class="slide level2">
+<h2>Remedies for outliers</h2>
+<ul>
+<li>Remove them (not recommended)</li>
+<li>Use robust regression, which automatically downweights observations</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>rmod_ins <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">rlm</span>(<span class="at">data =</span> insurance,</span>
+<span id="cb5-2"><a href=""></a>  charges <span class="sc">~</span> splines<span class="sc">::</span><span class="fu">bs</span>(age) <span class="sc">+</span> obesity<span class="sc">*</span>smoker<span class="sc">*</span>bmi <span class="sc">+</span> children)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Robust regression is less efficient (higher std. errors), but more robust to outliers.</p>
+<p>The theory of robust statistics beyond the scope of the course.</p>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 <div class="quarto-auto-generated-content">
 <p><img src="fig/logo_hec_montreal_bleu_web.png" class="slide-logo"></p>
 <div class="footer footer-default">
 
+</div>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Box.Cox:1964" class="csl-entry" role="listitem">
+Box, G. E. P., and D. R. Cox. 1964. <span>“An Analysis of Transformations.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological)</em> 26 (2): 211–43. <a href="https://doi.org/10.1111/j.2517-6161.1964.tb00553.x">https://doi.org/10.1111/j.2517-6161.1964.tb00553.x</a>.
+</div>
+<div id="ref-Brockwell.Davis:2016" class="csl-entry" role="listitem">
+Brockwell, P. J., and R. A. Davis. 2016. <em>Introduction to Time Series and Forecasting</em>. Springer Texts in Statistics. Springer.
+</div>
+<div id="ref-McKinnon.White:1985" class="csl-entry" role="listitem">
+MacKinnon, James G, and Halbert White. 1985. <span>“Some Heteroskedasticity-Consistent Covariance Matrix Estimators with Improved Finite Sample Properties.”</span> <em>Journal of Econometrics</em> 29 (3): 305–25. <a href="https://doi.org/10.1016/0304-4076(85)90158-7">https://doi.org/10.1016/0304-4076(85)90158-7</a>.
+</div>
+<div id="ref-White:1980" class="csl-entry" role="listitem">
+White, Halbert. 1980. <span>“A Heteroskedasticity-Consistent Covariance Matrix Estimator and a Direct Test for Heteroskedasticity.”</span> <em>Econometrica</em> 48 (4): 817–38. <a href="https://doi.org/10.2307/1912934">https://doi.org/10.2307/1912934</a>.
 </div>
 </div>
 </section>
