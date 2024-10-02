@@ -1,0 +1,170 @@
+---
+title: "Graphical diagnostics"
+eval: true
+echo: false
+out-width: "100%"
+fig-width: 6.6
+fig-height: 10
+fig-align: "center"
+---
+
+
+We consider a regression model with two covariates, age (in years) and the categorical variable education and no interaction. Based on the diagnostic plots in the Figures, what is the most likely violation of the model assumptions for each scenario?
+
+
+The diagnostic plots are: plot of ordinary residuals versus fitted values (top left), plot of ordinary residuals against explanatory variable age (top right), plot of the absolute value of the externally studentized residuals against fitted values (middle left), plot of the externally studentized residuals against education level (middle right), quantile-quantile plot of the externally studentized residuals (bottom left) and Cook's distance plot as a function of the variable index (bottom right).
+
+
+*Careful: some violations have feedback on multiple graphs.*
+
+**Model assumptions**
+
+* independence
+* incorrect mean model specification
+* additivity
+* homoscedasticity
+* normality
+* absence of outliers
+
+
+```{r}
+#| warning: false
+# Diagnostic plots: acf/ e_{t} versus e_{t-1}
+# fitted versus predictor
+# fitted versus residuals
+# fitted versus esr
+# Q-Q plot of esr
+# boxplots per category
+
+# (1) Plot shows omitted interaction
+# (2) quadratic pattern
+# (3) funnel (increase in variance)
+# (4) Group heteroscedasticity
+# (5) heavy non-normality + small sample size in categ
+# (6) Outliers
+set.seed(1234)
+educ <- factor(sample.int(n = 3, size = 100, replace = TRUE))
+age <- 1 + round(runif(100, min = 18, max = 75))
+model_gen <- function(scenario){
+stopifnot(scenario %in% 1:6)
+if(scenario == 1L){
+  y <- as.numeric(runif(1, 3,4)*I(educ == 2)*scale(age) - 
+                  runif(1, 2,3)*I(educ == 1)*scale(age) + 
+                  rnorm(n = 100))
+  mod <- lm(y~age + educ)
+  # plot(resid(mod)~fitted(mod), col = as.numeric(educ))
+} else if(scenario == 2L){
+   y <- switch(sample.int(2,1),
+               as.numeric(runif(1, 3,4)*scale(age) - 
+                  runif(1, -2,-1)*I((scale(age)-1)^2)  + 
+                  rnorm(n = 100)),
+               as.numeric(runif(1, 3,4)*scale(age) - 
+                  runif(1, -4,-2)*scale(exp(scale(age)))  + 
+                  rnorm(n = 100)),
+               
+   )
+  mod <- lm(y~age)
+  # plot(resid(mod)~fitted(mod), col = as.numeric(educ))
+} else if(scenario == 3L){
+  y <- runif(1,1,2)*age + rnorm(100)*2*(age - min(age))
+  # plot(rstudent(lm(y~age))~fitted(lm(y~age)))
+} else if(scenario == 4L){
+  ord <- sample.int(3,3)
+  y <- runif(1,1,2)*age + 
+    rnorm(100, sd = 0.1*ord[1])*I(educ ==1) + 
+    rnorm(100, sd = ord[2])*I(educ ==2) +
+    rnorm(100, sd = ord[3])*I(educ ==3)
+  #boxplot(rstudent(lm(y~age + educ))~educ)
+} else if(scenario == 5L){
+  scenn <- sample.int(2,1)
+  y <- switch(scenn,
+              #switch(sample.int(2,1),-1,1)*100*rgamma(n = 100, shape = 1, scale = 2),
+              switch(sample.int(2,1),0,3)- rbinom(100, size = 2, prob = 0.3),
+              ifelse(runif(100)< 0.25, rnorm(100, mean = 4), 
+                     rnorm(100, mean = -4)))
+  # qqnorm(scale(rstudent(lm(y~age))));abline(a=0,b=1)
+} else if(scenario == 6L){
+  nout <- sample.int(5,1)
+  y <- runif(1,1,2)*2*scale(age) + c(rnorm(100-nout), switch(sample.int(2,1),-1,1)*runif(nout,min = 5, max = 10))[order(age)]
+}
+linmod <- lm(y~ age + educ)
+cols <- viridis::viridis(3)
+par(mfrow = c(3,2), mar = c(4.5,4.5,0.5,0.5), pch = 20, bty = "l")
+par(mfrow = c(3,2), mar = c(4.5,4.5,0.5,0.5), pch = 20, bty = "l")
+plot(y = resid(linmod), 
+     x =fitted(linmod),
+      xlab = "fitted values", 
+     ylab = "ordinary residuals", 
+     pch = c(19,1,5)[as.numeric(educ)],
+     col = cols[as.numeric(educ)])
+plot(resid(linmod)~age, ylab = "ordinary residuals", 
+     pch = c(19,1,5)[as.numeric(educ)],
+     col = cols[as.numeric(educ)], xlab = "age (in years)")
+
+plot(abs(rstudent(linmod))~fitted(linmod), ylab = "|externally studentized residuals|",xlab = "fitted values")
+boxplot(rstudent(linmod)~educ, col = cols,
+        ylab = "externally studentized residuals", xlab = "education categories") 
+qqnorm(scale(rstudent(linmod)), 
+       ylab = "externally studentized residuals", 
+       xlab = 'theoretical quantiles', 
+       main = "", 
+       panel.first = {abline(a=0,b=1)})
+plot(cooks.distance(linmod), xlab = "index", ylab = "Cook's distance")
+
+
+sc <- list(solutions = c(FALSE, scenario %in% c(1L,2L), 
+                         scenario %in% c(3L,4L), 
+                         scenario == 5L, 
+                         scenario == 6L))
+}
+```
+
+## Example 1
+
+```{r}
+#| eval: true
+#| echo: false
+model_gen(3)
+```
+
+## Example 2
+
+```{r}
+#| eval: true
+#| echo: false
+model_gen(2)
+```
+
+## Example 3
+
+```{r}
+#| eval: true
+#| echo: false
+model_gen(5)
+```
+
+## Example 4
+
+```{r}
+#| eval: true
+#| echo: false
+model_gen(1)
+```
+
+## Example 5
+
+```{r}
+#| eval: true
+#| echo: false
+model_gen(4)
+```
+
+## Example 6
+
+```{r}
+#| eval: true
+#| echo: false
+model_gen(6)
+```
+
+

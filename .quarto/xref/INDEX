@@ -85,5 +85,11 @@
   },
   "exercises/interactions.qmd": {
     "interactions.html": "202fb73e"
+  },
+  "exercises/graphicaldiagnostics.qmd": {
+    "graphicaldiagnostics.html": "55ab620c"
+  },
+  "exercises/graphical-diagnostics.qmd": {
+    "graphical-diagnostics.html": "ff12aa54"
   }
 }

@@ -1,495 +1,288 @@
 [
   {
-    "objectID": "content/installation.html",
-    "href": "content/installation.html",
-    "title": "Installing R and RStudio",
+    "objectID": "exercises/graphical-diagnostics.html",
+    "href": "exercises/graphical-diagnostics.html",
+    "title": "Graphical diagnostics",
     "section": "",
-    "text": "You will do all of your work in this class with the open source (and free!) R programming language. You will use RStudio as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.",
-    "crumbs": [
-      "Content",
-      "Installing **R**"
-    ]
-  },
-  {
-    "objectID": "content/installation.html#learning-r",
-    "href": "content/installation.html#learning-r",
-    "title": "Installing R and RStudio",
-    "section": "Learning R",
-    "text": "Learning R\nSearching for help with R on Google can sometimes be tricky because the program name is a single letter. Google is generally smart enough to figure out what you mean when you search for “r scatterplot”, but if it does struggle, try searching for “rstats” instead (e.g., “rstats scatterplot”).\nCheck out StackOverflow (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and RStudio Community (a forum specifically designed for people using RStudio and the tidyverse).",
-    "crumbs": [
-      "Content",
-      "Installing **R**"
-    ]
-  },
-  {
-    "objectID": "syllabus.html",
-    "href": "syllabus.html",
-    "title": "Syllabus",
-    "section": "",
-    "text": "Dr. Léo Belzile\n   CSC 4.850\n   leo.belzile@hec.ca\n\n\n\n\n\n   Dr. Juliana Schulz\n   CSC 4.809\n   juliana.schulz@hec.ca\n\n\n\n\n\n   Fall 2024\n   Thursday\n   12:00–15:00\n   Côte-Ste-Catherine, salle Hélène-Desmarais"
-  },
-  {
-    "objectID": "syllabus.html#course-description",
-    "href": "syllabus.html#course-description",
-    "title": "Syllabus",
-    "section": "Course description",
-    "text": "Course description\nThe objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.\nThe course will focus on regression models, including linear models, generalized linear models and models for longitudinal data with random effects and correlation structures. For each of these models, basic inference principles will be covered, notably hypothesis testing and estimation procedures.\n\nBasic principles in inference and statistical modeling\nLinear models\nGeneralized linear models\nModels for longitudinal data and correlated data\nIntroduction to survival analysis"
-  },
-  {
-    "objectID": "syllabus.html#learning-objectives",
-    "href": "syllabus.html#learning-objectives",
-    "title": "Syllabus",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nThe course learning objectives are listed here."
-  },
-  {
-    "objectID": "syllabus.html#prerequisites",
-    "href": "syllabus.html#prerequisites",
-    "title": "Syllabus",
-    "section": "Prerequisites",
-    "text": "Prerequisites\nThe course is of an overview course. Students should have basic training in statistics at the level of Introductory Statistics with Randomization and Simulation (Chapters 1–4, excluding special topics)."
-  },
-  {
-    "objectID": "syllabus.html#target-audience",
-    "href": "syllabus.html#target-audience",
-    "title": "Syllabus",
-    "section": "Target audience",
-    "text": "Target audience\nStatistical modelling is a compulsory course of the M.Sc. in Data Science and Business Analytics (Supervised Project stream) and an optional course for the Thesis stream. Please note this course is not credited in the “Intelligence d’affaires” specialization: the course is incompatible with MATH606019(A)."
-  },
-  {
-    "objectID": "syllabus.html#intellectual-integrity-and-generative-artificial-intelligence",
-    "href": "syllabus.html#intellectual-integrity-and-generative-artificial-intelligence",
-    "title": "Syllabus",
-    "section": "Intellectual integrity and generative artificial intelligence",
-    "text": "Intellectual integrity and generative artificial intelligence\nPlease don’t cheat! The official policy lists the school rules regarding plagiarism and academic integrity.\nThe midterm and final are closed book exams. Students can use generative artificial intelligence (AI) tools for the project to improve and edit the deliverables (either code or text), but only as a proof-reading tool. That is, the first draft of the text must be student’s original work. Any use of generative AI must be cited adequately and students should provide their work with\n\ndetails about the tool used (name and version),\nthe list of prompts,\na copy of the original draft or code,\na description of any modification to the proposed output,\na short reflection on the usage of generative AI."
-  },
-  {
-    "objectID": "syllabus.html#student-services",
-    "href": "syllabus.html#student-services",
-    "title": "Syllabus",
-    "section": "Student services",
-    "text": "Student services\nStudents with special needs should feel free to approach me so we can best discuss accommodations. Do check out HEC Montréal’s disabled students and psychological support services."
-  },
-  {
-    "objectID": "syllabus.html#harassment-and-sexual-violence",
-    "href": "syllabus.html#harassment-and-sexual-violence",
-    "title": "Syllabus",
-    "section": "Harassment and sexual violence",
-    "text": "Harassment and sexual violence\nThe Center for Harassment Intervention (BIMH) is the unique access point for all members of the community subject to harassment or sexual violence. You can reach them at 514 343-7020 or by email at harcelement@hec.ca from Monday until Friday, from 8:30 until 4:30pm.\nIf you are in an emergency situation or fear for your safety, call emergency services at 911, followed by HEC Montréal security services at 514 340-6611.\nCheck the school official policy on these matters for more details."
-  },
-  {
-    "objectID": "syllabus.html#family-policy",
-    "href": "syllabus.html#family-policy",
-    "title": "Syllabus",
-    "section": "Family policy",
-    "text": "Family policy\nHEC now has an official family policy, but the following guidelines reflect my own beliefs and commitments towards parent students1\n\nBabies are welcome in class as often as necessary for support feeding relationship.\nYou are welcome to bring your child to class in order to cover unforeseeable gaps in childcare.\nIf you come with babies or toddler, I ask that you sit close to the door so that, in case your little one needs special attention and is disrupting the learning of other students, you may step outside of class until their needs are met. Seats close to the door are reserved for parents attending class with their child."
-  },
-  {
-    "objectID": "syllabus.html#footnotes",
-    "href": "syllabus.html#footnotes",
-    "title": "Syllabus",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nShamelessly stolen/adapted from similar policy by Drs. Melissa Cheney, Guy Grossman and Rohan Alexander↩︎"
-  },
-  {
-    "objectID": "exercises/interactions.html",
-    "href": "exercises/interactions.html",
-    "title": "Interactions",
-    "section": "",
-    "text": "The database insurance from package hecstatmod contains information about medical charges billed to 1338 Americans during 2003. Figure 1 shows a plot obtained from an exploratory data analysis, showing the potential interaction between smoking and body mass index.\nFigure 1: Graph of insurance charges against body mass index, colored by smoking status.",
+    "text": "We consider a regression model with two covariates, age (in years) and the categorical variable education and no interaction. Based on the diagnostic plots in the Figures, what is the most likely violation of the model assumptions for each scenario?\nThe diagnostic plots are: plot of ordinary residuals versus fitted values (top left), plot of ordinary residuals against explanatory variable age (top right), plot of the absolute value of the externally studentized residuals against fitted values (middle left), plot of the externally studentized residuals against education level (middle right), quantile-quantile plot of the externally studentized residuals (bottom left) and Cook’s distance plot as a function of the variable index (bottom right).\nCareful: some violations have feedback on multiple graphs.\nModel assumptions",
     "crumbs": [
       "Exercises",
       "In class",
-      "Interactions"
+      "Graphical diagnostics"
     ]
   },
   {
-    "objectID": "exercises/interactions.html#footnotes",
-    "href": "exercises/interactions.html#footnotes",
-    "title": "Interactions",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nAccording to the World Health Organization, people with a \\(\\texttt{bmi} \\ge 25\\) are overweight and those with \\(\\texttt{bmi} \\ge 30\\) are obese. However, BMI is perceived as being a flawed indicator of health: see this New York Times paper for example.↩︎",
+    "objectID": "exercises/graphical-diagnostics.html#example-1",
+    "href": "exercises/graphical-diagnostics.html#example-1",
+    "title": "Graphical diagnostics",
+    "section": "Example 1",
+    "text": "Example 1",
     "crumbs": [
       "Exercises",
       "In class",
-      "Interactions"
+      "Graphical diagnostics"
     ]
   },
   {
-    "objectID": "content/index.html",
-    "href": "content/index.html",
-    "title": "Content",
-    "section": "",
-    "text": "The course content is divided in chapters: for each topic, readers have access to course notes, sample code and exercises sheets.",
+    "objectID": "exercises/graphical-diagnostics.html#example-2",
+    "href": "exercises/graphical-diagnostics.html#example-2",
+    "title": "Graphical diagnostics",
+    "section": "Example 2",
+    "text": "Example 2",
     "crumbs": [
-      "Content",
-      "Ressources"
+      "Exercises",
+      "In class",
+      "Graphical diagnostics"
     ]
   },
   {
-    "objectID": "content/index.html#r-packages-and-data",
-    "href": "content/index.html#r-packages-and-data",
-    "title": "Content",
-    "section": "R packages and data",
-    "text": "R packages and data\nYou can access the data sets in R by installing the hecstatmod package. The following chunk will install all R packages that are used throughout the course.\n\nlib &lt;- c(\"afex\", \"broom\", \"car\", \"dplyr\", \"emmeans\",\n         \"ggplot2\", \"Hmisc\", \"lme4\", \"lmerTest\", \n         \"marginaleffects\", \"MASS\", \"multcomp\", \"nlme\", \n         \"patchwork\", \"poorman\", \"remotes\", \"survminer\",\n         \"survival\", \"tidyr\", \"tinytable\")\nfor(pack in lib){\n  if(!require(pack, quietly = TRUE)){\n    install.packages(pack)\n  }\n}\nremotes::install_github(\"lbelzile/hecstatmod\")\nremotes::install_github(\"lbelzile/hecedsm\")\n\nNote: not all data sets are currently documented in hecstatmod. Please re-install the package periodically to benefit from the latest features.",
+    "objectID": "exercises/graphical-diagnostics.html#example-3",
+    "href": "exercises/graphical-diagnostics.html#example-3",
+    "title": "Graphical diagnostics",
+    "section": "Example 3",
+    "text": "Example 3",
     "crumbs": [
-      "Content",
-      "Ressources"
+      "Exercises",
+      "In class",
+      "Graphical diagnostics"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Statistical modelling",
-    "section": "",
-    "text": "Statistical modelling\n        \n        \n            The objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.\n        \n        \n            MATH 60604A, Fall 2024HEC Montréal\n        \n    \n\n\n\n\n\n\nInstructor\n\n   Dr. Léo Belzile\n   CSC 4.850\n   leo.belzile@hec.ca\n\n\n\nInstructor\n\n   Dr. Juliana Schulz\n   CSC 4.809\n   juliana.schulz@hec.ca\n\n\n\nCourse details\n\n   Fall 2024\n   Thursday\n   12:00–15:00\n   Côte-Ste-Catherine, salle Hélène-Desmarais"
+    "objectID": "exercises/graphical-diagnostics.html#example-4",
+    "href": "exercises/graphical-diagnostics.html#example-4",
+    "title": "Graphical diagnostics",
+    "section": "Example 4",
+    "text": "Example 4",
+    "crumbs": [
+      "Exercises",
+      "In class",
+      "Graphical diagnostics"
+    ]
   },
   {
-    "objectID": "content/02-content.html",
-    "href": "content/02-content.html",
-    "title": "Likelihood-based inference",
+    "objectID": "exercises/graphical-diagnostics.html#example-5",
+    "href": "exercises/graphical-diagnostics.html#example-5",
+    "title": "Graphical diagnostics",
+    "section": "Example 5",
+    "text": "Example 5",
+    "crumbs": [
+      "Exercises",
+      "In class",
+      "Graphical diagnostics"
+    ]
+  },
+  {
+    "objectID": "exercises/graphical-diagnostics.html#example-6",
+    "href": "exercises/graphical-diagnostics.html#example-6",
+    "title": "Graphical diagnostics",
+    "section": "Example 6",
+    "text": "Example 6",
+    "crumbs": [
+      "Exercises",
+      "In class",
+      "Graphical diagnostics"
+    ]
+  },
+  {
+    "objectID": "exercises/01-solution.html",
+    "href": "exercises/01-solution.html",
+    "title": "Statistical inference",
     "section": "",
-    "text": "Learn the terminology associated with likelihood-based inference\nDerive closed-form expressions for the maximum likelihood estimator in simple models\nUsing numerical optimization, obtain parameter estimates and their standards errors using maximum likelihood\nUse large-sample properties of the likelihood to derive confidence intervals and tests\nUse information criteria for model selection",
+    "text": "The level of the test is 5%, so we should reject 5% of the time under the null.\nThe curve is the power curve, i.e., the percentage of rejection of the null hypothesis for one-sample \\(t\\)-test. The further away from the true value \\(\\mu\\), the higher the ability to detect departures from \\(\\mathscr{H}_0\\). Because we set \\(\\alpha=0.05\\), the curve should be around 0.05 near \\(\\mu\\) and increase towards 1 as we move away from the true population mean.\nPower increases if the sample size \\(n\\) increases, so we expect to see the curve be higher everywhere, but at \\(\\mu\\) where it should be close to \\(0.05\\) if the test is calibrated.\nThe data are clearly not symmetric and heavily discretized, yet the power curve of the one-sample \\(t\\)-test is steadily increasing and the nominal level matches the type I error. This illustrates the robustness of the test to departures from normality.\n\n\n\nCode\ndata(renfe, package = \"hecstatmod\")\nlibrary(ggplot2)\nrenfe_sub &lt;- renfe |&gt; \n         dplyr::filter(type == \"AVE\")\nparams &lt;- as.list(MASS::fitdistr(renfe_sub$duration, \"normal\")$estimate)\nggplot(data = renfe_sub,\n       mapping = aes(sample = duration)) +\n  geom_qq(dparams = list(mean = params$mean, \n                         sd = params$sd)) +\n  geom_abline(intercept = 0, slope = 1) + \n  theme_classic()",
+    "crumbs": [
+      "Exercises",
+      "Hypothesis testing",
+      "Solution 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-solution.html#solution-to-exercise-1.1",
+    "href": "exercises/01-solution.html#solution-to-exercise-1.1",
+    "title": "Statistical inference",
+    "section": "",
+    "text": "The level of the test is 5%, so we should reject 5% of the time under the null.\nThe curve is the power curve, i.e., the percentage of rejection of the null hypothesis for one-sample \\(t\\)-test. The further away from the true value \\(\\mu\\), the higher the ability to detect departures from \\(\\mathscr{H}_0\\). Because we set \\(\\alpha=0.05\\), the curve should be around 0.05 near \\(\\mu\\) and increase towards 1 as we move away from the true population mean.\nPower increases if the sample size \\(n\\) increases, so we expect to see the curve be higher everywhere, but at \\(\\mu\\) where it should be close to \\(0.05\\) if the test is calibrated.\nThe data are clearly not symmetric and heavily discretized, yet the power curve of the one-sample \\(t\\)-test is steadily increasing and the nominal level matches the type I error. This illustrates the robustness of the test to departures from normality.\n\n\n\nCode\ndata(renfe, package = \"hecstatmod\")\nlibrary(ggplot2)\nrenfe_sub &lt;- renfe |&gt; \n         dplyr::filter(type == \"AVE\")\nparams &lt;- as.list(MASS::fitdistr(renfe_sub$duration, \"normal\")$estimate)\nggplot(data = renfe_sub,\n       mapping = aes(sample = duration)) +\n  geom_qq(dparams = list(mean = params$mean, \n                         sd = params$sd)) +\n  geom_abline(intercept = 0, slope = 1) + \n  theme_classic()",
+    "crumbs": [
+      "Exercises",
+      "Hypothesis testing",
+      "Solution 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-solution.html#solution-to-exercise-1.2",
+    "href": "exercises/01-solution.html#solution-to-exercise-1.2",
+    "title": "Statistical inference",
+    "section": "Solution to Exercise 1.2",
+    "text": "Solution to Exercise 1.2\n\nThe empirical coverage is 0.947. The coverage is not far from nominal coverage of 0.95, indicating the test is well calibrated.\n\n\n\nCode\ndata(renfe_simu, package = \"hecstatmod\")\ntrue_diff &lt;- -0.28\ncoverage &lt;- mean(with(renfe_simu, cilb &lt; true_diff & ciub &gt; true_diff))\ncoverage\n\n\n[1] 0.947\n\n\n\nThe histogram for the mean difference in Figure 1 looks symmetric and light-tailed, and centered around 0.28, whereas the \\(p\\)-values are scattered in the unit interval, with some values closer to zero.\n\n\n\nCode\nlibrary(patchwork) \ntheme_set(theme_classic())\ng1 &lt;- ggplot(data = renfe_simu, \n             mapping = aes(x = meandif)) +\n  geom_density() +\n  geom_vline(xintercept = true_diff, \n             color = \"gray\",\n             linetype = \"dashed\") +\n  labs(x = \"mean difference\")\ng2 &lt;- ggplot(data = renfe_simu,\n             mapping = aes(x = pval)) +\n  geom_histogram(bins = 11)\ng1 + g2\n\n\n\n\n\n\n\n\nFigure 1: Left: density plot of the mean difference price for high-speed train tickets from Madrid to Barcelona versus Barcelona to Madrid, along with average (gray vertical line). Right: histogram of p-values.\n\n\n\n\n\n\nThe power is \\(0.105\\). Under the alternative regime (since \\(\\Delta=0.28\\)€), we only reject 10.5% of the time. While this number is low, it is due to the small size of the true mean difference, which is hard to detect unless the sample size is enormous. The estimated mean difference for the sample is \\(0.274\\)€.\n\n\n\nCode\nt.test(price ~ dest, data = renfe_sub)\n\n\n\n    Welch Two Sample t-test\n\ndata:  price by dest\nt = -1.9433, df = 9170.2, p-value = 0.05201\nalternative hypothesis: true difference in means between group Barcelona-Madrid and group Madrid-Barcelona is not equal to 0\n95 percent confidence interval:\n -1.652691253  0.007157275\nsample estimates:\nmean in group Barcelona-Madrid mean in group Madrid-Barcelona \n                      87.40053                       88.22329 \n\n\nCode\nmean(renfe_simu$pval &lt; 0.05)\n\n\n[1] 0.105",
+    "crumbs": [
+      "Exercises",
+      "Hypothesis testing",
+      "Solution 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-solution.html#solution-to-exercise-1.3",
+    "href": "exercises/01-solution.html#solution-to-exercise-1.3",
+    "title": "Statistical inference",
+    "section": "Solution to Exercise 1.3",
+    "text": "Solution to Exercise 1.3\nCareful here, as the price of the REXPRESS tickets is fixed at 43.25€. The only random sample is for the other class of train!\n\n\nCode\nwith(renfe,\n     t.test(x = price,\n            mu = 43.25,\n            conf.level = 0.9,\n            subset = type == \"AVE-TGV\"))\n\n\n\n    One Sample t-test\n\ndata:  price\nt = 197.9, df = 9999, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 43.25\n90 percent confidence interval:\n 85.73892 86.45119\nsample estimates:\nmean of x \n 86.09505 \n\n\n\nThe null hypothesis is \\(\\mathscr{H}_0: \\mu_{\\text{AVE-TGV}}=43.25\\)€ against the alternative \\(\\mathscr{H}_1: \\mu_{\\text{AVE-TGV}}\\neq 43.25\\)€, where \\(\\mu_{\\text{AVE-TGV}}\\) is the average AVE-TGV ticket price.\nSince this is a one-sample location problem, we use a one-sample \\(t\\)-test.\nThe estimated mean difference is \\(45.63\\)€\\(= 88.88\\)€\\(-43.25\\)€, with 90% confidence interval for the mean difference of \\([44.14, 47.12]\\).\nThe \\(t\\)-statistic is 50.519 with 428 degrees of freedom, and the \\(p\\)-value is negligible.\nWe strongly reject the null hypothesis that high-speed trains are the same price as RegioExpress ones.",
+    "crumbs": [
+      "Exercises",
+      "Hypothesis testing",
+      "Solution 1"
+    ]
+  },
+  {
+    "objectID": "exercises/linear-models-contrasts.html",
+    "href": "exercises/linear-models-contrasts.html",
+    "title": "Hypothesis testing in linear models",
+    "section": "",
+    "text": "The database HBSC24_S4 from package hecedsm contains data for Study 4 of Huang et al. (2024).\n\n\nCode\nremotes::install_github(\"lbelzile/hecedsm\")\ndata(HBSC24_S4, package = \"hecedsm\")\n?hecedsm::HBSC24_S4\n# Fit regression for effect of mindset on perceived authenticity\nmod &lt;- lm(authenticity ~ cond, data = HBSC24_S4)\n(emm &lt;- emmeans::emmeans(mod, specs = \"cond\"))\nemm |&gt;\n  contrasts(\n    method = list(C1 = c(), # fill in Contrast 1 here\n                  C2 = c()))  # fill in Contrast 2 here\n\n\nThe following results are extracted from Section D Authenticity and Social Learning Behavior of the Supplementary material.\n\nWe ran a regression with contrast coding to examine the role of mindset on perceived authenticity. Participants who reflected on their goal attainment as a transformation perceived their current state to be more authentic \\((M = 5.98\\), \\(\\text{SD} =  .82)\\) compared to participants who wrote about distancing from old state or arriving at a new state \\((M_{\\text{old}} = 5.62\\), \\(\\text{SD} =  1.18\\); \\(M_{\\text{new}} = 5.74\\), \\(\\text{SD} =  1.07\\), contrast 1: \\(b = .10\\), \\(\\text{SE} =  .04\\), \\(t(259) = 2.21\\), \\(p = .028).\\)\n\n\nFurther, there was no difference between participants who reflected on their goal attainment as distancing from an old state compared to arriving at a new state (contrast 2: \\(b = .06\\), \\(\\text{SE} =  .08\\), \\(t(259) = .79\\), \\(p = .433).\\)\n\n\nWe next examined how perceived authenticity affects information sharing. As expected, authenticity positively predicted information sharing (\\(b = 6.84\\), \\(\\text{SE} =  1.87\\), \\(t(260) = 3.66\\), \\(p &lt;.001\\)).\n\n\nUsing the description from the text, write down the weights for the two contrasts listed above if the order of the conditions is change, new and old.\nPerform a global test for the authenticity as a function of experimental condition (cond)\nCompute contrasts and report the values of the tests. Check the marginal means and the test statistics: can you reproduce the output of the authors.\nPerform a simple linear regression of words on authenticity and check whether the correlation is significant.\n\n\n\n\n\nReferences\n\nHuang, S., Brucks, M. S., Song, J., & Campbell, M. C. (2024). Beyond achievement: Transformation mindset enhances authenticity after goal success. Motivation Science, 10(3), 171–181. https://doi.org/10.1037/mot0000340",
+    "crumbs": [
+      "Exercises",
+      "In class",
+      "Contrasts"
+    ]
+  },
+  {
+    "objectID": "exercises/01-exercise.html",
+    "href": "exercises/01-exercise.html",
+    "title": "Statistical inference",
+    "section": "",
+    "text": "The renfe data contains information about 10 000 train ticket sales from Renfe, the Spanish national train company. The data include:",
+    "crumbs": [
+      "Exercises",
+      "Hypothesis testing",
+      "Exercise 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-exercise.html#exercise-1.1",
+    "href": "exercises/01-exercise.html#exercise-1.1",
+    "title": "Statistical inference",
+    "section": "Exercise 1.1",
+    "text": "Exercise 1.1\nWe consider travel time for high-speed (AVE and AVE-TGV) trains. The true “population” mean travel time between cities is known to be \\(\\mu=2.845\\) hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).\nA simulation study is performed to assess the behaviour of univariate tests under repeated sampling. The following algorithm was repeated 10K times for different values of \\(\\mu_0\\):\n\nSelect a random subsample of size \\(n=100\\).\nCompute the one-sample \\(t\\)-test statistic for \\(\\mathscr{H}_0: \\mu=\\mu_0\\) (versus \\(\\mathscr{H}_0: \\mu \\neq \\mu_0\\)) .\nReturn the \\(p\\)-value\n\nFigure 1 shows the percentage of the 10K \\(p\\)-values that are less than 0.05, i.e. the percentage of rejection (at the \\(5\\)% level) of \\(\\mathscr{H}_0:\\mu=\\mu_0\\) against the two-sided alternative at \\(\\mu_0 \\in \\{2.83, \\nu, 2.835, 2.84, \\ldots, 2.995, 3\\`\\). Use the resulting curve to answer the following questions:\n\n\n\n\n\n\n\n\nFigure 1: Power curve for the one-sample \\(t\\)-test based on subsamples of size \\(n=100\\), as a function of travel time. The grey horizontal line is at 0.05, the vertical dashed line indicates the population mean \\(\\mu\\).\n\n\n\n\n\n\nExplain why the value for the one-sample \\(t\\)-test around \\(\\mu=2.845\\) should be approximately 0.05.\nExplain why the values on the curve increase towards the right of the plot.\nSuppose we repeated the simulation study, but this time with subsamples of size \\(n=1000\\). How would the points compare for the one-sample \\(t\\)-test: should they be higher, equal, or lower than their current values?\nIs the assumption of the one-sample \\(t\\)-test valid in this example? Produce a quantile-quantile plot using the code below and hence comment on the robustness of the \\(t\\)-test to departures from the normality assumption.",
+    "crumbs": [
+      "Exercises",
+      "Hypothesis testing",
+      "Exercise 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-exercise.html#exercise-1.2",
+    "href": "exercises/01-exercise.html#exercise-1.2",
+    "title": "Statistical inference",
+    "section": "Exercise 1.2",
+    "text": "Exercise 1.2\nSuppose we now want to compare the mean fare for high-speed train tickets for the two destinations, i.e., Madrid to Barcelona versus Barcelona to Madrid. We run a simulation study where we perform a two-sided Welch test for this hypothesis repeatedly with random subsamples of size \\(n=1000\\). The data renfe_simu contains the mean difference (meandif), the test statistic (Wstat), the \\(p\\)-value (pval) and the confidence interval (cilb and ciub) for these 1000 repetitions. Based on the entire database, the true mean difference is known to be \\(-0.28\\)€. Use the simulated data to answer the following questions and briefly comment on each item\n\nWhat is the empirical coverage of the 95% confidence intervals (i.e., the percentage of intervals covering the true mean difference value)?\nPlot an histogram of the mean differences and superimpose the true mean difference in the population.\nCompute the power of the test (percentage of rejection of the null hypothesis).",
+    "crumbs": [
+      "Exercises",
+      "Hypothesis testing",
+      "Exercise 1"
+    ]
+  },
+  {
+    "objectID": "exercises/01-exercise.html#exercise-1.3",
+    "href": "exercises/01-exercise.html#exercise-1.3",
+    "title": "Statistical inference",
+    "section": "Exercise 1.3",
+    "text": "Exercise 1.3\nUsing the renfe data, test whether the average ticket price of AVE-TGV trains is different from that of Regio Express trains (REXPRESS). Make sure to\n\nState your null and alternative hypothesis.\nCarefully justify your choice of test statistic.\nReport the estimated mean difference and a 90% confidence interval for that difference.\nConclude within the setting of the problem.",
+    "crumbs": [
+      "Exercises",
+      "Hypothesis testing",
+      "Exercise 1"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html",
+    "href": "content/05-content.html",
+    "title": "Linear models",
+    "section": "",
+    "text": "perform custom tests for model parameters (contrasts, tests of significance);\ninterpret and test the significance of interaction terms between continuous and categorical variables, as well as between two categorical variables;",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 2"
+      "Week 5"
     ]
   },
   {
-    "objectID": "content/02-content.html#learning-objectives",
-    "href": "content/02-content.html#learning-objectives",
-    "title": "Likelihood-based inference",
+    "objectID": "content/05-content.html#learning-objectives",
+    "href": "content/05-content.html#learning-objectives",
+    "title": "Linear models",
     "section": "",
-    "text": "Learn the terminology associated with likelihood-based inference\nDerive closed-form expressions for the maximum likelihood estimator in simple models\nUsing numerical optimization, obtain parameter estimates and their standards errors using maximum likelihood\nUse large-sample properties of the likelihood to derive confidence intervals and tests\nUse information criteria for model selection",
+    "text": "perform custom tests for model parameters (contrasts, tests of significance);\ninterpret and test the significance of interaction terms between continuous and categorical variables, as well as between two categorical variables;",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 2"
+      "Week 5"
     ]
   },
   {
-    "objectID": "content/02-content.html#content",
-    "href": "content/02-content.html#content",
-    "title": "Likelihood-based inference",
+    "objectID": "content/05-content.html#content",
+    "href": "content/05-content.html#content",
+    "title": "Linear models",
     "section": "Content",
-    "text": "Content\n\nCourse notes: chapter 3 (Likelihood-based inference)",
+    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.5–4.6.",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 2"
+      "Week 5"
     ]
   },
   {
-    "objectID": "content/02-content.html#in-class",
-    "href": "content/02-content.html#in-class",
-    "title": "Likelihood-based inference",
+    "objectID": "content/05-content.html#in-class",
+    "href": "content/05-content.html#in-class",
+    "title": "Linear models",
     "section": "In class",
-    "text": "In class\n\nSlides (pdf and code)",
+    "text": "In class\n\nSlides (pdf and code)\nExercise: interactions",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 2"
+      "Week 5"
     ]
   },
   {
-    "objectID": "content/02-content.html#slides",
-    "href": "content/02-content.html#slides",
-    "title": "Likelihood-based inference",
-    "section": "Slides",
-    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "content/02-content.html#after-class",
-    "href": "content/02-content.html#after-class",
-    "title": "Likelihood-based inference",
+    "objectID": "content/05-content.html#after-class",
+    "href": "content/05-content.html#after-class",
+    "title": "Linear models",
     "section": "After class",
-    "text": "After class\n\nExercise sheet 3\n\n\n\n\n\n\nS\nContent\nPDF\nVideos\nR\n\n\n\n\n3\nLikelihood-based inference",
+    "text": "After class\n\nWatch the videos of Section 6\nSlides on geometry of OLS (pdf and code)\nSlides on coefficient of determination (pdf)\nExercises 2.1, 2.3 and 2.8",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 2"
+      "Week 5"
     ]
   },
   {
-    "objectID": "content/02-content.html#additional-readings",
-    "href": "content/02-content.html#additional-readings",
-    "title": "Likelihood-based inference",
-    "section": "Additional readings",
-    "text": "Additional readings\n\nUnderstanding Maximum Likelihood by Kristoffer Magnusson\nDavison (2003), Chapter 4",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "content/06-content.html",
-    "href": "content/06-content.html",
-    "title": "Linear models",
-    "section": "",
-    "text": "list the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.\ninterpret the coefficients of the log-linear model on a meaningful scale;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 6"
-    ]
-  },
-  {
-    "objectID": "content/06-content.html#learning-objectives",
-    "href": "content/06-content.html#learning-objectives",
-    "title": "Linear models",
-    "section": "",
-    "text": "list the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.\ninterpret the coefficients of the log-linear model on a meaningful scale;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 6"
-    ]
-  },
-  {
-    "objectID": "content/06-content.html#content",
-    "href": "content/06-content.html#content",
-    "title": "Linear models",
-    "section": "Content",
-    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.7–4.8.",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 6"
-    ]
-  },
-  {
-    "objectID": "content/06-content.html#in-class",
-    "href": "content/06-content.html#in-class",
-    "title": "Linear models",
-    "section": "In class",
-    "text": "In class\n\nSlides (pdf and code)",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 6"
-    ]
-  },
-  {
-    "objectID": "content/06-content.html#slides",
-    "href": "content/06-content.html#slides",
+    "objectID": "content/05-content.html#slides",
+    "href": "content/05-content.html#slides",
     "title": "Linear models",
     "section": "Slides",
-    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
+    "text": "Slides\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n  View slides in new window   Download PDF of slides",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 6"
+      "Week 5"
     ]
   },
   {
-    "objectID": "content/03-content.html",
-    "href": "content/03-content.html",
+    "objectID": "content/05-content.html#sec-videos",
+    "href": "content/05-content.html#sec-videos",
     "title": "Linear models",
+    "section": "Videos",
+    "text": "Videos\nThere’s a set of videos that walks through each section below. To make it easier for you to jump around the video examples, I cut the long video into smaller pieces and included them all in one YouTube playlist.\n\nGeometry of least squares\nCoefficient of determination\n\nYou can also watch the playlist (and skip around to different sections) here:",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 5"
+    ]
+  },
+  {
+    "objectID": "exercises/index.html",
+    "href": "exercises/index.html",
+    "title": "Exercises",
     "section": "",
-    "text": "perform exploratory data analysis on a dataset for the purpose of regression modelling\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;",
+    "text": "This webpage section contains exercises along with solutions sets and code.\n\n\n\n\n\n\nChapter\nExercise\nSolution\nR\n\n\n\n\n1\nBasics of statistical inference\n\n\n\n\n\n2\nLinear regression\n\n\n\n\n\n3\nLikelihood methods\n\n\n\n\n\n4\nGeneralized linear models\n\n\n\n\n\n5\nCorrelated and longitudinal data\n\n\n\n\n\n6\nLinear mixed models\n\n\n\n\n\n7\nSurvival analysis",
     "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#learning-objectives",
-    "href": "content/03-content.html#learning-objectives",
-    "title": "Linear models",
-    "section": "",
-    "text": "perform exploratory data analysis on a dataset for the purpose of regression modelling\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#content",
-    "href": "content/03-content.html#content",
-    "title": "Linear models",
-    "section": "Content",
-    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.1–4.2.",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#in-class",
-    "href": "content/03-content.html#in-class",
-    "title": "Linear models",
-    "section": "In class",
-    "text": "In class\n\nSlides (pdf and code)",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "content/03-content.html#slides",
-    "href": "content/03-content.html#slides",
-    "title": "Linear models",
-    "section": "Slides",
-    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html",
-    "href": "content/01-content.html",
-    "title": "Statistical inference",
-    "section": "",
-    "text": "Understanding the role of uncertainty in decision making.\nUnderstanding the importance of signal-to-noise ratio as a measure of evidence.\nFormulating the null and alternative hypotheses attached to a problem statement.\nUnderstanding and correctly interpreting \\(p\\)-values and confidence intervals;",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#learning-objectives",
-    "href": "content/01-content.html#learning-objectives",
-    "title": "Statistical inference",
-    "section": "",
-    "text": "Understanding the role of uncertainty in decision making.\nUnderstanding the importance of signal-to-noise ratio as a measure of evidence.\nFormulating the null and alternative hypotheses attached to a problem statement.\nUnderstanding and correctly interpreting \\(p\\)-values and confidence intervals;",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#content",
-    "href": "content/01-content.html#content",
-    "title": "Statistical inference",
-    "section": "Content",
-    "text": "Content\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should normally be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes.\n\n\n\nCourse notes: chapter 1 (Introduction) and 2 (Statistical Inference)\nInstall R and RStudio",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#in-class",
-    "href": "content/01-content.html#in-class",
-    "title": "Statistical inference",
-    "section": "In class",
-    "text": "In class\n\nSyllabus\nSlides (pdf and code)\nActivity: reporting conclusion of tests",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#slides",
-    "href": "content/01-content.html#slides",
-    "title": "Statistical inference",
-    "section": "Slides",
-    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#after-class",
-    "href": "content/01-content.html#after-class",
-    "title": "Statistical inference",
-    "section": "After class",
-    "text": "After class\n\nExercise sheet 1",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "content/01-content.html#additional-readings",
-    "href": "content/01-content.html#additional-readings",
-    "title": "Statistical inference",
-    "section": "Additional readings",
-    "text": "Additional readings\n\nPermutation tests",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "content/04-content.html",
-    "href": "content/04-content.html",
-    "title": "Linear models",
-    "section": "",
-    "text": "perform custom tests for model parameters (contrasts, tests of significance);\nobtain predictions from a linear model using software;\nunderstand the distinction between estimated mean and predicted values;\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors.",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "content/04-content.html#learning-objectives",
-    "href": "content/04-content.html#learning-objectives",
-    "title": "Linear models",
-    "section": "",
-    "text": "perform custom tests for model parameters (contrasts, tests of significance);\nobtain predictions from a linear model using software;\nunderstand the distinction between estimated mean and predicted values;\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors.",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "content/04-content.html#content",
-    "href": "content/04-content.html#content",
-    "title": "Linear models",
-    "section": "Content",
-    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.3–4.4.",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "content/04-content.html#in-class",
-    "href": "content/04-content.html#in-class",
-    "title": "Linear models",
-    "section": "In class",
-    "text": "In class\n\nSlides (pdf and code)\nTesting exercise and code for the solution",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "content/04-content.html#slides",
-    "href": "content/04-content.html#slides",
-    "title": "Linear models",
-    "section": "Slides",
-    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 4"
+      "Exercises"
     ]
   },
   {
@@ -581,205 +374,496 @@
     ]
   },
   {
-    "objectID": "exercises/index.html",
-    "href": "exercises/index.html",
-    "title": "Exercises",
-    "section": "",
-    "text": "This webpage section contains exercises along with solutions sets and code.\n\n\n\n\n\n\nChapter\nExercise\nSolution\nR\n\n\n\n\n1\nBasics of statistical inference\n\n\n\n\n\n2\nLinear regression\n\n\n\n\n\n3\nLikelihood methods\n\n\n\n\n\n4\nGeneralized linear models\n\n\n\n\n\n5\nCorrelated and longitudinal data\n\n\n\n\n\n6\nLinear mixed models\n\n\n\n\n\n7\nSurvival analysis",
-    "crumbs": [
-      "Exercises"
-    ]
-  },
-  {
-    "objectID": "content/05-content.html",
-    "href": "content/05-content.html",
+    "objectID": "content/04-content.html",
+    "href": "content/04-content.html",
     "title": "Linear models",
     "section": "",
-    "text": "perform custom tests for model parameters (contrasts, tests of significance);\ninterpret and test the significance of interaction terms between continuous and categorical variables, as well as between two categorical variables;",
+    "text": "perform custom tests for model parameters (contrasts, tests of significance);\nobtain predictions from a linear model using software;\nunderstand the distinction between estimated mean and predicted values;\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors.",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 5"
+      "Week 4"
     ]
   },
   {
-    "objectID": "content/05-content.html#learning-objectives",
-    "href": "content/05-content.html#learning-objectives",
+    "objectID": "content/04-content.html#learning-objectives",
+    "href": "content/04-content.html#learning-objectives",
     "title": "Linear models",
     "section": "",
-    "text": "perform custom tests for model parameters (contrasts, tests of significance);\ninterpret and test the significance of interaction terms between continuous and categorical variables, as well as between two categorical variables;",
+    "text": "perform custom tests for model parameters (contrasts, tests of significance);\nobtain predictions from a linear model using software;\nunderstand the distinction between estimated mean and predicted values;\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors.",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 5"
+      "Week 4"
     ]
   },
   {
-    "objectID": "content/05-content.html#content",
-    "href": "content/05-content.html#content",
+    "objectID": "content/04-content.html#content",
+    "href": "content/04-content.html#content",
     "title": "Linear models",
     "section": "Content",
-    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.5–4.6.",
+    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.3–4.4.",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 5"
+      "Week 4"
     ]
   },
   {
-    "objectID": "content/05-content.html#in-class",
-    "href": "content/05-content.html#in-class",
+    "objectID": "content/04-content.html#in-class",
+    "href": "content/04-content.html#in-class",
     "title": "Linear models",
     "section": "In class",
-    "text": "In class\n\nSlides (pdf and code)\nExercise: interactions",
+    "text": "In class\n\nSlides (pdf and code)\nTesting exercise and code for the solution",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 5"
+      "Week 4"
     ]
   },
   {
-    "objectID": "content/05-content.html#after-class",
-    "href": "content/05-content.html#after-class",
-    "title": "Linear models",
-    "section": "After class",
-    "text": "After class\n\nWatch the videos of Section 6\nSlides on geometry of OLS (pdf and code)\nSlides on coefficient of determination (pdf)\nExercises 2.1, 2.3 and 2.8",
-    "crumbs": [
-      "Content",
-      "Pedagogical content",
-      "Week 5"
-    ]
-  },
-  {
-    "objectID": "content/05-content.html#slides",
-    "href": "content/05-content.html#slides",
+    "objectID": "content/04-content.html#slides",
+    "href": "content/04-content.html#slides",
     "title": "Linear models",
     "section": "Slides",
-    "text": "Slides\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n  View slides in new window   Download PDF of slides",
+    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 5"
+      "Week 4"
     ]
   },
   {
-    "objectID": "content/05-content.html#sec-videos",
-    "href": "content/05-content.html#sec-videos",
+    "objectID": "content/01-content.html",
+    "href": "content/01-content.html",
+    "title": "Statistical inference",
+    "section": "",
+    "text": "Understanding the role of uncertainty in decision making.\nUnderstanding the importance of signal-to-noise ratio as a measure of evidence.\nFormulating the null and alternative hypotheses attached to a problem statement.\nUnderstanding and correctly interpreting \\(p\\)-values and confidence intervals;",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#learning-objectives",
+    "href": "content/01-content.html#learning-objectives",
+    "title": "Statistical inference",
+    "section": "",
+    "text": "Understanding the role of uncertainty in decision making.\nUnderstanding the importance of signal-to-noise ratio as a measure of evidence.\nFormulating the null and alternative hypotheses attached to a problem statement.\nUnderstanding and correctly interpreting \\(p\\)-values and confidence intervals;",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#content",
+    "href": "content/01-content.html#content",
+    "title": "Statistical inference",
+    "section": "Content",
+    "text": "Content\n\n\n\n\n\n\nWarning\n\n\n\nThese readings should normally be completed before class, to ensure timely understanding and let us discuss the concepts together through various examples and case studies — the strict minimum being the course notes.\n\n\n\nCourse notes: chapter 1 (Introduction) and 2 (Statistical Inference)\nInstall R and RStudio",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#in-class",
+    "href": "content/01-content.html#in-class",
+    "title": "Statistical inference",
+    "section": "In class",
+    "text": "In class\n\nSyllabus\nSlides (pdf and code)\nActivity: reporting conclusion of tests",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#slides",
+    "href": "content/01-content.html#slides",
+    "title": "Statistical inference",
+    "section": "Slides",
+    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#after-class",
+    "href": "content/01-content.html#after-class",
+    "title": "Statistical inference",
+    "section": "After class",
+    "text": "After class\n\nExercise sheet 1",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#additional-readings",
+    "href": "content/01-content.html#additional-readings",
+    "title": "Statistical inference",
+    "section": "Additional readings",
+    "text": "Additional readings\n\nPermutation tests",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "content/03-content.html",
+    "href": "content/03-content.html",
     "title": "Linear models",
-    "section": "Videos",
-    "text": "Videos\nThere’s a set of videos that walks through each section below. To make it easier for you to jump around the video examples, I cut the long video into smaller pieces and included them all in one YouTube playlist.\n\nGeometry of least squares\nCoefficient of determination\n\nYou can also watch the playlist (and skip around to different sections) here:",
+    "section": "",
+    "text": "perform exploratory data analysis on a dataset for the purpose of regression modelling\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;",
     "crumbs": [
       "Content",
       "Pedagogical content",
-      "Week 5"
+      "Week 3"
     ]
   },
   {
-    "objectID": "exercises/01-exercise.html",
-    "href": "exercises/01-exercise.html",
-    "title": "Statistical inference",
+    "objectID": "content/03-content.html#learning-objectives",
+    "href": "content/03-content.html#learning-objectives",
+    "title": "Linear models",
     "section": "",
-    "text": "The renfe data contains information about 10 000 train ticket sales from Renfe, the Spanish national train company. The data include:",
+    "text": "perform exploratory data analysis on a dataset for the purpose of regression modelling\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;",
     "crumbs": [
-      "Exercises",
-      "Hypothesis testing",
-      "Exercise 1"
+      "Content",
+      "Pedagogical content",
+      "Week 3"
     ]
   },
   {
-    "objectID": "exercises/01-exercise.html#exercise-1.1",
-    "href": "exercises/01-exercise.html#exercise-1.1",
-    "title": "Statistical inference",
-    "section": "Exercise 1.1",
-    "text": "Exercise 1.1\nWe consider travel time for high-speed (AVE and AVE-TGV) trains. The true “population” mean travel time between cities is known to be \\(\\mu=2.845\\) hours (the instructor has access to the full dataset of more than 2.3 millions records, so these are known quantities, unlike in most practical settings).\nA simulation study is performed to assess the behaviour of univariate tests under repeated sampling. The following algorithm was repeated 10K times for different values of \\(\\mu_0\\):\n\nSelect a random subsample of size \\(n=100\\).\nCompute the one-sample \\(t\\)-test statistic for \\(\\mathscr{H}_0: \\mu=\\mu_0\\) (versus \\(\\mathscr{H}_0: \\mu \\neq \\mu_0\\)) .\nReturn the \\(p\\)-value\n\nFigure 1 shows the percentage of the 10K \\(p\\)-values that are less than 0.05, i.e. the percentage of rejection (at the \\(5\\)% level) of \\(\\mathscr{H}_0:\\mu=\\mu_0\\) against the two-sided alternative at \\(\\mu_0 \\in \\{2.83, \\nu, 2.835, 2.84, \\ldots, 2.995, 3\\`\\). Use the resulting curve to answer the following questions:\n\n\n\n\n\n\n\n\nFigure 1: Power curve for the one-sample \\(t\\)-test based on subsamples of size \\(n=100\\), as a function of travel time. The grey horizontal line is at 0.05, the vertical dashed line indicates the population mean \\(\\mu\\).\n\n\n\n\n\n\nExplain why the value for the one-sample \\(t\\)-test around \\(\\mu=2.845\\) should be approximately 0.05.\nExplain why the values on the curve increase towards the right of the plot.\nSuppose we repeated the simulation study, but this time with subsamples of size \\(n=1000\\). How would the points compare for the one-sample \\(t\\)-test: should they be higher, equal, or lower than their current values?\nIs the assumption of the one-sample \\(t\\)-test valid in this example? Produce a quantile-quantile plot using the code below and hence comment on the robustness of the \\(t\\)-test to departures from the normality assumption.",
+    "objectID": "content/03-content.html#content",
+    "href": "content/03-content.html#content",
+    "title": "Linear models",
+    "section": "Content",
+    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.1–4.2.",
     "crumbs": [
-      "Exercises",
-      "Hypothesis testing",
-      "Exercise 1"
+      "Content",
+      "Pedagogical content",
+      "Week 3"
     ]
   },
   {
-    "objectID": "exercises/01-exercise.html#exercise-1.2",
-    "href": "exercises/01-exercise.html#exercise-1.2",
-    "title": "Statistical inference",
-    "section": "Exercise 1.2",
-    "text": "Exercise 1.2\nSuppose we now want to compare the mean fare for high-speed train tickets for the two destinations, i.e., Madrid to Barcelona versus Barcelona to Madrid. We run a simulation study where we perform a two-sided Welch test for this hypothesis repeatedly with random subsamples of size \\(n=1000\\). The data renfe_simu contains the mean difference (meandif), the test statistic (Wstat), the \\(p\\)-value (pval) and the confidence interval (cilb and ciub) for these 1000 repetitions. Based on the entire database, the true mean difference is known to be \\(-0.28\\)€. Use the simulated data to answer the following questions and briefly comment on each item\n\nWhat is the empirical coverage of the 95% confidence intervals (i.e., the percentage of intervals covering the true mean difference value)?\nPlot an histogram of the mean differences and superimpose the true mean difference in the population.\nCompute the power of the test (percentage of rejection of the null hypothesis).",
+    "objectID": "content/03-content.html#in-class",
+    "href": "content/03-content.html#in-class",
+    "title": "Linear models",
+    "section": "In class",
+    "text": "In class\n\nSlides (pdf and code)",
     "crumbs": [
-      "Exercises",
-      "Hypothesis testing",
-      "Exercise 1"
+      "Content",
+      "Pedagogical content",
+      "Week 3"
     ]
   },
   {
-    "objectID": "exercises/01-exercise.html#exercise-1.3",
-    "href": "exercises/01-exercise.html#exercise-1.3",
-    "title": "Statistical inference",
-    "section": "Exercise 1.3",
-    "text": "Exercise 1.3\nUsing the renfe data, test whether the average ticket price of AVE-TGV trains is different from that of Regio Express trains (REXPRESS). Make sure to\n\nState your null and alternative hypothesis.\nCarefully justify your choice of test statistic.\nReport the estimated mean difference and a 90% confidence interval for that difference.\nConclude within the setting of the problem.",
+    "objectID": "content/03-content.html#slides",
+    "href": "content/03-content.html#slides",
+    "title": "Linear models",
+    "section": "Slides",
+    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
     "crumbs": [
-      "Exercises",
-      "Hypothesis testing",
-      "Exercise 1"
+      "Content",
+      "Pedagogical content",
+      "Week 3"
     ]
   },
   {
-    "objectID": "exercises/linear-models-contrasts.html",
-    "href": "exercises/linear-models-contrasts.html",
-    "title": "Hypothesis testing in linear models",
+    "objectID": "content/06-content.html",
+    "href": "content/06-content.html",
+    "title": "Linear models",
     "section": "",
-    "text": "The database HBSC24_S4 from package hecedsm contains data for Study 4 of Huang et al. (2024).\n\n\nCode\nremotes::install_github(\"lbelzile/hecedsm\")\ndata(HBSC24_S4, package = \"hecedsm\")\n?hecedsm::HBSC24_S4\n# Fit regression for effect of mindset on perceived authenticity\nmod &lt;- lm(authenticity ~ cond, data = HBSC24_S4)\n(emm &lt;- emmeans::emmeans(mod, specs = \"cond\"))\nemm |&gt;\n  contrasts(\n    method = list(C1 = c(), # fill in Contrast 1 here\n                  C2 = c()))  # fill in Contrast 2 here\n\n\nThe following results are extracted from Section D Authenticity and Social Learning Behavior of the Supplementary material.\n\nWe ran a regression with contrast coding to examine the role of mindset on perceived authenticity. Participants who reflected on their goal attainment as a transformation perceived their current state to be more authentic \\((M = 5.98\\), \\(\\text{SD} =  .82)\\) compared to participants who wrote about distancing from old state or arriving at a new state \\((M_{\\text{old}} = 5.62\\), \\(\\text{SD} =  1.18\\); \\(M_{\\text{new}} = 5.74\\), \\(\\text{SD} =  1.07\\), contrast 1: \\(b = .10\\), \\(\\text{SE} =  .04\\), \\(t(259) = 2.21\\), \\(p = .028).\\)\n\n\nFurther, there was no difference between participants who reflected on their goal attainment as distancing from an old state compared to arriving at a new state (contrast 2: \\(b = .06\\), \\(\\text{SE} =  .08\\), \\(t(259) = .79\\), \\(p = .433).\\)\n\n\nWe next examined how perceived authenticity affects information sharing. As expected, authenticity positively predicted information sharing (\\(b = 6.84\\), \\(\\text{SE} =  1.87\\), \\(t(260) = 3.66\\), \\(p &lt;.001\\)).\n\n\nUsing the description from the text, write down the weights for the two contrasts listed above if the order of the conditions is change, new and old.\nPerform a global test for the authenticity as a function of experimental condition (cond)\nCompute contrasts and report the values of the tests. Check the marginal means and the test statistics: can you reproduce the output of the authors.\nPerform a simple linear regression of words on authenticity and check whether the correlation is significant.\n\n\n\n\n\nReferences\n\nHuang, S., Brucks, M. S., Song, J., & Campbell, M. C. (2024). Beyond achievement: Transformation mindset enhances authenticity after goal success. Motivation Science, 10(3), 171–181. https://doi.org/10.1037/mot0000340",
+    "text": "list the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.\ninterpret the coefficients of the log-linear model on a meaningful scale;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#learning-objectives",
+    "href": "content/06-content.html#learning-objectives",
+    "title": "Linear models",
+    "section": "",
+    "text": "list the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.\ninterpret the coefficients of the log-linear model on a meaningful scale;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#content",
+    "href": "content/06-content.html#content",
+    "title": "Linear models",
+    "section": "Content",
+    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.7–4.8.",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#in-class",
+    "href": "content/06-content.html#in-class",
+    "title": "Linear models",
+    "section": "In class",
+    "text": "In class\n\nSlides (pdf and code)\nExercise on diagnostic plots",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "content/06-content.html#slides",
+    "href": "content/06-content.html#slides",
+    "title": "Linear models",
+    "section": "Slides",
+    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 6"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html",
+    "href": "content/02-content.html",
+    "title": "Likelihood-based inference",
+    "section": "",
+    "text": "Learn the terminology associated with likelihood-based inference\nDerive closed-form expressions for the maximum likelihood estimator in simple models\nUsing numerical optimization, obtain parameter estimates and their standards errors using maximum likelihood\nUse large-sample properties of the likelihood to derive confidence intervals and tests\nUse information criteria for model selection",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#learning-objectives",
+    "href": "content/02-content.html#learning-objectives",
+    "title": "Likelihood-based inference",
+    "section": "",
+    "text": "Learn the terminology associated with likelihood-based inference\nDerive closed-form expressions for the maximum likelihood estimator in simple models\nUsing numerical optimization, obtain parameter estimates and their standards errors using maximum likelihood\nUse large-sample properties of the likelihood to derive confidence intervals and tests\nUse information criteria for model selection",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#content",
+    "href": "content/02-content.html#content",
+    "title": "Likelihood-based inference",
+    "section": "Content",
+    "text": "Content\n\nCourse notes: chapter 3 (Likelihood-based inference)",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#in-class",
+    "href": "content/02-content.html#in-class",
+    "title": "Likelihood-based inference",
+    "section": "In class",
+    "text": "In class\n\nSlides (pdf and code)",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#slides",
+    "href": "content/02-content.html#slides",
+    "title": "Likelihood-based inference",
+    "section": "Slides",
+    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#after-class",
+    "href": "content/02-content.html#after-class",
+    "title": "Likelihood-based inference",
+    "section": "After class",
+    "text": "After class\n\nExercise sheet 3\n\n\n\n\n\n\nS\nContent\nPDF\nVideos\nR\n\n\n\n\n3\nLikelihood-based inference",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#additional-readings",
+    "href": "content/02-content.html#additional-readings",
+    "title": "Likelihood-based inference",
+    "section": "Additional readings",
+    "text": "Additional readings\n\nUnderstanding Maximum Likelihood by Kristoffer Magnusson\nDavison (2003), Chapter 4",
+    "crumbs": [
+      "Content",
+      "Pedagogical content",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Statistical modelling",
+    "section": "",
+    "text": "Statistical modelling\n        \n        \n            The objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.\n        \n        \n            MATH 60604A, Fall 2024HEC Montréal\n        \n    \n\n\n\n\n\n\nInstructor\n\n   Dr. Léo Belzile\n   CSC 4.850\n   leo.belzile@hec.ca\n\n\n\nInstructor\n\n   Dr. Juliana Schulz\n   CSC 4.809\n   juliana.schulz@hec.ca\n\n\n\nCourse details\n\n   Fall 2024\n   Thursday\n   12:00–15:00\n   Côte-Ste-Catherine, salle Hélène-Desmarais"
+  },
+  {
+    "objectID": "content/index.html",
+    "href": "content/index.html",
+    "title": "Content",
+    "section": "",
+    "text": "The course content is divided in chapters: for each topic, readers have access to course notes, sample code and exercises sheets.",
+    "crumbs": [
+      "Content",
+      "Ressources"
+    ]
+  },
+  {
+    "objectID": "content/index.html#r-packages-and-data",
+    "href": "content/index.html#r-packages-and-data",
+    "title": "Content",
+    "section": "R packages and data",
+    "text": "R packages and data\nYou can access the data sets in R by installing the hecstatmod package. The following chunk will install all R packages that are used throughout the course.\n\nlib &lt;- c(\"afex\", \"broom\", \"car\", \"dplyr\", \"emmeans\",\n         \"ggplot2\", \"Hmisc\", \"lme4\", \"lmerTest\", \n         \"marginaleffects\", \"MASS\", \"multcomp\", \"nlme\", \n         \"patchwork\", \"poorman\", \"remotes\", \"survminer\",\n         \"survival\", \"tidyr\", \"tinytable\")\nfor(pack in lib){\n  if(!require(pack, quietly = TRUE)){\n    install.packages(pack)\n  }\n}\nremotes::install_github(\"lbelzile/hecstatmod\")\nremotes::install_github(\"lbelzile/hecedsm\")\n\nNote: not all data sets are currently documented in hecstatmod. Please re-install the package periodically to benefit from the latest features.",
+    "crumbs": [
+      "Content",
+      "Ressources"
+    ]
+  },
+  {
+    "objectID": "exercises/interactions.html",
+    "href": "exercises/interactions.html",
+    "title": "Interactions",
+    "section": "",
+    "text": "The database insurance from package hecstatmod contains information about medical charges billed to 1338 Americans during 2003. Figure 1 shows a plot obtained from an exploratory data analysis, showing the potential interaction between smoking and body mass index.\nFigure 1: Graph of insurance charges against body mass index, colored by smoking status.",
     "crumbs": [
       "Exercises",
       "In class",
-      "Contrasts"
+      "Interactions"
     ]
   },
   {
-    "objectID": "exercises/01-solution.html",
-    "href": "exercises/01-solution.html",
-    "title": "Statistical inference",
+    "objectID": "exercises/interactions.html#footnotes",
+    "href": "exercises/interactions.html#footnotes",
+    "title": "Interactions",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAccording to the World Health Organization, people with a \\(\\texttt{bmi} \\ge 25\\) are overweight and those with \\(\\texttt{bmi} \\ge 30\\) are obese. However, BMI is perceived as being a flawed indicator of health: see this New York Times paper for example.↩︎",
+    "crumbs": [
+      "Exercises",
+      "In class",
+      "Interactions"
+    ]
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
     "section": "",
-    "text": "The level of the test is 5%, so we should reject 5% of the time under the null.\nThe curve is the power curve, i.e., the percentage of rejection of the null hypothesis for one-sample \\(t\\)-test. The further away from the true value \\(\\mu\\), the higher the ability to detect departures from \\(\\mathscr{H}_0\\). Because we set \\(\\alpha=0.05\\), the curve should be around 0.05 near \\(\\mu\\) and increase towards 1 as we move away from the true population mean.\nPower increases if the sample size \\(n\\) increases, so we expect to see the curve be higher everywhere, but at \\(\\mu\\) where it should be close to \\(0.05\\) if the test is calibrated.\nThe data are clearly not symmetric and heavily discretized, yet the power curve of the one-sample \\(t\\)-test is steadily increasing and the nominal level matches the type I error. This illustrates the robustness of the test to departures from normality.\n\n\n\nCode\ndata(renfe, package = \"hecstatmod\")\nlibrary(ggplot2)\nrenfe_sub &lt;- renfe |&gt; \n         dplyr::filter(type == \"AVE\")\nparams &lt;- as.list(MASS::fitdistr(renfe_sub$duration, \"normal\")$estimate)\nggplot(data = renfe_sub,\n       mapping = aes(sample = duration)) +\n  geom_qq(dparams = list(mean = params$mean, \n                         sd = params$sd)) +\n  geom_abline(intercept = 0, slope = 1) + \n  theme_classic()",
-    "crumbs": [
-      "Exercises",
-      "Hypothesis testing",
-      "Solution 1"
-    ]
+    "text": "Dr. Léo Belzile\n   CSC 4.850\n   leo.belzile@hec.ca\n\n\n\n\n\n   Dr. Juliana Schulz\n   CSC 4.809\n   juliana.schulz@hec.ca\n\n\n\n\n\n   Fall 2024\n   Thursday\n   12:00–15:00\n   Côte-Ste-Catherine, salle Hélène-Desmarais"
   },
   {
-    "objectID": "exercises/01-solution.html#solution-to-exercise-1.1",
-    "href": "exercises/01-solution.html#solution-to-exercise-1.1",
-    "title": "Statistical inference",
+    "objectID": "syllabus.html#course-description",
+    "href": "syllabus.html#course-description",
+    "title": "Syllabus",
+    "section": "Course description",
+    "text": "Course description\nThe objective of this course is to provide students with the basics of statistical inference, as well as statistical tools for data modeling in a regression framework. The theory behind the statistical models will be reviewed with an emphasis on data applications in management.\nThe course will focus on regression models, including linear models, generalized linear models and models for longitudinal data with random effects and correlation structures. For each of these models, basic inference principles will be covered, notably hypothesis testing and estimation procedures.\n\nBasic principles in inference and statistical modeling\nLinear models\nGeneralized linear models\nModels for longitudinal data and correlated data\nIntroduction to survival analysis"
+  },
+  {
+    "objectID": "syllabus.html#learning-objectives",
+    "href": "syllabus.html#learning-objectives",
+    "title": "Syllabus",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nThe course learning objectives are listed here."
+  },
+  {
+    "objectID": "syllabus.html#prerequisites",
+    "href": "syllabus.html#prerequisites",
+    "title": "Syllabus",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nThe course is of an overview course. Students should have basic training in statistics at the level of Introductory Statistics with Randomization and Simulation (Chapters 1–4, excluding special topics)."
+  },
+  {
+    "objectID": "syllabus.html#target-audience",
+    "href": "syllabus.html#target-audience",
+    "title": "Syllabus",
+    "section": "Target audience",
+    "text": "Target audience\nStatistical modelling is a compulsory course of the M.Sc. in Data Science and Business Analytics (Supervised Project stream) and an optional course for the Thesis stream. Please note this course is not credited in the “Intelligence d’affaires” specialization: the course is incompatible with MATH606019(A)."
+  },
+  {
+    "objectID": "syllabus.html#intellectual-integrity-and-generative-artificial-intelligence",
+    "href": "syllabus.html#intellectual-integrity-and-generative-artificial-intelligence",
+    "title": "Syllabus",
+    "section": "Intellectual integrity and generative artificial intelligence",
+    "text": "Intellectual integrity and generative artificial intelligence\nPlease don’t cheat! The official policy lists the school rules regarding plagiarism and academic integrity.\nThe midterm and final are closed book exams. Students can use generative artificial intelligence (AI) tools for the project to improve and edit the deliverables (either code or text), but only as a proof-reading tool. That is, the first draft of the text must be student’s original work. Any use of generative AI must be cited adequately and students should provide their work with\n\ndetails about the tool used (name and version),\nthe list of prompts,\na copy of the original draft or code,\na description of any modification to the proposed output,\na short reflection on the usage of generative AI."
+  },
+  {
+    "objectID": "syllabus.html#student-services",
+    "href": "syllabus.html#student-services",
+    "title": "Syllabus",
+    "section": "Student services",
+    "text": "Student services\nStudents with special needs should feel free to approach me so we can best discuss accommodations. Do check out HEC Montréal’s disabled students and psychological support services."
+  },
+  {
+    "objectID": "syllabus.html#harassment-and-sexual-violence",
+    "href": "syllabus.html#harassment-and-sexual-violence",
+    "title": "Syllabus",
+    "section": "Harassment and sexual violence",
+    "text": "Harassment and sexual violence\nThe Center for Harassment Intervention (BIMH) is the unique access point for all members of the community subject to harassment or sexual violence. You can reach them at 514 343-7020 or by email at harcelement@hec.ca from Monday until Friday, from 8:30 until 4:30pm.\nIf you are in an emergency situation or fear for your safety, call emergency services at 911, followed by HEC Montréal security services at 514 340-6611.\nCheck the school official policy on these matters for more details."
+  },
+  {
+    "objectID": "syllabus.html#family-policy",
+    "href": "syllabus.html#family-policy",
+    "title": "Syllabus",
+    "section": "Family policy",
+    "text": "Family policy\nHEC now has an official family policy, but the following guidelines reflect my own beliefs and commitments towards parent students1\n\nBabies are welcome in class as often as necessary for support feeding relationship.\nYou are welcome to bring your child to class in order to cover unforeseeable gaps in childcare.\nIf you come with babies or toddler, I ask that you sit close to the door so that, in case your little one needs special attention and is disrupting the learning of other students, you may step outside of class until their needs are met. Seats close to the door are reserved for parents attending class with their child."
+  },
+  {
+    "objectID": "syllabus.html#footnotes",
+    "href": "syllabus.html#footnotes",
+    "title": "Syllabus",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nShamelessly stolen/adapted from similar policy by Drs. Melissa Cheney, Guy Grossman and Rohan Alexander↩︎"
+  },
+  {
+    "objectID": "content/installation.html",
+    "href": "content/installation.html",
+    "title": "Installing R and RStudio",
     "section": "",
-    "text": "The level of the test is 5%, so we should reject 5% of the time under the null.\nThe curve is the power curve, i.e., the percentage of rejection of the null hypothesis for one-sample \\(t\\)-test. The further away from the true value \\(\\mu\\), the higher the ability to detect departures from \\(\\mathscr{H}_0\\). Because we set \\(\\alpha=0.05\\), the curve should be around 0.05 near \\(\\mu\\) and increase towards 1 as we move away from the true population mean.\nPower increases if the sample size \\(n\\) increases, so we expect to see the curve be higher everywhere, but at \\(\\mu\\) where it should be close to \\(0.05\\) if the test is calibrated.\nThe data are clearly not symmetric and heavily discretized, yet the power curve of the one-sample \\(t\\)-test is steadily increasing and the nominal level matches the type I error. This illustrates the robustness of the test to departures from normality.\n\n\n\nCode\ndata(renfe, package = \"hecstatmod\")\nlibrary(ggplot2)\nrenfe_sub &lt;- renfe |&gt; \n         dplyr::filter(type == \"AVE\")\nparams &lt;- as.list(MASS::fitdistr(renfe_sub$duration, \"normal\")$estimate)\nggplot(data = renfe_sub,\n       mapping = aes(sample = duration)) +\n  geom_qq(dparams = list(mean = params$mean, \n                         sd = params$sd)) +\n  geom_abline(intercept = 0, slope = 1) + \n  theme_classic()",
+    "text": "You will do all of your work in this class with the open source (and free!) R programming language. You will use RStudio as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.",
     "crumbs": [
-      "Exercises",
-      "Hypothesis testing",
-      "Solution 1"
+      "Content",
+      "Installing **R**"
     ]
   },
   {
-    "objectID": "exercises/01-solution.html#solution-to-exercise-1.2",
-    "href": "exercises/01-solution.html#solution-to-exercise-1.2",
-    "title": "Statistical inference",
-    "section": "Solution to Exercise 1.2",
-    "text": "Solution to Exercise 1.2\n\nThe empirical coverage is 0.947. The coverage is not far from nominal coverage of 0.95, indicating the test is well calibrated.\n\n\n\nCode\ndata(renfe_simu, package = \"hecstatmod\")\ntrue_diff &lt;- -0.28\ncoverage &lt;- mean(with(renfe_simu, cilb &lt; true_diff & ciub &gt; true_diff))\ncoverage\n\n\n[1] 0.947\n\n\n\nThe histogram for the mean difference in Figure 1 looks symmetric and light-tailed, and centered around 0.28, whereas the \\(p\\)-values are scattered in the unit interval, with some values closer to zero.\n\n\n\nCode\nlibrary(patchwork) \ntheme_set(theme_classic())\ng1 &lt;- ggplot(data = renfe_simu, \n             mapping = aes(x = meandif)) +\n  geom_density() +\n  geom_vline(xintercept = true_diff, \n             color = \"gray\",\n             linetype = \"dashed\") +\n  labs(x = \"mean difference\")\ng2 &lt;- ggplot(data = renfe_simu,\n             mapping = aes(x = pval)) +\n  geom_histogram(bins = 11)\ng1 + g2\n\n\n\n\n\n\n\n\nFigure 1: Left: density plot of the mean difference price for high-speed train tickets from Madrid to Barcelona versus Barcelona to Madrid, along with average (gray vertical line). Right: histogram of p-values.\n\n\n\n\n\n\nThe power is \\(0.105\\). Under the alternative regime (since \\(\\Delta=0.28\\)€), we only reject 10.5% of the time. While this number is low, it is due to the small size of the true mean difference, which is hard to detect unless the sample size is enormous. The estimated mean difference for the sample is \\(0.274\\)€.\n\n\n\nCode\nt.test(price ~ dest, data = renfe_sub)\n\n\n\n    Welch Two Sample t-test\n\ndata:  price by dest\nt = -1.9433, df = 9170.2, p-value = 0.05201\nalternative hypothesis: true difference in means between group Barcelona-Madrid and group Madrid-Barcelona is not equal to 0\n95 percent confidence interval:\n -1.652691253  0.007157275\nsample estimates:\nmean in group Barcelona-Madrid mean in group Madrid-Barcelona \n                      87.40053                       88.22329 \n\n\nCode\nmean(renfe_simu$pval &lt; 0.05)\n\n\n[1] 0.105",
+    "objectID": "content/installation.html#learning-r",
+    "href": "content/installation.html#learning-r",
+    "title": "Installing R and RStudio",
+    "section": "Learning R",
+    "text": "Learning R\nSearching for help with R on Google can sometimes be tricky because the program name is a single letter. Google is generally smart enough to figure out what you mean when you search for “r scatterplot”, but if it does struggle, try searching for “rstats” instead (e.g., “rstats scatterplot”).\nCheck out StackOverflow (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and RStudio Community (a forum specifically designed for people using RStudio and the tidyverse).",
     "crumbs": [
-      "Exercises",
-      "Hypothesis testing",
-      "Solution 1"
-    ]
-  },
-  {
-    "objectID": "exercises/01-solution.html#solution-to-exercise-1.3",
-    "href": "exercises/01-solution.html#solution-to-exercise-1.3",
-    "title": "Statistical inference",
-    "section": "Solution to Exercise 1.3",
-    "text": "Solution to Exercise 1.3\nCareful here, as the price of the REXPRESS tickets is fixed at 43.25€. The only random sample is for the other class of train!\n\n\nCode\nwith(renfe,\n     t.test(x = price,\n            mu = 43.25,\n            conf.level = 0.9,\n            subset = type == \"AVE-TGV\"))\n\n\n\n    One Sample t-test\n\ndata:  price\nt = 197.9, df = 9999, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 43.25\n90 percent confidence interval:\n 85.73892 86.45119\nsample estimates:\nmean of x \n 86.09505 \n\n\n\nThe null hypothesis is \\(\\mathscr{H}_0: \\mu_{\\text{AVE-TGV}}=43.25\\)€ against the alternative \\(\\mathscr{H}_1: \\mu_{\\text{AVE-TGV}}\\neq 43.25\\)€, where \\(\\mu_{\\text{AVE-TGV}}\\) is the average AVE-TGV ticket price.\nSince this is a one-sample location problem, we use a one-sample \\(t\\)-test.\nThe estimated mean difference is \\(45.63\\)€\\(= 88.88\\)€\\(-43.25\\)€, with 90% confidence interval for the mean difference of \\([44.14, 47.12]\\).\nThe \\(t\\)-statistic is 50.519 with 428 degrees of freedom, and the \\(p\\)-value is negligible.\nWe strongly reject the null hypothesis that high-speed trains are the same price as RegioExpress ones.",
-    "crumbs": [
-      "Exercises",
-      "Hypothesis testing",
-      "Solution 1"
+      "Content",
+      "Installing **R**"
     ]
   }
 ]

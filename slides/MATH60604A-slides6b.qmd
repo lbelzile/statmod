@@ -1,0 +1,232 @@
+---
+title: "Statistical modelling"
+author: "Léo Belzile, HEC Montréal"
+subtitle: "06. Linear models (collinearity)"
+date: today
+date-format: YYYY
+eval: true
+cache: false
+echo: false
+fig-align: 'center'
+out-width: '100%'
+standalone: true
+bibliography: MATH60604A.bib
+format:
+  revealjs:
+    slide-number: true
+    preview-links: auto
+    code-block-height: 750px
+    theme: [simple, hecmontreal.scss]
+    title-slide-attributes:
+      data-background-color: "#002855"
+    logo: "fig/logo_hec_montreal_bleu_web.png"
+    width: 1600
+    height: 900
+---
+
+
+```{r}
+#| eval: true
+#| include: false
+#| cache: false
+hecblue <- c("#002855")
+
+fcols <- c(gris = "#888b8d",
+           bleu = "#0072ce",
+           aqua = "#00aec7",
+           vert = "#26d07c",
+           rouge = "#ff585d",
+           rose = "#eb6fbd",
+           jaune = "#f3d03e")
+pcols <- c(gris = "#d9d9d6",
+           bleu = "#92c1e9",
+           agua = "#88dbdf",
+           vert = "#8fe2b0",
+           rouge = "#ffb1bb",
+           rose = "#eab8e4",
+           jaune = "#f2f0a1")
+library(ggplot2)
+library(knitr)
+theme_set(theme_classic())
+library(patchwork)
+knitr::opts_chunk$set(fig.retina = 3, collapse = TRUE)
+options(scipen=1, digits=2, width = 75)
+options(knitr.kable.NA = '')
+library(kableExtra)
+library(car)
+```
+
+
+## Multicollinearity
+
+We say that two variables $\mathrm{X}_1$ and $\mathrm{X}_2$ are **collinear** if
+
+- $\mathrm{X}_1$ and $\mathrm{X}_2$ are both correlated with $Y$
+- $\mathrm{X}_1$ and $\mathrm{X}_2$ are strongly correlated with each other --- so much so that they contain essentially the same information.
+
+There could be multicollinearity between more than two variables\ldots in the same way that there could be more than one confounding variable.
+
+- In such a case,multicollinearity (or simply collinearity) describes when an explanatory variable (or several) is strongly correlated with a linear combination of other explanatory variables.
+- One potential harm of multicollinearity is the *decrease in precision*: it increases the standard errors of the parameters. 
+
+## A stupid illustration of multicollinearity
+
+Consider the log number of Bixi rentals per day as a function of the temperature in degrees Celcius and in Farenheit, rounded to the nearest unit. The postulated linear model is 
+\begin{align*}
+\texttt{lognuser} = \beta_0 + \beta_{\texttt{c}} \texttt{celcius} + \beta_{\texttt{f}} \texttt{farenheit} + \varepsilon.
+\end{align*}
+
+- The interpretation of $\beta_{\texttt{c}}$ is ``the average increase in number of rental per day when temperature increases by $1{}^{\circ}$C, keeping the temperature in Farenheit constant''\ldots
+- The two temperatures units are linearly related,
+$$1.8 \texttt{celcius} + 32 = \texttt{farenheit}.$$
+
+## Diving into the problem
+
+Suppose that the true effect (fictional) effect of temperature on bike rental is 
+ \begin{align*}
+  \mathsf{E}(\texttt{lognuser} \mid \cdot) = \alpha_0+ \alpha_1 \texttt{celcius}.
+ \end{align*}
+ 
+The coefficients for the model that only includes Farenheit are thus
+ \begin{align*}
+  \mathsf{E}(\texttt{lognuser} \mid \cdot)= \gamma_0 + \gamma_1\texttt{farenheit},
+ \end{align*}
+ where $\alpha_0 = \gamma_0 + 32\gamma_1$ and $1.8\gamma_1 = \alpha_1$.
+
+
+The parameters of the postulated linear model with both predictors, 
+ \begin{align*}
+ \texttt{lognuser} = \beta_0 + \beta_{\texttt{c}} \texttt{celcius} + \beta_{\texttt{f}} \texttt{farenheit} + \varepsilon,
+\end{align*}
+ are not **identifiable**, since any linear combination of the two solutions 
+gives the same answer.
+
+## Bixi and multicollinearity
+
+
+We consider a simple illustration with temperature at 16:00 in Celcius and Farenheit (rounded to the nearest unit for $\texttt{rfarenheit}$) to explain log of daily counts of Bixi users for 2014--2019. 
+ 
+```{r}
+
+
+```
+    \begin{figure}[ht!]
+ \centering 
+  \includegraphics[width = 0.49\textwidth]{img/c2/slides3-e20} 
+  \includegraphics[width = 0.49\textwidth]{img/c2/slides3-e21}
+ \end{figure}
+ 
+   \begin{figure}[ht!]
+ \centering 
+  \includegraphics[width = 0.49\textwidth]{img/c2/slides3-e22} 
+  \includegraphics[width = 0.49\textwidth]{img/c2/slides3-e23}
+ \end{figure}
+ {\footnotesize \SASlang prints a warning if the data are exactly collinear.
+ \begin{quote}
+ \textbf{Note}: The X'X matrix has been found to be singular, and a generalized inverse was used to solve the normal equations. Terms whose estimates are followed by the letter 'B' are not uniquely estimable.
+ \end{quote}
+ 
+ }
+
+
+\end{frame}
+
+\begin{frame}{Effects of collinearity}
+Generally, collinearity has the following effects:
+\bi
+- The regression coefficients change drastically when new observations are included, or when we include/remove new covariates.
+- The standard errors of the coefficients in the multiple regression model are very high, since the $\bs{\beta}$ cannot be precisely estimated.
+- Consequently, the confidence intervals for these coefficients will be very wide.
+- The individual parameters are not statistically significant, but the global $F$-test indicates some covariates are nevertheless relevant.
+\ei
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{How do we detect collinearity or confounders?}
+\bi
+- If the variables are exactly collinear, \SASlang or \Rlang will drop redundant ones.
+\bi 
+- The variables that are not \textbf{perfectly} collinear (e.g., due to rounding) will not be captured by software and will cause issues.
+\ei
+- Look at the \textbf{linear correlation} between \alert{explanatory variables} and look at changes in estimated coefficients between regression models with and without a potential collinear variable.
+- The problem is that, when more than two variables are collinear, detection is hard.
+- One explanatory variable could be strongly correlated with a linear combination of other variables even though the individual correlations between the variables are not high. 
+\ei
+\end{frame}
+
+\begin{frame}
+\frametitle{Variance inflation factor}
+\bi
+- Another tool we can use is the variance inflation factor ($\mathsf{VIF}$); in \SASlang, use the option \texttt{vif} inside \texttt{proc reg}.
+- For a given explanatory variable $\mathrm{X}_j$, its $\mathsf{VIF}$ is
+\begin{align*}
+\mathsf{VIF}(j)=\frac{1}{1-R^2(j)}
+\end{align*}
+where $R^2(j)$ is the $R^2$ of the model obtained by regressing $\mathrm{X}_j$ on all the other explanatory variables.
+ - The tolerance factor, $\mathsf{TOL}=1-R^2(j)$, is the reciprocal of $\texttt{VIF}$.
+\ei
+\end{frame}
+\begin{frame}
+\frametitle{When is collinearity an issue?}
+\bi
+- $R^2(j)$ represents the proportion of the variance of $\mathrm{X}_j$ that is explained by all the other predictor variables.
+- When is collinearity problematic? There is no general agreement, but practitioners typically choose an arbitrary cutoff (rule of thumb)
+\bi 
+- $\mathsf{VIF}(j) > 4$ or $\mathsf{TOL} < 0.25$ implies that $R^2(j) >0.75$
+- $\mathsf{VIF}(j) > 5$ or $\mathsf{TOL} < 0.2$ implies that $R^2(j) >0.8$
+- $\mathsf{VIF}(j) > 10$ or $\mathsf{TOL} < 0.1$  implies that $R^2(j) >0.9$
+\ei
+\ei
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+ \frametitle{Observations for Bixi multicollinearity example}
+ \bi 
+ - The value of the $F$ statistic for the global significance for the simple linear model with Celcius (not reported) is $1292$ with associated $p$-value less than $0.0001$, suggesting that temperature is statistically significant ($5$\% increase in number of users for each increase of $1^{\circ}$C).
+ - Yet, when we include both Celcius and Farenheit (rounded), the individual coefficients are not significant anymore at the 5\% level.
+ - Moreover, the sign of \texttt{rfarenheit} change relative to that of \texttt{farenheit}!
+  - Note that the standard errors for Celcius are $48$ times bigger when including the two covariates.
+ - The variance inflation factors of both \texttt{rfarenheit} and \texttt{celcius} are enormous ($2454.68$), suggesting identifiability issues. 
+\ei
+\end{frame}
+\begin{frame}[fragile]
+ \frametitle{Added-variable plots for Bixi multicollinearity example}
+ 
+ \begin{figure}
+  \centering 
+  \includegraphics[width = \textwidth]{img/c2/03-linreg-avplot_temp.pdf}
+ \end{figure}
+
+\end{frame}
+
+## Added variable plots
+
+- Remove the column of the model matrix $\mathbf{X}$ corresponding to explanatory variable $X_j$ to obtain $\mathbf{X}_{-j}$
+  - fit a regression of $\boldsymbol{y}$ as a function of $\mathbf{X}_{-j}$
+  - fit a linear regression of $\boldsymbol{X}_j$ as a function of $\mathbf{X}_{-j}$
+  - plot both residuals. The regression slope is exactly $\beta_j$.
+
+Useful for detecting collinearity. 
+
+## Example - added variable plots
+
+```{r}
+#| eval: true
+#| echo: true
+#| out-width: '100%'
+#| fig-align: 'center'
+#| fig-width: 10
+#| fig-height: 8
+#| fig-cap: "Added variable plots for years of service and years since PhD. Both are collinear and show no relationship once either is included."
+#| label: fig-addedvariableplots
+car::avPlots(linmod.college1, terms = ~service + years, id = FALSE)
+```
+
+## References
+

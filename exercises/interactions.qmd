@@ -1,6 +1,5 @@
 ---
 title: "Interactions"
-
 ---
 
 The database `insurance` from package `hecstatmod` contains information about medical charges billed to 1338 Americans during 2003. @fig-insuranceinter1 shows a plot obtained from an exploratory data analysis, showing the potential interaction between smoking and body mass index.

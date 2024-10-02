@@ -1,0 +1,17 @@
+{
+  "hash": "da02824ec959e56d18253693c577891e",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Graphical diagnostics\"\neval: true\necho: false\nout-width: \"100%\"\nfig-width: 6.6\nfig-height: 10\nfig-align: \"center\"\n---\n\n\n\n\n\nWe consider a regression model with two covariates, age (in years) and the categorical variable education and no interaction. Based on the diagnostic plots in the Figures, what is the most likely violation of the model assumptions for each scenario?\n\n\nThe diagnostic plots are: plot of ordinary residuals versus fitted values (top left), plot of ordinary residuals against explanatory variable age (top right), plot of the absolute value of the externally studentized residuals against fitted values (middle left), plot of the externally studentized residuals against education level (middle right), quantile-quantile plot of the externally studentized residuals (bottom left) and Cook's distance plot as a function of the variable index (bottom right).\n\n\n*Careful: some violations have feedback on multiple graphs.*\n\n**Model assumptions**\n\n* independence\n* incorrect mean model specification\n* additivity\n* homoscedasticity\n* normality\n* absence of outliers\n\n\n\n\n\n::: {.cell}\n\n:::\n\n\n\n\n## Example 1\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](graphical-diagnostics_files/figure-html/unnamed-chunk-2-1.png){width=633.6}\n:::\n:::\n\n\n\n\n## Example 2\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](graphical-diagnostics_files/figure-html/unnamed-chunk-3-1.png){width=633.6}\n:::\n:::\n\n\n\n\n## Example 3\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](graphical-diagnostics_files/figure-html/unnamed-chunk-4-1.png){width=633.6}\n:::\n:::\n\n\n\n\n## Example 4\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](graphical-diagnostics_files/figure-html/unnamed-chunk-5-1.png){width=633.6}\n:::\n:::\n\n\n\n\n## Example 5\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](graphical-diagnostics_files/figure-html/unnamed-chunk-6-1.png){width=633.6}\n:::\n:::\n\n\n\n\n## Example 6\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](graphical-diagnostics_files/figure-html/unnamed-chunk-7-1.png){width=633.6}\n:::\n:::\n",
+    "supporting": [
+      "graphical-diagnostics_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

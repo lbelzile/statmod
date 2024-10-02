@@ -84,7 +84,9 @@ website:
             - text: "Contrasts"
               file: exercises/linear-models-contrasts.qmd  
             - text: "Interactions"
-              file: exercises/interactions.qmd  
+              file: exercises/interactions.qmd
+            - text: "Graphical diagnostics"
+              file: exercises/graphical-diagnostics.qmd  
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor1.name_no_title >}}]({{< var instructor1.url >}}), [{{< var instructor2.name_no_title >}}]({{< var instructor2.url >}})<br>

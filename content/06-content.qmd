@@ -19,14 +19,15 @@ title: "Linear models"
 
 ## In class
 
-- [Slides](../slides/MATH60604A-slides6.html) ([pdf](../slides/MATH60604A-slides6.pdf) and [code](MATH60604A-slides6.R))
+- [Slides](../slides/MATH60604A-slides6a.html) ([pdf](../slides/MATH60604A-slides6a.pdf) and [code](MATH60604A-slides6a.R))
+- [Exercise on diagnostic plots](../exercises/graphical-diagnostics.qmd)
 
 ## Slides
 
 
-<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides6.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides6.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
+<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides6a.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides6a.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
 
 <div class="ratio ratio-16x9">
-<iframe class="slide-deck" src="../slides/MATH60604A-slides6.html"></iframe>
+<iframe class="slide-deck" src="../slides/MATH60604A-slides6a.html"></iframe>
 </div>
 
