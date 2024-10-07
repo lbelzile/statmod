@@ -210,7 +210,7 @@ We can also use graphics to check suspicious relationships.
 
 
 
-## Added-variable plots for Bixi multicollinearity 
+## Added variable plots for Bixi multicollinearity data
  
 ```{r}
 #| eval: true
@@ -242,5 +242,70 @@ linmod1_college <- lm(
 car::avPlots(linmod1_college, terms = ~service + years, id = FALSE)
 ```
 
-## References
 
+## Confounding variable
+
+A **confounder** is a variable $C$ that is associated with both the response $Y$ and an explanatory variable $X$ of interest.
+
+```{mermaid}
+flowchart TD
+    A("explanatory") --> B("response")
+    C("confounder") --> A & B
+    style A color:#FFFFFF, fill:#AA00FF, stroke:#AA00FF
+    style B color:#FFFFFF, stroke:#00C853, fill:#00C853
+    style C color:#FFFFFF, stroke:#2962FF, fill:#2962FF
+```
+
+The confounding variable $C$ can bias the observed relationship between $X$ and $Y$, thus complicating the interpretations and conclusions of our analyses.
+
+## Example of confounder
+
+The academic `rank` of professors is correlated with `sex`, because there are fewer women who are full professors and the latter are on average better paid. The variable `rank` is a confounder for the effect of `sex`.
+
+```{r}
+#| eval: true
+#| echo: false
+#| label: tbl-out
+#| tbl-cap: "Coefficients for the college salary data, for models with sex and without/with rank."
+data(college, package = "hecstatmod")
+linmod0_college <- lm(salary ~ sex, data = college)
+linmod1_college <- lm(salary ~ sex + rank, data = college)
+tab0 <- as.data.frame(summary(linmod0_college)$coefficients[,1:4])
+tab1 <- as.data.frame(summary(linmod1_college)$coefficients[,1:4])
+rownames(tab0) <- c("intercept","sex [woman]")
+rownames(tab1) <- c("intercept","sex [woman]", "rank [associate]", "rank [full]")
+tab0[,4] <- papaja::apa_p(tab0[,4])
+tab1[,4] <- papaja::apa_p(tab1[,4])
+knitr::kable(tab0, 
+             digits = 2, 
+             booktabs = TRUE,
+             align = "rrrr", 
+             col.names = c("coef.","std. error","stat","p value"))
+knitr::kable(tab1, 
+             digits = 2, 
+             align = "rrrr",
+             booktabs = TRUE, 
+             col.names = c("coef.","std. error","stat","p value"))
+```
+
+
+## Stratification and regression adjustment.
+
+How to handle confounding variables? One way of discovering and accounting for a possible confounder is through **stratification**
+
+- Compare salary separately for each rank (each rank consists of a stratum).
+
+Or fit both variables in a regression model.
+
+- We'll be measuring the effect of `sex`, adjusting for the other explanatory variables, which are possible confounders. 
+
+
+## Experimental vs observational data
+
+Confounders are really only an issue in the context of observational studies. 
+
+
+In experiments, randomization ensures balance across all confounders that could affect $Y$. 
+
+
+In this case, we can thus make causal interpretations of the effect of $X$ on $Y$ without having to adjust for possible confounders.

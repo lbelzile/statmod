@@ -286,91 +286,87 @@
     ]
   },
   {
-    "objectID": "learningobjectives.html",
-    "href": "learningobjectives.html",
-    "title": "Learning objectives",
+    "objectID": "content/06-content.html",
+    "href": "content/06-content.html",
+    "title": "Linear models",
     "section": "",
-    "text": "This page lists the chapter-specific and overall learning objectives for the course",
+    "text": "list the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.\ninterpret the coefficients of the log-linear model on a meaningful scale;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.",
     "crumbs": [
       "Content",
-      "Learning objectives"
+      "Pedagogical content",
+      "Week 6"
     ]
   },
   {
-    "objectID": "learningobjectives.html#introduction",
-    "href": "learningobjectives.html#introduction",
-    "title": "Learning objectives",
-    "section": "Introduction",
-    "text": "Introduction\nAt the end of this chapter, students should be able to\n\nUnderstanding the role of uncertainty in decision making.\nUnderstanding the importance of signal-to-noise ratio as a measure of evidence.\nFormulating the null and alternative hypotheses attached to a problem statement.\nUnderstanding and correctly interpreting \\(p\\)-values and confidence intervals;",
+    "objectID": "content/06-content.html#learning-objectives",
+    "href": "content/06-content.html#learning-objectives",
+    "title": "Linear models",
+    "section": "",
+    "text": "list the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.\ninterpret the coefficients of the log-linear model on a meaningful scale;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.",
     "crumbs": [
       "Content",
-      "Learning objectives"
+      "Pedagogical content",
+      "Week 6"
     ]
   },
   {
-    "objectID": "learningobjectives.html#linear-regression",
-    "href": "learningobjectives.html#linear-regression",
-    "title": "Learning objectives",
-    "section": "Linear regression",
-    "text": "Linear regression\nAt the end of the chapter, students should be able to\n\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;\ntest for statistical significance of model parameters as well as global significance;\nobtain predictions from a linear model using software; understand the distinction between estimated mean and predicted values;\ninterpret the coefficients of the log-linear model on a meaningful scale;\ninterpret and test the significance of interaction terms between continuous and categorical variables, as well as between two categorical variables;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors;\nlist the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.",
+    "objectID": "content/06-content.html#content",
+    "href": "content/06-content.html#content",
+    "title": "Linear models",
+    "section": "Content",
+    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.7–4.8.",
     "crumbs": [
       "Content",
-      "Learning objectives"
+      "Pedagogical content",
+      "Week 6"
     ]
   },
   {
-    "objectID": "learningobjectives.html#likelihood-based-modelling",
-    "href": "learningobjectives.html#likelihood-based-modelling",
-    "title": "Learning objectives",
-    "section": "Likelihood-based modelling",
-    "text": "Likelihood-based modelling\nAt the end of the chapter, students should be able to:\n\nunderstand what the likelihood represents;\nderive the maximum likelihood estimator of a simple model;\nunderstand the maximum likelihood principle;\nperform likelihood ratio tests for two nested models using software output;\nuse information criteria to compare two non-nested models. Generalized linear models At the end of the chapter, students should be able to\nwrite the equation linking predictors and parameters for Poisson, binomial and normal generalized linear models with canonical link function;\nunderstand the relationship between mean and variance in generalized linear models;\ninterpret parameters of the Poisson and negative binomial models;\ntest for overdispersion in Poisson models using likelihood ratio tests;\nassess the quality of the fit of a Poisson model using the deviance statistic;\ntest independence in contingency tables using a saturated Poisson model.\ninterpret software output for generalized linear models and the respective merits of different functions;\ninterpret parameters of logistic regression models in terms of log-odds.\nmodel success rate for aggregated data using a Poisson regression with an offset or a binomial generalized linear regression and correctly interpret the rates.",
+    "objectID": "content/06-content.html#in-class",
+    "href": "content/06-content.html#in-class",
+    "title": "Linear models",
+    "section": "In class",
+    "text": "In class\n\nSlides (pdf and code)\nExercise on diagnostic plots",
     "crumbs": [
       "Content",
-      "Learning objectives"
+      "Pedagogical content",
+      "Week 6"
     ]
   },
   {
-    "objectID": "learningobjectives.html#correlated-and-longitudinal-data",
-    "href": "learningobjectives.html#correlated-and-longitudinal-data",
-    "title": "Learning objectives",
-    "section": "Correlated and longitudinal data",
-    "text": "Correlated and longitudinal data\nAt the end of the chapter, students should be able to\n\nunderstand how correlation appears in grouped or longitudinal data;\ncorrectly calculate summary statistics for repeated data;\nadjust models with compound symmetry, first-order autoregressive or unstructured correlation structures;\nwrite correlation and covariance models for main models and understand their parametrization;\nperform tests to compare covariance structures (for nested models) or using information criteria;\nunderstand group heteroscedasticity and how to account for it.",
+    "objectID": "content/06-content.html#after-class",
+    "href": "content/06-content.html#after-class",
+    "title": "Linear models",
+    "section": "After class",
+    "text": "After class\n\nWatch the video of Section 6\nSlides on colinearity (pdf and code)\nExercises 2.4, 2.5, 2.9, 2.10",
     "crumbs": [
       "Content",
-      "Learning objectives"
+      "Pedagogical content",
+      "Week 6"
     ]
   },
   {
-    "objectID": "learningobjectives.html#linear-mixed-models",
-    "href": "learningobjectives.html#linear-mixed-models",
-    "title": "Learning objectives",
-    "section": "Linear mixed models",
-    "text": "Linear mixed models\nAt the end of the chapter, students should be able to\n\nunderstand the concept of group-effect;\nknow in which context to use random group-effects as opposed to fixed group-effects (covariates constant within group, large number of groups with few observations in each);\nwrite down the equation of the mixed model with random-intercept(s) and random-slope(s);\nwrite down the model assumptions (linearity, covariance within-group and between-group, etc.);\nwrite the covariance matrix of observations given parameter estimates (sum of covariance matrices of random effects and errors);\ndistinguish between the adequate structures for correlated and longitudinal data;\ndistinguish predicted (marginal) mean and individual predictions with random effects (conditional);\nobtain predictions for new observations from mixed models using dedicated software.",
+    "objectID": "content/06-content.html#slides",
+    "href": "content/06-content.html#slides",
+    "title": "Linear models",
+    "section": "Slides",
+    "text": "Slides\n\n  View slides in new window   Download PDF of slides\n\n\n\n\n\n\n  View slides in new window   Download PDF of slides",
     "crumbs": [
       "Content",
-      "Learning objectives"
+      "Pedagogical content",
+      "Week 6"
     ]
   },
   {
-    "objectID": "learningobjectives.html#introduction-to-survival-analysis",
-    "href": "learningobjectives.html#introduction-to-survival-analysis",
-    "title": "Learning objectives",
-    "section": "Introduction to survival analysis",
-    "text": "Introduction to survival analysis\nAt the end of the chapter, students should be able to\n\nexplain key concepts (truncation, censoring) arising in survival analysis in your own word and provide examples of the latter;\nrecognize scenarios with random right censoring;\ninterpret a Kaplan–Meier nonparametric estimate of the survival function;\ncompare and test for equality of survival curves using a score test;\ninterpret the coefficients of the Cox proportional hazard model and check for their significance.",
+    "objectID": "content/06-content.html#sec-videos",
+    "href": "content/06-content.html#sec-videos",
+    "title": "Linear models",
+    "section": "Videos",
+    "text": "Videos",
     "crumbs": [
       "Content",
-      "Learning objectives"
-    ]
-  },
-  {
-    "objectID": "learningobjectives.html#global-objectives",
-    "href": "learningobjectives.html#global-objectives",
-    "title": "Learning objectives",
-    "section": "Global objectives",
-    "text": "Global objectives\nAt the end of the course, students should be able to de\n\nset up a database in a format suitable for a regression analysis (e.g., in long format).\nchoose an adequate regression model for data.\ncriticise the quality of model fit.\nsynthetise the conclusions of a regression model.\ncompare different regression models based on their respective benefits.\nformulate practical recommandations based on a regression model.",
-    "crumbs": [
-      "Content",
-      "Learning objectives"
+      "Pedagogical content",
+      "Week 6"
     ]
   },
   {
@@ -578,63 +574,102 @@
     ]
   },
   {
-    "objectID": "content/06-content.html",
-    "href": "content/06-content.html",
-    "title": "Linear models",
+    "objectID": "learningobjectives.html",
+    "href": "learningobjectives.html",
+    "title": "Learning objectives",
     "section": "",
-    "text": "list the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.\ninterpret the coefficients of the log-linear model on a meaningful scale;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.",
+    "text": "This page lists the chapter-specific and overall learning objectives for the course",
     "crumbs": [
       "Content",
-      "Pedagogical content",
-      "Week 6"
+      "Learning objectives"
     ]
   },
   {
-    "objectID": "content/06-content.html#learning-objectives",
-    "href": "content/06-content.html#learning-objectives",
-    "title": "Linear models",
-    "section": "",
-    "text": "list the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.\ninterpret the coefficients of the log-linear model on a meaningful scale;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.",
+    "objectID": "learningobjectives.html#introduction",
+    "href": "learningobjectives.html#introduction",
+    "title": "Learning objectives",
+    "section": "Introduction",
+    "text": "Introduction\nAt the end of this chapter, students should be able to\n\nUnderstanding the role of uncertainty in decision making.\nUnderstanding the importance of signal-to-noise ratio as a measure of evidence.\nFormulating the null and alternative hypotheses attached to a problem statement.\nUnderstanding and correctly interpreting \\(p\\)-values and confidence intervals;",
     "crumbs": [
       "Content",
-      "Pedagogical content",
-      "Week 6"
+      "Learning objectives"
     ]
   },
   {
-    "objectID": "content/06-content.html#content",
-    "href": "content/06-content.html#content",
-    "title": "Linear models",
-    "section": "Content",
-    "text": "Content\n\nCourse notes: chapter 4 (Linear regression models), Sections 4.7–4.8.",
+    "objectID": "learningobjectives.html#linear-regression",
+    "href": "learningobjectives.html#linear-regression",
+    "title": "Learning objectives",
+    "section": "Linear regression",
+    "text": "Linear regression\nAt the end of the chapter, students should be able to\n\ninterpret the coefficients of a linear model (binary, continuous and categorical variables);\nfit the model by least squares (using dedicated software), correctly accounting for categorical variables;\ntest for statistical significance of model parameters as well as global significance;\nobtain predictions from a linear model using software; understand the distinction between estimated mean and predicted values;\ninterpret the coefficients of the log-linear model on a meaningful scale;\ninterpret and test the significance of interaction terms between continuous and categorical variables, as well as between two categorical variables;\nconceptualize the notion of collinearity and understand its impacts on statistical inference.\ntest for equality of means in multiple (sub-groups) and also mean differences between groups with one or two factors;\nlist the assumptions of the linear model and understand their meaning;\nuse graphical diagnostic tools to validate the model assumptions.",
     "crumbs": [
       "Content",
-      "Pedagogical content",
-      "Week 6"
+      "Learning objectives"
     ]
   },
   {
-    "objectID": "content/06-content.html#in-class",
-    "href": "content/06-content.html#in-class",
-    "title": "Linear models",
-    "section": "In class",
-    "text": "In class\n\nSlides (pdf and code)\nExercise on diagnostic plots",
+    "objectID": "learningobjectives.html#likelihood-based-modelling",
+    "href": "learningobjectives.html#likelihood-based-modelling",
+    "title": "Learning objectives",
+    "section": "Likelihood-based modelling",
+    "text": "Likelihood-based modelling\nAt the end of the chapter, students should be able to:\n\nunderstand what the likelihood represents;\nderive the maximum likelihood estimator of a simple model;\nunderstand the maximum likelihood principle;\nperform likelihood ratio tests for two nested models using software output;\nuse information criteria to compare two non-nested models.",
     "crumbs": [
       "Content",
-      "Pedagogical content",
-      "Week 6"
+      "Learning objectives"
     ]
   },
   {
-    "objectID": "content/06-content.html#slides",
-    "href": "content/06-content.html#slides",
-    "title": "Linear models",
-    "section": "Slides",
-    "text": "Slides\n\n  View slides in new window   Download PDF of slides",
+    "objectID": "learningobjectives.html#generalized-linear-models",
+    "href": "learningobjectives.html#generalized-linear-models",
+    "title": "Learning objectives",
+    "section": "Generalized linear models",
+    "text": "Generalized linear models\nAt the end of the chapter, students should be able to - write the equation linking predictors and parameters for Poisson, binomial and normal generalized linear models with canonical link function; - understand the relationship between mean and variance in generalized linear models; - interpret parameters of the Poisson and negative binomial models; - test for overdispersion in Poisson models using likelihood ratio tests; - assess the quality of the fit of a Poisson model using the deviance statistic; - test independence in contingency tables using a saturated Poisson model. - interpret software output for generalized linear models and the respective merits of different functions; - interpret parameters of logistic regression models in terms of log-odds. - model success rate for aggregated data using a Poisson regression with an offset or a binomial generalized linear regression and correctly interpret the rates.",
     "crumbs": [
       "Content",
-      "Pedagogical content",
-      "Week 6"
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "learningobjectives.html#correlated-and-longitudinal-data",
+    "href": "learningobjectives.html#correlated-and-longitudinal-data",
+    "title": "Learning objectives",
+    "section": "Correlated and longitudinal data",
+    "text": "Correlated and longitudinal data\nAt the end of the chapter, students should be able to\n\nunderstand how correlation appears in grouped or longitudinal data;\ncorrectly calculate summary statistics for repeated data;\nadjust models with compound symmetry, first-order autoregressive or unstructured correlation structures;\nwrite correlation and covariance models for main models and understand their parametrization;\nperform tests to compare covariance structures (for nested models) or using information criteria;\nunderstand group heteroscedasticity and how to account for it.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "learningobjectives.html#linear-mixed-models",
+    "href": "learningobjectives.html#linear-mixed-models",
+    "title": "Learning objectives",
+    "section": "Linear mixed models",
+    "text": "Linear mixed models\nAt the end of the chapter, students should be able to\n\nunderstand the concept of group-effect;\nknow in which context to use random group-effects as opposed to fixed group-effects (covariates constant within group, large number of groups with few observations in each);\nwrite down the equation of the mixed model with random-intercept(s) and random-slope(s);\nwrite down the model assumptions (linearity, covariance within-group and between-group, etc.);\nwrite the covariance matrix of observations given parameter estimates (sum of covariance matrices of random effects and errors);\ndistinguish between the adequate structures for correlated and longitudinal data;\ndistinguish predicted (marginal) mean and individual predictions with random effects (conditional);\nobtain predictions for new observations from mixed models using dedicated software.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "learningobjectives.html#introduction-to-survival-analysis",
+    "href": "learningobjectives.html#introduction-to-survival-analysis",
+    "title": "Learning objectives",
+    "section": "Introduction to survival analysis",
+    "text": "Introduction to survival analysis\nAt the end of the chapter, students should be able to\n\nexplain key concepts (truncation, censoring) arising in survival analysis in your own word and provide examples of the latter;\nrecognize scenarios with random right censoring;\ninterpret a Kaplan–Meier nonparametric estimate of the survival function;\ncompare and test for equality of survival curves using a score test;\ninterpret the coefficients of the Cox proportional hazard model and check for their significance.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
+    ]
+  },
+  {
+    "objectID": "learningobjectives.html#global-objectives",
+    "href": "learningobjectives.html#global-objectives",
+    "title": "Learning objectives",
+    "section": "Global objectives",
+    "text": "Global objectives\nAt the end of the course, students should be able to de\n\nset up a database in a format suitable for a regression analysis (e.g., in long format).\nchoose an adequate regression model for data.\ncriticise the quality of model fit.\nsynthetise the conclusions of a regression model.\ncompare different regression models based on their respective benefits.\nformulate practical recommandations based on a regression model.",
+    "crumbs": [
+      "Content",
+      "Learning objectives"
     ]
   },
   {

@@ -22,7 +22,17 @@ title: "Linear models"
 - [Slides](../slides/MATH60604A-slides6a.html) ([pdf](../slides/MATH60604A-slides6a.pdf) and [code](MATH60604A-slides6a.R))
 - [Exercise on diagnostic plots](../exercises/graphical-diagnostics.qmd)
 
+
+## After class 
+
+- Watch the video of @sec-videos
+- [Slides on colinearity](../slides/MATH60604A-slides6b.html) ([pdf](../slides/MATH60604A-slides6b.pdf) and [code](MATH60604A-slides6b.R))
+- Exercises 2.4, 2.5, 2.9, 2.10
+
+
+
 ## Slides
+
 
 
 <p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides6a.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides6a.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
@@ -30,4 +40,16 @@ title: "Linear models"
 <div class="ratio ratio-16x9">
 <iframe class="slide-deck" src="../slides/MATH60604A-slides6a.html"></iframe>
 </div>
+
+
+
+<p class="text-center"><a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides6b.html">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class="btn btn-success btn-lg" target="_blank" href="../slides/MATH60604A-slides6b.pdf" role="button">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>
+
+<div class="ratio ratio-16x9">
+<iframe class="slide-deck" src="../slides/MATH60604A-slides6b.html"></iframe>
+</div>
+
+## Videos {#sec-videos}
+
+{{< video https://www.youtube.com/embed/JT61hD0HIvA >}}
 

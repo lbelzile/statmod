@@ -1,0 +1,15 @@
+{
+  "hash": "f1ccd0ccf098c914edcbb456de74baaf",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Linear models\"\n---\n\n\n\n\n## Learning objectives\n\n- list the assumptions of the linear model and understand their meaning;\n- use graphical diagnostic tools to validate the model assumptions.\n- interpret the coefficients of the log-linear model on a meaningful scale;\n- conceptualize the notion of collinearity and understand its impacts on statistical inference.\n\n\n\n## Content\n\n\n- Course notes: chapter [4 (Linear regression models)](https://lbelzile.github.io/math60604a/linearmodels.html), Sections 4.7--4.8.\n\n\n## In class\n\n- [Slides](../slides/MATH60604A-slides6a.html) ([pdf](../slides/MATH60604A-slides6a.pdf) and [code](MATH60604A-slides6a.R))\n- [Exercise on diagnostic plots](../exercises/graphical-diagnostics.qmd)\n\n\n## After class \n\n- Watch the video of @sec-videos\n- [Slides on colinearity](../slides/MATH60604A-slides6b.html) ([pdf](../slides/MATH60604A-slides6b.pdf) and [code](MATH60604A-slides6b.R))\n- Exercises 2.4, 2.5, 2.9, 2.10\n\n\n\n## Slides\n\n\n\n<p class=\"text-center\"><a class=\"btn btn-success btn-lg\" target=\"_blank\" href=\"../slides/MATH60604A-slides6a.html\">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class=\"btn btn-success btn-lg\" target=\"_blank\" href=\"../slides/MATH60604A-slides6a.pdf\" role=\"button\">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>\n\n<div class=\"ratio ratio-16x9\">\n<iframe class=\"slide-deck\" src=\"../slides/MATH60604A-slides6a.html\"></iframe>\n</div>\n\n\n\n<p class=\"text-center\"><a class=\"btn btn-success btn-lg\" target=\"_blank\" href=\"../slides/MATH60604A-slides6b.html\">{{< fa arrow-up-right-from-square >}} &ensp;View slides in new window</a> <a class=\"btn btn-success btn-lg\" target=\"_blank\" href=\"../slides/MATH60604A-slides6b.pdf\" role=\"button\">{{< fa file-pdf >}} &ensp;Download PDF of slides</a></p>\n\n<div class=\"ratio ratio-16x9\">\n<iframe class=\"slide-deck\" src=\"../slides/MATH60604A-slides6b.html\"></iframe>\n</div>\n\n## Videos {#sec-videos}\n\n\n\n\n\n\n\nThere's a set of videos that walks through each section below. To make it easier for you to jump around the video examples, I cut the long video into smaller pieces and included them all in [one YouTube playlist](https://www.youtube.com/playlist?list=PLUB8VZzxA8ItMV0PT6lSI6t8Kf-YBPBjj).\n\n- [Colinearity](https://www.youtube.com/watch?v=JT61hD0HIvA&list=PLUB8VZzxA8ItMV0PT6lSI6t8Kf-YBPBjj)\n\nYou can also watch the playlist (and skip around to different sections) here:\n\n<div class=\"ratio ratio-16x9\">\n<iframe src=\"https://www.youtube.com/embed/playlist?list=PLUB8VZzxA8ItMV0PT6lSI6t8Kf-YBPBjj\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n</div>\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
