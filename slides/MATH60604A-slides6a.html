@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="MATH60604A-slides6_files/libs/clipboard/clipboard.min.js"></script>
-<script src="MATH60604A-slides6_files/libs/quarto-html/tabby.min.js"></script>
-<script src="MATH60604A-slides6_files/libs/quarto-html/popper.min.js"></script>
-<script src="MATH60604A-slides6_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="MATH60604A-slides6_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="MATH60604A-slides6_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="MATH60604A-slides6_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="MATH60604A-slides6_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.56">
+<script src="MATH60604A-slides6a_files/libs/clipboard/clipboard.min.js"></script>
+<script src="MATH60604A-slides6a_files/libs/quarto-html/tabby.min.js"></script>
+<script src="MATH60604A-slides6a_files/libs/quarto-html/popper.min.js"></script>
+<script src="MATH60604A-slides6a_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="MATH60604A-slides6a_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="MATH60604A-slides6a_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="MATH60604A-slides6a_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="MATH60604A-slides6a_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.1">
 
   <meta name="author" content="Léo Belzile, HEC Montréal">
   <meta name="dcterms.date" content="2024-01-01">
@@ -16,8 +16,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="MATH60604A-slides6_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="MATH60604A-slides6_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="MATH60604A-slides6a_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="MATH60604A-slides6a_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -116,11 +116,11 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="MATH60604A-slides6_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="MATH60604A-slides6a_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="MATH60604A-slides6a_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="MATH60604A-slides6a_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="MATH60604A-slides6a_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="MATH60604A-slides6a_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -470,13 +470,13 @@ Léo Belzile, HEC Montréal
 <h2>Examples of residual plots</h2>
 <p>Look for pattern in the <span class="math inline">\(y\)</span>-axis, not the <span class="math inline">\(x\)</span>-axis!</p>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-regdiaglin-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/fig-regdiaglin-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;1: Scatterplots of residuals against fitted values. The first two plots show no departure from linearity (mean zero). The third plot shows a clear quadratic pattern, suggesting the mean model is misspecified. Note that the distribution of the fitted value need not be uniform, as in the second panel which shows more high fitted values.
 </p></section>
 <section id="examples" class="slide level2">
 <h2>Examples</h2>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-residplots-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/fig-residplots-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;2: Scatterplot of residuals against explanatory (left) and an omitted covariate (right). We can pick up a forgotten interaction between BMI and smoker/obese and a linear trend for the number of children.
 </p></section>
 <section id="examples-for-the-college-data" class="slide level2">
@@ -487,7 +487,7 @@ Figure&nbsp;2: Scatterplot of residuals against explanatory (left) and an omitte
 <span id="cb1-3"><a href=""></a>car<span class="sc">::</span><span class="fu">residualPlots</span>(linmod.college1, <span class="at">test =</span> <span class="cn">FALSE</span>, <span class="at">layout =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="MATH60604A-slides6_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
 <section id="remedy-for-mean-model-specification" class="slide level2">
 <h2>Remedy for mean model specification</h2>
 <p>Fix the mean model</p>
@@ -498,8 +498,8 @@ Figure&nbsp;2: Scatterplot of residuals against explanatory (left) and an omitte
 <li>Transformations</li>
 </ul>
 </section>
-<section id="assumption-2-homoskedasticity-equal-variance" class="slide level2">
-<h2>Assumption 2: homoskedasticity (equal variance)</h2>
+<section id="assumption-2-homoscedasticity-equal-variance" class="slide level2">
+<h2>Assumption 2: homoscedasticity (equal variance)</h2>
 <p>The variance is the same for all observations, <span class="math inline">\(\mathsf{Va}(Y_i \mid \mathbf{x}_i) = \sigma^2\)</span></p>
 <p>Typical heteroscedasticity patterns arise when</p>
 <ul>
@@ -525,33 +525,34 @@ Figure&nbsp;2: Scatterplot of residuals against explanatory (left) and an omitte
 <section id="examples-of-spread-level-plots" class="slide level2">
 <h2>Examples of spread level plots</h2>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-diagfitvalhomosce-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/fig-diagfitvalhomosce-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;3: Plot of externally studentized residuals against fitted value (left) and categorical explanatory (right). Both clearly display heteroscedasticity.
 </p></section>
 <section id="heteroscedasticity-tests-for-college-data" class="slide level2">
 <h2>Heteroscedasticity tests for college data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Fit ANOVA to |rstudent - mean|rstudent||</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Extract externally studentized residuals</span></span>
 <span id="cb2-2"><a href=""></a>r <span class="ot">&lt;-</span> <span class="fu">rstudent</span>(linmod.college1)</span>
-<span id="cb2-3"><a href=""></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(r <span class="sc">~</span> rank, <span class="at">center =</span> <span class="st">"mean"</span>, <span class="at">data =</span> college)</span>
-<span id="cb2-4"><a href=""></a><span class="do">## Levene's Test for Homogeneity of Variance (center = "mean")</span></span>
-<span id="cb2-5"><a href=""></a><span class="do">##        Df F value Pr(&gt;F)    </span></span>
-<span id="cb2-6"><a href=""></a><span class="do">## group   2      50 &lt;2e-16 ***</span></span>
-<span id="cb2-7"><a href=""></a><span class="do">##       394                   </span></span>
-<span id="cb2-8"><a href=""></a><span class="do">## ---</span></span>
-<span id="cb2-9"><a href=""></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb2-10"><a href=""></a><span class="co"># Breusch-Pagan (with a score test)</span></span>
-<span id="cb2-11"><a href=""></a>car<span class="sc">::</span><span class="fu">ncvTest</span>(linmod.college1, <span class="at">var.formula =</span>  <span class="sc">~</span> rank)</span>
-<span id="cb2-12"><a href=""></a><span class="do">## Non-constant Variance Score Test </span></span>
-<span id="cb2-13"><a href=""></a><span class="do">## Variance formula: ~ rank </span></span>
-<span id="cb2-14"><a href=""></a><span class="do">## Chisquare = 70, Df = 2, p = 6e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href=""></a><span class="co"># Levene test (F-test for ANOVA)</span></span>
+<span id="cb2-4"><a href=""></a>car<span class="sc">::</span><span class="fu">leveneTest</span>(r <span class="sc">~</span> rank, <span class="at">center =</span> <span class="st">"mean"</span>, <span class="at">data =</span> college)</span>
+<span id="cb2-5"><a href=""></a><span class="do">## Levene's Test for Homogeneity of Variance (center = "mean")</span></span>
+<span id="cb2-6"><a href=""></a><span class="do">##        Df F value Pr(&gt;F)    </span></span>
+<span id="cb2-7"><a href=""></a><span class="do">## group   2      50 &lt;2e-16 ***</span></span>
+<span id="cb2-8"><a href=""></a><span class="do">##       394                   </span></span>
+<span id="cb2-9"><a href=""></a><span class="do">## ---</span></span>
+<span id="cb2-10"><a href=""></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb2-11"><a href=""></a><span class="co"># Breusch-Pagan (with a score test)</span></span>
+<span id="cb2-12"><a href=""></a>car<span class="sc">::</span><span class="fu">ncvTest</span>(linmod.college1, <span class="at">var.formula =</span>  <span class="sc">~</span> rank)</span>
+<span id="cb2-13"><a href=""></a><span class="do">## Non-constant Variance Score Test </span></span>
+<span id="cb2-14"><a href=""></a><span class="do">## Variance formula: ~ rank </span></span>
+<span id="cb2-15"><a href=""></a><span class="do">## Chisquare = 70, Df = 2, p = 6e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="consequences-of-unequal-variance" class="slide level2">
 <h2>Consequences of unequal variance</h2>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-simuWelchnull-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;4: Histogram of the null distribution of <span class="math inline">\(p\)</span>-values obtained through simulation using the classical analysis of variance <span class="math inline">\(F\)</span>-test (left) and Welch’s unequal variance alternative (right), based on 10 000 simulations. Each simulated sample consist of 50 observations from a <span class="math inline">\(\mathsf{normal}(0, 1)\)</span> distribution and 10 observations from <span class="math inline">\(\mathsf{normal}(0, 9)\)</span>. The uniform distribution would have 5% in each of the 20 bins used for the display.
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/fig-simuWelchnull-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;4: Histogram of the null distribution of <span class="math inline">\(p\)</span>-values obtained through simulation using the two-sample <span class="math inline">\(t\)</span>-test (left) and Welch’s <span class="math inline">\(t\)</span>-test (right), based on 10 000 simulations. Each simulated sample consist of 50 observations from a <span class="math inline">\(\mathsf{normal}(0, 1)\)</span> distribution and 10 observations from <span class="math inline">\(\mathsf{normal}(0, 9)\)</span>. The uniform distribution would have 5% in each of the 20 bins used for the display.
 </p></section>
 <section id="remedy-1---specify-the-variance-structure" class="slide level2">
 <h2>Remedy 1 - specify the variance structure</h2>
@@ -565,7 +566,7 @@ Figure&nbsp;4: Histogram of the null distribution of <span class="math inline">\
 </section>
 <section id="example-of-heteroscedasticity-for-the-college-data" class="slide level2">
 <h2>Example of heteroscedasticity for the college data</h2>
-<p>For the college data, we set <span class="math inline">\(Y_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2_{\mathsf{rank}_i})\)</span> with three different variance parameters. This seemingly corrects the heteroscedasticity.</p>
+<p>For the college data, we set <span class="math inline">\(Y_i \sim \mathsf{normal}(\mathbf{x}_i\boldsymbol{\beta}, \sigma^2_{\texttt{rank}_i})\)</span> with three different variance parameters. This seemingly corrects the heteroscedasticity.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(nlme) <span class="co"># R package for mixed models and variance specification</span></span>
 <span id="cb3-2"><a href=""></a>linmod.college2 <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">gls</span>(</span>
@@ -575,7 +576,14 @@ Figure&nbsp;4: Histogram of the null distribution of <span class="math inline">\
 <span id="cb3-6"><a href=""></a><span class="fu">plot</span>(linmod.college2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="MATH60604A-slides6_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="group-heteroscedasticity-in-anova" class="slide level2">
+<h2>Group heteroscedasticity in ANOVA</h2>
+<p>The <code>t.test</code> and <code>oneway.test</code> functions in <strong>R</strong> perform hypothesis test for equality of mean: for observation <span class="math inline">\(i\)</span> from group <span class="math inline">\(j\)</span>, the model specified is</p>
+<p><span class="math display">\[Y_{ij} \sim \mathsf{normal}(\mu_j, \sigma^2_j).\]</span> These tests are often labelled by software under the name of <span class="citation" data-cites="Welch:1947">Welch (<a href="#/references" role="doc-biblioref" onclick="">1947</a>)</span>.</p>
+<p>There is no exact expression for the null distribution for equal variance, but approximations due to <span class="citation" data-cites="Satterthwaite:1946">Satterthwaite (<a href="#/references" role="doc-biblioref" onclick="">1946</a>)</span> are used as benchmarks.</p>
+<p>We need enough people in each subgroup to reliably estimate both the mean and variance!</p>
+</section>
 <section id="remedy-2---use-a-sandwich-matrix-for-the-errors" class="slide level2">
 <h2>Remedy 2 - use a sandwich matrix for the errors</h2>
 <p>Economists often use <strong>sandwich</strong> estimators <span class="citation" data-cites="White:1980">(<a href="#/references" role="doc-biblioref" onclick="">White 1980</a>)</span>, whereby we replace the estimator of the covariance matrix of <span class="math inline">\(\widehat{\boldsymbol{\beta}}\)</span>, usually <span class="math inline">\(S^2(\mathbf{X}^\top\mathbf{X})^{-1}\)</span>, by a sandwich estimator of the form</p>
@@ -604,10 +612,8 @@ Figure&nbsp;4: Histogram of the null distribution of <span class="math inline">\
 <section id="multiplicative-structure" class="slide level2">
 <h2>Multiplicative structure</h2>
 <p>Multiplicative data of the form <span class="math display">\[\begin{align*}
-\left(\begin{matrix} \text{quantity depending}\\
-\text{on the treatment used}\end{matrix}\right) \times
-\left(\begin{matrix} \text{quantity depending only }\\
-\text{on the particular unit}
+\left(\begin{matrix} \text{moyenne $\mu$}\end{matrix}\right) \times
+\left(\begin{matrix} \text{random error}
 \end{matrix}\right)
 \end{align*}\]</span> tend to have higher variability when the response is larger.</p>
 </section>
@@ -660,7 +666,8 @@ Y= X_1^{\beta_1}\exp(\beta_0 + \beta_2X_2 + \cdots + \beta_pX_p + \varepsilon)
 <ul>
 <li>repeated measures (correlated observations).</li>
 <li>longitudinal data: repeated measurements are taken from the same subjects (few time points)</li>
-<li>time series: observations observed at multiple time periods or in space.</li>
+<li>time series: observations observed at multiple time periods</li>
+<li>spatial data</li>
 </ul>
 </section>
 <section id="consequences-of-dependence" class="slide level2">
@@ -672,7 +679,7 @@ Y= X_1^{\beta_1}\exp(\beta_0 + \beta_2X_2 + \cdots + \beta_pX_p + \varepsilon)
 <section id="consequences-of-correlated-data" class="slide level2">
 <h2>Consequences of correlated data</h2>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-plotLevelIndep-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/fig-plotLevelIndep-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;5: Percentage of rejection of the null hypothesis for the <span class="math inline">\(F\)</span>-test of equality of means for the one way ANOVA with data generated with equal mean and variance from an equicorrelation model (within group observations are correlated, between group observations are independent). The nominal level of the test is 5%.
 </p></section>
 <section id="fixes-for-group-structure-and-autocorrelation" class="slide level2">
@@ -690,7 +697,7 @@ r(h) = \frac{\gamma(h)}{\gamma(0)}, \qquad \gamma(h) = \frac{1}{n}\sum_{i=1}^{n-
 <section id="example-of-correlogram" class="slide level2">
 <h2>Example of correlogram</h2>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-correlogram-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/fig-correlogram-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;6: Correlogram of independent observations (left) and the ordinary residuals of the log-linear model fitted to the air passengers data (right). While the mean model of the latter is seemingly correctly specified, there is residual dependence between monthly observations and yearly (at lag 12). The blue lines give approximate pointwise 95% confidence intervals for white noise (uncorrelated observations).
 </p></section>
 <section id="normality-assumption" class="slide level2">
@@ -707,13 +714,13 @@ Figure&nbsp;6: Correlogram of independent observations (left) and the ordinary r
 <h2>Quantile-quantile plots</h2>
 <p>Produce Student quantile-quantile plots of externally studentized residuals <span class="math inline">\(R_i \sim \mathsf{Student}(n-p-2)\)</span>.</p>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-qqplotresid-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
-Figure&nbsp;7: Histogram (left) and Student quantile-quantile plot (right) of the jackknife studentized residuals. The left panel includes a kernel density estimate (black), with the density of Student distribution (blue) superimposed. The right panel includes pointwise 95% confidence bands calculated using a bootstrap.
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/fig-qqplotresid-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;7: Histogram (left) and Student quantile-quantile plot (right) of the externally studentized residuals. The left panel includes a kernel density estimate (black), with the density of Student distribution (blue) superimposed. The right panel includes pointwise 95% confidence bands calculated using a bootstrap.
 </p></section>
 <section id="interpretation-of-quantile-quantile-plots" class="slide level2">
 <h2>Interpretation of quantile-quantile plots</h2>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-qqplotsbad-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/fig-qqplotsbad-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;8: Quantile-quantile plots of non-normal data, showing typical look of behaviour of discrete (top left), heavy tailed (top right), skewed (bottom left) and bimodal data (bottom right).
 </p></section>
 <section id="remedy-for-normality" class="slide level2">
@@ -762,19 +769,19 @@ Y &amp;= \beta_0 + \beta_1 \texttt{poison}_2 + \beta_2\texttt{poison}_3  +\beta_
 <section id="diagnostic-plots-for-poison-data" class="slide level2">
 <h2>Diagnostic plots for poison data</h2>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-poisonplots-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p class="caption">
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/fig-poisonplots-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p class="caption">
 Figure&nbsp;9: Diagnostic plots for the poison data: ordinary residuals (jittered) for the linear model for survival time as a function of poison and treatment and fitted values against residuals.
 </p></section>
 <section id="profile-plot" class="slide level2">
 <h2>Profile plot</h2>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>The profile log likelihood for the Box–Cox transform parameter, suggests a value of <span class="math inline">\(\lambda=-1\)</span> would be within the 95% confidence interval.</p>
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>The profile log likelihood for the Box–Cox transform parameter, suggests a value of <span class="math inline">\(\lambda=-1\)</span> would be within the 95% confidence interval.</p>
 </section>
 <section id="model-with-transformation" class="slide level2">
 <h2>Model with transformation</h2>
 <p>The reciprocal response <span class="math inline">\(Y^{-1}\)</span> corresponds to the speed of action of the poison depending on both poison type and treatment.</p>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>The diagnostics plot at the bottom right for this model show no residual structure.</p>
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>The diagnostics plot for this model show no residual structure.</p>
 </section>
 <section id="comment-about-transformations" class="slide level2">
 <h2>Comment about transformations</h2>
@@ -791,7 +798,7 @@ C_i=\frac{r_i^2h_{ii}}{(p+1)(1-h_{ii})}.
 <section id="diagnostic-plots-for-the-insurance-data" class="slide level2">
 <h2>Diagnostic plots for the insurance data</h2>
 
-<img data-src="MATH60604A-slides6_files/figure-revealjs/fig-cook-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+<img data-src="MATH60604A-slides6a_files/figure-revealjs/fig-cook-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
 Figure&nbsp;10: Diagnostic plots for outliers.
 </p></section>
 <section id="remedies-for-outliers" class="slide level2">
@@ -825,6 +832,12 @@ Brockwell, P. J., and R. A. Davis. 2016. <em>Introduction to Time Series and For
 <div id="ref-McKinnon.White:1985" class="csl-entry" role="listitem">
 MacKinnon, James G, and Halbert White. 1985. <span>“Some Heteroskedasticity-Consistent Covariance Matrix Estimators with Improved Finite Sample Properties.”</span> <em>Journal of Econometrics</em> 29 (3): 305–25. <a href="https://doi.org/10.1016/0304-4076(85)90158-7">https://doi.org/10.1016/0304-4076(85)90158-7</a>.
 </div>
+<div id="ref-Satterthwaite:1946" class="csl-entry" role="listitem">
+Satterthwaite, F. E. 1946. <span>“An Approximate Distribution of Estimates of Variance Components.”</span> <em>Biometrics Bulletin</em> 2 (6): 110–14. <a href="http://www.jstor.org/stable/3002019">http://www.jstor.org/stable/3002019</a>.
+</div>
+<div id="ref-Welch:1947" class="csl-entry" role="listitem">
+Welch, B. L. 1947. <span>“The Generalization of <span>‘Student’s’</span> Problem When Several Population Variances Are Involved.”</span> <em>Biometrika</em> 34 (1–2): 28–35. <a href="https://doi.org/10.1093/biomet/34.1-2.28">https://doi.org/10.1093/biomet/34.1-2.28</a>.
+</div>
 <div id="ref-White:1980" class="csl-entry" role="listitem">
 White, Halbert. 1980. <span>“A Heteroskedasticity-Consistent Covariance Matrix Estimator and a Direct Test for Heteroskedasticity.”</span> <em>Econometrica</em> 48 (4): 817–38. <a href="https://doi.org/10.2307/1912934">https://doi.org/10.2307/1912934</a>.
 </div>
@@ -834,19 +847,19 @@ White, Halbert. 1980. <span>“A Heteroskedasticity-Consistent Covariance Matrix
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="MATH60604A-slides6a_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="MATH60604A-slides6a_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="MATH60604A-slides6a_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="MATH60604A-slides6a_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="MATH60604A-slides6a_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="MATH60604A-slides6a_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="MATH60604A-slides6_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="MATH60604A-slides6a_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="MATH60604A-slides6a_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="MATH60604A-slides6a_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="MATH60604A-slides6a_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

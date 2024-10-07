@@ -41,7 +41,10 @@ At the end of the chapter, students should be able to:
 - understand the maximum likelihood principle;
 - perform likelihood ratio tests for two nested models using software output;
 - use information criteria to compare two non-nested models.
-Generalized linear models
+
+
+## Generalized linear models
+
 At the end of the chapter, students should be able to
 - write the equation linking predictors and parameters for Poisson, binomial and normal generalized linear models
 with canonical link function;

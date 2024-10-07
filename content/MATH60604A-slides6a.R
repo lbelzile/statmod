@@ -8,6 +8,7 @@ library(ggfortify) # ggplot for base graphs
 library(nlme) # mixed models and variance specification
 library(mgcv) # generalized additive models and smoothing
 library(qqplotr, warn.conflicts = FALSE) # qqplots for ggplot2
+library(MASS)
 
 ## APPLICATION 1 - Linear model for insurance data
 data(insurance, package = "hecstatmod")
@@ -147,7 +148,7 @@ summary(linmod_college2)
 # Model fitted via REML, so difference between likelihood ratio and Wald tests
 anova(linmod_college2)
 
-# Impact of sex not significative once we account for rank
+# Impact of sex not significant once we account for rank
 
 # Sandwich matrix
 vcov_HCE <- car::hccm(linmod1_college)
@@ -159,7 +160,8 @@ diag(vcov_HCE) / diag(vcov(linmod1_college))
 pval <- 2*pt(abs(w),
              df = linmod1_college$df.residual,
              lower.tail = FALSE)
-
+# Also with lmtest
+lmtest::coeftest(modlin1_college, vcov. = vcov_HCE)
 
 library(forecast)
 # Correlogram and partial autocorrelation function
@@ -187,3 +189,8 @@ car::qqPlot(linmod2_poisons, id = FALSE, ylab= 'externally studentized residuals
 ## Box-Cox transformation for model
 car::boxCox(linmod1_poisons)
 
+## Robust regression and outliers
+rmod_ins <- MASS::rlm(
+  data = insurance,
+  charges ~ splines::bs(age) + obesity*smoker*bmi + children)
+residualPlots(rmod_ins, tests = FALSE)
