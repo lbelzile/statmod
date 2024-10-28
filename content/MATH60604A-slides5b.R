@@ -29,15 +29,17 @@ g2 <- ggplot(data = data.frame(service = college$service,
   labs(x = "years of service", y = "residuals")
 g1 + g2
 
-# Scale variables, change parametrization of dummies, remove intercept
-modB <- lm(salary ~ 0 + sex + field + rank + service,
-           data = college |>
-            dplyr::mutate(service = scale(service)),
-           contrasts = list(rank = contr.sum))
-head(model.matrix(mod), n = 3L)
-head(model.matrix(modB), n = 3L)
+
 # Verify model invariance
-isTRUE(all.equal(fitted(mod), fitted(modB)))
+modA <- lm(salary ~ sex +  rank + service, data = college)
+modB <- lm(salary ~ 0 + sex + rank + service, # 0+ = remove intercept
+           data = college |>
+             dplyr::mutate(service = scale(service)), # standardize variable (mean zero, unit std. dev)
+           contrasts = list(rank = contr.sum)) # change parametrization of dummies
+head(model.matrix(modA), n = 3L)
+head(model.matrix(modB), n = 3L)
+# Model invariance
+isTRUE(all.equal(fitted(modA), fitted(modB)))
 
 
 # Residuals and other similar quantities

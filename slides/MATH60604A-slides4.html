@@ -703,7 +703,7 @@ R &amp;= 2( \ell_{\mathbb{M}_1} - \ell_{\mathbb{M}_0})
 <p>Let <span class="math inline">\(\mu_{0}, \mu_{0.5}, \mu_{1}, \mu_2\)</span> denote the true mean of the PEF score as a function of the proportion of paper for the data from <span class="citation" data-cites="Sokolova:2023">Sokolova, Krishna, and Döring (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span>.</p>
 <p>We could compare the linear regression model (in which the PEF score increases linearly with the proportion of paper to plastic) <span class="math display">\[\begin{align*}
 \mathsf{E}(\texttt{pef} \mid \texttt{proportion}) = \beta_0 + \beta_1\texttt{proportion},
-\end{align*}\]</span> against the ANOVA which allows each of the four groups to have different means. <span class="math display">\[\begin{align*}
+\end{align*}\]</span> against the model which allows each of the four groups to have different means. <span class="math display">\[\begin{align*}
 \mathsf{E}(\texttt{pef} \mid \texttt{proportion}) &amp;= \alpha_0 + \alpha_1 \mathbf{1}_{\texttt{proportion}=0.5} + \alpha_2 \mathbf{1}_{\texttt{proportion}=1}\\&amp; \qquad  + \alpha_3\mathbf{1}_{\texttt{proportion}=2}.
 \end{align*}\]</span></p>
 </section>
@@ -723,7 +723,7 @@ R &amp;= 2( \ell_{\mathbb{M}_1} - \ell_{\mathbb{M}_0})
 <span id="cb5-2"><a href=""></a>linmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(pef <span class="sc">~</span> proportion, <span class="at">data =</span> SKD23_S2A) <span class="co"># fit simple linear regression</span></span>
 <span id="cb5-3"><a href=""></a>anovamod <span class="ot">&lt;-</span> <span class="fu">lm</span>(pef <span class="sc">~</span> <span class="fu">factor</span>(proportion), <span class="co"># one-way ANOVA</span></span>
 <span id="cb5-4"><a href=""></a>               <span class="at">data =</span> SKD23_S2A)</span>
-<span id="cb5-5"><a href=""></a><span class="co"># Compare simple linear regression with ANOVA via 'anova' call</span></span>
+<span id="cb5-5"><a href=""></a><span class="co"># Compare simple linear regression with four via 'anova' call</span></span>
 <span id="cb5-6"><a href=""></a><span class="fu">anova</span>(linmod, anovamod) <span class="co"># is the change in PEF linear?</span></span>
 <span id="cb5-7"><a href=""></a><span class="do">## Analysis of Variance Table</span></span>
 <span id="cb5-8"><a href=""></a><span class="do">## </span></span>
@@ -876,7 +876,7 @@ Table&nbsp;2: Estimated group averages with standard errors and 95% confidence i
 </section>
 <section id="weights-for-first-contrast" class="slide level2">
 <h2>Weights for first contrast</h2>
-<p>The hypothesis of <span class="citation" data-cites="Baumann:1992">Baumann, Seifert-Kessell, and Jones (<a href="#/references" role="doc-biblioref" onclick="">1992</a>)</span> is <span class="math inline">\(\mathscr{H}_0: \mu_{\mathrm{TA}} + \mu_{\mathrm{DRTA}} = 2 \mu_{\mathrm{DRA}}\)</span> or, rewritten slightly, <span class="math display">\[\begin{align*}
+<p>The hypothesis of <span class="citation" data-cites="Baumann:1992">Baumann, Seifert-Kessell, and Jones (<a href="#/references" role="doc-biblioref" onclick="">1992</a>)</span> is <span class="math inline">\(\mathscr{H}_0: \mu_{\mathrm{TA}} + \mu_{\mathrm{DRTA}} = 2 \mu_{\mathrm{DR}}\)</span> or, rewritten slightly, <span class="math display">\[\begin{align*}
 \mathscr{H}_0: - 2 \mu_{\mathrm{DR}} + \mu_{\mathrm{DRTA}} + \mu_{\mathrm{TA}} = 0.
 \end{align*}\]</span> with weights <span class="math inline">\((-2, 1, 1)\)</span></p>
 <ul>

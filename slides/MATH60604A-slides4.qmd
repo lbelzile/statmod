@@ -353,7 +353,7 @@ Indeed, if $Z \sim \mathsf{Student}(\nu)$, then $Z^2 \sim \mathsf{Fisher}(1, \nu
  \begin{align*}
  \mathsf{E}(\texttt{pef} \mid \texttt{proportion}) = \beta_0 + \beta_1\texttt{proportion},
  \end{align*}
- against the ANOVA which allows each of the four groups to have different means.
+ against the model which allows each of the four groups to have different means.
  \begin{align*}
  \mathsf{E}(\texttt{pef} \mid \texttt{proportion}) &= \alpha_0 + \alpha_1 \mathbf{1}_{\texttt{proportion}=0.5} + \alpha_2 \mathbf{1}_{\texttt{proportion}=1}\\& \qquad  + \alpha_3\mathbf{1}_{\texttt{proportion}=2}.
  \end{align*}
@@ -380,7 +380,7 @@ data(SKD23_S2A, package = "hecedsm") # load data
 linmod <- lm(pef ~ proportion, data = SKD23_S2A) # fit simple linear regression
 anovamod <- lm(pef ~ factor(proportion), # one-way ANOVA
                data = SKD23_S2A)
-# Compare simple linear regression with ANOVA via 'anova' call
+# Compare simple linear regression with four via 'anova' call
 anova(linmod, anovamod) # is the change in PEF linear?
 ```
 
@@ -486,7 +486,7 @@ knitr::kable(emmeans_post,
 
 ## Weights for first contrast
 
-The hypothesis of @Baumann:1992 is $\mathscr{H}_0: \mu_{\mathrm{TA}} + \mu_{\mathrm{DRTA}} = 2 \mu_{\mathrm{DRA}}$
+The hypothesis of @Baumann:1992 is $\mathscr{H}_0: \mu_{\mathrm{TA}} + \mu_{\mathrm{DRTA}} = 2 \mu_{\mathrm{DR}}$
 or, rewritten slightly,
 \begin{align*}
 \mathscr{H}_0: - 2 \mu_{\mathrm{DR}} + \mu_{\mathrm{DRTA}} + \mu_{\mathrm{TA}} = 0.
